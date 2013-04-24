@@ -1,0 +1,63 @@
+# Connection files #
+####################
+gunsaluspiano/settings.py
+*settings.py
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.pyc
+
+# Temporary files #
+###################
+*.swp
+
+# Videos #
+##########
+*.mp4
+*.oog
+*.ogv
+*.webm
+
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+*.csv
+sql_backups
+raw_data
+
+# Static files dump #
+website/static_dump/*
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+thumbs.db
+Thumbs.db
+Repo exclude

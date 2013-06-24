@@ -1,0 +1,126 @@
+/* add to parent elements when their children are floating
+and parent needs to expand to the children's size. */
+.clearfix {
+  zoom: 1;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.invisible {
+	display: none;
+}
+
+/* icon for external links */
+.external {
+	padding-right: 15px;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAElJREFUeNpiZMACInYnzQdSCSA2C5DzHyq+YIXrvER0xSwgAijBiEX3ArgCbJIw05iwOAHVKiQ3YHMoVhNgIAHuBlymgABAgAEAuZUbEqLsuG0AAAAASUVORK5CYII=) center right no-repeat;
+} 
+
+#cgsb-logo {
+	float: left;
+}
+
+#nyu-logo {
+	float: right;
+}
+
+/* grey line */
+hr {
+	margin: 0;
+	border: 0;
+	border-top: 1px solid #d1d1d1;
+	width: 100%;
+	float: left;
+}
+
+/* fonts */
+body {
+	font-family: 'Computer Modern Serif', serif;
+	background: #fff;
+	color: #333;
+	font-size: 17px;
+	line-height: 130%;
+}
+
+h1, h2, h3, h4 {
+	font-family: 'Computer Modern Serif', serif;
+	font-weight: normal;
+}
+
+h1 {
+	font-size: 36px;
+	color: #111;
+}
+
+h1:hover {
+	color: #58bb62;
+}
+
+h2 {
+	font-size: 24px;
+	padding-bottom: 10px;
+}
+
+h3 {
+	font-size: 18px;
+	clear: none;
+	letter-spacing: 1px;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+}
+
+#site_subtitle {
+	float: left;
+	font-size: 12px;
+	color: #aaa;
+}
+
+a {
+	text-decoration: none;
+	color: #58bb62;
+	/* color: #5ad531; */
+}
+
+a:hover, a.active {
+	text-decoration: underline;
+}
+
+a.active {
+	cursor: default;
+	font-weight: bold;
+}
+
+html, body {
+	min-width: 100%;
+	margin: 0;
+}
+
+#wrap-header, #wrap-content {
+	width: 100%;
+	clear: both;
+	float: left;
+	min-width: 1000px;
+}
+
+#wrap-header {
+	position: relative; /* to accept z-index */
+	z-index: 1;
+	-moz-box-shadow: 0 0 8px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 0 0 8px rgba(0,0,0,0.3);
+	box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+#wrap-content {
+	padding: 40px 0 80px 0;
+}
+
+#header, #content {
+	width: 980px;
+	margin: 0 auto;
+}

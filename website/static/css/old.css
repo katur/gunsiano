@@ -1,0 +1,337 @@
+a.no-style {
+	text-decoration: none;
+	color: black;
+}
+
+.center td {
+	text-align: center;
+}
+
+.centered-block {
+	display: block; 
+	margin: auto;
+}
+
+/* can't get this to work when content is loading */
+.tall-content {
+	min-height: 800px;
+}
+
+/* -----------------------------------------------
+ Search Form: used on Ahringer and Strains Pages
+----------------------------------------------- */
+.small-message {
+	color: #666; 
+	font-size: 13px;
+}
+
+.search-form {
+	float: right;
+	padding-top: 15px;
+}
+
+.strain-search {
+	float: right;
+	clear: both;
+}
+
+.no-clear {
+	clear: none;
+	max-width: 50%;
+}
+
+/* -----------------------------------------------
+~~~~~ Grid: used on Strains and Stocks Pages ~~~~~
+----------------------------------------------- */
+#grid {
+	width: 100%;
+	margin: 20px 0;
+	border: solid #AAA;
+	border-width: 0 0 1px 1px;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+#grid td {
+    border: solid #AAA;
+    border-width: 1px 1px 0 0;
+	margin: 0;
+	padding: 6px;
+}
+
+#top-row td {
+	text-align: center;
+	background: #000;
+	color: #FFF;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+
+/* -----------------------------------------------
+~~~~~~~~~~~~~~~~~~ Home Page ~~~~~~~~~~~~~~~~~~~~~
+----------------------------------------------- */
+#post-9 * {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box; /* switch box model so padding+border within width */
+}
+
+#post-9 header {
+	display: none;
+}
+
+
+
+/* -----------------------------------------------
+~~~~~~~~~~~~~~~ Lab Members Page ~~~~~~~~~~~~~~~~~
+----------------------------------------------- */
+.two-column {
+	float: left;
+	width: 46%;
+	margin: 0 2%;
+}
+
+
+/* -----------------------------------------------
+~~~~~~~~~~~~~~~~ Projects Page ~~~~~~~~~~~~~~~~~~~
+----------------------------------------------- */
+.entry-content .project-table td {
+	vertical-align: top;
+	padding: 15px;
+	padding-right: 0;
+}
+
+.entry-content .project-table img {
+	margin: 0;
+}
+
+table.project-table {
+	border-bottom: 0;
+}
+
+table.project-table tr:first-child td {
+	border-top: 0;
+}
+
+
+/* -----------------------------------------------
+~~~~~~~~~~~~~~ Publications Page ~~~~~~~~~~~~~~~~~
+----------------------------------------------- */
+.publication {
+	margin: 4% 0;
+}
+
+.journal {
+	font-weight: bold;
+	margin-right: 2%;
+}
+
+/* -----------------------------------------------
+~~~~~~~~~~~~~~~~ Contact Page ~~~~~~~~~~~~~~~~~~~~
+----------------------------------------------- */
+#contact-address {
+	float: left;
+	width: 100%;
+}
+
+#contact-address .column {
+	float: left;
+	width: 50%;
+}
+
+#contact-address .column {
+	float: left;
+	width: 50%;
+}
+
+
+/* -----------------------------------------------
+~~~~~~~~~~~~~~~~~~ Stocks Page ~~~~~~~~~~~~~~~~~~~
+----------------------------------------------- */
+.vat-image {
+	float: left;
+	padding: 20px;
+	text-align: center;	
+}
+
+.freeze-date {
+	font-size: 14px;
+}
+
+.no-record {
+	color: #FF1493;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+
+/* -----------------------------------------------
+~~~~~~~~~~~~~~~~~~ Strains Page ~~~~~~~~~~~~~~~~~~
+----------------------------------------------- */
+.strain-section {
+	position: relative;
+	right: 2%;
+	width: 104%; /* to compensate for margin around strainData */
+	clear: both;
+	float: left;
+}
+
+.strain-section h3 {
+	font-size: 16px;
+	margin-left: 2%;
+}
+
+.strain-data {
+	float: left;
+	margin: 2%;
+}
+
+.freeze-data {
+	float: left;
+	width: 29%;
+	margin: 2%;
+}
+
+.line {
+	clear: both;
+	float: left;
+	background: #AAA;
+	height: 1px;
+	width: 100%;
+	margin: 3% 0;
+}
+
+
+/* -----------------------------------------------
+~~~~~~~~~~~~~~~~~~ Stamps Page ~~~~~~~~~~~~~~~~~~~
+----------------------------------------------- */
+
+div.status0 {
+	background: #635335;
+}
+
+div.status1 {
+	background: #D5AA02;
+}
+
+div.status2 {
+	background: #4B2;
+}
+
+div.badMatch {
+	color: #F00;
+}
+
+div#hover-clone {
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	background: #DDD;
+	border: 1px solid #AAA;
+	padding: 5px;
+	display: none;
+}
+
+div.plate {
+	width: 684px;
+	height: 456px;
+	background: #635335;
+	border: 5px solid #635335;
+	margin: 0 auto;
+}
+
+div.well {
+	float: left;
+	border: 1px solid #635335; 
+	width: 45px;
+	height: 45px;
+	margin: 5px;
+	color: #fff;
+	text-align: center;
+}
+
+div.plate-medium {
+	width: 636px;
+	height: 368px;
+	background: #635335;
+	border: 5px solid #635335;
+	margin: 0 auto;
+}
+
+div.well-medium {
+	float: left;
+	border: 1px solid #635335; 
+	width: 40px;
+	height: 40px;
+	margin: 2px;
+	color: #fff;
+}
+
+.plate-small {
+	width: 372px;
+	height: 248px;
+	background: #635335;
+	border: 5px solid #635335;
+}
+
+div.well-small {
+	float: left;
+	border: 1px solid #635335;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	color: #fff;
+	font-size: 12px;
+	text-align: center;
+}
+
+/* plate-row contains two small plates */
+div.plate-row {
+	clear: both;
+	float: left;
+	margin-top: 40px;
+	width: 100%;
+}
+
+/* plateWrap wraps one small plate plus accompanying text */
+.left-plate-wrap {
+	float: left;
+	text-align: center;
+}
+
+.right-plate-wrap {
+	float: right;
+	text-align: center;
+}
+
+div.comments {
+	text-align: left;
+	font-size: 12px;
+}
+
+span.stamp-source {
+	font-size: 12px;
+	margin-left: 20px;
+}
+
+
+/* ~~~~~~~~ NEW_STAMP PAGE ~~~~~~~~ */
+
+div.comment-button {
+	float: left;
+	border: 1px solid #666;
+	width: 5px;
+	height: 5px;
+	background: #000;
+}
+
+div.comment-popup {
+	position: absolute;
+	background: #DDD;
+	border: 1px solid #AAA;
+	padding: 5px;
+	display: none;
+}
+
+/* link color is 58BB62 */

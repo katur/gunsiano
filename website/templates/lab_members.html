@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
 
+{% block page_title %}
+	Lab Members
+{% endblock %}
+
 {% block content %}
+	<ul>
 	{% for member in lab_members %}
-	{{ member.first_name }} {{ member.last_name }}	
+	<a href="{% url 'website.views.lab_member' last_name=member.last_name %}">
+			<li>{{ member.first_name }} {{ member.last_name }}</li>
+		</a>
 	{% endfor %}
+	</ul>
 {% endblock content %}

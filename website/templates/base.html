@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<link href="{{ STATIC_URL }}images/favicon.ico" rel="icon" type="image/x-icon">
-	<link href="{{ STATIC_URL }}css/universal.css" rel="stylesheet" type="text/css" />
-	<link href="{{ STATIC_URL }}css/home.css" rel="stylesheet" type="text/css" />
-	<title>Gunsiano Lab Website</title>
-</head>
-
-<body>
-	{% block content %}{% endblock content %}
-</body>
+	<!-- HEAD -->
+	{% include "head.html" %}
+				
+	<body>
+		<div id="wrap-header">
+			<div id="header" class="clearfix">
+				
+					<!-- Site Title -->
+				<h1>Gunsalus and Piano Labs as NYU</h1>
+				<span id="site_subtitle">at New York University's Center for Genomics and Systems Biology</a>
+			
+				<!-- MENU -->
+				{% include "menu.html" %}
+			</div>
+		</div>
+		
+		<div id="wrap-content">
+			<div id="content">
+				<!-- PAGE TITLE -->
+				<h2>
+					{% block page_title %}{% endblock %}
+				</h2>
+				
+				<!-- REST OF CONTENT -->
+				{% block content %}{% endblock %}
+			</div>
+		</div>
+	</body>
 </html>

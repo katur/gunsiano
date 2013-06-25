@@ -9,6 +9,13 @@ def home(request):
 	# render page
 	return render_to_response('home.html', context_instance=RequestContext(request))
 
+def research(request):
+	"""
+	Research Areas
+	"""
+	# render page
+	return render_to_response('research.html', context_instance=RequestContext(request))
+
 def contact(request):
 	"""
 	Contact Page
@@ -24,11 +31,11 @@ def lab_members(request):
 
 	return render_to_response('lab_members.html', {'lab_members':l}, context_instance=RequestContext(request))
 
-def lab_member(request, last_name):
+def lab_member(request, url_name):
 	"""
 	Page for each lab member
 	"""
-	member = get_object_or_404(Person, last_name = last_name)
+	person = get_object_or_404(Person, url_name=url_name)
 	return render_to_response('lab_member.html', {
-		'member': member,
+		'person': person,
 	}, context_instance=RequestContext(request))

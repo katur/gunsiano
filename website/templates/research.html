@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+	<h2>Research Areas</h2>
+{% endblock %}
+
+{% block content %}
+	<div id="research-bubble" class="intro-bubble">
+		We study the genetic and evolutionary mechanisms underlying early embryonic development.
+	</div>
+
+	<div class="research-area text-left">
+		<!-- NETWORKS -->
+		<span>
+			<h3>Biological Network Analysis</h3>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+			sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+		</span>
+		<img src='{{ STATIC_URL }}images/Celegans-WI8-1.jpg'>
+	</div>
+
+	<div class="separator"></div>
+
+	<!-- CELL BIOLOGY -->
+	<div class="research-area text-right">
+		<video loop autoplay><source src='{{ STATIC_URL }}videos/nathalie.mp4' type='video/mp4'>Your browser does not support HTML5 video</video>
+		<span>
+			<h3>Dynamics of Cell Biology in the Early Embryo</h3>
+			Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+		</span>
+	</div>
+
+	<div class="separator"></div>
+
+	<!-- EVOLUTION -->
+	<div class="research-area text-left">
+		<span>
+			<h3>Evolution of early development and reproduction modes</h3>
+			Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+		</span>
+		<img src='{{ STATIC_URL }}images/Protorhabditis.jpg'>
+	</div>
+
+	<div class="separator"></div>
+	
+	<!-- GI -->
+	<div class="research-area text-right">
+		<img src='{{ STATIC_URL }}images/Tile000001.jpg'>
+		<span>
+			<h3>Genome-Wide Genetic Interactions Screens</h3>
+			Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, 
+			totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+		</span>
+	</div>
+	
+	<div class="separator"></div>
+
+	<!-- RNA -->
+	<div class="research-area text-left">
+		<span>
+			<h3>RNA Regulation</h3>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+			sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+		</span>
+		<img src='{{ STATIC_URL }}images/sw_flipped.jpg'>
+	</div>
+
+	<div class="separator"></div>
+
+	<!-- MOUSE EMBRYOGENESIS -->
+	<div class="research-area text-right">
+		<img src='{{ STATIC_URL }}images/mouse.jpg'>
+		<span>
+			<h3>Mouse Embryogenesis</h3>
+			Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+		</span>
+	</div>
+{% endblock content %}

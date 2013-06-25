@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block page_title %}
-	{{ member }}
+	<h2>{{ person }}</h2>
 {% endblock %}
 
 {% block content %}
-	Specific lab member page!
+	{% if person.blurb %}
+		{{ person.blurb }}
+	{% endif %}
 {% endblock content %}

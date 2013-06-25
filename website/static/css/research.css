@@ -1,0 +1,59 @@
+/* styles for research areas page */
+#research-bubble {
+	background: #0FA7D1;
+}
+
+.separator {
+	float: left;
+	clear: both;
+	width: 90%;
+	margin: -1px 5%;
+	height: 1px;
+	background: #ddd;
+	position: relative;
+	z-index: 1;
+}
+
+.research-area {
+	float: left;
+	clear: both;
+	width: 90%;
+	padding: 5%;
+	margin-top: -1px;
+	border: 1px solid white;
+	position: relative;
+	z-index: 0;
+}
+
+.research-area:hover {
+	border-radius: 15px;
+	border: 1px solid #ddd;
+	background: #efefef;
+	position: relative;
+	z-index: 2;
+}
+
+.research-area span {
+	float: left;
+	clear: none;
+	width: 50%;
+}
+
+.research-area img, .research-area video {
+	float: left;
+	clear: none;
+	width: 45%;
+}
+
+.text-left span, .text-right img, .text-right video {
+	float: left;
+}
+
+.text-right span, .text-left img, .text-left video {
+	float: right;
+}
+
+.text-right span {
+	float: right;
+}
+

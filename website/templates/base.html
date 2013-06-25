@@ -6,10 +6,9 @@
 	<body>
 		<div id="wrap-header">
 			<div id="header" class="clearfix">
-				
-					<!-- Site Title -->
-				<h1>Gunsalus and Piano Labs as NYU</h1>
-				<span id="site_subtitle">at New York University's Center for Genomics and Systems Biology</a>
+				<!-- Site Title -->
+				<a href="{% url 'home_url' %}"><h1>Gunsalus and Piano Labs as NYU</h1></a>
+				<span class="subtitle">at New York University's Center for Genomics and Systems Biology</a>
 			
 				<!-- MENU -->
 				{% include "menu.html" %}
@@ -19,9 +18,7 @@
 		<div id="wrap-content">
 			<div id="content">
 				<!-- PAGE TITLE -->
-				<h2>
-					{% block page_title %}{% endblock %}
-				</h2>
+				{% block page_title %}{% endblock %}
 				
 				<!-- REST OF CONTENT -->
 				{% block content %}{% endblock %}

@@ -1,0 +1,22 @@
+#lab-members-image {
+	float: left;
+	clear: both;
+	margin: 0 120px;
+}
+
+#lab-members-caption {
+	float: left;
+	clear: both;
+	margin: 0 120px;
+}
+
+#lab-members-list {
+	float: left;
+	clear: both;
+}
+
+.two-column {
+	float: left;
+	width: 46%;
+	margin: 0 2%;
+}

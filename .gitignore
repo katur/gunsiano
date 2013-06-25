@@ -1,7 +1,9 @@
 # Connection files #
 ####################
 gunsaluspiano/settings.py
+gunsaluspiano/secret_settings.py
 *settings.py
+*secret_settings.py
 
 # Compiled source #
 ###################

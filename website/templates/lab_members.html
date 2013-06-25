@@ -16,10 +16,16 @@
 
 	<div id="two-column">
 		<ul id="lab-members-list">
-		{% for person in lab_members %}
-			<a href="{% url 'lab_member_url' url_name=person.url_name %}">
-				<li>{{ person.full_name }}</li>
-			</a>
+			
+		{% regroup lab_members by position_full as position_list %}
+		
+		{% for position in position_list %}
+			{{ position.grouper }}s
+			{% for person in position.list %}
+				<a href="{% url 'lab_member_url' url_name=person.url_name %}">
+					<li>{{ person.full_name }}</li>
+				</a>
+			{% endfor %}
 		{% endfor %}
 		</ul>
 	</div>

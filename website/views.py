@@ -16,20 +16,17 @@ def research(request):
 	# render page
 	return render_to_response('research.html', context_instance=RequestContext(request))
 
-def contact(request):
-	"""
-	Contact Page
-	"""
-	return render_to_response('contact.html', context_instance=RequestContext(request))
-
 def lab_members(request):
 	"""
 	Page listing all lab members
 	"""
 	# get all lab members
-	l = Person.objects.all().order_by('position__display_order', 'last_name')
+	l = Person.objects.all().order_by('-is_current', 'position__display_order', 'last_name')
 	for person in l:
-		person.position_full = person.position.position
+		if person.is_current:
+			person.display_position = person.position.position
+		else:
+			person.display_position = "Former Lab Member"
 
 	return render_to_response('lab_members.html', {
 		'lab_members':l
@@ -41,5 +38,21 @@ def lab_member(request, url_name):
 	"""
 	person = get_object_or_404(Person, url_name=url_name)
 	return render_to_response('lab_member.html', {
-		'person': person,
+		'person':person,
 	}, context_instance=RequestContext(request))
+
+def resources(request):
+	"""
+	Resources Page
+	"""
+	r = Resource.objects.all().order_by('name')
+
+	return render_to_response('resources.html', {
+		'resources':r
+	}, context_instance=RequestContext(request))
+
+def contact(request):
+	"""
+	Contact Page
+	"""
+	return render_to_response('contact.html', context_instance=RequestContext(request))

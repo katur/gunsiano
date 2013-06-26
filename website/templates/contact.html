@@ -5,5 +5,68 @@
 {% endblock %}
 
 {% block content %}
-	Contact page!
+	<div class="contact-section">
+		<h3>Email</h3>
+		<span>
+			Dr. Kris Gunsalus:
+			<a href="mailto:kcg1@nyu.edu">
+				kcg1@nyu.edu
+			</a>
+		</span>
+		<span>
+			Dr. Fabio Piano:
+			<a href="mailto:fp1@nyu.edu">
+				fp1@nyu.edu
+			</a>
+		</span>
+		<span>
+			Jessica Lucas, New York Lab Manager:
+			<a href="mailto:jl199@nyu.edu">
+				jl199@nyu.edu
+			</a>
+		</span>
+	</div>
+	
+	<div class="contact-section">
+		<h3>Telephone</h3>
+		<span>
+			Jessica Lucas, New York Lab Manager: 
+			<a href="tel:212-992-6958">212-992-6958</a>
+		</span>
+		<span>
+			Gunsalus Lab Phone, New York: 
+			<a href="tel:212.998.7794">212-998-7794</a>
+		</span>
+		<span>
+			Piano Lab Phone, New York: 
+			<a href="tel:212.992.9563">212-992-9563</a>
+		</span>
+	</div>
+	
+	<div class="contact-section">
+		<h3>Address</h3>
+		<span class="address-selector">
+			Select a PI:
+			<a href="#" data-lab="Kris Gunsalus">Gunsalus</a> 
+			<a href="#" data-lab="Fabio Piano">Piano</a>
+		</span>
+		<span class="address-selector">
+			Select which city:
+			<a href="#" data-city="Abu Dhabi, U.A.E.">Abu Dhabi</a> 
+			<a href="#" data-city="New York, NY, U.S.A.">New York City</a>
+		</span>
+		<span class="address-selector">
+			Select type of mail:
+			<a href="#" data-address-type="visiting">visiting</a> 
+			<a href="#" data-address-type="regular">regular mail</a> 
+			<a href="#" data-address-type="packages">packages</a>
+		</span>
+		<span id="address">
+			Laboratory of <span id="laboratory"></span><br>
+			Center for Genomics and Systems Biology<br>
+			New York University<br>
+			12 Waverly Place, <span id="floor-detail"></span><br>
+			New York, NY 10003
+		</span>
+	</div>
 {% endblock content %}

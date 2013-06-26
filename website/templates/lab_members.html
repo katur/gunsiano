@@ -5,28 +5,61 @@
 {% endblock %}
 
 {% block content %}
-	<img id="lab-members-image"
-		title="LabRetreat2011" 
-		src="{{ STATIC_URL }}images/LabRetreat2011.jpg" 
-		width="720" height="481" 
-	/>
-	<span id="lab-members-caption" class="subtitle">
-		Gunsiano Lab Retreat, Catskills, 2011
-	</span>
-
-	<div id="two-column">
-		<ul id="lab-members-list">
+	<div id="lab-members-photo" class="colorful-bubble">
+		<img
+			title="LabRetreat2011" 
+			src="{{ STATIC_URL }}images/LabRetreat2011.jpg" 
+			width="720" height="481" 
+		/>
+		<span class="subtitle">
+			Gunsiano Lab Retreat, Catskills, 2011
+		</span>
+	</div>
+	
+	<div id="lab-members-list">
+		<div>
+			{% regroup lab_members by display_position as position_list %}
 			
-		{% regroup lab_members by position_full as position_list %}
-		
-		{% for position in position_list %}
-			{{ position.grouper }}s
-			{% for person in position.list %}
-				<a href="{% url 'lab_member_url' url_name=person.url_name %}">
-					<li>{{ person.full_name }}</li>
-				</a>
+			{% for position in position_list %}
+				{% ifequal position.grouper "Lab Manager" %}
+					</div><div>
+				{% endifequal %}
+				
+				{% ifequal position.grouper "Former Lab Member" %}
+					</div><div class="rightmost">
+				{% endifequal %}
+				
+				<h3>{{ position.grouper }}s</h3>
+				<ul>	
+					{% for person in position.list %}
+						<li>
+							{% if person.blurb %}
+								<a href="{% url 'lab_member_url' url_name=person.url_name %}">
+							{% elif person.website %}
+								<a target="_blank" href="{{ person.website }}">
+							{% endif %}
+							
+							{{ person.full_name }}
+
+							{% if person.blurb or person.website %}</a>{% endif %}
+							
+							<span class="nyu-location">
+								{% if person.in_abu_dhabi %}
+									NYUAD
+								{% elif person.in_abu_dhabi == 0 %}
+									NYUNY
+								{% else %}
+									NYUAD/NY
+								{% endif %}
+							</span>
+						
+							{% if not person.is_current %}
+								<span class="lab-member-position">{{ person.position.position }}</span>
+							{% endif %}
+						</li>
+					{% endfor %}
+				</ul>
 			{% endfor %}
-		{% endfor %}
 		</ul>
 	</div>
 {% endblock content %}

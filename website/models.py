@@ -19,3 +19,9 @@ class Person(models.Model):
 
 	def __unicode__(self):
 		return self.full_name
+
+class Resource(models.Model):
+	name = models.CharField(max_length=50)
+	logo_filename = models.CharField(max_length=50, blank=True)
+	url = models.CharField(max_length=100, blank=True)
+	description = models.CharField(max_length=300, blank=True)

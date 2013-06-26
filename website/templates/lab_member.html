@@ -6,6 +6,6 @@
 
 {% block content %}
 	{% if person.blurb %}
-		{{ person.blurb }}
+		{{ person.blurb|safe }}
 	{% endif %}
 {% endblock content %}

@@ -1,0 +1,24 @@
+.contact-section {
+	float: left;
+	width: 100%;
+	margin-bottom: 40px;
+}
+
+.contact-section span, h3 {
+	float: left;
+	clear: both;
+}
+
+.contact-section span {
+	float: left;
+	clear: both;
+}
+
+#address {
+	margin-top: 20px;
+}
+
+#address span {
+	float: none;
+	clear: none;
+}

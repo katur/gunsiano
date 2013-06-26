@@ -1,8 +1,30 @@
 /* styles for research areas page */
-#research-bubble {
-	background: #0FA7D1;
+
+/* colorful bubble 
+ * (generalized to implement elsewhere) */
+.colorful-bubble {
+	clear: both;
+	float: left;
+	border-radius: 10px;
+	width: 920px;
+	padding: 30px;
+	margin-bottom: 40px;
+	font-size: 20px; 
+	color: black;
 }
 
+.colorful-bubble a {
+	color: white;
+}
+
+/* specific to this coloful bubble */
+#research-bubble {
+	background: #58bb62;
+	text-align: center;
+}
+
+/* Big Bubble Links 
+ * (generalized to implement elsewhere) */
 .separator {
 	float: left;
 	clear: both;
@@ -14,7 +36,7 @@
 	z-index: 1;
 }
 
-.research-area {
+.bubble-link {
 	float: left;
 	clear: both;
 	width: 90%;
@@ -25,7 +47,7 @@
 	z-index: 0;
 }
 
-.research-area:hover {
+.bubble-link:hover {
 	border-radius: 15px;
 	border: 1px solid #ddd;
 	background: #efefef;
@@ -33,6 +55,7 @@
 	z-index: 2;
 }
 
+/* Layout within the big bubble link */
 .research-area span {
 	float: left;
 	clear: none;
@@ -56,4 +79,3 @@
 .text-right span {
 	float: right;
 }
-

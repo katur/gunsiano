@@ -1,7 +1,8 @@
 <div id="menu">
 	{% url 'home_url' as home_url %}
-	{% url 'research_url' as research_url %}
 	{% url 'lab_members_url' as lab_members_url %}
+	{% url 'research_url' as research_url %}
+	{% url 'resources_url' as resources_url %}
 	{% url 'contact_url' as contact_url %}
 	
 	<a href="{{ home_url }}" 
@@ -9,17 +10,22 @@
 		{% endifequal %}>
 		Home
 	</a> 
-	<a href="{{ research_url }}" 
-		{% ifequal request.path research_url %}class="active"
-		{% endifequal %}>
-		Research Areas
-	</a> 
 	<a href="{{ lab_members_url }}" 
 		{% ifequal request.path lab_members_url %}
 			class="active"
 		{% endifequal %}>
 		Lab Members
 	</a>
+	<a href="{{ research_url }}" 
+		{% ifequal request.path research_url %}class="active"
+		{% endifequal %}>
+		Research Areas
+	</a> 
+	<a href="{{ resources_url }}" 
+		{% ifequal request.path resources_url %}class="active"
+		{% endifequal %}>
+		Resources and Data
+	</a> 
 	<a href="{{ contact_url }}" 
 		{% ifequal request.path contact_url %}
 			class="active"

@@ -1,22 +1,57 @@
-#lab-members-image {
-	float: left;
-	clear: both;
-	margin: 0 120px;
+#lab-members-photo {
+	/*background: #0FA7D1;*/
+	background: #F8BA5E;
 }
 
-#lab-members-caption {
+#lab-members-photo img {
 	float: left;
 	clear: both;
-	margin: 0 120px;
+	margin-left: 100px;
+}
+
+#lab-members-photo span {
+	float: left;
+	clear: both;
+	margin-left: 100px;
 }
 
 #lab-members-list {
 	float: left;
 	clear: both;
+	width: 100%;
 }
 
-.two-column {
+#lab-members-list div {
 	float: left;
-	width: 46%;
-	margin: 0 2%;
+	width: 30%;
+	margin: 0 3% 0 0;
+}
+
+#lab-members-list .rightmost {
+	width: 34%;
+	margin: 0;
+}
+
+#lab-members-list h3 {
+	margin: 0 0 10px;
+}
+
+#lab-members-list ul {
+	padding: 0;
+	margin: 0 0 30px;
+}
+
+#lab-members-list li {
+	list-style-type: none;
+}
+
+.nyu-location {
+	font-size: 10px;
+	padding-left: 5px;
+}
+
+.lab-member-position {
+	font-style: italic;
+	font-size: 14px;
+	padding-left: 5px;
 }

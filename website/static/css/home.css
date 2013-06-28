@@ -1,3 +1,14 @@
 #employment {
 	margin-top: 100px;
 }
+
+#home-page {
+	width: 100%;
+}
+
+#home-page img {
+	display: block;
+	padding-top: 40px;
+	margin-left: auto;
+	margin-right: auto;
+}

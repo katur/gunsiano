@@ -7,10 +7,10 @@ class Position(models.Model):
 
 class Person(models.Model):
 	user = models.ForeignKey(User, unique=True, null=True)
-	full_name = models.CharField(max_length=50)
-	url_name = models.CharField(max_length=50, unique=True)
-	first_name = models.CharField(max_length=25)
-	last_name = models.CharField(max_length=25)
+	full_name = models.CharField(max_length=100)
+	url_name = models.CharField(max_length=25, unique=True)
+	first_name = models.CharField(max_length=50)
+	last_name = models.CharField(max_length=50)
 	position = models.ForeignKey(Position)
 	in_abu_dhabi = models.NullBooleanField(null=True)
 	is_current = models.BooleanField(default=True)

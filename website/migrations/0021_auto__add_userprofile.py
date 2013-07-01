@@ -8,15 +8,29 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Person.image_filename'
-        db.add_column(u'website_person', 'image_filename',
-                      self.gf('django.db.models.fields.CharField')(default='', max_length=100, blank=True),
-                      keep_default=False)
+        # Adding model 'UserProfile'
+        db.create_table(u'website_userprofile', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], unique=True, null=True)),
+            ('full_name', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('url_name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=25)),
+            ('first_name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('last_name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('position', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['website.Position'])),
+            ('in_abu_dhabi', self.gf('django.db.models.fields.NullBooleanField')(null=True, blank=True)),
+            ('is_current', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('net_id', self.gf('django.db.models.fields.CharField')(max_length=25, blank=True)),
+            ('email', self.gf('django.db.models.fields.EmailField')(max_length=254, blank=True)),
+            ('url', self.gf('django.db.models.fields.URLField')(max_length=200, blank=True)),
+            ('blurb', self.gf('django.db.models.fields.TextField')(blank=True)),
+            ('image_filename', self.gf('django.db.models.fields.CharField')(max_length=100, blank=True)),
+        ))
+        db.send_create_signal(u'website', ['UserProfile'])
 
 
     def backwards(self, orm):
-        # Deleting field 'Person.image_filename'
-        db.delete_column(u'website_person', 'image_filename')
+        # Deleting model 'UserProfile'
+        db.delete_table(u'website_userprofile')
 
 
     models = {
@@ -56,8 +70,22 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'website.person': {
-            'Meta': {'object_name': 'Person'},
+        u'website.position': {
+            'Meta': {'object_name': 'Position'},
+            'display_order': ('django.db.models.fields.PositiveSmallIntegerField', [], {'unique': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'position': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+        },
+        u'website.resource': {
+            'Meta': {'object_name': 'Resource'},
+            'description': ('django.db.models.fields.CharField', [], {'max_length': '300', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'logo_filename': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'url': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'})
+        },
+        u'website.user_expanded': {
+            'Meta': {'object_name': 'User_Expanded'},
             'blurb': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '254', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
@@ -73,19 +101,22 @@ class Migration(SchemaMigration):
             'url_name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '25'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'unique': 'True', 'null': 'True'})
         },
-        u'website.position': {
-            'Meta': {'object_name': 'Position'},
-            'display_order': ('django.db.models.fields.PositiveSmallIntegerField', [], {'unique': 'True'}),
+        u'website.userprofile': {
+            'Meta': {'object_name': 'UserProfile'},
+            'blurb': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '254', 'blank': 'True'}),
+            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'full_name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'position': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        u'website.resource': {
-            'Meta': {'object_name': 'Resource'},
-            'description': ('django.db.models.fields.CharField', [], {'max_length': '300', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'logo_filename': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'url': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'})
+            'image_filename': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
+            'in_abu_dhabi': ('django.db.models.fields.NullBooleanField', [], {'null': 'True', 'blank': 'True'}),
+            'is_current': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'net_id': ('django.db.models.fields.CharField', [], {'max_length': '25', 'blank': 'True'}),
+            'position': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['website.Position']"}),
+            'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
+            'url_name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '25'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'unique': 'True', 'null': 'True'})
         }
     }
 

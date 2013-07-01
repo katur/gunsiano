@@ -7,7 +7,7 @@ class Position(models.Model):
 	def __unicode__(self):
 		return self.position
 
-class Person(models.Model):
+class UserProfile(models.Model):
 	user = models.ForeignKey(User, unique=True, null=True)
 	full_name = models.CharField(max_length=100)
 	url_name = models.CharField(max_length=25, unique=True)

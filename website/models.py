@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 class Position(models.Model):
 	position = models.CharField(max_length=50)
 	display_order = models.PositiveSmallIntegerField(unique=True)
+	def __unicode__(self):
+		return self.position
 
 class Person(models.Model):
 	user = models.ForeignKey(User, unique=True, null=True)

@@ -34,7 +34,7 @@
 					{% for person in position.list %}
 						<li>
 							{% if person.blurb %}
-								<a href="{% url 'lab_member_url' url_name=person.url_name %}">
+							add link{#<a href="{% url 'lab_member_url' username=person.user.username %}">#}
 							{% elif person.website %}
 								<a target="_blank" href="{{ person.website }}">
 							{% endif %}

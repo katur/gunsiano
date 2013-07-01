@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block page_title %}
-	<h2>{{ person }}</h2>
+	<h2>{{ profile.full_name }}</h2>
 {% endblock %}
 
 {% block content %}
 	<div id="lab-member-profile">
-		{% if person.image_filename %}
-			<img src="{{ STATIC_URL }}images/lab_members/{{ person.image_filename }}" />
+		{% if profile.image_filename %}
+			<img src="{{ STATIC_URL }}images/lab_members/{{ profile.image_filename }}" />
 		{% endif %}
-		{% if person.blurb %}
-			{{ person.blurb|safe }}
+		{% if profile.blurb %}
+			{{ profile.blurb|safe }}
 		{% endif %}
 	</div>
 {% endblock content %}

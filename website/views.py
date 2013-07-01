@@ -23,25 +23,26 @@ def lab_members(request):
 	Page listing all lab members
 	"""
 	# get all lab members
-	l = UserProfile.objects.all().order_by('-is_current', 'position__display_order', 'last_name')
-	for person in l:
+	profiles = UserProfile.objects.all().order_by('-is_current', 'position__display_order', 'user__last_name')
+	for person in profiles:
 		if person.is_current:
 			person.display_position = person.position.position
 		else:
 			person.display_position = "Former Lab Member"
-
+	
 	return render_to_response('lab_members.html', {
-		'lab_members':l
+		'lab_members':profiles
 	}, context_instance=RequestContext(request))
 
 
-def lab_member(request, url_name):
+def lab_member(request, username):
 	"""
 	Page for each lab member
 	"""
-	person = get_object_or_404(UserProfile, url_name=url_name)
+	user = get_object_or_404(User, username=username)
+	user_profile = user.get_profile()
 	return render_to_response('lab_member.html', {
-		'person':person,
+		'profile':user_profile,
 	}, context_instance=RequestContext(request))
 
 

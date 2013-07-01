@@ -16,7 +16,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-AUTH_PROFILE_MODULE = "website.Person"
+AUTH_PROFILE_MODULE = "website.UserProfile"
 
 '''
 # include this, filled in, in settings_secret.py

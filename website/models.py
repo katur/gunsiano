@@ -18,6 +18,7 @@ class Person(models.Model):
 	email = models.EmailField(max_length=254, blank=True)
 	url = models.URLField(blank=True)
 	blurb = models.TextField(blank=True)
+	image_filename = models.CharField(max_length=100, blank=True)
 
 	def __unicode__(self):
 		return self.full_name

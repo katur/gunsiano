@@ -7,11 +7,11 @@
 .contact-section span {
 	float: left;
 	clear: both;
+	margin-bottom: 10px;
 }
 
-.contact-section span {
-	float: left;
-	clear: both;
+.address-selector a {
+	margin-right: 15px;
 }
 
 #address {

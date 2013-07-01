@@ -5,7 +5,12 @@
 {% endblock %}
 
 {% block content %}
-	{% if person.blurb %}
-		{{ person.blurb|safe }}
-	{% endif %}
+	<div id="lab-member-profile">
+		{% if person.image_filename %}
+			<img src="{{ STATIC_URL }}images/lab_members/{{ person.image_filename }}" />
+		{% endif %}
+		{% if person.blurb %}
+			{{ person.blurb|safe }}
+		{% endif %}
+	</div>
 {% endblock content %}

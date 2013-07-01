@@ -1,0 +1,10 @@
+#lab-member-profile {
+	float: left;
+	width: 100%;
+}
+
+#lab-member-profile img {
+	float: right;
+	max-width: 500px;
+	margin: 0 0 40px 40px;
+}

@@ -47,13 +47,25 @@
 		<h3>Address</h3>
 		<span class="address-selector">
 			Select a PI:
-			<a href="#" data-lab="Kris Gunsalus">Gunsalus</a> 
-			<a href="#" data-lab="Fabio Piano">Piano</a>
+			<a href="#" data-lab="Laboratory of Kris Gunsalus">Gunsalus</a> 
+			<a href="#" data-lab="Laboratory of Fabio Piano">Piano</a>
+			<a href="#" data-lab="Gunsalus and Piano Labs">both</a>
 		</span>
 		<span class="address-selector">
-			Select which city:
-			<a href="#" data-city="Abu Dhabi, U.A.E.">Abu Dhabi</a> 
-			<a href="#" data-city="New York, NY, U.S.A.">New York City</a>
+			Select location:
+			<a href="#" data-city="
+				NYU Abu Dhabi, Center for Science and Engineering<br>
+				Block C Building, Abu Dhabi Business Hub<br>
+				Industrial City of Abu Dhabi (ICAD 1), 
+				Plot No. 1, Sector M41<br>
+				Musaffah, Abu Dhabi, United Arab Emirates
+			">Abu Dhabi</a> 
+			<a href="#" data-city="
+				NYU Center for Genomics and Systems Biology<br>
+				12 Waverly Place<br>
+				<span id='floor-detail'>
+				New York, NY, U.S.A.
+			">New York City</a>
 		</span>
 		<span class="address-selector">
 			Select type of mail:
@@ -62,11 +74,8 @@
 			<a href="#" data-address-type="packages">packages</a>
 		</span>
 		<span id="address">
-			Laboratory of <span id="laboratory"></span><br>
-			Center for Genomics and Systems Biology<br>
-			New York University<br>
-			12 Waverly Place, <span id="floor-detail"></span><br>
-			New York, NY 10003
+			<span id="laboratory"></span><br>
+			<span id="location"></span>
 		</span>
 	</div>
 {% endblock content %}

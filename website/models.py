@@ -8,8 +8,7 @@ class Position(models.Model):
 		return self.position
 
 class UserProfile(models.Model):
-	user = models.ForeignKey(User, unique=True, null=True)
-	full_name = models.CharField(max_length=100)
+	user = models.ForeignKey(User, unique=True)
 	position = models.ForeignKey(Position)
 	in_abu_dhabi = models.NullBooleanField(null=True)
 	is_current = models.BooleanField(default=True)
@@ -19,7 +18,9 @@ class UserProfile(models.Model):
 	image_filename = models.CharField(max_length=100, blank=True)
 
 	def __unicode__(self):
-		return self.full_name
+		return self.user.username
+	class Meta:
+		ordering = ["net_id"]
 
 class Resource(models.Model):
 	name = models.CharField(max_length=50)

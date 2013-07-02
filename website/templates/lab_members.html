@@ -18,7 +18,7 @@
 	
 	<div id="lab-members-list">
 		<div>
-			{% regroup lab_members by display_position as position_list %}
+			{% regroup profiles by display_position as position_list %}
 			
 			{% for position in position_list %}
 				{% ifequal position.grouper "Lab Manager" %}
@@ -31,22 +31,24 @@
 				
 				<h3>{{ position.grouper }}s</h3>
 				<ul>	
-					{% for person in position.list %}
+					{% for profile in position.list %}
 						<li>
-							{% if person.blurb %}
-							add link{#<a href="{% url 'lab_member_url' username=person.user.username %}">#}
-							{% elif person.website %}
+							{% if profile.blurb %}
+							<a href="
+								{% url 'lab_member_url' 
+									username=profile.user.get_username %}">
+							{% elif profile.website %}
 								<a target="_blank" href="{{ person.website }}">
 							{% endif %}
 							
-							{{ person.full_name }}
+							{{ profile.user.get_full_name }}
 
-							{% if person.blurb or person.website %}</a>{% endif %}
+							{% if profile.blurb or profile.website %}</a>{% endif %}
 							
 							<span class="nyu-location">
-								{% if person.in_abu_dhabi %}
+								{% if profile.in_abu_dhabi %}
 									NYUAD
-								{% elif person.in_abu_dhabi == 0 %}
+								{% elif profile.in_abu_dhabi == 0 %}
 									NYUNY
 								{% else %}
 									NYUAD/NY

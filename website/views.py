@@ -24,14 +24,14 @@ def lab_members(request):
 	"""
 	# get all lab members
 	profiles = UserProfile.objects.all().order_by('-is_current', 'position__display_order', 'user__last_name')
-	for person in profiles:
-		if person.is_current:
-			person.display_position = person.position.position
+	for profile in profiles:
+		if profile.is_current:
+			profile.display_position = profile.position.position
 		else:
-			person.display_position = "Former Lab Member"
+			profile.display_position = "Former Lab Member"
 	
 	return render_to_response('lab_members.html', {
-		'lab_members':profiles
+		'profiles':profiles
 	}, context_instance=RequestContext(request))
 
 
@@ -40,9 +40,8 @@ def lab_member(request, username):
 	Page for each lab member
 	"""
 	user = get_object_or_404(User, username=username)
-	user_profile = user.get_profile()
 	return render_to_response('lab_member.html', {
-		'profile':user_profile,
+		'user':user,
 	}, context_instance=RequestContext(request))
 
 

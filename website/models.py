@@ -8,7 +8,7 @@ class Position(models.Model):
 		return self.position
 
 class UserProfile(models.Model):
-	user = models.ForeignKey(User, unique=True)
+	user = models.OneToOneField(User, primary_key=True)
 	position = models.ForeignKey(Position)
 	in_abu_dhabi = models.NullBooleanField(null=True)
 	is_current = models.BooleanField(default=True)

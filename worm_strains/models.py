@@ -1,4 +1,5 @@
 from django.db import models
+from website.models import UserProfile
 
 class WormSpecies(models.Model):
 	name = models.CharField(max_length=50)
@@ -11,8 +12,11 @@ class Mutagen(models.Model):
 class WormStrain(models.Model):
 	name = models.CharField(max_length=10, blank=True)
 	on_wormbase = models.BooleanField(default=False)
+	species = models.ForeignKey(WormSpecies, default=1)
 	genotype = models.CharField(max_length=500, blank=True)
+	mutagen = models.ForeignKey(Mutagen, null=True)
 	date_created = models.DateField(null=True)
+	created_by = models.ForeignKey(UserProfile, null=True)
 	culture = models.TextField(blank=True)
 	remarks = models.TextField(blank=True)
 	def __unicode__(self):

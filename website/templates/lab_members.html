@@ -38,10 +38,7 @@
 							{% elif profile.website %}
 								<a target="_blank" href="{{ person.website }}">
 							{% endif %}
-							
-							{{ profile.user.get_full_name }}
-
-							{% if profile.blurb or profile.website %}</a>{% endif %}
+							{{ profile.user.get_full_name }}{% if profile.blurb or profile.website %}</a>{% endif %}
 							
 							<span class="nyu-location">
 								{% if profile.in_abu_dhabi %}

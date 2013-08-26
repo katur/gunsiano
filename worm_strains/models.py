@@ -17,6 +17,7 @@ class WormStrain(models.Model):
 	on_wormbase = models.BooleanField(default=False)
 	species = models.ForeignKey(WormSpecies, default=1)
 	genotype = models.CharField(max_length=500, blank=True)
+	genotype_code = models.PositiveIntegerField(null=True)
 	mutagen = models.ForeignKey(Mutagen, null=True)
 	date_created = models.DateField(null=True)
 	created_by = models.ForeignKey(UserProfile, null=True)

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+	<h2>Worm Portal</h2>
+{% endblock %}
+
+{% block content %}
+	Lab tools.
+	All except Protocols are for internal use only and require login.
+	<ul>
+		<li><a href="">
+			Protocols and Recipes
+		</a></li>
+
+		<li><a href="{% url 'strains_url' %}">
+			Worm Strain Database
+		</a></li>
+
+		<li><a href="">
+			Bacterial Clone Database</li>
+		</a></li>
+
+		<li><a href="">
+			Vector (& Plasmid) Database</li>
+		</a></li>
+
+		<li><a href="">
+			Primer Database
+		</a></li>
+
+		<li><a href="">
+			Antibody Database
+		</a></li>
+
+		<li><a href="">
+			Chemical Database
+		</a></li>
+	</ul>
+{% endblock content %}

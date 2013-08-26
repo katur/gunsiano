@@ -8,4 +8,5 @@ urlpatterns = patterns('website.views', # first arg prefix for views
 	url(r'^lab_member/(?P<username>.+)$', 'lab_member', name='lab_member_url'),
 	url(r'^resources$', 'resources', name='resources_url'),
 	url(r'^contact$', 'contact', name='contact_url'),
+	url(r'^worm_portal$', 'worm_portal', name='worm_portal_url'),
 )

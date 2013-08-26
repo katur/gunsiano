@@ -8,9 +8,12 @@ class WormSpecies(models.Model):
 
 class Mutagen(models.Model):
 	mutagen = models.CharField(max_length=50)
+	def __unicode__(self):
+		return self.mutagen
 
 class WormStrain(models.Model):
 	name = models.CharField(max_length=10, blank=True)
+	internal_identifier = models.CharField(max_length=30, blank=True)
 	on_wormbase = models.BooleanField(default=False)
 	species = models.ForeignKey(WormSpecies, default=1)
 	genotype = models.CharField(max_length=500, blank=True)

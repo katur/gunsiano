@@ -6,7 +6,7 @@ def strain(request, name):
 	"""
 	Page showing information on a particular worm strain.
 	"""
-	strain_name = get_object_or_404(WormStrain, name=name)
+	strain = get_object_or_404(WormStrain, name=name)
 	return render_to_response('strain.html', {
-		'strain_name':name
+		'strain':strain
 	}, context_instance=RequestContext(request))

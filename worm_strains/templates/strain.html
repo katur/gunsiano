@@ -1,8 +1,63 @@
 {% extends 'base.html' %}
 
 {% block page_title %}
-	<h2>{{ strain_name }}</h2>
+	<h2>{{ strain }}</h2>
 {% endblock %}
 
 {% block content %}
+	{% if strain.internal_identifier %}
+	<div>
+		Internal identifier: {{ strain.internal_identifier }}
+	</div>
+	{% endif %}
+	
+	{% if strain.on_wormbase %}
+	<div>
+		<a href="http://www.wormbase.org/species/c_elegans/strain/{{ strain }}" target="_blank">
+			See strain on wormbase
+		</a>
+	</div>
+	{% endif %}
+	
+	{% if strain.species %}
+	<div>
+		Species: <i>{{ strain.species }}</i>
+	</div>
+	{% endif %}
+	
+	{% if strain.genotype%}
+	<div>
+		Genotype: {{ strain.genotype }}
+	</div>
+	{% endif %}
+	
+	{% if strain.mutagen %}
+	<div>
+		Mutagen: {{ strain.mutagen }}
+	</div>
+	{% endif %}
+	
+	{% if strain.date_created %}
+	<div>
+		Created on {{ strain.date_created }}
+	</div>
+	{% endif %}
+
+	{% if strain.created_by %}
+	<div>
+		Created by {{ strain.created_by.user.get_full_name }}
+	</div>
+	{% endif %}
+	
+	{% if strain.culture %}
+	<div>
+		Culture: {{ strain.culture }}
+	</div>
+	{% endif %}
+	
+	{% if strain.remarks %}
+	<div>
+		Remarks: {{ strain.remarks }}
+	</div>
+	{% endif %}
 {% endblock %}

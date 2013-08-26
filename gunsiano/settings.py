@@ -143,6 +143,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 		'south', # for database migrations
 		'website', # app for public website
+		'worm_strains', # app for worm strains
 )
 
 # A sample logging configuration. The only tangible logging

@@ -144,6 +144,7 @@ INSTALLED_APPS = (
 	'south', # for database migrations
 	'website', # app for public website
 	'worm_strains', # app for worm strains
+	'vectors', # app for vectors
 )
 
 # A sample logging configuration. The only tangible logging

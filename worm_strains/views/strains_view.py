@@ -7,8 +7,18 @@ def strains(request):
 	Page listing worms strains, with possible filtering
 	"""
 	# get all worm strains
-	strains = WormStrain.objects.all().order_by('name')	
-
+	strains = WormStrain.objects.all().order_by('strain_sort')	
+	
+	for strain in strains:
+		if not strain.genotype and strain.transgene:
+			vector = strain.transgene.vector
+			strain.genotype = strain.transgene.name + "[" + vector.parent_vector.genotype_pattern + "]"
+			strain.genotype = strain.genotype.replace("gene", vector.gene)
+			strain.genotype = strain.genotype.replace("promoter", vector.promoter)
+			strain.genotype = strain.genotype.replace("threePrimeUTR", vector.three_prime_utr)
+			if strain.parent_strain.name == "DP38":
+				strain.genotype = "unc-119(ed3) III; " + strain.genotype
+		
 	# render page
 	return render_to_response('strains.html', {
 		'strains':strains

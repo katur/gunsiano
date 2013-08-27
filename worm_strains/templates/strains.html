@@ -6,11 +6,20 @@
 
 {% block content %}
 	All strains in database:
-	<ul>
+	<table>
+		<tr>
+			<td>Strain Name</td>
+			<td>Species</td>
+			<td>Genotype</td>
+		</tr>
 	{% for strain in strains %}
-		<li><a href={% url 'strain_url' name=strain %}>
-			{{ strain }}
-		</a></li>
+		<tr>
+			<td><a href={% url 'strain_url' name=strain %}>
+				{{ strain }}
+			</a></td>
+			<td><i>{{ strain.species }}</i></td>
+			<td>{{ strain.genotype }}</td>
+		</tr>
 	{% endfor %}
-	</ul>
+	</table>
 {% endblock %}

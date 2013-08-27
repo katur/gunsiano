@@ -32,3 +32,10 @@ class WormStrain(models.Model):
 	remarks = models.TextField(blank=True)
 	def __unicode__(self):
 		return self.name
+
+class WormStrainLine(models.Model):
+	strain = models.ForeignKey(WormStrain)
+	received_from = models.CharField(max_length=50, blank=True)
+	received_by = models.ForeignKey(UserProfile, null=True)
+	date_received = models.DateField(null=True)
+	times_outcrossed = models.PositiveSmallIntegerField(null=True)

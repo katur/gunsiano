@@ -39,3 +39,4 @@ class WormStrainLine(models.Model):
 	received_by = models.ForeignKey(UserProfile, null=True)
 	date_received = models.DateField(null=True)
 	times_outcrossed = models.PositiveSmallIntegerField(null=True)
+	remarks = models.TextField(blank=True)

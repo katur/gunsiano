@@ -13,6 +13,7 @@ class Mutagen(models.Model):
 
 class WormStrain(models.Model):
 	name = models.CharField(max_length=10, blank=True)
+	strain_sort = models.CharField(max_length=10, blank=True)
 	internal_identifier = models.CharField(max_length=30, blank=True)
 	on_wormbase = models.BooleanField(default=False)
 	species = models.ForeignKey(WormSpecies, default=1)

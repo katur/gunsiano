@@ -52,7 +52,7 @@ html, body {
 	margin: 0;
 }
 
-#wrap-header, #wrap-content {
+#wrap-header, #wrap-content, #wrap-footer {
 	width: 100%;
 	clear: both;
 	float: left;
@@ -71,7 +71,7 @@ html, body {
 	padding: 50px 0 100px 0;
 }
 
-#header, #content {
+#header, #content, #footer {
 	width: 980px;
 	margin: 0 auto;
 }

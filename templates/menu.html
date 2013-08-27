@@ -12,18 +12,18 @@
 		{% endifequal %}>
 		Home
 	</a> 
-	<a href="{{ lab_members_url }}" 
-		{% ifequal request.path lab_members_url %}
-			class="active"
-		{% endifequal %}>
-		Lab Members
-	</a>
 	<a href="{{ research_url }}" 
 		{% ifequal request.path research_url %}
 			class="active"
 		{% endifequal %}>
 		Research Areas
 	</a> 
+	<a href="{{ lab_members_url }}" 
+		{% ifequal request.path lab_members_url %}
+			class="active"
+		{% endifequal %}>
+		Lab Members
+	</a>
 	<a href="{{ resources_url }}" 
 		{% ifequal request.path resources_url %}
 			class="active"

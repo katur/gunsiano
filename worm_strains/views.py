@@ -30,6 +30,16 @@ def strains(request):
 	}, context_instance=RequestContext(request))
 
 
+def strain(request, name):
+	"""
+	Page showing information on a particular worm strain.
+	"""
+	strain = get_object_or_404(WormStrain, name=name)
+	return render_to_response('strain.html', {
+		'strain':strain
+	}, context_instance=RequestContext(request))
+
+
 def generate_genotype(strain):
 	if strain.transgene and strain.parent_strain:
 		vector = strain.transgene.vector

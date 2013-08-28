@@ -7,7 +7,7 @@
 {% block content %}
 	<!-- STRAIN IDENTIFICATION -->
 	{% if strain.species or strain.on_wormbase or strain.genotype or strain.culture %}
-	<div class="strain-section">
+	<div id="strain-section-top" class="strain-section">
 		{% if strain.species %}
 		<div>
 			<b>Species:</b> <i>{{ strain.species }}</i>
@@ -38,8 +38,11 @@
 	
 	<!-- STRAIN ORIGIN -->
 	{% if strain.created_by or strain.lab or strain.date_created or strain.mutagen %}
+	<hr size="1" width="70%" noshade>
+	
 	<div class="strain-section">
 		<h4>Origin</h4>
+		
 		{% if strain.created_by %}
 		<div>
 			<b>Made by:</b> {{ strain.created_by.user.get_full_name }}
@@ -56,19 +59,19 @@
 		<div>
 			<b>Mutagen or Method Used:</b> {{ strain.mutagen }}
 		</div>
-		{% endif %}
+		{% endif %}	
 	</div>
 	{% endif %}
 		
 	<!-- OTHER INFORMATION -->	
 	{% if strain.remarks %}
+	<hr size="1" width="70%" noshade>
 	<div class="strain-section">
 		<h4>Remarks</h4>
 		{% if strain.remarks %}
-		<div>
-			<b>Remarks:</b> {{ strain.remarks }}
-		</div>
-		{% endif %}
+		<div>{{ strain.remarks }}</div>
+		{% endif %}	
 	</div>
+	
 	{% endif %}
 {% endblock %}

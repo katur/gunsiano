@@ -1,5 +1,5 @@
 #strains {
-	border-collapse:collapse;
+	border-collapse: collapse;
 }
 
 #strains, #strains td, #strains tr {
@@ -18,4 +18,20 @@
 
 #species {
 	width: 95px;
+}
+
+.strain-section {
+	min-width: 100%;
+	margin: 40px 0;
+}
+
+#strain-section-top {
+	margin-top: 0;
+}
+
+.strain-section h4 {
+	text-align: center;
+	color: #aaa;
+	font-weight: bold;
+	font-size: 20px;
 }

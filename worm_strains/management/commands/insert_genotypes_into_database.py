@@ -1,11 +1,19 @@
 from django.core.management.base import BaseCommand, CommandError
-from polls.models import Poll
+from worm_strains.models import *
+from worm_strains.views.strains_view import generate_genotype
 
+class Command(BaseCommand):
+	help = 'Updates strain database to add genotypes based on parent strain, transgene, and the generate_genotype function'
 
-def insert_generated_genotypes_into_database():
-        strains = WormStrain.objects.all().exclude(parent_strain__exact='').exclude(transgene__exact='')
-        i = 0
-        for strain in strains:
-                generate_genotype(strain)
-                print strain.genotype
-                i += 1
+	def handle(self, *args, **options):
+		strains = WormStrain.objects.all()
+		i = 0
+		for strain in strains:
+			original_genotype = strain.genotype
+			generate_genotype(strain)
+			if original_genotype != strain.genotype:
+				self.stdout.write('Generated genotype is: %s' % strain.genotype)
+				strain.save()
+				i += 1
+		
+		self.stdout.write('%s' % str(i))

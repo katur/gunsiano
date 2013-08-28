@@ -1,0 +1,21 @@
+#strains {
+	border-collapse:collapse;
+}
+
+#strains, #strains td, #strains tr {
+	border: 1px solid #ddd;
+	padding: 4px 6px;
+}
+
+#top-row {
+	font-weight: bold;
+	text-align: center;
+}
+
+#strain {
+	width: 95px;
+}
+
+#species {
+	width: 95px;
+}

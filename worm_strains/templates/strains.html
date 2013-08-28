@@ -5,19 +5,18 @@
 {% endblock %}
 
 {% block content %}
-	All strains in database:
-	<table>
-		<tr>
-			<td>Strain Name</td>
-			<td>Species</td>
-			<td>Genotype</td>
+	<table id="strains">
+		<tr id="top-row">
+			<td id="strain">Strain Name</td>
+			<td id="species">Species</td>
+			<td id="genotype">Genotype</td>
 		</tr>
 	{% for strain in strains %}
 		<tr>
 			<td><a href={% url 'strain_url' name=strain %}>
 				{{ strain }}
 			</a></td>
-			<td><i>{{ strain.species }}</i></td>
+			<td><i>{{ strain.truncated_species }}</i></td>
 			<td>{{ strain.genotype }}</td>
 		</tr>
 	{% endfor %}

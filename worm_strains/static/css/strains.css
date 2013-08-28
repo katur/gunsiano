@@ -12,11 +12,11 @@
 	text-align: center;
 }
 
-#strain {
+#strain-column {
 	width: 95px;
 }
 
-#species {
+#species-column {
 	width: 95px;
 }
 
@@ -25,7 +25,7 @@
 	margin: 40px 0;
 }
 
-#strain-section-top {
+#strain-sections .strain-section:first-child {
 	margin-top: 0;
 }
 

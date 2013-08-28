@@ -41,33 +41,6 @@ a.no-style {
 }
 
 /* -----------------------------------------------
-~~~~~ Grid: used on Strains and Stocks Pages ~~~~~
------------------------------------------------ */
-#grid {
-	width: 100%;
-	margin: 20px 0;
-	border: solid #AAA;
-	border-width: 0 0 1px 1px;
-    border-spacing: 0;
-    border-collapse: collapse;
-}
-
-#grid td {
-    border: solid #AAA;
-    border-width: 1px 1px 0 0;
-	margin: 0;
-	padding: 6px;
-}
-
-#top-row td {
-	text-align: center;
-	background: #000;
-	color: #FFF;
-	font-size: 15px;
-	font-weight: bold;
-}
-
-/* -----------------------------------------------
 ~~~~~~~~~~~~~~~~~~ Home Page ~~~~~~~~~~~~~~~~~~~~~
 ----------------------------------------------- */
 #post-9 * {
@@ -150,43 +123,6 @@ table.project-table tr:first-child td {
 	color: #FF1493;
 	font-weight: bold;
 	vertical-align: middle;
-}
-
-
-/* -----------------------------------------------
-~~~~~~~~~~~~~~~~~~ Strains Page ~~~~~~~~~~~~~~~~~~
------------------------------------------------ */
-.strain-section {
-	position: relative;
-	right: 2%;
-	width: 104%; /* to compensate for margin around strainData */
-	clear: both;
-	float: left;
-}
-
-.strain-section h3 {
-	font-size: 16px;
-	margin-left: 2%;
-}
-
-.strain-data {
-	float: left;
-	margin: 2%;
-}
-
-.freeze-data {
-	float: left;
-	width: 29%;
-	margin: 2%;
-}
-
-.line {
-	clear: both;
-	float: left;
-	background: #AAA;
-	height: 1px;
-	width: 100%;
-	margin: 3% 0;
 }
 
 

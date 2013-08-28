@@ -18,6 +18,11 @@ class Transgene(models.Model):
 	def __unicode__(self):
 		return self.name
 
+class WormLab(models.Model):
+	lab = models.CharField(max_length=200)
+	strain_code = models.CharField(max_length=5)
+	allele_code = models.CharField(max_length=5, blank=True)
+
 class WormStrain(models.Model):
 	name = models.CharField(max_length=10, blank=True, unique=True)
 	strain_sort = models.CharField(max_length=10, blank=True, unique=True)

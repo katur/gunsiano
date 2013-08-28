@@ -43,7 +43,10 @@ def strain(request, name):
 	letters_only = all.translate(all, string.ascii_uppercase)
 	strain_code = str(strain.name).translate(all, letters_only)
 		
-	strain.lab = get_object_or_404(WormLab, strain_code=strain_code)
+	try:
+		strain.lab = WormLab.objects.get(strain_code=strain_code)
+	except WormLab.DoesNotExist:
+		strain.lab = None
 	
 	return render_to_response('strain.html', {
 		'strain':strain

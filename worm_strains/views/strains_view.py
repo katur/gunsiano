@@ -8,12 +8,26 @@ def strains(request):
 	"""
 	# get all worm strains
 	strains = WormStrain.objects.all().order_by('strain_sort')	
+	
+	"""
+	The following, commented out, would dynamically generate genotypes 
+	when they can be created from the background and a single transgene.
+	For performance, all genotypes are instead hard-coded into the database,
+	using the generate_genotype function in this module along with
+	the script worm_strains/management/commands/insert_genotypes_into_database.py
+	(which can be run with "python manage.py insert_genotypes_into_database").
+	"""
+	"""
 	for strain in strains:
 		generate_genotype(strain)
+	
+	"""
+
 	# render page
 	return render_to_response('strains.html', {
 		'strains':strains
 	}, context_instance=RequestContext(request))
+
 
 def generate_genotype(strain):
 	if strain.transgene and strain.parent_strain:

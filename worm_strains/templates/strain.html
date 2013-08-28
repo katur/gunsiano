@@ -50,6 +50,12 @@
 			</div>
 			{% endif %}
 			
+			{% if strain.lab %}
+			<div>
+				<b>Lab:</b> {{ strain.lab }}
+			</div>
+			{% endif %}
+			
 			{% if strain.date_created %}
 			<div>
 				<b>Made on:</b> {{ strain.date_created }}

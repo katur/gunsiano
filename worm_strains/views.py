@@ -1,6 +1,7 @@
 from django.template import RequestContext # extends Context; needed for STATIC_URL
 from django.shortcuts import render_to_response, get_object_or_404 # r_to_r loads template, passes c    ontext, renders
 from worm_strains.models import *
+import string
 
 def strains(request):
 	"""
@@ -34,7 +35,16 @@ def strain(request, name):
 	"""
 	Page showing information on a particular worm strain.
 	"""
+	# get the strain
 	strain = get_object_or_404(WormStrain, name=name)
+	
+	# get lab code by extracting the letters from the strain name (usually 2 letters but sometimes more)
+	all = all=string.maketrans('','')	
+	letters_only = all.translate(all, string.ascii_uppercase)
+	strain_code = str(strain.name).translate(all, letters_only)
+		
+	strain.lab = get_object_or_404(WormLab, strain_code=strain_code)
+	
 	return render_to_response('strain.html', {
 		'strain':strain
 	}, context_instance=RequestContext(request))

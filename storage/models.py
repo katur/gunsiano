@@ -15,16 +15,19 @@ class ContainerSupertype(models.Model):
 	name = models.CharField(max_length=20)
 
 class ContainerType(models.Model):
-	name = models.CharField(max_length=50, blank=True)
 	supertype = models.ForeignKey(ContainerSupertype, null=True)
+	name = models.CharField(max_length=50, blank=True)
 	slots_vertical = models.IntegerField(null=True)
 	slots_horizontal = models.IntegerField(null=True)
+	slot_type = models.ForeignKey(ContainerSupertype, null=True, related_name="container_slot_type")
 	image_filename = models.CharField(max_length=30, blank=True)
 	
 class Container(models.Model):
+	type = models.ForeignKey(ContainerType, null=True)
 	name = models.CharField(max_length=200, blank=True)
 	contents = models.CharField(max_length=200, blank=True)
-	type = models.ForeignKey(ContainerType, null=True)
+	parent = models.ForeignKey('self', null=True)
 	vertical_position = models.PositiveSmallIntegerField(null=True)
 	horizontal_position = models.PositiveSmallIntegerField(null=True)
+	owner = models.ForeignKey(UserProfile, null=True)
 	stock = models.ForeignKey(Stock, null=True)

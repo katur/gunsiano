@@ -37,29 +37,40 @@ def strain(request, name):
 	Page showing information on a particular worm strain.
 	"""
 	# get the strain
-	s = get_object_or_404(WormStrain, name=name)
+	strain = get_object_or_404(WormStrain, name=name)
 	
 	# get the strain lines
-	lines = WormStrainLine.objects.filter(strain=s).order_by('date_received')
-	i=0
+	lines = WormStrainLine.objects.filter(strain=strain).order_by('date_received')
 	for line in lines:
-		i += 1
-		line.line_number = i
 		line.stocks = Stock.objects.filter(stockable=line.stockable).order_by('date_prepared')	
-	
+		for stock in line.stocks:
+			stock.tubes = Container.objects.filter(stock=stock, is_thawed=False)
+		
+			for tube in stock.tubes:
+				tube.vertical_letter = chr(tube.vertical_position + 64)		
+			try:
+				stock.thaw_80 = Container.objects.get(stock=stock, parent=7)
+			except Container.DoesNotExist:
+				stock.thaw_80 = None
+			
+			try:
+				stock.thaw_N = Container.objects.get(stock=stock, parent=8)
+			except Container.DoesNotExist:
+				stock.thaw_N = None
+			
 	# get lab code by extracting the letters from the strain name (usually 2 letters but sometimes more)
 	all = all=string.maketrans('','')	
 	letters_only = all.translate(all, string.ascii_uppercase)
-	strain_code = str(s.name).translate(all, letters_only)	
+	strain_code = str(strain.name).translate(all, letters_only)	
 	try:
-		s.lab = WormLab.objects.get(strain_code=strain_code)
+		strain.lab = WormLab.objects.get(strain_code=strain_code)
 	except WormLab.DoesNotExist:
-		s.lab = None
+		strain.lab = None
 	
 	
 	return render_to_response('strain.html', {
 		'lines':lines,
-		'strain':s,
+		'strain':strain,
 	}, context_instance=RequestContext(request))
 
 

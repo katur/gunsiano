@@ -91,28 +91,69 @@
 				{% if line.received_by %}
 					by {{ line.received_by.user.get_full_name }}
 				{% endif %}	
+			
 				{% if line.received_from %}
 					from {{ line.received_from }}
 				{% endif %}	
+
 				{% if line.date_received %}
 					on {{ line.date_received }}
 				{% endif %}
 			{% else %}
-				Some line
+				Some line of this strain
 			{% endif %}
-				<ul class="line-stock">
-				{% for stock in line.stocks %}
+				<ul class="line-stock">{% for stock in line.stocks %}
 					<li>
-					Frozen
-					{% if stock.prepared_by %}
-						by {{ stock.prepared_by.user.get_full_name }}
-					{% endif %}
-					{% if stock.date_prepared %}
-						on {{ stock.date_prepared }}
-					{% endif %}
-					</li>
-				{% endfor %}
-				</ul>
+						Frozen
+						{% if stock.prepared_by %}
+							by {{ stock.prepared_by.user.get_full_name }}
+						{% endif %}
+
+						{% if stock.date_prepared %}
+							on {{ stock.date_prepared }}.
+						{% endif %}
+						
+						<ul>
+							<li>-80C test
+							{% if stock.thaw_80 %}
+								{% if stock.thaw_80.is_thawed %}
+									by {{ stock.thaw_80.thawed_by.user.get_full_name }}
+									on {{ stock.thaw_80.date_thawed }}
+									was {{ stock.thaw_80.thaw_results }}
+								{% else %}
+									not thawed yet
+								{% endif %}
+							{% else %}
+								not available
+							{% endif %}
+							</li>
+							
+							<li>Liquid Nitrogen test
+							{% if stock.thaw_N %}
+								{% if stock.thaw_N.is_thawed %}
+									by {{ stock.thaw_N.thawed_by.user.get_full_name }}
+									on {{ stock.thaw_N.date_thawed }}
+									was {{ stock.thaw_N.thaw_results }}
+								{% else %}
+									not thawed yet
+								{% endif %}
+							{% else %}
+								not available
+							{% endif %}
+							</li>
+							
+							<li>Tubes available:
+								<ul>{% for tube in stock.tubes %}
+									<li>
+										{{ tube.parent.parent.parent }}
+										- Rack {{ tube.parent.parent.horizontal_position }}
+										- Box {{ tube.parent.vertical_position }}
+										- Position {{ tube.vertical_letter }}{{ tube.horizontal_position }}
+									</li>
+								{% endfor %}</ul>
+							</li>
+						</ul>
+				{% endfor %}</ul>
 			</li>
 		{% endfor %}
 		</ul>

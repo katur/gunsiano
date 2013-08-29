@@ -13,6 +13,8 @@ class Stock(models.Model):
 
 class ContainerSupertype(models.Model):
 	name = models.CharField(max_length=20)
+	def __unicode__(self):
+		return self.name
 
 class ContainerType(models.Model):
 	supertype = models.ForeignKey(ContainerSupertype, null=True)
@@ -21,6 +23,8 @@ class ContainerType(models.Model):
 	slots_horizontal = models.IntegerField(null=True)
 	slot_type = models.ForeignKey(ContainerSupertype, null=True, related_name="container_slot_type")
 	image_filename = models.CharField(max_length=30, blank=True)
+	def __unicode__(self):
+		return self.name
 	
 class Container(models.Model):
 	type = models.ForeignKey(ContainerType, null=True)
@@ -36,3 +40,5 @@ class Container(models.Model):
 	thawed_by = models.ForeignKey(UserProfile, null=True, related_name="container_thawed_by")
 	date_thawed = models.DateField(null=True)
 	thaw_results = models.CharField(max_length=100, blank=True)	
+	def __unicode__(self):
+		return self.name

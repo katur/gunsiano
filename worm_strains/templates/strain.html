@@ -83,25 +83,39 @@
 	{% if lines %}
 		<hr>
 		<h4>Stock</h4>
+		<ul class="strain-lines">
 		{% for line in lines %}
-			<div class="strain-section">
-			{% if line.received_from %}
-				<div class="strain-subsection">
-					<b>Received from:</b> {{ line.received_from }}
-				</div>
-			{% endif %}	
-			{% if line.received_by %}
-				<div class="strain-subsection">
-					<b>Received by:</b> {{ line.received_by.user.get_full_name }}
-				</div>
-			{% endif %}	
-			{% if line.date_received %}
-				<div class="strain-subsection">
-					<b>Received on:</b> {{ line.date_received }}
-				</div>
+			<li> 
+			{% if line.received_from or line.received_by or line.date_received %}
+				Received
+				{% if line.received_by %}
+					by {{ line.received_by.user.get_full_name }}
+				{% endif %}	
+				{% if line.received_from %}
+					from {{ line.received_from }}
+				{% endif %}	
+				{% if line.date_received %}
+					on {{ line.date_received }}
+				{% endif %}
+			{% else %}
+				Some line
 			{% endif %}
-			</div>
+				<ul class="line-stock">
+				{% for stock in line.stocks %}
+					<li>
+					Frozen
+					{% if stock.prepared_by %}
+						by {{ stock.prepared_by.user.get_full_name }}
+					{% endif %}
+					{% if stock.date_prepared %}
+						on {{ stock.date_prepared }}
+					{% endif %}
+					</li>
+				{% endfor %}
+				</ul>
+			</li>
 		{% endfor %}
+		</ul>
 	{% endif %}
 	</div>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.db import models
 from website.models import UserProfile
 from vectors.models import Vector
+from storage.models import Stockable
 
 class WormSpecies(models.Model):
 	name = models.CharField(max_length=50, unique=True)
@@ -43,6 +44,7 @@ class WormStrain(models.Model):
 		return self.name
 
 class WormStrainLine(models.Model):
+	stockable = models.ForeignKey(Stockable, null=True)
 	strain = models.ForeignKey(WormStrain)
 	received_from = models.CharField(max_length=50, blank=True)
 	received_by = models.ForeignKey(UserProfile, null=True)

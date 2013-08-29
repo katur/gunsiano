@@ -1,6 +1,7 @@
 from django.template import RequestContext # extends Context; needed for STATIC_URL
 from django.shortcuts import render_to_response, get_object_or_404 # r_to_r loads template, passes c    ontext, renders
 from worm_strains.models import *
+from storage.models import *
 import string
 
 def strains(request):
@@ -39,7 +40,13 @@ def strain(request, name):
 	s = get_object_or_404(WormStrain, name=name)
 	
 	# get the strain lines
-	lines = WormStrainLine.objects.filter(strain=s)
+	lines = WormStrainLine.objects.filter(strain=s).order_by('date_received')
+	i=0
+	for line in lines:
+		i += 1
+		line.line_number = i
+		line.stocks = Stock.objects.filter(stockable=line.stockable).order_by('date_prepared')
+		
 	
 	# get lab code by extracting the letters from the strain name (usually 2 letters but sometimes more)
 	all = all=string.maketrans('','')	

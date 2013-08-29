@@ -9,3 +9,4 @@ class Stock(models.Model):
 	concentration = models.CharField(max_length=30, blank=True)
 	prepared_by = models.ForeignKey(UserProfile, null=True)
 	date_prepared = models.DateField(null=True)
+	notes = models.TextField(blank=True)

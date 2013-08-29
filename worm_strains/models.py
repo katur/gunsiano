@@ -26,8 +26,8 @@ class WormLab(models.Model):
 		return self.lab
 
 class WormStrain(models.Model):
-	name = models.CharField(max_length=10, blank=True, unique=True)
-	strain_sort = models.CharField(max_length=10, blank=True, unique=True)
+	name = models.CharField(max_length=20, blank=True, unique=True)
+	strain_sort = models.CharField(max_length=20, blank=True, unique=True)
 	internal_identifier = models.CharField(max_length=30, blank=True)
 	on_wormbase = models.BooleanField(default=False)
 	species = models.ForeignKey(WormSpecies, default=1)

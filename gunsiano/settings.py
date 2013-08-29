@@ -149,6 +149,7 @@ INSTALLED_APPS = (
 
 	# Apps
 	'website',
+	'storage',
 	'worm_strains',
 	'vectors',
 )

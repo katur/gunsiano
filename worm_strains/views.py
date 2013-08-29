@@ -36,20 +36,24 @@ def strain(request, name):
 	Page showing information on a particular worm strain.
 	"""
 	# get the strain
-	strain = get_object_or_404(WormStrain, name=name)
+	s = get_object_or_404(WormStrain, name=name)
+	
+	# get the strain lines
+	lines = WormStrainLine.objects.filter(strain=s)
 	
 	# get lab code by extracting the letters from the strain name (usually 2 letters but sometimes more)
 	all = all=string.maketrans('','')	
 	letters_only = all.translate(all, string.ascii_uppercase)
-	strain_code = str(strain.name).translate(all, letters_only)
-		
+	strain_code = str(s.name).translate(all, letters_only)	
 	try:
-		strain.lab = WormLab.objects.get(strain_code=strain_code)
+		s.lab = WormLab.objects.get(strain_code=strain_code)
 	except WormLab.DoesNotExist:
-		strain.lab = None
+		s.lab = None
+	
 	
 	return render_to_response('strain.html', {
-		'strain':strain
+		'lines':lines,
+		'strain':s,
 	}, context_instance=RequestContext(request))
 
 

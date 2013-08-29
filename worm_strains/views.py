@@ -45,8 +45,7 @@ def strain(request, name):
 	for line in lines:
 		i += 1
 		line.line_number = i
-		line.stocks = Stock.objects.filter(stockable=line.stockable).order_by('date_prepared')
-		
+		line.stocks = Stock.objects.filter(stockable=line.stockable).order_by('date_prepared')	
 	
 	# get lab code by extracting the letters from the strain name (usually 2 letters but sometimes more)
 	all = all=string.maketrans('','')	

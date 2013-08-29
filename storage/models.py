@@ -10,3 +10,8 @@ class Stock(models.Model):
 	prepared_by = models.ForeignKey(UserProfile, null=True)
 	date_prepared = models.DateField(null=True)
 	notes = models.TextField(blank=True)
+
+class Container(models.Model):
+	vertical_position = models.PositiveSmallIntegerField(null=True)
+	horizontal_position = models.PositiveSmallIntegerField(null=True)
+	stock = models.ForeignKey(Stock, null=True)

@@ -5,16 +5,18 @@
 {% endblock %}
 
 {% block content %}
+	<div id="resources">
 	{% for resource in resources %}
-		<div class="resource">
-			<a target="_blank" href="{{ resource.url }}">
+		<a target="_blank" href="{{ resource.url }}">
+			<div class="resource">
 				<img width="160px" src="{{ STATIC_URL }}images/resource_logos/{{ resource.logo_filename }}" />
-			</a>
-			<span>
-				{{ resource.description|safe }}
-			</span>
-		</div>
-		
-		<div class="resource-separator"></div>
-	{% endfor %}
+				<span>
+					{{ resource.description|safe }}
+				</span>
+			</div>
+		</a>
+
+		<hr>
+		{% endfor %}
+	</div>
 {% endblock content %}

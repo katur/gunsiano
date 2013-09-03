@@ -1,38 +1,22 @@
 /* Big Bubble Links
  * (generalized to implement elsewhere) */
-.separator {
+.resource {
 	float: left;
-	clear: both;
 	width: 90%;
-	margin: -1px 5%;
-	height: 1px;
-	background: #ddd;
+	padding: 5%;
+	margin-bottom: -1px;
+	margin-top: -1px;
+	border: 1px solid transparent;
 	position: relative;
 	z-index: 1;
 }
 
-.bubble-link {
-	float: left;
-	clear: both;
-	width: 90%;
-	padding: 5%;
-	margin-top: -1px;
-	border: 1px solid white;
-	position: relative;
-	z-index: 0;
-}
-
-.bubble-link:hover {
+.resource:hover {
 	border-radius: 15px;
 	border: 1px solid #ddd;
 	background: #efefef;
 	position: relative;
-	z-index: 2;
-}
-
-.resource {
-	float: left;
-	width: 100%;
+	z-index: 0;
 }
 
 .resource img {
@@ -47,11 +31,7 @@
 	color: #333;
 }
 
-.resource-separator {
-	float: left;
-	clear: both;
-	width: 100%;
-	height: 1px;
-	background: #ddd;
-	margin: 20px 0;
+#resources hr:last-child {
+	color: transparent;
+	background-color: transparent;
 }

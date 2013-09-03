@@ -10,15 +10,7 @@
 	margin-bottom: 10px;
 }
 
-.address-selector a {
-	margin-right: 15px;
-}
-
-#address {
-	margin-top: 20px;
-}
-
-#address span {
-	float: none;
-	clear: none;
+.contact-section .two-column {
+	float: left;
+	width: 50%;
 }

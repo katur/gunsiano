@@ -94,7 +94,7 @@ html, body {
 .external {
 	padding-right: 15px;
 	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAElJREFUeNpiZMACInYnzQdSCSA2C5DzHyq+YIXrvER0xSwgAijBiEX3ArgCbJIw05iwOAHVKiQ3YHMoVhNgIAHuBlymgABAgAEAuZUbEqLsuG0AAAAASUVORK5CYII=) center right no-repeat;
-} 
+}
 
 /* add to parent elements when their children are floating
 and parent needs to expand to the children's size. */
@@ -112,4 +112,15 @@ and parent needs to expand to the children's size. */
 
 .invisible {
 	display: none;
+}
+
+/* horizontal rule line */
+hr {
+	height: 1px;
+	width: 75%;
+	color: #aaa;
+	background-color: #aaa;
+	border-width: 0;
+	margin-top: 0;
+	margin-bottom: 0;
 }

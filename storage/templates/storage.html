@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+	<h2>Outer Storage Containers</h2>
+{% endblock %}
+
+{% block content %}
+	<ul>
+	{% for vat in vats %}
+		<li>
+		<a href={% url 'storage_detail_url' parent_container_id=vat.id %}>
+			{{ vat.name }}
+		</a>
+		</li>
+ 	{% endfor %}
+	</ul>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+	<h2>Contents of {{ container_title }} </h2>
+{% endblock %}
+
+{% block content %}
+	<table id="storage">
+	{% for row in grid %}
+		<tr>
+		{% for compartment in row %}
+			<td>
+			{% for container in compartment %}
+				{% if container.type.supertype.has_children %}
+					<a href={% url 'storage_detail_url' parent_container_id=container.id %}>
+				{% endif %}
+
+				{% if container.name or container.stock or container.owner %}
+					{% if container.stock %}
+						{% if container.stock.stockable %}
+							strain here
+						{% else %}
+							{{ container.stock.notes }}
+						{% endif %}
+					{% endif %}
+
+					{% if container.name %}
+						{{ container.name}}
+					{% endif %}
+
+					{% if container.owner %}
+						{{ container.owner.user.get_full_name }}
+					{% endif %}
+				{% else %}
+					No name, stock, or owner given for whatever is here
+				{% endif %}
+
+
+				{% if container.type.supertype.has_children %}
+					</a>
+				{% endif %}
+
+			{% empty %}
+				No record
+			{% endfor %}
+			</td>
+		{% endfor %}
+		</tr>
+	{% endfor %}
+	</table>
+{% endblock %}

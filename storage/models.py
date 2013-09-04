@@ -17,6 +17,7 @@ class Stock(models.Model):
 
 class ContainerSupertype(models.Model):
 	name = models.CharField(max_length=20)
+	has_children = models.BooleanField(default=False)
 	def __unicode__(self):
 		return self.name
 

@@ -1,0 +1,8 @@
+#storage, #storage td, #storage tr {
+	border-collapse: collapse;
+	border: 1px solid #ddd;
+}
+
+#storage td {
+	padding: 10px;
+}

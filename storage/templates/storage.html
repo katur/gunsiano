@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block page_title %}
-	<h2>Outer Storage Containers</h2>
+	<h2>Outermost Storage Containers</h2>
 {% endblock %}
 
 {% block content %}
 	<div id="vats">
 	{% for vat in vats %}
 		<div>
-			<a href={% url 'storage_detail_url' parent_container_id=vat.id %}>
+			<a href={% url 'storage_detail_url' container_id=vat.id %}>
 				<img src="{{ STATIC_URL }}images/{{ vat.type.image_filename }}"	/>
 				<span>{{ vat.name }}</span>
 			</a>

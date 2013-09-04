@@ -15,6 +15,11 @@
 	clear: both;
 }
 
+#storage {
+	width: 100%;
+	text-align: center;
+}
+
 #storage, #storage td, #storage tr {
 	border-collapse: collapse;
 	border: 1px solid #ddd;

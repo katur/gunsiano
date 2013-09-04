@@ -10,26 +10,29 @@
 		<tr>
 		{% for compartment in row %}
 			<td>
-			{% for container in compartment %}
-				{% if container.type.supertype.has_children %}
-					<a href={% url 'storage_detail_url' parent_container_id=container.id %}>
+
+			{% for child in compartment %}
+				{% if child.type.supertype.has_children %}
+					<a href={% url 'storage_detail_url' container_id=child.id %}>
 				{% endif %}
 
-				{% if container.name or container.stock or container.owner %}
-					{% if container.stock %}
-						{% if container.stock.stockable %}
-							strain here
-						{% else %}
-							{{ container.stock.notes }}
-						{% endif %}
+				{% if child.name or child.stock or child.owner %}
+					{% if child.name %}
+						<span>{{ child.name}}</span>
 					{% endif %}
 
-					{% if container.name %}
-						{{ container.name}}
+					{% if child.strain %}
+						<span>
+							<a href={% url 'strain_url' name=child.strain %}>
+								{{ child.strain }}
+							</a>
+						</span>
+					{% elif child.stock.notes %}
+						<span>{{ child.stock.notes }}</span>
 					{% endif %}
 
-					{% if container.owner %}
-						{{ container.owner.user.get_full_name }}
+					{% if child.owner %}
+						<span>{{ child.owner.user.get_full_name }}<span>
 					{% endif %}
 				{% else %}
 					No name, stock, or owner given for whatever is here
@@ -43,6 +46,7 @@
 			{% empty %}
 				No record
 			{% endfor %}
+
 			</td>
 		{% endfor %}
 		</tr>

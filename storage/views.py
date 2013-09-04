@@ -1,6 +1,7 @@
 from django.template import RequestContext # extends Context; needed for STATIC_URL
 from django.shortcuts import render_to_response, get_object_or_404 # r_to_r loads template, passes c    ontext, renders
 from storage.models import *
+from worm_strains.models import *
 
 def storage(request):
 	"""
@@ -14,35 +15,41 @@ def storage(request):
 	}, context_instance=RequestContext(request))
 
 
-def storage_detail(request, parent_container_id):
+def storage_detail(request, container_id):
 	"""
-	Page showing the contents of some parent container
+	Page showing the contents of some container
 	"""
-	parent_container = get_object_or_404(Container, id=parent_container_id)
+	# get the parent container for which we are displaying the contents
+	container = get_object_or_404(Container, id=container_id)
 
-	parent_temp = parent_container
-	title = parent_temp.type.supertype.name + " " + parent_temp.name
-	while parent_temp.parent:
-		parent_temp = parent_temp.parent
-		title = parent_temp.type.supertype.name + " " + parent_temp.name + " -> " + title
+	# generate the name for the page by following chain of parents
+	temp = container
+	title = temp.type.supertype.name + " " + temp.name
+	while temp.parent:
+		temp = temp.parent
+		title = temp.type.supertype.name + " " + temp.name + " -> " + title
 
-	containers = Container.objects.all().filter(parent_id=parent_container)
+	# get all the containers contained in the parent
+	children = Container.objects.all().filter(parent_id=container)
 
+	# create a grid of empty lists, the dimensions based on the parent dimensions
 	grid = [
-		[list() for i in range(parent_container.type.slots_horizontal)]
-		for j in range(parent_container.type.slots_vertical)
+		[list() for i in range(container.type.slots_horizontal)]
+		for j in range(container.type.slots_vertical)
 	]
 
-	for container in containers:
-		(grid[container.vertical_position-1][container.horizontal_position-1]).append(container)
+	# iterate over children containers
+	for child in children:
+		(grid[child.vertical_position-1][child.horizontal_position-1]).append(child)
+		try:
+			if child.stock.stockable.type.id == 1:
+				child.strain = get_object_or_404(WormStrainLine, stockable=child.stock.stockable).strain
+		except AttributeError:
+			child.strain = None
 
-
-	# render page
+# render page
 	return render_to_response('storage_detail.html', {
-		'parent_container':parent_container,
+		'container':container,
 		'container_title':title,
-		'containers':containers,
-		'vertical_range':range(parent_container.type.slots_vertical),
-		'horizontal_range':range(parent_container.type.slots_horizontal),
 		'grid':grid,
 	}, context_instance=RequestContext(request))

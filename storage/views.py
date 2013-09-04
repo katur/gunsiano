@@ -26,7 +26,6 @@ def storage_detail(request, parent_container_id):
 		parent_temp = parent_temp.parent
 		title = parent_temp.type.supertype.name + " " + parent_temp.name + " -> " + title
 
-
 	containers = Container.objects.all().filter(parent_id=parent_container)
 
 	grid = [
@@ -40,11 +39,10 @@ def storage_detail(request, parent_container_id):
 
 	# render page
 	return render_to_response('storage_detail.html', {
-		'title':title,
 		'parent_container':parent_container,
+		'container_title':title,
 		'containers':containers,
 		'vertical_range':range(parent_container.type.slots_vertical),
 		'horizontal_range':range(parent_container.type.slots_horizontal),
 		'grid':grid,
-		'container_title':title,
 	}, context_instance=RequestContext(request))

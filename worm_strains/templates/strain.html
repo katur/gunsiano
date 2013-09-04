@@ -14,7 +14,7 @@
 				<b>Species:</b> <i>{{ strain.species }}</i>
 			</div>
 		{% endif %}
-		
+
 		{% if strain.on_wormbase %}
 			<div class="strain-subsection">
 				<a href="http://www.wormbase.org/species/c_elegans/strain/{{ strain }}" target="_blank">
@@ -22,13 +22,13 @@
 				</a>
 			</div>
 		{% endif %}
-		
+
 		{% if strain.genotype%}
 			<div class="strain-subsection">
 				<b>Genotype:</b> {{ strain.genotype }}
 			</div>
 		{% endif %}
-		
+
 		{% if strain.culture %}
 			<div class="strain-subsection">
 				<b>Culture:</b> {{ strain.culture }}
@@ -36,65 +36,65 @@
 		{% endif %}
 	</div>
 	{% endif %}
-		
+
 	<!-- STRAIN ORIGIN -->
 	{% if strain.created_by or strain.lab or strain.date_created or strain.mutagen %}
 		<hr>
 		<h4>Origin</h4>
-		<div class="strain-section">	
+		<div class="strain-section">
 		{% if strain.created_by %}
 			<div class="strain-subsection">
 				<b>Made by:</b> {{ strain.created_by.user.get_full_name }}
 			</div>
 		{% endif %}
-			
+
 		{% if strain.lab %}
 			<div class="strain-subsection">
 				<b>Lab:</b> {{ strain.lab }}
 			</div>
 		{% endif %}
-			
+
 		{% if strain.date_created %}
 			<div class="strain-subsection">
 				<b>Made on:</b> {{ strain.date_created }}
 			</div>
 		{% endif %}
-			
+
 		{% if strain.mutagen %}
 			<div class="strain-subsection">
 				<b>Mutagen or Method Used:</b> {{ strain.mutagen }}
 			</div>
-		{% endif %}	
+		{% endif %}
 		</div>
 	{% endif %}
-			
-	<!-- OTHER INFORMATION -->	
+
+	<!-- OTHER INFORMATION -->
 	{% if strain.remarks %}
 		<hr>
 		<h4>Remarks</h4>
 		<div class="strain-section">
 		{% if strain.remarks %}
 			<div class="strain-subsection">{{ strain.remarks }}</div>
-		{% endif %}	
+		{% endif %}
 		</div>
 	{% endif %}
-	
+
 	<!-- STOCK -->
 	{% if lines %}
 		<hr>
 		<h4>Stock</h4>
 		<ul class="strain-lines">
 		{% for line in lines %}
-			<li> 
+			<li>
 			{% if line.received_from or line.received_by or line.date_received %}
 				Received
 				{% if line.received_by %}
 					by {{ line.received_by.user.get_full_name }}
-				{% endif %}	
-			
+				{% endif %}
+
 				{% if line.received_from %}
 					from {{ line.received_from }}
-				{% endif %}	
+				{% endif %}
 
 				{% if line.date_received %}
 					on {{ line.date_received }}
@@ -110,9 +110,9 @@
 						{% endif %}
 
 						{% if stock.date_prepared %}
-							on {{ stock.date_prepared }}.
+							on {{ stock.date_prepared }}
 						{% endif %}
-						
+
 						<ul>
 							<li>-80C test
 							{% if stock.thaw_80 %}
@@ -127,7 +127,7 @@
 								not available
 							{% endif %}
 							</li>
-							
+
 							<li>Liquid Nitrogen test
 							{% if stock.thaw_N %}
 								{% if stock.thaw_N.is_thawed %}
@@ -141,16 +141,22 @@
 								not available
 							{% endif %}
 							</li>
-							
-							<li>Tubes available:
-								<ul>{% for tube in stock.tubes %}
-									<li>
+
+							<li class="tubes">
+							{% if stock.tubes %}
+								<table>
+								{% for tube in stock.tubes %}
+									<tr><td>
 										{{ tube.parent.parent.parent }}
 										- Rack {{ tube.parent.parent.horizontal_position }}
 										- Box {{ tube.parent.vertical_position }}
 										- Position {{ tube.vertical_letter }}{{ tube.horizontal_position }}
-									</li>
-								{% endfor %}</ul>
+									</td></tr>
+								{% endfor %}
+								</table>
+							{% else %}
+								No tubes available
+							{% endif %}
 							</li>
 						</ul>
 				{% endfor %}</ul>

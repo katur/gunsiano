@@ -27,6 +27,19 @@
 	float: left;
 }
 
-.strain-line {
+.strain-lines {
+	list-style-position: inside;
+	padding-left: 0;
 	width: 100%;
+}
+
+.strain-lines .tubes {
+	display: inline-block;
+}
+
+.strain-lines table, .strain-lines td {
+	border: 1px solid #ddd;
+	border-collapse: collapse;
+	padding: 3px;
+	margin-top: 5px;
 }

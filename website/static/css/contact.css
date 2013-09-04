@@ -1,16 +1,24 @@
-.contact-section {
+#contact span {
 	float: left;
 	width: 100%;
-	margin-bottom: 40px;
-}
-
-.contact-section span {
-	float: left;
 	clear: both;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
-.contact-section .two-column {
+#contact .two-column {
 	float: left;
-	width: 50%;
+	width: 45%;
+	padding: 3%;
+	border-radius: 15px;
+	background: #efefef;
+	border: 1px solid #ddd;
+}
+
+#contact .two-column:first-child {
+	margin-right: 5%;
+	width: 36%;
+}
+
+#contact ul {
+	margin-top: 2px;
 }

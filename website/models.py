@@ -16,7 +16,6 @@ class UserProfile(models.Model):
 	url = models.URLField(blank=True)
 	blurb = models.TextField(blank=True)
 	image_filename = models.CharField(max_length=100, blank=True)
-
 	def __unicode__(self):
 		return self.user.username
 	class Meta:
@@ -27,3 +26,5 @@ class Resource(models.Model):
 	logo_filename = models.CharField(max_length=50, blank=True)
 	url = models.CharField(max_length=100, blank=True)
 	description = models.CharField(max_length=300, blank=True)
+	def __unicode__(self):
+		return self.name

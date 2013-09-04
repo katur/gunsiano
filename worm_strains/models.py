@@ -90,3 +90,5 @@ class WormStrainLine(models.Model):
 	received_by = models.ForeignKey(UserProfile, null=True)
 	date_received = models.DateField(null=True)
 	remarks = models.TextField(blank=True)
+	def __unicode__(self):
+		return self.strain.name

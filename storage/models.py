@@ -1,8 +1,12 @@
 from django.db import models
 from website.models import UserProfile
 
+class StockableType(models.Model):
+	name = models.CharField(max_length=20)
+
 class Stockable(models.Model):
 	id = models.IntegerField(primary_key=True)
+	type = models.ForeignKey(StockableType)
 
 class Stock(models.Model):
 	stockable = models.ForeignKey(Stockable, null=True)

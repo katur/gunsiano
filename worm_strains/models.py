@@ -46,8 +46,9 @@ class WormStrain(models.Model):
 class WormStrainLine(models.Model):
 	stockable = models.ForeignKey(Stockable, null=True)
 	strain = models.ForeignKey(WormStrain)
+	created_internally = models.BooleanField(default=False)
+	times_outcrossed = models.PositiveSmallIntegerField(null=True)
 	received_from = models.CharField(max_length=50, blank=True)
 	received_by = models.ForeignKey(UserProfile, null=True)
 	date_received = models.DateField(null=True)
-	times_outcrossed = models.PositiveSmallIntegerField(null=True)
 	remarks = models.TextField(blank=True)

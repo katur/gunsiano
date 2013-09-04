@@ -86,7 +86,9 @@
 		<ul class="strain-lines">
 		{% for line in lines %}
 			<li>
-			{% if line.received_from or line.received_by or line.date_received %}
+			{% if line.received_from == "internal" %}
+				Internal line
+			{% elif line.received_from or line.received_by or line.date_received %}
 				Received
 				{% if line.received_by %}
 					by {{ line.received_by.user.get_full_name }}
@@ -100,7 +102,7 @@
 					on {{ line.date_received }}
 				{% endif %}
 			{% else %}
-				Some line of this strain
+				Some line
 			{% endif %}
 				<ul class="line-stock">{% for stock in line.stocks %}
 					<li>
@@ -150,7 +152,7 @@
 										{{ tube.parent.parent.parent }}
 										- Rack {{ tube.parent.parent.horizontal_position }}
 										- Box {{ tube.parent.vertical_position }}
-										- Position {{ tube.vertical_letter }}{{ tube.horizontal_position }}
+										- {{ tube.vertical_letter }}{{ tube.horizontal_position }}
 									</td></tr>
 								{% endfor %}
 								</table>

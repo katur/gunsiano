@@ -5,6 +5,11 @@
 	margin-bottom: 20px;
 }
 
+#contact #columns {
+	margin-top: 20px;
+	float: left;
+}
+
 #contact .two-column {
 	float: left;
 	width: 45%;

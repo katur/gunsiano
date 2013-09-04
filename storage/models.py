@@ -25,12 +25,11 @@ class ContainerType(models.Model):
 	image_filename = models.CharField(max_length=30, blank=True)
 	def __unicode__(self):
 		return self.name
-	
+
 class Container(models.Model):
 	type = models.ForeignKey(ContainerType, null=True)
 	name = models.CharField(max_length=200, blank=True)
-	mislabeled_as = models.CharField(max_length=50, blank=True)
-	contents = models.CharField(max_length=200, blank=True)
+	notes = models.TextField(blank=True)
 	parent = models.ForeignKey('self', null=True)
 	vertical_position = models.PositiveSmallIntegerField(null=True)
 	horizontal_position = models.PositiveSmallIntegerField(null=True)
@@ -39,6 +38,6 @@ class Container(models.Model):
 	is_thawed = models.BooleanField(default=False)
 	thawed_by = models.ForeignKey(UserProfile, null=True, related_name="container_thawed_by")
 	date_thawed = models.DateField(null=True)
-	thaw_results = models.CharField(max_length=100, blank=True)	
+	thaw_results = models.CharField(max_length=100, blank=True)
 	def __unicode__(self):
 		return self.name

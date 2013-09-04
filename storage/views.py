@@ -24,28 +24,42 @@ def storage_detail(request, container_id):
 
 	# generate the name for the page by following chain of parents
 	temp = container
-	title = temp.type.supertype.name + " " + temp.name
+	try:
+		title = temp.type.supertype.name + " " + temp.name
+	except AttributeError:
+		title = temp.name
+
 	while temp.parent:
 		temp = temp.parent
-		title = temp.type.supertype.name + " " + temp.name + " -> " + title
+		try:
+			title = temp.type.supertype.name + " " + temp.name + " -> " + title
+		except AttributeError:
+			title = temp.name + " -> " + title
+
 
 	# get all the containers contained in the parent
-	children = Container.objects.all().filter(parent_id=container)
+	children = Container.objects.all().filter(parent_id=container, is_thawed=0)
 
 	# create a grid of empty lists, the dimensions based on the parent dimensions
-	grid = [
-		[list() for i in range(container.type.slots_horizontal)]
-		for j in range(container.type.slots_vertical)
-	]
+	try:
+		grid = [
+			[list() for i in range(container.type.slots_horizontal)]
+			for j in range(container.type.slots_vertical)
+		]
 
-	# iterate over children containers
-	for child in children:
-		(grid[child.vertical_position-1][child.horizontal_position-1]).append(child)
-		try:
-			if child.stock.stockable.type.id == 1:
-				child.strain = get_object_or_404(WormStrainLine, stockable=child.stock.stockable).strain
-		except AttributeError:
-			child.strain = None
+		# iterate over children containers
+		for child in children:
+			(grid[child.vertical_position-1][child.horizontal_position-1]).append(child)
+			try:
+				if child.stock.stockable.type.id == 1:
+					child.strain = get_object_or_404(WormStrainLine, stockable=child.stock.stockable).strain
+			except AttributeError:
+				child.strain = None
+
+	except AttributeError:
+		grid = [[list()]]
+		for child in children:
+			grid[0][0].append(child)
 
 # render page
 	return render_to_response('storage_detail.html', {

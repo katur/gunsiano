@@ -7,7 +7,6 @@ class StockableType(models.Model):
 		return self.name
 
 class Stockable(models.Model):
-	id = models.IntegerField(primary_key=True)
 	type = models.ForeignKey(StockableType)
 
 class Stock(models.Model):

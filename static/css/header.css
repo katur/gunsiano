@@ -9,7 +9,6 @@
 
 #header h1 {
 	float: left;
-	width: 60%;
 	font-size: 36px;
 	margin-bottom: 10px;
 }
@@ -26,7 +25,7 @@
 #login {
 	padding-top: 10px;
 	float: right;
-	font-size: 15px;
+	font-size: 13px;
 }
 
 #login a {

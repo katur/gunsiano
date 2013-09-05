@@ -9,7 +9,11 @@
 				<!-- Site Title -->
 				<h1><a href="{% url 'home_url' %}">Gunsalus and Piano Labs</a></h1>
 				<div id="login">
-					<a href="{% url 'login_url' %}">Login</a>
+					{% url 'login_url' as login_url %}
+					<a href="{{ login_url }}"
+					{% ifequal request.path login_url %}
+						class="active"
+					{% endifequal %}>Login</a>
 					<a href="{% url 'logout_url' %}">Logout</a>
 				</div>
 				<span class="subtitle">at New York University's Center for Genomics and Systems Biology</a>

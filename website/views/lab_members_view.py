@@ -1,6 +1,6 @@
-from django.template import RequestContext # extends Context; needed for STATIC_URL
-from django.shortcuts import render_to_response, get_object_or_404 # r_to_r loads template, passes c    ontext, renders
-from website.models import *
+from django.template import RequestContext
+from django.shortcuts import render_to_response
+from website.models import UserProfile
 
 def lab_members(request):
 	"""
@@ -13,7 +13,7 @@ def lab_members(request):
 			profile.display_position = profile.position.position
 		else:
 			profile.display_position = "Former Lab Member"
-	
+
 	return render_to_response('lab_members.html', {
 		'profiles':profiles
 	}, context_instance=RequestContext(request))

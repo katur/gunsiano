@@ -143,12 +143,7 @@
 											{% if stock.tubes %}
 												<table>
 													{% for tube in stock.tubes %}
-														<tr><td>
-															{{ tube.parent.parent.parent }}
-															- Rack {{ tube.parent.parent.horizontal_position }}
-															- Box {{ tube.parent.vertical_position }}
-															- {{ tube.vertical_letter }}{{ tube.horizontal_position }}
-														</td></tr>
+														<tr><td>{{ tube.position }}</td></tr>
 													{% endfor %}
 												</table>
 											{% else %}No remaining tubes recorded{% endif %}

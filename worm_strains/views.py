@@ -47,19 +47,42 @@ def strain(request, name):
 	for line in lines:
 		line.stocks = Stock.objects.filter(stockable=line.stockable).order_by('date_prepared')
 		for stock in line.stocks:
-			stock.tubes = Container.objects.filter(stock=stock, is_thawed=False)
-
-			for tube in stock.tubes:
-				tube.vertical_letter = chr(tube.vertical_position + 64)
+			# get the -80C test thaw
 			try:
 				stock.thaw_80 = Container.objects.get(stock=stock, parent=7)
 			except Container.DoesNotExist:
 				stock.thaw_80 = None
 
+			# get the Nitrogen test thaw
 			try:
 				stock.thaw_N = Container.objects.get(stock=stock, parent=8)
 			except Container.DoesNotExist:
 				stock.thaw_N = None
+
+			# get all other, unthawed tubes
+			stock.tubes = Container.objects.filter(stock=stock, is_thawed=False)
+
+			for tube in stock.tubes:
+				# get position inside the box, using char for row
+				position_in_box = """%s%s""" % (
+					chr(tube.vertical_position + 64),
+					tube.horizontal_position
+				)
+
+				# follow parent pointers to generate string of detailed position
+				try:
+					tube.position = """%s - Rack %s - Box %s - %s """ % (
+						tube.parent.parent.parent.name,
+						tube.parent.parent.name,
+						tube.parent.name,
+						position_in_box
+					)
+				except AttributeError:
+					tube.position = position_in_box
+
+			# sort the tubes by position
+			stock.tubes = sorted(stock.tubes, key=lambda x: x.position)
+
 
 	# get lab code by extracting the letters from the strain name (usually 2 letters but sometimes more)
 	all = all=string.maketrans('','')

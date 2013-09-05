@@ -5,19 +5,27 @@
 {% endblock %}
 
 {% block content %}
-	<ul>
+	<ul id="lab-tools">
 		<!--
 		<li><a href="">
 			Protocols and Recipes
 		</a></li>
 		-->
 
-		<li><a href="{% url 'storage_url' %}">
-			Storage Navigation Interface
+		<li><a href="{% url 'strains_url' %}">
+			Worm Strains Database
 		</a></li>
 
-		<li><a href="{% url 'strains_url' %}">
-			Worm Strain Database
+		<li><a href="{% url 'storage_url' %}">
+			Storage Navigation Database
+		</a></li>
+
+		<li><a href="http://aquila.bio.nyu.edu/EEGI/" target="_blank">
+			Genetic Interactions Pilot website
+		</a></li>
+
+		<li><a href="http://pleiades.bio.nyu.edu/GenomeWideGI/" target="_blank">
+			Genome-Wide Genetic Interactions website
 		</a></li>
 
 		<!--

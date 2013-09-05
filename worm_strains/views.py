@@ -26,10 +26,8 @@ def strains(request):
 		the script worm_strains/management/commands/insert_genotypes_into_database.py
 		(which can be run with "python manage.py insert_genotypes_into_database").
 		"""
-		"""
-		generate_genotype(strain)
+		# generate_genotype(strain)
 
-		"""
 		strain.truncated_species = strain.species.name.replace("Caenorhabditis", "C.")
 
 	# render page

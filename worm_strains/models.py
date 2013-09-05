@@ -51,7 +51,6 @@ class WormStrain(models.Model):
 			sletters = re.match(re_letters, self.name).group(0).lower()
 		except AttributeError:
 			sletters = "zzzz"
-
 		try:
 			oletters = re.match(re_letters, other.name).group(0).lower()
 		except AttributeError:

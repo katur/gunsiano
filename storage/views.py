@@ -28,16 +28,16 @@ def storage_detail(request, container_id):
 	# generate the name for the page by following chain of parents
 	temp = container
 	try:
-		title = temp.type.supertype.name + " " + temp.name
+		title = """%s %s""" % ( temp.type.supertype.name, temp.name )
 	except AttributeError:
 		title = temp.name
 
 	while temp.parent:
 		temp = temp.parent
 		try:
-			title = temp.type.supertype.name + " " + temp.name + " -> " + title
+			title = """%s %s -> %s""" % ( temp.type.supertype.name, temp.name, title)
 		except AttributeError:
-			title = temp.name + " -> " + title
+			title = """%s -> %s""" % ( temp.name, title )
 
 
 	# get all the containers contained in the parent

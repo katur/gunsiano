@@ -61,8 +61,8 @@ def strain(request, name):
 			except Container.DoesNotExist:
 				stock.thaw_N = None
 
-			# get all other, unthawed tubes
-			stock.tubes = Container.objects.filter(stock=stock, is_thawed=False)
+			# get all other, unthawed, non-tester tubes
+			stock.tubes = Container.objects.filter(stock=stock, is_thawed=False).exclude(parent=7).exclude(parent=8)
 
 			for tube in stock.tubes:
 				# get position inside the box, using char for row

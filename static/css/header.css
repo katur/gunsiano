@@ -35,11 +35,11 @@
 
 #menu {
 	float: left;
+	font-size: 18px;
 	padding: 20px 0;
 }
 
 #menu a {
-	font-size: 20px;
 	margin-right: 36px;
 	float: left;
 }

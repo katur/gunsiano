@@ -85,7 +85,6 @@ def strain(request, name):
 			# sort the tubes by position
 			stock.tubes = sorted(stock.tubes, key=lambda x: x.position)
 
-
 	# get lab code by extracting the letters from the strain name (usually 2 letters but sometimes more)
 	all = all=string.maketrans('','')
 	letters_only = all.translate(all, string.ascii_uppercase)
@@ -94,7 +93,6 @@ def strain(request, name):
 		strain.lab = WormLab.objects.get(strain_code=strain_code)
 	except WormLab.DoesNotExist:
 		strain.lab = None
-
 
 	return render_to_response('strain.html', {
 		'lines':lines,

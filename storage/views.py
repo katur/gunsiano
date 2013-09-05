@@ -1,8 +1,10 @@
-from django.template import RequestContext # extends Context; needed for STATIC_URL
-from django.shortcuts import render_to_response, get_object_or_404 # r_to_r loads template, passes c    ontext, renders
+from django.template import RequestContext
+from django.shortcuts import render_to_response, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from storage.models import *
 from worm_strains.models import *
 
+@login_required
 def storage(request):
 	"""
 	Page showing all available vats
@@ -15,6 +17,7 @@ def storage(request):
 	}, context_instance=RequestContext(request))
 
 
+@login_required
 def storage_detail(request, container_id):
 	"""
 	Page showing the contents of some container

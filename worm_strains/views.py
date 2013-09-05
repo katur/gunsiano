@@ -1,9 +1,12 @@
-from django.template import RequestContext # extends Context; needed for STATIC_URL
-from django.shortcuts import render_to_response, get_object_or_404 # r_to_r loads template, passes c    ontext, renders
+from django.template import RequestContext
+from django.shortcuts import render_to_response, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from worm_strains.models import *
 from storage.models import *
 import string
 
+
+@login_required
 def strains(request):
 	"""
 	Page listing worms strains, with possible filtering
@@ -35,6 +38,7 @@ def strains(request):
 	}, context_instance=RequestContext(request))
 
 
+@login_required
 def strain(request, name):
 	"""
 	Page showing information on a particular worm strain.

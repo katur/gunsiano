@@ -18,6 +18,7 @@ MANAGERS = ADMINS
 
 AUTH_PROFILE_MODULE = "website.UserProfile"
 
+LOGIN_URL = "login_url"
 LOGIN_REDIRECT_URL = "home_url"
 
 '''

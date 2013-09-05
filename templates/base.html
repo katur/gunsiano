@@ -2,29 +2,33 @@
 <html lang="en">
 	<!-- HEAD -->
 	{% include "head.html" %}
-				
+
 	<body>
 		<div id="wrap-header">
 			<div id="header" class="clearfix">
 				<!-- Site Title -->
 				<h1><a href="{% url 'home_url' %}">Gunsalus and Piano Labs</a></h1>
+				<div id="login">
+					<a href="{% url 'login_url' %}">Login</a>
+					<a href="{% url 'logout_url' %}">Logout</a>
+				</div>
 				<span class="subtitle">at New York University's Center for Genomics and Systems Biology</a>
-			
+
 				<!-- MENU -->
 				{% include "menu.html" %}
 			</div>
 		</div>
-		
+
 		<div id="wrap-content">
 			<div id="content">
 				<!-- PAGE TITLE -->
 				{% block page_title %}{% endblock %}
-				
+
 				<!-- REST OF CONTENT -->
 				{% block content %}{% endblock %}
 			</div>
 		</div>
-		
+
 		<!-- FOOTER -->
 		{% include "footer.html" %}
 	</body>

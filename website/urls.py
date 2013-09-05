@@ -12,8 +12,11 @@ urlpatterns = patterns('website.views', # first arg prefix for views
 	url(r'^worm_portal$', 'worm_portal', name='worm_portal_url'),
 )
 
-urlpatterns += url(r'^login/$', 'django.contrib.auth.views.login', {
-	'template_name':'login.html',
-}), url(r'^logout/$', 'django.contrib.auth.views.logout', {
-	'next_page':'/',
-}),
+urlpatterns += patterns('',
+	url(r'^login/$', 'django.contrib.auth.views.login', {
+		'template_name':'login.html',
+	}, name='login_url'),
+	url(r'^logout/$', 'django.contrib.auth.views.logout', {
+		'next_page':'/',
+	}, name='logout_url'),
+)

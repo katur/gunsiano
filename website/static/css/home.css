@@ -13,3 +13,9 @@
 	margin-top: 100px;
 	width: 80%;
 }
+
+#employment span {
+	float: left;
+	clear: both;
+	margin-bottom: 20px;
+}

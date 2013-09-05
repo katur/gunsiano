@@ -11,29 +11,21 @@
 		{% if strain.species or strain.on_wormbase or strain.genotype or strain.culture %}
 			<div class="strain-section">
 				{% if strain.species %}
-					<div class="strain-subsection">
-						<b>Species:</b> <i>{{ strain.species }}</i>
-					</div>
+					<span><b>Species:</b> <i>{{ strain.species }}</i></span>
 				{% endif %}
 
 				{% if strain.on_wormbase %}
-					<div class="strain-subsection">
-						<a href="http://www.wormbase.org/species/c_elegans/strain/{{ strain }}" target="_blank">
-							See strain on wormbase
-						</a>
-					</div>
+					<span><a href="http://www.wormbase.org/species/c_elegans/strain/{{ strain }}" target="_blank">
+						See strain on wormbase
+					</a></span>
 				{% endif %}
 
 				{% if strain.genotype%}
-					<div class="strain-subsection">
-						<b>Genotype:</b> {{ strain.genotype }}
-					</div>
+					<span><b>Genotype:</b> {{ strain.genotype }}</span>
 				{% endif %}
 
 				{% if strain.culture %}
-					<div class="strain-subsection">
-						<b>Culture:</b> {{ strain.culture }}
-					</div>
+					<span><b>Culture:</b> {{ strain.culture }}</span>
 				{% endif %}
 			</div>
 		{% endif %}
@@ -44,27 +36,19 @@
 			<h4>Origin</h4>
 			<div class="strain-section">
 				{% if strain.created_by %}
-					<div class="strain-subsection">
-						<b>Made by:</b> {{ strain.created_by.user.get_full_name }}
-					</div>
+					<span><b>Made by:</b> {{ strain.created_by.user.get_full_name }}</span>
 				{% endif %}
 
 				{% if strain.lab %}
-					<div class="strain-subsection">
-						<b>Lab:</b> {{ strain.lab }}
-					</div>
+					<span><b>Lab:</b> {{ strain.lab }}</span>
 				{% endif %}
 
 				{% if strain.date_created %}
-					<div class="strain-subsection">
-						<b>Made on:</b> {{ strain.date_created }}
-					</div>
+					<span><b>Made on:</b> {{ strain.date_created }}</span>
 				{% endif %}
 
 				{% if strain.mutagen %}
-					<div class="strain-subsection">
-						<b>Mutagen or Method Used:</b> {{ strain.mutagen }}
-					</div>
+					<span><b>Mutagen or Method Used:</b> {{ strain.mutagen }}</span>
 				{% endif %}
 			</div>
 		{% endif %}
@@ -74,7 +58,7 @@
 			<hr>
 			<h4>Remarks</h4>
 			<div class="strain-section">
-				<div class="strain-subsection">{{ strain.remarks }}</div>
+				<span>{{ strain.remarks }}</span>
 			</div>
 		{% endif %}
 
@@ -83,7 +67,7 @@
 			<hr>
 			<h4>Stock</h4>
 
-			<ul class="strain-lines">
+			<ul class="lines">
 				{% for line in lines %}
 					<li>
 						{% if line.created_internally %}
@@ -111,7 +95,7 @@
 							, outcrossed {{ line.times_outcrossed }}
 						{% endif %}
 
-						<ul class="line-stock">
+						<ul>
 							{% for stock in line.stocks %}
 								<li>Frozen
 									{% if stock.prepared_by %}

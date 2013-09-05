@@ -22,22 +22,23 @@
 	margin-top: 0;
 }
 
-.strain-subsection {
+.strain-section span {
 	margin: 10px;
 	float: left;
 }
 
-.strain-lines {
+.lines {
 	list-style-position: inside;
 	padding-left: 0;
 	width: 100%;
+	line-height: 150%;
 }
 
-.strain-lines .tubes {
+.lines .tubes {
 	display: inline-block;
 }
 
-.strain-lines table, .strain-lines td {
+.lines table, .lines td {
 	border: 1px solid #ddd;
 	border-collapse: collapse;
 	padding: 3px;

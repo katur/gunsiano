@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+
 # urlpatterns is a module-level variable
 urlpatterns = patterns('website.views', # first arg prefix for views
 	# subsequent args are tuples: (regex, view, optional dictionary)
@@ -10,3 +11,9 @@ urlpatterns = patterns('website.views', # first arg prefix for views
 	url(r'^contact$', 'contact', name='contact_url'),
 	url(r'^worm_portal$', 'worm_portal', name='worm_portal_url'),
 )
+
+urlpatterns += url(r'^login/$', 'django.contrib.auth.views.login', {
+	'template_name':'login.html',
+}), url(r'^logout/$', 'django.contrib.auth.views.logout', {
+	'next_page':'/',
+}),

@@ -5,41 +5,43 @@
 	{% url 'resources_url' as resources_url %}
 	{% url 'contact_url' as contact_url %}
 	{% url 'worm_portal_url' as worm_portal_url %}
-	
-	<a href="{{ home_url }}" 
+
+	<a href="{{ home_url }}"
 		{% ifequal request.path home_url %}
 			class="active"
 		{% endifequal %}>
 		Home
-	</a> 
-	<a href="{{ research_url }}" 
+	</a>
+	<a href="{{ research_url }}"
 		{% ifequal request.path research_url %}
 			class="active"
 		{% endifequal %}>
 		Research Areas
-	</a> 
-	<a href="{{ lab_members_url }}" 
+	</a>
+	<a href="{{ lab_members_url }}"
 		{% ifequal request.path lab_members_url %}
 			class="active"
 		{% endifequal %}>
 		Lab Members
 	</a>
-	<a href="{{ resources_url }}" 
+	<a href="{{ resources_url }}"
 		{% ifequal request.path resources_url %}
 			class="active"
 		{% endifequal %}>
 		Resources and Data
-	</a> 
-	<a href="{{ contact_url }}" 
+	</a>
+	<a href="{{ contact_url }}"
 		{% ifequal request.path contact_url %}
 			class="active"
 		{% endifequal %}>
 		Contact
 	</a>
-	<a href="{{ worm_portal_url }}" 
-		{% ifequal request.path worm_portal_url %}
-			class="active"
-		{% endifequal %}>
-		Worm Portal
-	</a>
+	{% if user.is_authenticated %}
+		<a href="{{ worm_portal_url }}"
+			{% ifequal request.path worm_portal_url %}
+				class="active"
+			{% endifequal %}>
+			Worm Portal
+		</a>
+	{% endif %}
 </div>

@@ -96,6 +96,10 @@
 						{% endif %}
 
 						<ul>
+							{% if line.remarks %}
+								<li>{{ line.remarks }}</li>
+							{% endif %}
+
 							{% for stock in line.stocks %}
 								<li>Frozen
 									{% if stock.prepared_by %}

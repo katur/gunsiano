@@ -8,7 +8,6 @@
 	<table id="strains">
 		<tr id="top-row">
 			<td id="strain-column">Strain Name</td>
-			<td id="species-column">Species</td>
 			<td>Genotype</td>
 		</tr>
 	{% for strain in strains %}
@@ -16,7 +15,6 @@
 			<td><a href={% url 'strain_url' name=strain %}>
 				{{ strain }}
 			</a></td>
-			<td><i>{{ strain.truncated_species }}</i></td>
 			<td>{{ strain.genotype }}</td>
 		</tr>
 	{% endfor %}

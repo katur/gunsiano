@@ -2,18 +2,20 @@ from django.db import models
 from website.models import UserProfile
 from vectors.models import Vector
 from storage.models import Stockable
-import string
-import re
+import string, re
+
 
 class WormSpecies(models.Model):
 	name = models.CharField(max_length=50, unique=True)
 	def __unicode__(self):
 		return self.name
 
+
 class Mutagen(models.Model):
 	mutagen = models.CharField(max_length=50)
 	def __unicode__(self):
 		return self.mutagen
+
 
 class Transgene(models.Model):
 	name = models.CharField(max_length=10, blank=True)
@@ -21,12 +23,14 @@ class Transgene(models.Model):
 	def __unicode__(self):
 		return self.name
 
+
 class WormLab(models.Model):
 	lab = models.CharField(max_length=200)
 	strain_code = models.CharField(max_length=5)
 	allele_code = models.CharField(max_length=5, blank=True)
 	def __unicode__(self):
 		return self.lab
+
 
 class WormStrain(models.Model):
 	name = models.CharField(max_length=20, primary_key=True)
@@ -42,37 +46,34 @@ class WormStrain(models.Model):
 	def __unicode__(self):
 		return self.name
 
+	def is_properly_named(self):
+		return re.search('^[A-Z]+\d+$', self.name)
+
+	def extract_lab_code(self):
+		return re.search('^[A-Z]+', self.name).group(0)
+
+	def extract_number(self):
+		return int(re.search('\d+$', self.name).group(0))
+
 	def __cmp__(self, other):
-		re_letters = re.compile('^[a-zA-Z]+')
-
-		try:
-			sletters = re.match(re_letters, self.name).group(0).lower()
-		except AttributeError:
-			sletters = "zzzz"
-		try:
-			oletters = re.match(re_letters, other.name).group(0).lower()
-		except AttributeError:
-			oletters = "zzzz"
-
-		if sletters < oletters:
-			return -1
-		elif sletters > oletters:
-			return 1
-		else:
-			re_numbers = re.compile('\d+')
-			try:
-				snumber = int(re.search(re_numbers, self.name).group(0))
-			except AttributeError:
-				snumber = 0
-
-			try:
-				onumber = int(re.search(re_numbers, other.name).group(0))
-			except AttributeError:
-				onumber = 0
-
-			if snumber < onumber:
+		if self.is_properly_named() and other.is_properly_named():
+			scode = self.extract_lab_code()
+			ocode = other.extract_lab_code()
+			if scode < ocode:
 				return -1
-			elif snumber > onumber:
+			elif scode > ocode:
+				return 1
+			else: # if same lab prefix
+				if self.extract_number() < other.extract_number():
+					return -1
+				else: # strain names must be unique, so necessarily >
+					return 1
+		else: # if one or both strains are not properly named
+			slower = self.name.lower()
+			olower = other.name.lower()
+			if slower < olower:
+				return -1
+			elif slower > olower:
 				return 1
 			else:
 				return 0

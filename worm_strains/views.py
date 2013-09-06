@@ -3,7 +3,6 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from worm_strains.models import *
 from storage.models import *
-import string
 
 
 @login_required
@@ -14,21 +13,21 @@ def strains(request):
 	# get all worm strains
 	strains = WormStrain.objects.all()
 
-	# sort using overridden cmp method, which sorts first on strain letters, then on total strain number
+	# sort uses overridden cmp method (in WormStrain model)
 	strains = sorted(strains)
 
-	for strain in strains:
-		"""
-		The following, commented out, would dynamically generate genotypes
-		when they can be created from the background and a single transgene.
-		For performance, all genotypes are instead hard-coded into the database,
-		using the generate_genotype function in this module along with
-		the script worm_strains/management/commands/insert_genotypes_into_database.py
-		(which can be run with "python manage.py insert_genotypes_into_database").
-		"""
+	# for strain in strains:
+		# The following line (commented out) would dynamically generate genotypes
+		# when they can be created from the background and a single transgene.
+		# For performance, all genotypes are instead hard-coded into the database,
+		# using the generate_genotype function in this module along with
+		# the script worm_strains/management/commands/insert_genotypes_into_database.py
+		# (which can be run with "python manage.py insert_genotypes_into_database").
+
 		# generate_genotype(strain)
 
-		strain.truncated_species = strain.species.name.replace("Caenorhabditis", "C.")
+		# The following line, commented out, is needed to add shortened species name
+		# strain.truncated_species = strain.species.name.replace("Caenorhabditis", "C.")
 
 	# render page
 	return render_to_response('strains.html', {
@@ -89,13 +88,12 @@ def strain(request, name):
 			stock.tubes = sorted(stock.tubes, key=lambda x: x.position)
 
 	# get lab code by extracting the letters from the strain name (usually 2 letters but sometimes more)
-	all = all=string.maketrans('','')
-	letters_only = all.translate(all, string.ascii_uppercase)
-	strain_code = str(strain.name).translate(all, letters_only)
-	try:
-		strain.lab = WormLab.objects.get(strain_code=strain_code)
-	except WormLab.DoesNotExist:
-		strain.lab = None
+	if strain.is_properly_named():
+		lab_code = strain.extract_letters()
+		try:
+			strain.lab = WormLab.objects.get(strain_code=lab_code)
+		except WormLab.DoesNotExist:
+			strain.lab = None
 
 	return render_to_response('strain.html', {
 		'lines':lines,

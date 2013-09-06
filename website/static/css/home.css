@@ -10,8 +10,9 @@
 }
 
 #employment {
+	float: left;
 	margin-top: 100px;
-	width: 80%;
+	width: 60%;
 }
 
 #employment span {

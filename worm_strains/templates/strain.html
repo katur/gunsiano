@@ -94,7 +94,14 @@
 							{% endif %}
 
 							{% if line.times_outcrossed %}
-								<li>Outcrossed {{ line.times_outcrossed }}</li>
+								<li>Outcrossed {{ line.times_outcrossed }}x
+									{% if line.received_by %}
+										by {{ line.received_by.user.get_full_name }}
+									{% endif %}
+									{% if line.date_received %}
+										on {{ line.date_received }}
+									{% endif %}
+								</li>
 							{% endif %}
 
 							{% for stock in line.stocks %}

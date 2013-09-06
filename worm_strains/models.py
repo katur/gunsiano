@@ -83,7 +83,7 @@ class WormStrainLine(models.Model):
 	strain = models.ForeignKey(WormStrain, null=True)
 	created_internally = models.BooleanField(default=False)
 	times_outcrossed = models.PositiveSmallIntegerField(null=True)
-	received_from = models.CharField(max_length=50, blank=True)
+	received_from = models.CharField(max_length=100, blank=True)
 	received_by = models.ForeignKey(UserProfile, null=True)
 	date_received = models.DateField(null=True)
 	remarks = models.TextField(blank=True)

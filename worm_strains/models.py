@@ -29,7 +29,7 @@ class WormLab(models.Model):
 		return self.lab
 
 class WormStrain(models.Model):
-	name = models.CharField(max_length=20, blank=True, unique=True)
+	name = models.CharField(max_length=20, primary_key=True)
 	internal_identifier = models.CharField(max_length=30, blank=True)
 	on_wormbase = models.BooleanField(default=False)
 	species = models.ForeignKey(WormSpecies, default=1)
@@ -82,7 +82,7 @@ class WormStrain(models.Model):
 
 class WormStrainLine(models.Model):
 	stockable = models.ForeignKey(Stockable, null=True)
-	strain = models.ForeignKey(WormStrain)
+	strain = models.ForeignKey(WormStrain, null=True)
 	created_internally = models.BooleanField(default=False)
 	times_outcrossed = models.PositiveSmallIntegerField(null=True)
 	received_from = models.CharField(max_length=50, blank=True)

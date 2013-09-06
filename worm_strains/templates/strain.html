@@ -87,13 +87,14 @@
 							Line with unrecorded receipt
 						{% endif %}
 
-						{% if line.times_outcrossed %}
-							, outcrossed {{ line.times_outcrossed }}
-						{% endif %}
 
-						<ul>
+						<ul> <!-- more details about this line -->
 							{% if line.remarks %}
 								<li>{{ line.remarks }}</li>
+							{% endif %}
+
+							{% if line.times_outcrossed %}
+								<li>Outcrossed {{ line.times_outcrossed }}</li>
 							{% endif %}
 
 							{% for stock in line.stocks %}
@@ -106,7 +107,11 @@
 										on {{ stock.date_prepared }}
 									{% endif %}
 
-									<ul> <!-- tube information including thaws -->
+									<ul> <!-- more details about this stock -->
+										{% if stock.notes %}
+											<li>{{ stock.notes }}</li>
+										{% endif %}
+
 										<li>-80C test
 											{% if stock.thaw_80 %}
 												{% if stock.thaw_80.is_thawed %}thaw
@@ -148,14 +153,14 @@
 												</table>
 											{% else %}No remaining tubes recorded{% endif %}
 										</li>
-									</ul> <!-- tube information including thaws -->
+									</ul> <!-- stock details -->
 								</li>
 
 							{% empty %}<li>No stocks recorded</li>{% endfor %}
 						</ul>
-					</li> <!-- end of this line -->
-				{% endfor %} <!-- strain lines loop -->
-			</ul> <!-- end of all lines -->
+					</li> <!-- line details -->
+				{% endfor %}
+			</ul>
 		{% endif %} <!-- if any lines -->
 	</div>
 {% endblock %}

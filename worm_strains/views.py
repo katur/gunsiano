@@ -82,6 +82,9 @@ def strain(request, name):
 				except AttributeError:
 					tube.position = position_in_box
 
+				if tube.notes:
+					tube.position += ": " + tube.notes
+
 			# sort the tubes by position
 			stock.tubes = sorted(stock.tubes, key=lambda x: x.position)
 

@@ -8,7 +8,7 @@
 	<div id="strain-sections">
 
 		<!-- STRAIN IDENTIFICATION -->
-		{% if strain.species or strain.on_wormbase or strain.genotype or strain.culture %}
+		{% if strain.species or strain.on_wormbase or strain.genotype %}
 			<div class="strain-section">
 				{% if strain.species %}
 					<span><b>Species:</b> <i>{{ strain.species }}</i></span>
@@ -22,10 +22,6 @@
 
 				{% if strain.genotype%}
 					<span><b>Genotype:</b> {{ strain.genotype }}</span>
-				{% endif %}
-
-				{% if strain.culture %}
-					<span><b>Culture:</b> {{ strain.culture }}</span>
 				{% endif %}
 			</div>
 		{% endif %}

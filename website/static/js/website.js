@@ -10,7 +10,7 @@ setResizeHandler = function() {
 }
 
 positionFooter = function() {
-	footer = $("#wrap-footer");	
+	footer = $("#wrap-footer");
 	footerHeight = footer.outerHeight();
 	windowHeight = $(window).height();
 	contentHeight = $("html").height();
@@ -19,7 +19,9 @@ positionFooter = function() {
 	if (footer.css("position") == "absolute") {
 		contentHeight += footerHeight;
 	}
-	
+
+	console.log(contentHeight, windowHeight);
+
 	// if content is smaller than window, position the footer at bottom of page
 	// otherwise position it statically (necessary in case user resizes window)
 	footer.css(

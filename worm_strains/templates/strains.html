@@ -5,11 +5,13 @@
 {% endblock %}
 
 {% block content %}
-	<table id="strains">
-		<tr id="top-row">
-			<td id="strain-column">Strain Name</td>
-			<td>Genotype</td>
-		</tr>
+	<table class="strains">
+		<thead>
+			<tr>
+				<th id="strain-column">Strain Name</th>
+				<th>Genotype</th>
+			</tr>
+		</thead>
 	{% for strain in strains %}
 		<tr>
 			<td><a href={% url 'strain_url' name=strain %}>
@@ -19,4 +21,5 @@
 		</tr>
 	{% endfor %}
 	</table>
+	<table id="table-thead-fixed" class="strains"></table>
 {% endblock %}

@@ -1,13 +1,16 @@
-#strains {
+.strains {
+	width: 980px;
+	table-layout: fixed;
+	float: left;
 	border-collapse: collapse;
 }
 
-#strains, #strains td, #strains tr {
+.strains, .strains td, .strains tr, .strains th {
 	border: 1px solid #ddd;
 	padding: 4px 6px;
 }
 
-#top-row {
+.strains th {
 	font-weight: bold;
 	text-align: center;
 }
@@ -16,6 +19,9 @@
 	width: 95px;
 }
 
-#species-column {
-	width: 95px;
+#table-thead-fixed {
+	position: fixed;
+	top: 0px;
+	display: none;
+	background-color: white;
 }

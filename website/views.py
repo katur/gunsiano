@@ -66,9 +66,9 @@ def contact(request):
 
 
 @login_required
-def worm_portal(request):
+def lab_tools(request):
 	"""
-	Worm Portal landing page
+	Internal Lab Tools landing page
 	"""
 	# render page
-	return render_to_response('worm_portal.html', context_instance=RequestContext(request))
+	return render_to_response('lab_tools.html', context_instance=RequestContext(request))

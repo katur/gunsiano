@@ -4,7 +4,7 @@
 	{% url 'research_url' as research_url %}
 	{% url 'resources_url' as resources_url %}
 	{% url 'contact_url' as contact_url %}
-	{% url 'worm_portal_url' as worm_portal_url %}
+	{% url 'lab_tools_url' as lab_tools_url %}
 
 	<a href="{{ home_url }}"
 		{% ifequal request.path home_url %}
@@ -37,11 +37,11 @@
 		Contact
 	</a>
 	{% if user.is_authenticated %}
-		<a href="{{ worm_portal_url }}"
-			{% ifequal request.path worm_portal_url %}
+		<a href="{{ lab_tools_url }}"
+			{% ifequal request.path lab_tools_url %}
 				class="active"
 			{% endifequal %}>
-			Worm Portal
+			Internal Lab Tools
 		</a>
 	{% endif %}
 </div>

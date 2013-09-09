@@ -89,7 +89,7 @@ def strain(request, name):
 
 	# get lab code by extracting the letters from the strain name (usually 2 letters but sometimes more)
 	if strain.is_properly_named():
-		lab_code = strain.extract_letters()
+		lab_code = strain.extract_lab_code()
 		try:
 			strain.lab = WormLab.objects.get(strain_code=lab_code)
 		except WormLab.DoesNotExist:

@@ -80,53 +80,53 @@ def lab_tools(request):
 def publications(request):
 	"""
 	Page for publications, fetched dynamically from PubMed
-	PubMed search terms:
-	both: (Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author]) OR (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author])
-	kris_only: Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author]
-	fabio_only: Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author]
+	PubMed search term:
+	(Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author]) OR (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author])
 	"""
-	xml_file_both = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy")
-	xml_file_kris = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1HM5Uxfu7f2MxGrKDT9ZkYODwEeTitazig0NejO4Lw9dlj9kdA")
-	xml_file_fabio = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1-ONS2P_EKbiHxur7eYe8GZYYiix15mspfs-N0HFxYmGQWLsU7")
+	xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy")
 
-	def generate_items(xml_file):
-		# define functions to bolden or italicize a search term in a string
-		def embolden(s, term):
-			return string.replace(s, term, "<b>" + term + "</b>")
+	# define functions to bolden or italicize a search term in a string
+	def embolden(s, term):
+		return string.replace(s, term, "<b>" + term + "</b>")
 
-		def italicize(s, term):
-			return string.replace(s, term, "<i>" + term + "</i>")
+	def italicize(s, term):
+		return string.replace(s, term, "<i>" + term + "</i>")
 
-		# generate tree representing the tags of an xml file and get the root
-		tree = ET.parse(xml_file)
-		root = tree.getroot()
+	# define empty lists to fill with publications from the xml file
+	pub_both = []
+	pub_kris = []
+	pub_fabio = []
 
-		# define an empty list to fill with the publications given in the xml file
-		publications = []
-		for publication in root.iter('item'):
-			d = publication.find('description').text
+	# create tree of the xml file tags, and iterate over the items/publications
+	tree = ET.parse(xml_file)
+	root = tree.getroot()
+	for publication in root.iter('item'):
+		# extract the description for manipulation
+		d = publication.find('description').text
 
-			# italicize species names, and embolden PI names
+		# italicize species names
+		d = string.replace(d, "Caenorhabditis  elegans", "Caenorhabditis elegans")
+		d = italicize(d, "Caenorhabditis elegans")
+		d = italicize(d, "C. elegans")
+		d = italicize(d, "Drosophila")
+		d = italicize(d, "Protorhabditis")
+		d = italicize(d, "S. cerevisiae")
+
+		# embolden PI names, and add the publication to PI-specific lists
+		if "Piano F" in d:
+			pub_fabio.append(publication)
 			d = embolden(d, "Piano F")
+		if "Gunsalus K" in d:
+			pub_kris.append(publication)
 			d = embolden(d, "Gunsalus KC")
 			d = embolden(d, "Gunsalus K")
-			d = string.replace(d, "Caenorhabditis  elegans", "Caenorhabditis elegans")
-			d = italicize(d, "Caenorhabditis elegans")
-			d = italicize(d, "C. elegans")
-			d = italicize(d, "Drosophila")
-			d = italicize(d, "Protorhabditis")
 
-			publication.description = d
-			publications.append(publication)
-		return publications
-
-	pub_both = generate_items(xml_file_both)
-	pub_kris = generate_items(xml_file_kris)
-	pub_fabio = generate_items(xml_file_fabio)
+		# update the description, and add to the list for both PIs
+		publication.description = d
+		pub_both.append(publication)
 
 	return render_to_response('publications.html', {
 		'pub_both':pub_both,
 		'pub_kris':pub_kris,
 		'pub_fabio':pub_fabio,
 	}, context_instance=RequestContext(request))
-

@@ -2,6 +2,8 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from website.models import User, UserProfile, Resource
 from django.contrib.auth.decorators import login_required
+import xml.etree.ElementTree as ET
+import urllib2
 
 
 def home(request):
@@ -47,13 +49,6 @@ def lab_member(request, username):
 	}, context_instance=RequestContext(request))
 
 
-def publications(request):
-	"""
-	Page for publications, fetched dynamically from PubMed
-	"""
-	return render_to_response('publications.html', context_instance=RequestContext(request))
-
-
 def resources(request):
 	"""
 	Resources Page
@@ -79,3 +74,21 @@ def lab_tools(request):
 	"""
 	# render page
 	return render_to_response('lab_tools.html', context_instance=RequestContext(request))
+
+
+def publications(request):
+	"""
+	Page for publications, fetched dynamically from PubMed
+	"""
+	xmldoc = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1piP1Xotxtp6HZi3WJ-3lHVH9brJqC2fnqZNpmbUOOOEUSLkU3")
+	tree = ET.parse(xmldoc)
+	root = tree.getroot()
+
+	items = []
+	for item in root.iter('item'):
+		item.description = item.find('description').text
+		items.append(item)
+
+	return render_to_response('publications.html', {
+		'items':items,
+	}, context_instance=RequestContext(request))

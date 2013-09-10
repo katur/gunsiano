@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content %}
-	<div id="publications">
-	</div>
+	<table id="publications">
+		{% for item in items %}
+			{{ item.description|safe }}
+		{% endfor %}
+	</table>
 {% endblock content %}

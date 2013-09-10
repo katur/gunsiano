@@ -9,10 +9,10 @@ fixStrainsTopRow = function() {
 		var fixedHeader = $("#table-thead-fixed").append(header);
 
 		$(window).bind("scroll", function() {
-			var offset = $(this).scrollTop();
-			if (offset >= tableOffset && fixedHeader.is(":hidden")) {
+			var scrollDistance = $(this).scrollTop();
+			if (scrollDistance >= tableOffset && fixedHeader.is(":hidden")) {
 				fixedHeader.show();
-			} else if (offset < tableOffset) {
+			} else if ((scrollDistance < tableOffset) && fixedHeader.is(":visible")) {
 				fixedHeader.hide();
 			}
 		});

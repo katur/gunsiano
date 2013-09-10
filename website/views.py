@@ -85,22 +85,26 @@ def publications(request):
 	kris_only: Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author]
 	fabio_only: Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author]
 	"""
-	both = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy")
-	kris_only = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1HM5Uxfu7f2MxGrKDT9ZkYODwEeTitazig0NejO4Lw9dlj9kdA")
-	fabio_only = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1-ONS2P_EKbiHxur7eYe8GZYYiix15mspfs-N0HFxYmGQWLsU7")
-
-	def embolden(s, term):
-		return string.replace(s, term, "<b>" + term + "</b>")
-
-	def italicize(s, term):
-		return string.replace(s, term, "<i>" + term + "</i>")
+	xml_file_both = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy")
+	xml_file_kris = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1HM5Uxfu7f2MxGrKDT9ZkYODwEeTitazig0NejO4Lw9dlj9kdA")
+	xml_file_fabio = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1-ONS2P_EKbiHxur7eYe8GZYYiix15mspfs-N0HFxYmGQWLsU7")
 
 	def generate_items(xml_file):
+		# define functions to bolden or italicize a search term in a string
+		def embolden(s, term):
+			return string.replace(s, term, "<b>" + term + "</b>")
+
+		def italicize(s, term):
+			return string.replace(s, term, "<i>" + term + "</i>")
+
+		# generate tree representing the tags of an xml file and get the root
 		tree = ET.parse(xml_file)
 		root = tree.getroot()
-		items = []
-		for item in root.iter('item'):
-			d = item.find('description').text
+
+		# define an empty list to fill with the publications given in the xml file
+		publications = []
+		for publication in root.iter('item'):
+			d = publication.find('description').text
 
 			# italicize species names, and embolden PI names
 			d = embolden(d, "Piano F")
@@ -112,17 +116,17 @@ def publications(request):
 			d = italicize(d, "Drosophila")
 			d = italicize(d, "Protorhabditis")
 
-			item.description = d
-			items.append(item)
-		return items
+			publication.description = d
+			publications.append(publication)
+		return publications
 
-	both_items = generate_items(both)
-	kris_items = generate_items(kris_only)
-	fabio_items = generate_items(fabio_only)
+	pub_both = generate_items(xml_file_both)
+	pub_kris = generate_items(xml_file_kris)
+	pub_fabio = generate_items(xml_file_fabio)
 
 	return render_to_response('publications.html', {
-		'pub_both':both_items,
-		'pub_kris':kris_items,
-		'pub_fabio':fabio_items,
+		'pub_both':pub_both,
+		'pub_kris':pub_kris,
+		'pub_fabio':pub_fabio,
 	}, context_instance=RequestContext(request))
 

@@ -79,8 +79,10 @@ def lab_tools(request):
 def publications(request):
 	"""
 	Page for publications, fetched dynamically from PubMed
+	PubMed search term:
+	(Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author]) OR (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author])
 	"""
-	xmldoc = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1piP1Xotxtp6HZi3WJ-3lHVH9brJqC2fnqZNpmbUOOOEUSLkU3")
+	xmldoc = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy")
 	tree = ET.parse(xmldoc)
 	root = tree.getroot()
 

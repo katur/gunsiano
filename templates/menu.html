@@ -25,17 +25,17 @@
 		{% endifequal %}>
 		Lab Members
 	</a>
-	<a href="{{ publications_url }}"
-		{% ifequal request.path publications_url %}
-			class="active"
-		{% endifequal %}>
-		Publications
-	</a>
 	<a href="{{ resources_url }}"
 		{% ifequal request.path resources_url %}
 			class="active"
 		{% endifequal %}>
 		Resources and Data
+	</a>
+	<a href="{{ publications_url }}"
+		{% ifequal request.path publications_url %}
+			class="active"
+		{% endifequal %}>
+		Publications
 	</a>
 	<a href="{{ contact_url }}"
 		{% ifequal request.path contact_url %}

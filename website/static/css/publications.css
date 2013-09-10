@@ -1,5 +1,5 @@
 #pub-menu {
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 }
 
 #pub-menu a {
@@ -8,6 +8,7 @@
 
 #pub-line {
 	width: 100%;
+	background: #666;
 }
 
 #pub-count {

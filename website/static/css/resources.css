@@ -32,6 +32,5 @@
 }
 
 #resources hr:last-child {
-	color: transparent;
-	background-color: transparent;
+	display: none;
 }

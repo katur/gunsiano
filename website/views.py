@@ -2,6 +2,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from website.models import User, UserProfile, Resource
 from django.contrib.auth.decorators import login_required
+import string
 import xml.etree.ElementTree as ET
 import urllib2
 
@@ -88,7 +89,39 @@ def publications(request):
 
 	items = []
 	for item in root.iter('item'):
-		item.description = item.find('description').text
+		description = item.find('description').text
+
+		# italicize species names, and embolden PI names
+		description = string.replace(description,
+			"Drosophila",
+			"<i>Drosophila</i>"
+		)
+		description = string.replace(description,
+			"Protorhabditis",
+			"<i>Protorhabditis</i>"
+		)
+		description = string.replace(description,
+			"C. elegans",
+			"<i>C. elegans</i>"
+		)
+		description = string.replace(description,
+			"Caenorhabditis elegans",
+			"<i>Caenorhabditis elegans</i>"
+		)
+		description = string.replace(description,
+			"Piano F",
+			"<b>Piano F</b>"
+		)
+		description = string.replace(description,
+			"Gunsalus KC",
+			"<b>Gunsalus KC</b>"
+		)
+		description = string.replace(description,
+			"Gunsalus K",
+			"<b>Gunsalus K</b>"
+		)
+
+		item.description = description
 		items.append(item)
 
 	return render_to_response('publications.html', {

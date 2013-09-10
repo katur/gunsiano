@@ -12,6 +12,8 @@
 		<a id="pub-fabio" href="#">Fabio</a>
 	</div>
 
+	<hr id="pub-line">
+
 	<div id="pub-count">
 		<span class="pub-both count-both">
 			{{ pub_both|length }}
@@ -22,26 +24,33 @@
 		<span class="pub-fabio invisible">
 			{{ pub_fabio|length }}
 		</span>
-		publications
+		publications (pulled from <a href="http://www.ncbi.nlm.nih.gov/pubmed" target="_blank">PubMed</a>)
 	</div>
-
-	<hr id="pub-line">
 
 	<div class="publications pub-both">
 		{% for item in pub_both %}
-			{{ item.description|safe }}
+			<div class="publication">
+				{{ item.description|safe }}
+			</div>
+			<hr>
 		{% endfor %}
 	</div>
 
 	<div class="publications pub-kris invisible">
 		{% for item in pub_kris %}
-			{{ item.description|safe }}
+			<div class="publication">
+				{{ item.description|safe }}
+			</div>
+			<hr>
 		{% endfor %}
 	</div>
 
 	<div class="publications pub-fabio invisible">
 		{% for item in pub_fabio %}
-			{{ item.description|safe }}
+			<div class="publication">
+				{{ item.description|safe }}
+			</div>
+			<hr>
 		{% endfor %}
 	</div>
 {% endblock content %}

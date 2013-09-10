@@ -1,16 +1,23 @@
-#pub-menu a {
-	margin-right: 50px;
+#pub-menu {
+	margin-bottom: 20px;
 }
 
-#pub-count {
-	margin: 10px 0;
+#pub-menu a {
+	margin-right: 50px;
 }
 
 #pub-line {
 	width: 100%;
 }
 
+#pub-count {
+	margin: 20px 0 40px 0;
+}
+
 .publications {
-	margin-top: 25px;
 	font-size: 15px;
+}
+
+.publication {
+	margin: 40px 0;
 }

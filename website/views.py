@@ -80,50 +80,49 @@ def lab_tools(request):
 def publications(request):
 	"""
 	Page for publications, fetched dynamically from PubMed
-	PubMed search term:
-	(Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author]) OR (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author])
+	PubMed search terms:
+	both: (Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author]) OR (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author])
+	kris_only: Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author]
+	fabio_only: Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author]
 	"""
-	xmldoc = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy")
-	tree = ET.parse(xmldoc)
-	root = tree.getroot()
+	both = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy")
+	kris_only = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1HM5Uxfu7f2MxGrKDT9ZkYODwEeTitazig0NejO4Lw9dlj9kdA")
+	fabio_only = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1-ONS2P_EKbiHxur7eYe8GZYYiix15mspfs-N0HFxYmGQWLsU7")
 
-	items = []
-	for item in root.iter('item'):
-		description = item.find('description').text
+	def embolden(s, term):
+		return string.replace(s, term, "<b>" + term + "</b>")
 
-		# italicize species names, and embolden PI names
-		description = string.replace(description,
-			"Drosophila",
-			"<i>Drosophila</i>"
-		)
-		description = string.replace(description,
-			"Protorhabditis",
-			"<i>Protorhabditis</i>"
-		)
-		description = string.replace(description,
-			"C. elegans",
-			"<i>C. elegans</i>"
-		)
-		description = string.replace(description,
-			"Caenorhabditis elegans",
-			"<i>Caenorhabditis elegans</i>"
-		)
-		description = string.replace(description,
-			"Piano F",
-			"<b>Piano F</b>"
-		)
-		description = string.replace(description,
-			"Gunsalus KC",
-			"<b>Gunsalus KC</b>"
-		)
-		description = string.replace(description,
-			"Gunsalus K",
-			"<b>Gunsalus K</b>"
-		)
+	def italicize(s, term):
+		return string.replace(s, term, "<i>" + term + "</i>")
 
-		item.description = description
-		items.append(item)
+	def generate_items(xml_file):
+		tree = ET.parse(xml_file)
+		root = tree.getroot()
+		items = []
+		for item in root.iter('item'):
+			d = item.find('description').text
+
+			# italicize species names, and embolden PI names
+			d = embolden(d, "Piano F")
+			d = embolden(d, "Gunsalus KC")
+			d = embolden(d, "Gunsalus K")
+			d = string.replace(d, "Caenorhabditis  elegans", "Caenorhabditis elegans")
+			d = italicize(d, "Caenorhabditis elegans")
+			d = italicize(d, "C. elegans")
+			d = italicize(d, "Drosophila")
+			d = italicize(d, "Protorhabditis")
+
+			item.description = d
+			items.append(item)
+		return items
+
+	both_items = generate_items(both)
+	kris_items = generate_items(kris_only)
+	fabio_items = generate_items(fabio_only)
 
 	return render_to_response('publications.html', {
-		'items':items,
+		'pub_both':both_items,
+		'pub_kris':kris_items,
+		'pub_fabio':fabio_items,
 	}, context_instance=RequestContext(request))
+

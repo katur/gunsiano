@@ -5,9 +5,43 @@
 {% endblock %}
 
 {% block content %}
-	<div id="publications">
-	{% for item in items %}
-		{{ item.description|safe }}
-	{% endfor %}
+
+	<div id="pub-menu">
+		<a id="pub-both" class="active" href="#">Kris or Fabio</a>
+		<a id="pub-kris" href="#">Kris</a>
+		<a id="pub-fabio" href="#">Fabio</a>
+	</div>
+
+	<div id="pub-count">
+		<span class="pub-both count-both">
+			{{ pub_both|length }}
+		</span>
+		<span class="pub-kris invisible">
+			{{ pub_kris|length }}
+		</span>
+		<span class="pub-fabio invisible">
+			{{ pub_fabio|length }}
+		</span>
+		publications
+	</div>
+
+	<hr id="pub-line">
+
+	<div class="publications pub-both">
+		{% for item in pub_both %}
+			{{ item.description|safe }}
+		{% endfor %}
+	</div>
+
+	<div class="publications pub-kris invisible">
+		{% for item in pub_kris %}
+			{{ item.description|safe }}
+		{% endfor %}
+	</div>
+
+	<div class="publications pub-fabio invisible">
+		{% for item in pub_fabio %}
+			{{ item.description|safe }}
+		{% endfor %}
 	</div>
 {% endblock content %}

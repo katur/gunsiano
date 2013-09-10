@@ -47,6 +47,13 @@ def lab_member(request, username):
 	}, context_instance=RequestContext(request))
 
 
+def publications(request):
+	"""
+	Page for publications, fetched dynamically from PubMed
+	"""
+	return render_to_response('publications.html', context_instance=RequestContext(request))
+
+
 def resources(request):
 	"""
 	Resources Page

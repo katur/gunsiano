@@ -6,7 +6,9 @@
 {% endblock %}
 
 {% block content %}
-	Protocol updated by {{ protocol.author.user.get_full_name }}
-	on {{ protocol.pub_date }}
-	{{ protocol.body_markdown|markdown:"safe" }}
+	<div id="protocol-body">
+		Protocol updated by {{ protocol.author.user.get_full_name }}
+		on {{ protocol.pub_date }}
+		{{ protocol.body_markdown|markdown:"safe" }}
+	</div>
 {% endblock %}

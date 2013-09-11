@@ -25,12 +25,12 @@
 
 #lab-members-list div {
 	float: left;
-	width: 30%;
+	width: 31%;
 	margin: 0 3% 0 0;
 }
 
-#lab-members-list .rightmost {
-	width: 34%;
+#lab-members-list div:last-child {
+	width: 32%;
 	margin: 0;
 }
 

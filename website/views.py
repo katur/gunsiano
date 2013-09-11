@@ -27,16 +27,32 @@ def lab_members(request):
 	"""
 	Page listing all lab members
 	"""
-	# get all lab members
-	profiles = UserProfile.objects.all().order_by('-is_current', 'position__display_order', 'user__last_name')
-	for profile in profiles:
-		if profile.is_current:
-			profile.display_position = profile.position.position
+	# current lab members must be ordered by position to utilize "group by" in template
+	current = UserProfile.objects.all().filter(is_current=True).order_by(
+		'position__display_order',
+		'user__last_name'
+	)
+	former = UserProfile.objects.all().filter(is_current=False).order_by(
+		'user__last_name'
+	)
+
+	def add_location(profile):
+		if profile.in_abu_dhabi:
+			profile.location = "NYUAD"
+		elif profile.in_abu_dhabi == 0:
+			profile.location = "NYUNY"
 		else:
-			profile.display_position = "Former Lab Member"
+			profile.location = "NYUAD/NY"
+
+	for profile in current:
+		add_location(profile)
+
+	for profile in former:
+		add_location(profile)
 
 	return render_to_response('lab_members.html', {
-		'profiles':profiles
+		'current':current,
+		'former':former,
 	}, context_instance=RequestContext(request))
 
 

@@ -17,6 +17,8 @@ class Stock(models.Model):
 	prepared_by = models.ForeignKey(User, null=True)
 	date_prepared = models.DateField(null=True)
 	notes = models.TextField(blank=True)
+	def __unicode__(self):
+		return str(self.stockable) + " " + str(self.date_prepared)
 
 class ContainerSupertype(models.Model):
 	name = models.CharField(max_length=20)

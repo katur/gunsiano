@@ -13,5 +13,11 @@ class UserProfileAdmin(admin.ModelAdmin):
 	)
 	list_filter = ('is_current', 'in_abu_dhabi')
 
+	def queryset(self, request):
+		qs = super(UserProfileAdmin, self).queryset(request)
+		if request.user.is_superuser:
+			return qs
+		return qs.filter(user=request.user)
+
 admin.site.register(Position, PositionAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)

@@ -3,7 +3,7 @@ from protocols.models import Protocol
 from slugify import slugify
 
 class ProtocolAdmin(admin.ModelAdmin):
-	# list_display = ('title')
+	list_display = ('title', 'author', 'pub_date')
 	fieldsets = [
 		(None, { 'fields': [('title','body_markdown')] } ),
 	]

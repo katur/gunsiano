@@ -152,9 +152,10 @@ INSTALLED_APPS = (
 
 	# Apps
 	'website',
-	'storage',
 	'worm_strains',
 	'vectors',
+	'storage',
+	'protocols',
 )
 
 # A sample logging configuration. The only tangible logging

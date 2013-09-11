@@ -5,5 +5,11 @@
 {% endblock %}
 
 {% block content %}
-	PROTOCOLS GO HERE
+	<ul>
+		{% for protocol in protocols %}
+			<li><a href={% url 'protocol_url' url_title=protocol.url_title %}>
+				{{ protocol.title }}
+			</a></li>
+		{% endfor %}
+	</ul>
 {% endblock %}

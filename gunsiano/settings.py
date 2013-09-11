@@ -149,6 +149,7 @@ INSTALLED_APPS = (
 
 	# Added by Katherine
 	'south', # for database migrations
+	'django.contrib.markup', # needed to use markdown
 
 	# Apps
 	'website',

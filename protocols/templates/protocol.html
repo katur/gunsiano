@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+{% load markup %}
 
 {% block page_title %}
-	<h2>{{ protocol.title }}</h2>
+	<h2>{{ protocol }}</h2>
 {% endblock %}
 
 {% block content %}
-	{{ protocol.body_markdown }}
+	Protocol updated by {{ protocol.author.user.get_full_name }}
+	on {{ protocol.pub_date }}
+	{{ protocol.body_markdown|markdown:"safe" }}
 {% endblock %}

@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block page_title %}
-	<h2>{{ this_user.get_full_name }}</h2>
+	<h2>{{ member.get_full_name }}</h2>
 {% endblock %}
 
 {% block content %}
 	<div id="lab-member-profile">
-		{% if this_user.get_profile.image_filename %}
-			<img src="{{ STATIC_URL }}images/lab_members/{{ this_user.get_profile.image_filename }}" />
+		{% if member.get_profile.image_filename %}
+			<img src="{{ STATIC_URL }}images/lab_members/{{ member.get_profile.image_filename }}" />
 		{% endif %}
-		{% if this_user.get_profile.blurb %}
-			{{ this_user.get_profile.blurb|safe }}
+		{% if member.get_profile.blurb %}
+			{{ member.get_profile.blurb|safe }}
 		{% endif %}
 	</div>
 {% endblock content %}

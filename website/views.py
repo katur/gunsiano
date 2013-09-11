@@ -42,12 +42,13 @@ def lab_members(request):
 
 def lab_member(request, username):
 	"""
-	Page for each lab member. Note: use 'this_user' instead of 'user' as variable name
-	to avoid conflict with the global user variable (which is referenced for authentication purposes)
+	Page for each lab member.
+	Note: avoid 'user' as variable name to avoid conflict with the global variable
+	(which is referenced for authentication purposes)
 	"""
-	this_user = get_object_or_404(User, username=username)
+	member = get_object_or_404(User, username=username)
 	return render_to_response('lab_member.html', {
-		'this_user':this_user,
+		'member':member,
 	}, context_instance=RequestContext(request))
 
 

@@ -6,11 +6,14 @@
 
 {% block content %}
 	<div id="lab-member-profile">
+		{% if member.get_profile.blurb %}
+			<span>
+				{{ member.get_profile.blurb|safe }}
+			</span>
+		{% endif %}
+
 		{% if member.get_profile.image_filename %}
 			<img src="{{ STATIC_URL }}images/lab_members/{{ member.get_profile.image_filename }}" />
-		{% endif %}
-		{% if member.get_profile.blurb %}
-			{{ member.get_profile.blurb|safe }}
 		{% endif %}
 	</div>
 {% endblock content %}

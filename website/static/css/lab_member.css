@@ -3,8 +3,15 @@
 	width: 100%;
 }
 
+#lab-member-profile span {
+	float: left;
+	width: 60%;
+	clear: none;
+}
+
 #lab-member-profile img {
 	float: right;
-	max-width: 500px;
-	margin: 0 0 40px 40px;
+	width: 35%;
+	clear: none;
+	margin: 0 0 5% 5%;
 }

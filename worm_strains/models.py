@@ -1,5 +1,5 @@
 from django.db import models
-from website.models import UserProfile
+from django.contrib.auth.models import User
 from vectors.models import Vector
 from storage.models import Stockable
 import string, re
@@ -41,7 +41,7 @@ class WormStrain(models.Model):
 	transgene = models.ForeignKey(Transgene, null=True)
 	mutagen = models.ForeignKey(Mutagen, null=True)
 	date_created = models.DateField(null=True)
-	created_by = models.ForeignKey(UserProfile, null=True)
+	created_by = models.ForeignKey(User, null=True)
 	remarks = models.TextField(blank=True)
 	def __unicode__(self):
 		return self.name
@@ -85,7 +85,7 @@ class WormStrainLine(models.Model):
 	created_internally = models.BooleanField(default=False)
 	times_outcrossed = models.PositiveSmallIntegerField(null=True)
 	received_from = models.CharField(max_length=100, blank=True)
-	received_by = models.ForeignKey(UserProfile, null=True)
+	received_by = models.ForeignKey(User, null=True)
 	date_received = models.DateField(null=True)
 	remarks = models.TextField(blank=True)
 	def __unicode__(self):

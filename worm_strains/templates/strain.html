@@ -32,7 +32,7 @@
 			<h4>Origin</h4>
 			<div class="strain-section">
 				{% if strain.created_by %}
-					<span><b>Made by:</b> {{ strain.created_by.user.get_full_name }}</span>
+					<span><b>Made by:</b> {{ strain.created_by.get_full_name }}</span>
 				{% endif %}
 
 				{% if strain.lab %}
@@ -72,7 +72,7 @@
 						{% elif line.received_from or line.received_by or line.date_received %}
 							Received
 							{% if line.received_by %}
-								by {{ line.received_by.user.get_full_name }}
+								by {{ line.received_by.get_full_name }}
 							{% endif %}
 
 							{% if line.received_from %}
@@ -96,7 +96,7 @@
 							{% if line.times_outcrossed %}
 								<li>Outcrossed {{ line.times_outcrossed }}x
 									{% if line.received_by %}
-										by {{ line.received_by.user.get_full_name }}
+										by {{ line.received_by.get_full_name }}
 									{% endif %}
 									{% if line.date_received %}
 										on {{ line.date_received }}
@@ -107,7 +107,7 @@
 							{% for stock in line.stocks %}
 								<li>Frozen
 									{% if stock.prepared_by %}
-										by {{ stock.prepared_by.user.get_full_name }}
+										by {{ stock.prepared_by.get_full_name }}
 									{% endif %}
 
 									{% if stock.date_prepared %}
@@ -122,8 +122,8 @@
 										<li>-80C test
 											{% if stock.thaw_80 %}
 												{% if stock.thaw_80.is_thawed %}thaw
-													{% if stock.thaw_80.thawed_by.user.get_full_name %}
-														by {{ stock.thaw_80.thawed_by.user.get_full_name }}
+													{% if stock.thaw_80.thawed_by.get_full_name %}
+														by {{ stock.thaw_80.thawed_by.get_full_name }}
 													{% endif %}
 													{% if stock.thaw_80.date_thawed %}
 														on {{ stock.thaw_80.date_thawed }}
@@ -138,8 +138,8 @@
 										<li>Liquid Nitrogen test
 											{% if stock.thaw_N %}
 												{% if stock.thaw_N.is_thawed %}thaw
-													{% if stock.thaw_N.thawed_by.user.get_full_name %}
-														by {{ stock.thaw_N.thawed_by.user.get_full_name }}
+													{% if stock.thaw_N.thawed_by.get_full_name %}
+														by {{ stock.thaw_N.thawed_by.get_full_name }}
 													{% endif %}
 													{% if stock.thaw_N.date_thawed %}
 														on {{ stock.thaw_N.date_thawed }}

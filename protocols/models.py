@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-import datetime
 
 class Protocol(models.Model):
 	title = models.CharField('Title', max_length=250)

@@ -8,6 +8,8 @@ class StockableType(models.Model):
 
 class Stockable(models.Model):
 	type = models.ForeignKey(StockableType)
+	def __unicode__(self):
+		return str(self.id)
 
 class Stock(models.Model):
 	stockable = models.ForeignKey(Stockable, null=True)

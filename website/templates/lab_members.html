@@ -52,6 +52,7 @@
 						<a class="external-link" href="{{ profile.url }}">
 					{% endif %}
 					{{ profile.user.get_full_name }}{% if profile.blurb or profile.url %}</a>{% endif %}
+					<span class="former-position">{{ profile.position.position }}</span>
 
 					<span class="nyu-location">{{ profile.location }}</span>
 				</li>

@@ -25,12 +25,12 @@
 
 #lab-members-list div {
 	float: left;
-	width: 31%;
+	width: 30%;
 	margin: 0 3% 0 0;
 }
 
 #lab-members-list div:last-child {
-	width: 32%;
+	width: 33%;
 	margin: 0;
 }
 
@@ -45,6 +45,11 @@
 
 #lab-members-list li {
 	list-style-type: none;
+}
+
+.former-position {
+	font-size: 10px;
+	padding-left: 5px;
 }
 
 .nyu-location {

@@ -10,7 +10,7 @@ def protocols(request):
 	Page listing protocols
 	"""
 	# get all worm strains
-	protocols = Protocol.objects.all()
+	protocols = Protocol.objects.all().order_by('title')
 
 	# render page
 	return render_to_response('protocols.html', {

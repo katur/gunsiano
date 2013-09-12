@@ -17,7 +17,7 @@ class UserProfile(models.Model):
 	blurb = models.TextField(blank=True)
 	image_filename = models.CharField(max_length=100, blank=True)
 	def __unicode__(self):
-		return self.user.username
+		return self.user.get_full_name()
 	class Meta:
 		ordering = ["net_id"]
 

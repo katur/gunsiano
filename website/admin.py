@@ -31,6 +31,8 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 class MyUserAdmin(UserAdmin):
+	list_display = UserAdmin.list_display + ('is_active', 'is_superuser',)
+
 	# for non-superusers, limit the editable users to the logged in user
 	def queryset(self, request):
 		qs = super(self.__class__, self).queryset(request)

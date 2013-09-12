@@ -14,7 +14,7 @@ class UserProfile(models.Model):
 	is_current = models.BooleanField(default=True)
 	net_id = models.CharField(max_length=25, blank=True)
 	url = models.URLField(blank=True)
-	blurb = models.TextField(blank=True)
+	blurb = models.TextField('Blurb', help_text='Use Markdown syntax.', blank=True)
 	image_filename = models.CharField(max_length=100, blank=True)
 	def __unicode__(self):
 		return self.user.get_full_name()

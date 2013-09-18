@@ -101,7 +101,7 @@ def publications(request):
 	PubMed search term:
 	(Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author]) OR (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author])
 	"""
-	xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1-UFW4KkLsP6VkB-3xOIAL-Q0MJ4zBPkFrNFBDc-qrqManXQV4")
+	xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=18qVEVbjJjoq2mO-bQKE6E_-D4pje3l2O5Jd1cFE70SdwIYw_1")
 	# used to work: http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy
 	# define functions to bolden or italicize a search term in a string
 	def embolden(s, term):

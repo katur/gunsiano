@@ -13,6 +13,8 @@ def enhanced_markdown(value):
 	extensions = [
 		"nl2br", # for newline to create line break; more intuitive
 		"smartypants", # for emdash, endash, pretty quotes
+		"subscript",
+		"superscript",
 	]
 	return mark_safe(markdown.markdown(force_unicode(value),
 		extensions,

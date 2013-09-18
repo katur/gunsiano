@@ -86,15 +86,6 @@ def contact(request):
 	return render_to_response('contact.html', context_instance=RequestContext(request))
 
 
-@login_required
-def lab_tools(request):
-	"""
-	Internal Lab Tools landing page
-	"""
-	# render page
-	return render_to_response('lab_tools.html', context_instance=RequestContext(request))
-
-
 def publications(request):
 	"""
 	Page for publications, fetched dynamically from PubMed
@@ -148,3 +139,12 @@ def publications(request):
 		'pub_kris':pub_kris,
 		'pub_fabio':pub_fabio,
 	}, context_instance=RequestContext(request))
+
+
+@login_required
+def lab_tools(request):
+	"""
+	Internal Lab Tools landing page
+	"""
+	# render page
+	return render_to_response('lab_tools.html', context_instance=RequestContext(request))

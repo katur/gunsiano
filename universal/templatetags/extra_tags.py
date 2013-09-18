@@ -11,7 +11,7 @@ register = template.Library()
 @stringfilter
 def enhanced_markdown(value):
 	extensions = [
-		"nl2br", # for newline to create line break; more intuitive
+		# "nl2br", # for newline to create line break; more intuitive
 		"smartypants", # for emdash, endash, pretty quotes
 		"subscript",
 		"superscript",

@@ -3,9 +3,9 @@ from protocols.models import Protocol
 from slugify import slugify
 
 class ProtocolAdmin(admin.ModelAdmin):
-	list_display = ('title', 'author', 'pub_date')
+	list_display = ('title_markdown', 'author', 'pub_date')
 	fieldsets = [
-		(None, { 'fields': [('title','body_markdown')] } ),
+		(None, { 'fields': [('title_markdown','body_markdown')] } ),
 	]
 
 	def save_model(self, request, obj, form, change):
@@ -13,8 +13,8 @@ class ProtocolAdmin(admin.ModelAdmin):
 		obj.author = request.user
 
 		# if no url already determined, create it from the title
-		if obj.url_title == "":
-			obj.url_title = slugify(obj.title)
+		if obj.title_url == "":
+			obj.title_url = slugify(obj.title_markdown)
 		obj.save()
 
 admin.site.register(Protocol, ProtocolAdmin)

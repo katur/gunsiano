@@ -3,7 +3,7 @@
 {% load extra_tags %}
 
 {% block page_title %}
-	<h2>{{ protocol }}</h2>
+	<h2 id="protocol-title">{{ protocol|enhanced_markdown }}</h2>
 {% endblock %}
 
 {% block content %}

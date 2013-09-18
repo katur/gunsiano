@@ -1,3 +1,7 @@
 #protocol-body h1, #protocol-body h2, #protocol-body h3, #protocol-body h4 {
 	margin: 0;
 }
+
+#protocols p, #protocol-title p {
+	margin: 0;
+}

@@ -10,7 +10,7 @@ def protocols(request):
 	Page listing protocols
 	"""
 	# get all worm strains
-	protocols = Protocol.objects.all().order_by('title')
+	protocols = Protocol.objects.all().order_by('title_markdown')
 
 	# render page
 	return render_to_response('protocols.html', {
@@ -19,12 +19,12 @@ def protocols(request):
 
 
 @login_required
-def protocol(request, url_title):
+def protocol(request, title_url):
 	"""
 	Page listing protocol
 	"""
 	# get all worm strains
-	protocol = get_object_or_404(Protocol, url_title=url_title)
+	protocol = get_object_or_404(Protocol, title_url=title_url)
 
 	# render page
 	return render_to_response('protocol.html', {

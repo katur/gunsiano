@@ -2,11 +2,19 @@
 	width: 100%;
 }
 
-#home-page img {
-	display: block;
-	padding-top: 40px;
+#world-wrapper {
+	width: 568px;
+	height: 542px;
+	margin-top: 40px;
+	position: relative;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+#world-wrapper img, #world-wrapper canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 #employment {

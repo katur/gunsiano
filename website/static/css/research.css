@@ -24,6 +24,10 @@
 }
 
 /* individual research areas */
+#research-areas hr:last-child {
+	display: none;
+}
+
 .research-area {
 	margin: 40px 0;
 	float: left;

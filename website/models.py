@@ -21,8 +21,18 @@ class UserProfile(models.Model):
 	class Meta:
 		ordering = ["net_id"]
 
+class ResearchArea(models.Model):
+	name = models.CharField(max_length=60, unique=True)
+	display_order = models.PositiveSmallIntegerField(unique=True)
+	filename = models.CharField(max_length=50, unique=True, blank=True)
+	filename_is_video = models.BooleanField(default=False)
+	description = models.TextField('Description', help_text='Use Markdown syntax.')
+	def __unicode__(self):
+		return self.name
+
+
 class Resource(models.Model):
-	name = models.CharField(max_length=50)
+	name = models.CharField(max_length=40, unique=True)
 	logo_filename = models.CharField(max_length=50, blank=True)
 	url = models.CharField(max_length=100, blank=True)
 	description = models.CharField(max_length=300, blank=True)

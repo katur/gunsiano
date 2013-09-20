@@ -1,6 +1,6 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
-from website.models import User, UserProfile, Resource
+from website.models import User, UserProfile, ResearchArea, Resource
 from django.contrib.auth.decorators import login_required
 import string
 import xml.etree.ElementTree as ET
@@ -19,8 +19,16 @@ def research(request):
 	"""
 	Research Areas
 	"""
-	# render page
-	return render_to_response('research.html', context_instance=RequestContext(request))
+	r = ResearchArea.objects.all().order_by('display_order')
+
+	o = "right"
+	for area in r:
+		area.orientation = o
+		o = "left" if (o == "right") else "right"
+
+	return render_to_response('research.html', {
+		'research_areas':r
+	}, context_instance=RequestContext(request))
 
 
 def lab_members(request):

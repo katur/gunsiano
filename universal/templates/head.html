@@ -29,32 +29,35 @@
       var canvas = document.getElementById("world-worms");
       if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
+
+				var x = 0;
+				var y = 20;
 				ctx.beginPath();
 
 				// arc(x, y, radius, startAngle, endAngle, anticlockwise);
-				ctx.moveTo(0,20);
-				ctx.arc(5,20,5,Math.PI,0,false); // left half
-				ctx.moveTo(10,20);
-				ctx.arc(15,20,5,Math.PI,0,true); // right half
+				ctx.moveTo(x, y);
+				ctx.arc(x+5, y, 5, Math.PI, 0, false); // left half
+				ctx.moveTo(x+10, y);
+				ctx.arc(x+15, y, 5, Math.PI, 0, true); // right half
 
-				ctx.moveTo(30,15);
-				ctx.arc(30,20,5,(3*Math.PI/2),0,false); // left half
-				ctx.moveTo(35,20);
-				ctx.arc(40,20,5,Math.PI,0,true); // right half
-				ctx.moveTo(45,20);
-				ctx.arc(50,20,5,Math.PI,(3*Math.PI/2),false); // right half
+				ctx.moveTo(x+30, y-5);
+				ctx.arc(x+30, y, 5, 3*Math.PI/2, 0, false); // left half
+				ctx.moveTo(x+35, y);
+				ctx.arc(x+40, y, 5, Math.PI, 0, true); // right half
+				ctx.moveTo(x+45, y);
+				ctx.arc(x+50, y, 5, Math.PI, 3*Math.PI/2, false); // right half
 
-				ctx.moveTo(60,20);
-				ctx.arc(65,20,5,Math.PI,0,true); // left half
-				ctx.moveTo(70,20);
-				ctx.arc(75,20,5,Math.PI,0,false); // right half
+				ctx.moveTo(x+60, y);
+				ctx.arc(x+65, y, 5, Math.PI, 0, true); // left half
+				ctx.moveTo(x+70, y);
+				ctx.arc(x+75, y, 5, Math.PI, 0, false); // right half
 
-				ctx.moveTo(90,25);
-				ctx.arc(90,20,5,(Math.PI/2),0,true); // left half
-				ctx.moveTo(95,20);
-				ctx.arc(100,20,5,Math.PI,0,false); // right half
-				ctx.moveTo(105,20);
-				ctx.arc(110,20,5,Math.PI,(Math.PI/2),true); // right half
+				ctx.moveTo(x+90, y+5);
+				ctx.arc(x+90, y, 5, Math.PI/2, 0, true); // left half
+				ctx.moveTo(x+95, y);
+				ctx.arc(x+100, y, 5, Math.PI, 0, false); // right half
+				ctx.moveTo(x+105, y);
+				ctx.arc(x+110, y, 5, Math.PI, Math.PI/2,true); // right half
 
 				ctx.stroke();
       }

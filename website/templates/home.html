@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block body_declaration %}
+	<body onload="draw();">
+{% endblock %}
+
 {% block content %}
 	<div id="home-page">
 		Welcome to the labs of Drs. <a href="" title="Kris Gunsalus">Kris Gunsalus</a>
@@ -8,7 +12,9 @@
 
 		<div id="world-wrapper">
 			<img src="{{ STATIC_URL }}img/world.jpg" width="568" height="542" />
-			<canvas id="world-worms" width="568" height="542"></canvas>
+			<canvas id="world-worms" width="568" height="542">
+				<!-- here, add static picture of worms for browsers that do not support html5 -->
+			</canvas>
 		</div>
 
 		<div id="employment">

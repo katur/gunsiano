@@ -24,27 +24,23 @@
 }
 
 /* individual research areas */
-#research-areas hr:last-child {
-	display: none;
-}
-
 .research-area {
 	margin: 40px 0;
 	float: left;
 }
 
-.research-area span {
-	float: left;
-	clear: none;
-	width: 50%;
+.research-area video, .research-area img, .research-area span {
+	width: 48%;
 }
 
-.research-area img, .research-area video {
-	float: left;
-	clear: none;
-	width: 45%;
+.research-orient-left span, .research-orient-right img, .research-orient-right video {
+	float: right;
 }
 
-.research-area img:first-child, .research-area video:first-child, .research-area span:first-child {
-	margin-right: 5%;
+.research-orient-right span, .research-orient-left img, .research-orient-left video {
+	float: left;
+}
+
+#research-areas hr:last-child {
+	display: none;
 }

@@ -5,15 +5,13 @@ $(document).ready(function() {
 
 draw = function() {
 	function clearCanvas() {
-		// Store the current transformation matrix
-		ctx.save();
+		ctx.save(); // store current transformation matrix
 
 		// Use the identity matrix while clearing the canvas
 		ctx.setTransform(1, 0, 0, 1, 0, 0);
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-		// Restore the transform
-		ctx.restore();
+		ctx.restore(); // restore transform
 	}
 
 	function drawPosition(position, x, y) {
@@ -58,9 +56,10 @@ draw = function() {
 	var canvas = document.getElementById("world-worms");
 	if (canvas.getContext) {
 		var ctx = canvas.getContext("2d");
+		ctx.lineCap="round";
+		ctx.lineWidth=4;
 		var startTime = 0;
 		var x = -50;
-		var x = 0;
 		var y = 250;
 
 		for (var i=0; i<30; i++) {

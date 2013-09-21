@@ -14,7 +14,7 @@ draw = function() {
 		ctx.restore(); // restore transform
 	}
 
-	function drawPosition(position, x, y) {
+	function drawWorm(position, x, y) {
 		ctx.beginPath();
 		if (position==0) {
 			ctx.moveTo(x, y);
@@ -45,12 +45,12 @@ draw = function() {
 		ctx.stroke();
 	}
 
-	function drawCycle(t, x, y) {
+	function drawWormCycle(t, x, y) {
 		d = 200;
-		setTimeout( function(){clearCanvas(); drawPosition(0, x, y)}, t );
-		setTimeout( function(){clearCanvas(); drawPosition(1, x, y)}, t+=d );
-		setTimeout( function(){clearCanvas(); drawPosition(2, x, y)}, t+=d );
-		setTimeout( function(){clearCanvas(); drawPosition(3, x, y)}, t+=d );
+		setTimeout( function(){clearCanvas(); drawWorm(0, x, y)}, t );
+		setTimeout( function(){clearCanvas(); drawWorm(1, x, y)}, t+=d );
+		setTimeout( function(){clearCanvas(); drawWorm(2, x, y)}, t+=d );
+		setTimeout( function(){clearCanvas(); drawWorm(3, x, y)}, t+=d );
 	}
 
 	var canvas = document.getElementById("world-worms");
@@ -58,12 +58,13 @@ draw = function() {
 		var ctx = canvas.getContext("2d");
 		ctx.lineCap="round";
 		ctx.lineWidth=4;
+		
 		var startTime = 0;
-		var x = -50;
+		var x = -30;
 		var y = 250;
 
-		for (var i=0; i<30; i++) {
-			drawCycle(startTime, x, y);
+		for (var i=0; i<33; i++) {
+			drawWormCycle(startTime, x, y);
 			startTime += 800;
 			x+=20;
 		}

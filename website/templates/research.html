@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load markup %}
 
 {% block page_title %}
 	<h2>Research Areas</h2>
@@ -22,7 +23,7 @@
 				{% endif %}
 				<span>
 					<h3>{{ area }}</h3>
-					{{ area.description }}
+					{{ area.description|markdown:"safe" }}
 				</span>
 			</div>
 			<hr>

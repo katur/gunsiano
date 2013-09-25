@@ -1,5 +1,5 @@
 from django.contrib import admin
-from website.models import Position, UserProfile
+from website.models import Position, ResearchArea, UserProfile
 
 class PositionAdmin(admin.ModelAdmin):
 	list_display = ('position', 'display_order')
@@ -26,5 +26,6 @@ class UserProfileAdmin(admin.ModelAdmin):
 			self.exclude = ('user', 'in_abu_dhabi', 'is_current', 'image_filename')
 		return super(UserProfileAdmin, self).get_form(request, obj, **kwargs)
 
+admin.site.register(ResearchArea)
 admin.site.register(Position, PositionAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)

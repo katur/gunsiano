@@ -57,7 +57,7 @@ draw = function() {
 	if (canvas && canvas.getContext) {
 		var ctx = canvas.getContext("2d");
 		ctx.lineCap="round";
-		ctx.lineWidth=4;
+		ctx.lineWidth=3;
 
 		var startTime = 0;
 		var x = -30;

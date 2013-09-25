@@ -54,11 +54,11 @@ draw = function() {
 	}
 
 	var canvas = document.getElementById("world-worms");
-	if (canvas.getContext) {
+	if (canvas && canvas.getContext) {
 		var ctx = canvas.getContext("2d");
 		ctx.lineCap="round";
 		ctx.lineWidth=4;
-		
+
 		var startTime = 0;
 		var x = -30;
 		var y = 250;

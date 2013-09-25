@@ -148,6 +148,11 @@ html, body {
 	float: left;
 }
 
+#menu a:hover, #menu a.active {
+	color: #A78C77;
+	text-decoration: none;
+}
+
 /********** FOOTER ONLY **********/
 #wrap-footer {
 	padding: 15px 0 12px 0;

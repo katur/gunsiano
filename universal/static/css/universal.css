@@ -38,7 +38,7 @@ a {
 }
 
 a:hover, a.active {
-	text-decoration: underline;
+	color: #937AA9;
 }
 
 a.active {
@@ -146,11 +146,6 @@ html, body {
 #menu a {
 	margin-right: 36px;
 	float: left;
-}
-
-#menu a:hover, #menu a.active {
-	color: #937AA9;
-	text-decoration: none;
 }
 
 /********** FOOTER ONLY **********/

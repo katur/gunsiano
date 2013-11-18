@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load markup %}
+{% load extra_tags %}
 
 {% block page_title %}
 	<h2>{{ member.get_full_name }}</h2>
@@ -9,7 +10,7 @@
 	<div id="lab-member-profile">
 		{% if member.get_profile.blurb %}
 			<span>
-				{{ member.get_profile.blurb|markdown:"safe" }}
+				{{ member.get_profile.blurb|enhanced_markdown }}
 			</span>
 		{% endif %}
 

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	// draw();
+	draw();
 	togglePublications();
 })
 

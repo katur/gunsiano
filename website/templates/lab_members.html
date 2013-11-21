@@ -24,7 +24,11 @@
 					</div><div>
 				{% endif %}
 
-				<h3>{{ position.grouper }}s</h3>
+				{% if position.grouper == "Visiting Faculty" %}
+					<h3>{{ position.grouper }}</h3>
+				{% else %}
+					<h3>{{ position.grouper }}s</h3>
+				{% endif %}
 				<ul>
 					{% for profile in position.list %}
 						<li>

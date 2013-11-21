@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load markup %}
+{% load extra_tags %}
 
 {% block page_title %}
 	<h2>Resources and Data</h2>
@@ -11,7 +13,7 @@
 			<div class="resource">
 				<img width="160px" src="{{ STATIC_URL }}img/resource_logos/{{ resource.logo_filename }}" />
 				<span>
-					{{ resource.description|safe }}
+					{{ resource.description|enhanced_markdown }}
 				</span>
 			</div>
 		</a>

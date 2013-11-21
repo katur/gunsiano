@@ -37,6 +37,7 @@ class ResearchAreaAdmin(admin.ModelAdmin):
 class ResourceAdmin(admin.ModelAdmin):
 	list_display = (
 		'__unicode__',
+		'display_order'
 	)
 
 admin.site.register(UserProfile, UserProfileAdmin)

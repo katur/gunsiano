@@ -54,8 +54,15 @@ class Resource(models.Model):
 	display_order = models.PositiveSmallIntegerField(unique=True)
 	logo_filename = models.CharField(max_length=50, blank=True)
 	url = models.CharField(max_length=100, blank=True)
-	description = models.CharField(max_length=300, blank=True)
+	description = models.TextField('Description',
+		help_text='''Use Markdown syntax.
+			See
+			<a href="http://www.darkcoding.net/software/markdown-quick-reference" target="_blank">
+			a quick reference</a>,
+			<a href="http://www.markdowntutorial.com/" target="_blank">a tutorial</a>,
+			or practice <a href="http://dillinger.io/" target="_blank">here</a>.''',
+	)
 	def __unicode__(self):
 		return self.name
 	class Meta:
-		ordering = ["name"]
+		ordering = ["display_order"]

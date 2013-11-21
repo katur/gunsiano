@@ -80,7 +80,7 @@ def resources(request):
 	"""
 	Resources Page
 	"""
-	r = Resource.objects.all().order_by('name')
+	r = Resource.objects.all()
 
 	return render_to_response('resources.html', {
 		'resources':r

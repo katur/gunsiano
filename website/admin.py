@@ -1,8 +1,5 @@
 from django.contrib import admin
-from website.models import Position, ResearchArea, UserProfile
-
-class PositionAdmin(admin.ModelAdmin):
-	list_display = ('position', 'display_order')
+from website.models import UserProfile, Position, ResearchArea, Resource
 
 class UserProfileAdmin(admin.ModelAdmin):
 	list_display = (
@@ -12,7 +9,6 @@ class UserProfileAdmin(admin.ModelAdmin):
 		'is_current',
 		'in_abu_dhabi'
 	)
-
 	list_filter = ('is_current', 'in_abu_dhabi')
 
 	def queryset(self, request):
@@ -26,6 +22,24 @@ class UserProfileAdmin(admin.ModelAdmin):
 			self.exclude = ('user', 'in_abu_dhabi', 'is_current', 'image_filename')
 		return super(UserProfileAdmin, self).get_form(request, obj, **kwargs)
 
-admin.site.register(ResearchArea)
-admin.site.register(Position, PositionAdmin)
+class PositionAdmin(admin.ModelAdmin):
+	list_display = (
+		'position',
+		'display_order'
+	)
+
+class ResearchAreaAdmin(admin.ModelAdmin):
+	list_display = (
+		'__unicode__',
+		'display_order'
+	)
+
+class ResourceAdmin(admin.ModelAdmin):
+	list_display = (
+		'__unicode__',
+	)
+
 admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(Position, PositionAdmin)
+admin.site.register(ResearchArea, ResearchAreaAdmin)
+admin.site.register(Resource, ResourceAdmin)

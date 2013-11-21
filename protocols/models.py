@@ -10,7 +10,10 @@ class Protocol(models.Model):
 	pub_date = models.DateField('Publication Date', auto_now=True)
 	body_markdown = models.TextField('Body',
 		help_text='''Use Markdown syntax.
-			See <a href="http://www.markdowntutorial.com/" target="_blank">this tutorial</a>,
+			See
+			<a href="http://www.darkcoding.net/software/markdown-quick-reference" target="_blank">
+			a quick reference</a>,
+			<a href="http://www.markdowntutorial.com/" target="_blank">a tutorial</a>,
 			or practice <a href="http://dillinger.io/" target="_blank">here</a>.''',
 	)
 	def __unicode__(self):

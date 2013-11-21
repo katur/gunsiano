@@ -150,6 +150,7 @@ INSTALLED_APPS = (
 	'django.contrib.markup', # needed to use markdown
 
 	# Apps
+	'moderation',
 	'universal',
 	'website',
 	'worm_strains',

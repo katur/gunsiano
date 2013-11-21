@@ -1,4 +1,5 @@
 from django.contrib import admin
+from moderation.admin import ModerationAdmin
 from website.models import UserProfile, Position, ResearchArea, Resource
 
 class UserProfileAdmin(admin.ModelAdmin):

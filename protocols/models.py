@@ -8,6 +8,10 @@ class Protocol(models.Model):
 	title_url = models.CharField(max_length=250, unique=True)
 	author = models.ForeignKey(User, null=True, blank=True)
 	pub_date = models.DateField('Publication Date', auto_now=True)
-	body_markdown = models.TextField('Body', help_text='Use Markdown syntax.')
+	body_markdown = models.TextField('Body',
+		help_text='''Use Markdown syntax.
+			See <a href="http://www.markdowntutorial.com/" target="_blank">this tutorial</a>,
+			or practice <a href="http://dillinger.io/" target="_blank">here</a>.''',
+	)
 	def __unicode__(self):
 		return self.title_markdown

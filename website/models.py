@@ -6,6 +6,8 @@ class Position(models.Model):
 	display_order = models.PositiveSmallIntegerField(unique=True)
 	def __unicode__(self):
 		return self.position
+	class Meta:
+		ordering = ["display_order"]
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, primary_key=True)
@@ -14,7 +16,12 @@ class UserProfile(models.Model):
 	is_current = models.BooleanField(default=True)
 	net_id = models.CharField(max_length=25, blank=True)
 	url = models.URLField(blank=True)
-	blurb = models.TextField('Blurb', help_text='Use Markdown syntax.', blank=True)
+	blurb = models.TextField('Blurb',
+		help_text='''Use Markdown syntax.
+			See <a href="http://www.markdowntutorial.com/" target="_blank">this tutorial</a>,
+			or practice <a href="http://dillinger.io/" target="_blank">here</a>.''',
+		blank=True
+	)
 	image_filename = models.CharField(max_length=100, blank=True)
 	def __unicode__(self):
 		return self.user.get_full_name()
@@ -26,7 +33,11 @@ class ResearchArea(models.Model):
 	display_order = models.PositiveSmallIntegerField(unique=True)
 	filename = models.CharField(max_length=50, unique=True, blank=True)
 	filename_is_video = models.BooleanField(default=False)
-	description = models.TextField('Description', help_text='Use Markdown syntax.')
+	description = models.TextField('Description',
+		help_text='''Use Markdown syntax.
+			See <a href="http://www.markdowntutorial.com/" target="_blank">this tutorial</a>,
+			or practice <a href="http://dillinger.io/" target="_blank">here</a>.''',
+	)
 	def __unicode__(self):
 		return self.name
 

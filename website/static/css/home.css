@@ -16,15 +16,3 @@
 	top: 0;
 	left: 0;
 }
-
-#employment {
-	float: left;
-	margin-top: 100px;
-	width: 60%;
-}
-
-#employment span {
-	float: left;
-	clear: both;
-	margin-bottom: 20px;
-}

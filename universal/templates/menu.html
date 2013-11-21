@@ -4,6 +4,7 @@
 	{% url 'lab_members_url' as lab_members_url %}
 	{% url 'publications_url' as publications_url %}
 	{% url 'resources_url' as resources_url %}
+	{% url 'jobs_url' as jobs_url %}
 	{% url 'contact_url' as contact_url %}
 	{% url 'lab_tools_url' as lab_tools_url %}
 
@@ -17,7 +18,7 @@
 		{% ifequal request.path research_url %}
 			class="active"
 		{% endifequal %}>
-		Research Areas
+		Research
 	</a>
 	<a href="{{ lab_members_url }}"
 		{% ifequal request.path lab_members_url %}
@@ -36,6 +37,12 @@
 			class="active"
 		{% endifequal %}>
 		Publications
+	</a>
+	<a href="{{ jobs_url }}"
+		{% ifequal request.path jobs_url %}
+			class="active"
+		{% endifequal %}>
+		Jobs
 	</a>
 	<a href="{{ contact_url }}"
 		{% ifequal request.path contact_url %}

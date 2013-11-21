@@ -94,6 +94,13 @@ def contact(request):
 	return render_to_response('contact.html', context_instance=RequestContext(request))
 
 
+def jobs(request):
+	"""
+	Jobs Page
+	"""
+	return render_to_response('jobs.html', context_instance=RequestContext(request))
+
+
 def publications(request):
 	"""
 	Page for publications, fetched dynamically from PubMed

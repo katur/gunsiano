@@ -107,16 +107,18 @@ def publications(request):
 	PubMed search term:
 	(Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author]) OR (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author])
 	"""
-	xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=18qVEVbjJjoq2mO-bQKE6E_-D4pje3l2O5Jd1cFE70SdwIYw_1")
-	# used to work: http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy
-	# define functions to bolden or italicize a search term in a string
+	xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=12Wu35auLMyC-bw6heubsB4Aa1vq6MH4xOLj1ILBD4Wimwikba")
+	# used to work: xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=18qVEVbjJjoq2mO-bQKE6E_-D4pje3l2O5Jd1cFE70SdwIYw_1")
+	# used to work: xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy")
+
+	# fxns to bolden or italicize a search term in a string
 	def embolden(s, term):
 		return string.replace(s, term, "<b>" + term + "</b>")
 
 	def italicize(s, term):
 		return string.replace(s, term, "<i>" + term + "</i>")
 
-	# define empty lists to fill with publications from the xml file
+	# empty lists to fill with publications from the xml file
 	pub_both = []
 	pub_kris = []
 	pub_fabio = []

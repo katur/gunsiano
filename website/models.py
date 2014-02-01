@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_init
 
 class Position(models.Model):
 	position = models.CharField(max_length=50)
@@ -26,10 +27,22 @@ class UserProfile(models.Model):
 		blank=True
 	)
 	image_filename = models.CharField(max_length=100, blank=True)
+	
 	def __unicode__(self):
 		return self.user.get_full_name()
 	class Meta:
 		ordering = ["net_id"]
+
+def add_user_location(**kwargs):
+	instance = kwargs.get('instance')
+	if instance.in_abu_dhabi:
+		instance.location = "NYUAD"
+	elif instance.in_abu_dhabi == 0:
+		instance.location = "NYUNY"
+	else:
+		instance.location = "NYUAD/NY"
+	
+post_init.connect(add_user_location, UserProfile)
 
 class ResearchArea(models.Model):
 	name = models.CharField(max_length=60, unique=True)

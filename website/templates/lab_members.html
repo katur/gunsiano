@@ -16,19 +16,16 @@
 		</span>
 	</div>
 
-	<div id="lab-members-list">
-		<div>
-			{% regroup current by position.position as position_list %}
+	<div class="lab-members">
+		{% regroup current by position.position as position_list %}
+		<div class="column">
 			{% for position in position_list %}
-				{% if position.grouper == "Lab Manager" %}
-					</div><div>
+				{% if forloop.counter0|divisibleby:"3" and not forloop.first %}
+					</div><div class="column">
 				{% endif %}
-
-				{% if position.grouper == "Visiting Faculty" %}
-					<h3>{{ position.grouper }}</h3>
-				{% else %}
-					<h3>{{ position.grouper }}s</h3>
-				{% endif %}
+					
+				<h3>{{ position.grouper }}{% if "Faculty" not in position.grouper %}s{% endif %}</h3>
+				
 				<ul>
 					{% for profile in position.list %}
 						<li>
@@ -45,22 +42,29 @@
 				</ul>
 			{% endfor %}
 		</div>
+	</div>
 
+	<div id="former-lab-members" class="lab-members">
+		<h3>Former Lab Members</h3>
 		<div>
-			<h3>Former Lab Members</h3>
-			{% for profile in former %}
-				<li>
-					{% if profile.blurb %}
-						<a href="{% url 'lab_member_url' username=profile.user.get_username %}">
-					{% elif profile.url %}
-						<a class="external-link" href="{{ profile.url }}">
+			<ul class="column">
+				{% for profile in former %}
+					{% if forloop.counter0|divisibleby:column_length and not forloop.first %}
+						</ul><ul class="column">
 					{% endif %}
-					{{ profile.user.get_full_name }}{% if profile.blurb or profile.url %}</a>{% endif %}
-					<span class="former-position">{{ profile.position.position }}</span>
+					<li>
+						{% if profile.blurb %}
+							<a href="{% url 'lab_member_url' username=profile.user.get_username %}">
+						{% elif profile.url %}
+							<a class="external-link" href="{{ profile.url }}">
+						{% endif %}
+						{{ profile.user.get_full_name }}{% if profile.blurb or profile.url %}</a>{% endif %}
+						<span class="former-position">{{ profile.position.position }}</span>
 
-					<span class="nyu-location">{{ profile.location }}</span>
-				</li>
-			{% endfor %}
+						<span class="nyu-location">{{ profile.location }}</span>
+					</li>
+				{% endfor %}
+			</ul>
 		</div>
 	</div>
 {% endblock content %}

@@ -17,34 +17,38 @@
 	margin-left: 100px;
 }
 
-#lab-members-list {
+.lab-members {
 	float: left;
 	clear: both;
 	width: 100%;
 }
 
-#lab-members-list div {
-	float: left;
-	width: 30%;
-	margin: 0 3% 0 0;
+#former-lab-members {
+	font-size: 14px; 
 }
 
-#lab-members-list div:last-child {
-	width: 33%;
+.lab-members .column {
+	float: left;
+	width: 30%;
+	margin: 0 0 0 5%;
+	padding: none;
+}
+
+.lab-members .column:first-child {
 	margin: 0;
 }
 
-#lab-members-list h3 {
-	margin: 0 0 10px;
-}
-
-#lab-members-list ul {
+.lab-members .column ul {
 	padding: 0;
 	margin: 0 0 30px;
 }
 
-#lab-members-list li {
+.lab-members li {
 	list-style-type: none;
+}
+
+.lab-members h3 {
+	margin: 0 0 10px;
 }
 
 .former-position {

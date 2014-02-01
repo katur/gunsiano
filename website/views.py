@@ -2,7 +2,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from website.models import User, UserProfile, ResearchArea, Resource
 from django.contrib.auth.decorators import login_required
-import string
+import string, math
 import xml.etree.ElementTree as ET
 import urllib2
 
@@ -40,27 +40,18 @@ def lab_members(request):
 		'position__display_order',
 		'user__last_name'
 	)
+
 	former = UserProfile.objects.all().filter(is_current=False).order_by(
 		'user__last_name'
 	)
 
-	def add_location(profile):
-		if profile.in_abu_dhabi:
-			profile.location = "NYUAD"
-		elif profile.in_abu_dhabi == 0:
-			profile.location = "NYUNY"
-		else:
-			profile.location = "NYUAD/NY"
-
-	for profile in current:
-		add_location(profile)
-
-	for profile in former:
-		add_location(profile)
+	column_length = math.ceil(len(former) / 3.0)
+	print column_length
 
 	return render_to_response('lab_members.html', {
 		'current':current,
 		'former':former,
+		'column_length':column_length,
 	}, context_instance=RequestContext(request))
 
 

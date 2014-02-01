@@ -57,6 +57,10 @@ body {
 	line-height: 130%;
 }
 
+i, em {
+	font-style: italic;
+}
+
 h1, h2, h3, h4 {
 	font-family: 'Computer Modern Bright', Helvetica, sans-serif;
 	font-weight: normal;
@@ -150,7 +154,6 @@ html, body {
 	width: 980px;
 	margin: 0 auto;
 }
-
 /********** HEADER ONLY **********/
 #wrap-header {
 	position: relative; /* to accept z-index */
@@ -161,8 +164,13 @@ html, body {
 	background: black;
 }
 
+#header {
+	padding-top: 10px;
+}
+
 #header h1 {
 	float: left;
+	line-height: 1.2;
 	font-size: 36px;
 	margin-bottom: 10px;
 }
@@ -177,7 +185,6 @@ html, body {
 }
 
 #login {
-	padding-top: 10px;
 	float: right;
 	font-size: 13px;
 }

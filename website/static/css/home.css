@@ -25,10 +25,11 @@ body#home #content {
 }
 
 #research-bubble {
+	width: 800px;
 	float: left;
 	position: relative;
 	left: 50%;
-	margin-left: -490px; 
+	margin-left: -430px; 
 	margin-top: 80px;
 	background: #58bb62;
 	text-align: center;
@@ -50,7 +51,7 @@ body#home #content {
 
 .research-area div {
 	width: 50%;
-	margin: 100px 120px;
+	margin: 100px 15%;
 }
 
 .research-area .left {

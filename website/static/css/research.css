@@ -1,23 +1,5 @@
 /* styles for research areas page */
 
-/* colorful bubble
- * (generalized to implement elsewhere) */
-.colorful-bubble {
-	clear: both;
-	float: left;
-	border-radius: 10px;
-	width: 920px;
-	padding: 30px;
-	margin-bottom: 40px;
-	font-size: 20px;
-	color: black;
-}
-
-.colorful-bubble a {
-	color: white;
-}
-
-/* specific to this coloful bubble */
 #research-bubble {
 	background: #58bb62;
 	text-align: center;

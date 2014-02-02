@@ -24,6 +24,9 @@ gunsaluspiano/secret_settings.py
 *.ogv
 *.webm
 
+# Fullsize images #
+###################
+universal/static/img/original_logos/*
 
 # Packages #
 ############

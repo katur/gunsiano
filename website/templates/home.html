@@ -12,7 +12,7 @@
 	<div id="world-wrapper">
 		<img src="{{ STATIC_URL }}img/world.jpg" width="568" height="542" />
 		<canvas id="world-worms" width="568" height="542">
-			<!-- here, add static picture of worms for browsers that do not support html5 -->
+			<!-- here, add static picture of worm for browsers that do not support html5 -->
 		</canvas>
 	</div>
 
@@ -22,15 +22,17 @@
 
 	<div id="research-areas">
 		{% for area in research_areas %}
-			<div class="research-area 
-				{% if forloop.counter0|divisibleby:"2" %}
-					left
-				{% else %}
-					right
-				{% endif %}
-			">
-				<h3>{{ area }}</h3>
-				{{ area.description|enhanced_markdown }}
+			<div id="{{ area.style_name }}" class="research-area"> 
+				<div class="
+					{% if forloop.counter0|divisibleby:"2" %}
+						left
+					{% else %}
+						right
+					{% endif %}
+				">
+					<h3>{{ area }}</h3>
+					{{ area.description|enhanced_markdown }}
+				</div>
 			</div>
 		{% endfor %}
 	</div>

@@ -34,22 +34,49 @@ body#home #content {
 	text-align: center;
 }
 
-.research-area {
-	float: left;
-	width: 60%;
-	margin: 40px 120px;
+#research-areas {
 	font-size: 20px;
 	line-height: 175%;
 }
 
-.research-area.left {
+#research-areas h3 {
+	font-size: 20px;
+}
+
+.research-area {
+	float: left;
+	width: 100%;
+}
+
+.research-area div {
+	width: 50%;
+	margin: 100px 120px;
+}
+
+.research-area .left {
 	float: left;
 }
 
-.research-area.right {
+.research-area .right {
 	float: right;
 }
 
-.research-area h3 {
-	font-size: 20px;
+#gi-screen.research-area {
+}
+
+#network.research-area {
+	background: black;
+	color: white;
+}
+
+#cell-bio.research-area {
+}
+
+#evolution.research-area {
+}
+
+#rna.research-area {
+}
+
+#mouse.research-area {
 }

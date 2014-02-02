@@ -1,16 +1,37 @@
 {% extends "base.html" %}
+{% load markup %}
+{% load extra_tags %}
+
+{% block body_id %}home{% endblock %}
 
 {% block content %}
-	<div id="home-page">
-		Welcome to the labs of Drs. <a href="" title="Kris Gunsalus">Kris Gunsalus</a>
-		and <a href="" title="Fabio Piano">Fabio Piano</a>
-		at NYU New York City and NYU Abu Dhabi.
+	<span id="welcome-sentence">Welcome to the labs of Drs. <a href="" title="Kris Gunsalus">Kris Gunsalus</a>
+	and <a href="" title="Fabio Piano">Fabio Piano</a>
+	at NYU New York City and NYU Abu Dhabi.</span>
 
-		<div id="world-wrapper">
-			<img src="{{ STATIC_URL }}img/world.jpg" width="568" height="542" />
-			<canvas id="world-worms" width="568" height="542">
-				<!-- here, add static picture of worms for browsers that do not support html5 -->
-			</canvas>
-		</div>
+	<div id="world-wrapper">
+		<img src="{{ STATIC_URL }}img/world.jpg" width="568" height="542" />
+		<canvas id="world-worms" width="568" height="542">
+			<!-- here, add static picture of worms for browsers that do not support html5 -->
+		</canvas>
+	</div>
+
+	<div id="research-bubble" class="colorful-bubble">
+		We study the genetic and evolutionary mechanisms underlying early embryonic development.
+	</div>
+
+	<div id="research-areas">
+		{% for area in research_areas %}
+			<div class="research-area 
+				{% if forloop.counter0|divisibleby:"2" %}
+					left
+				{% else %}
+					right
+				{% endif %}
+			">
+				<h3>{{ area }}</h3>
+				{{ area.description|enhanced_markdown }}
+			</div>
+		{% endfor %}
 	</div>
 {% endblock content %}

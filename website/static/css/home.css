@@ -1,18 +1,55 @@
-#home-page {
+body#home #content {
 	width: 100%;
 }
 
+#welcome-sentence {
+	float: left;
+	width: 100%;
+	text-align: center;
+}
+
 #world-wrapper {
+	float: left;
+	position: relative;
+	left: 50%; 
 	width: 568px;
 	height: 542px;
+	margin-left: -284px;
 	margin-top: 40px;
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 #world-wrapper img, #world-wrapper canvas {
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+#research-bubble {
+	float: left;
+	position: relative;
+	left: 50%;
+	margin-left: -490px; 
+	margin-top: 80px;
+	background: #58bb62;
+	text-align: center;
+}
+
+.research-area {
+	float: left;
+	width: 60%;
+	margin: 40px 120px;
+	font-size: 20px;
+	line-height: 175%;
+}
+
+.research-area.left {
+	float: left;
+}
+
+.research-area.right {
+	float: right;
+}
+
+.research-area h3 {
+	font-size: 20px;
 }

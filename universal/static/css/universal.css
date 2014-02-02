@@ -29,9 +29,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
-	line-height: 1;
-}
 ol, ul {
 	list-style: none;
 }
@@ -105,6 +102,21 @@ a.active {
 }
 
 /********** MISCELLANOUS **********/
+.colorful-bubble {
+	float: left;
+	clear: both;
+	width: 920px;
+	padding: 30px;
+	margin-bottom: 40px;
+	border-radius: 10px;
+	font-size: 20px;
+	color: black;
+}
+
+.colorful-bubble a {
+	color: white;
+}
+
 /* add to parent elements when their children are floating
 and parent needs to expand to the children's size. */
 .clearfix {
@@ -215,22 +227,21 @@ html, body {
 	border-top: 1px solid #ddd;
 }
 
-#nyu-logo {
+#copyright {
 	float: left;
 }
 
-#cgsb-logo {
-	float: right;
-}
-
-#copyright-lab, #copyright-site {
-	padding: 40px 20px;
-}
-
-#copyright-lab {
+#copyright span {
 	float: left;
+	clear: both;
+	padding: 10px 0;
 }
 
-#copyright-site {
+#logos {
 	float: right;
+}
+
+#logos img {
+	float: left;
+	margin-left: 40px;
 }

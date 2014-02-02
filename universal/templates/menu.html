@@ -1,6 +1,5 @@
 <div id="menu">
 	{% url 'home_url' as home_url %}
-	{% url 'research_url' as research_url %}
 	{% url 'lab_members_url' as lab_members_url %}
 	{% url 'publications_url' as publications_url %}
 	{% url 'resources_url' as resources_url %}
@@ -13,12 +12,6 @@
 			class="active"
 		{% endifequal %}>
 		Home
-	</a>
-	<a href="{{ research_url }}"
-		{% ifequal request.path research_url %}
-			class="active"
-		{% endifequal %}>
-		Research
 	</a>
 	<a href="{{ lab_members_url }}"
 		{% ifequal request.path lab_members_url %}

@@ -9,9 +9,16 @@
 				<!-- Site Title -->
 				<h1><a href="{% url 'home_url' %}">Gunsalus and Piano Labs</a></h1>
 				<div id="login">
+					{% url 'lab_tools_url' as lab_tools_url %}
 					{% if user.is_authenticated %}
 						<a href="{% url 'logout_url' %}">Logout</a>
 						<a href="{% url 'admin:index' %}">Admin</a>
+						<a href="{{ lab_tools_url }}"
+							{% ifequal request.path lab_tools_url %}
+								class="active"
+							{% endifequal %}>
+							Lab Tools
+						</a>
 					{% else %}
 						{% url 'login_url' as login_url %}
 						<a href="{{ login_url }}"
@@ -20,7 +27,8 @@
 						{% endifequal %}>Login</a>
 					{% endif %}
 				</div>
-				<span class="subtitle">at New York University's Center for Genomics and Systems Biology</a>
+				
+				<span class="subtitle">at New York University's Center for Genomics and Systems Biology</span>
 
 				<!-- MENU -->
 				{% include "menu.html" %}

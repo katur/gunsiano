@@ -15,8 +15,7 @@ body#home #content {
 	left: 50%;
 	width: 562px;
 	height: 536px;
-	margin-left: -281px;
-	margin-top: 40px;
+	margin: 40px 0 0 -281px;
 	background-image: url("../img/world.jpg");
 }
 
@@ -50,9 +49,7 @@ body#home #content {
 	float: left;
 	position: relative;
 	left: 50%;
-	margin-left: -430px;
-	margin-top: 80px;
-	margin-bottom: 80px;
+	margin: 80px 0 80px -430px;
 	background: #58bb62;
 	text-align: center;
 }

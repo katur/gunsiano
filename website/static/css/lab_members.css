@@ -19,10 +19,6 @@
 	width: 100%;
 }
 
-#former.lab-members {
-	font-size: 14px;
-}
-
 .lab-members .column {
 	float: left;
 	width: 30%;
@@ -41,18 +37,26 @@
 	margin-bottom: 30px;
 }
 
-.former-position {
+.nyu-location, #former.lab-members .position {
 	font-size: 10px;
 	padding-left: 5px;
 }
 
-.nyu-location {
-	font-size: 10px;
-	padding-left: 5px;
-}
-
-.lab-member-position {
-	font-style: italic;
+#former.lab-members {
 	font-size: 14px;
-	padding-left: 5px;
+}
+
+#former.lab-members h3 {
+	float: left;
+}
+
+#former.lab-members #position-disclaimer {
+	float: left;
+	font-style: italic;
+	margin-left: 20px;
+}
+
+#former.lab-members .columns {
+	float: left;
+	width: 100%;
 }

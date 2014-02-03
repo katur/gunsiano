@@ -56,7 +56,8 @@
 
 	<div id="former" class="lab-members">
 		<h3>Former Lab Members</h3>
-		<div>
+		<span id="position-disclaimer">Lists position last held in this lab</span>
+		<div class="columns">
 			<ul class="column">
 				{% for profile in former %}
 					{% if forloop.counter0|divisibleby:column_length and not forloop.first %}
@@ -74,7 +75,7 @@
 						{% if profile.blurb or profile.url %}
 							</a>
 						{% endif %}
-						<span class="former-position">{{ profile.position.position }}</span>
+						<span class="position">{{ profile.position.position }}</span>
 
 						<span class="nyu-location">{{ profile.location }}</span>
 					</li>

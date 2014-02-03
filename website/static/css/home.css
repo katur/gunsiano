@@ -55,18 +55,19 @@ body#home #content {
 	text-align: center;
 }
 
+/* triangle beneath research bubble */
 #research-bubble:after {
 	display: block;
 	position: absolute;
 	left: 50%;
-	bottom: -20px;
+	bottom: -10px;
 	content: " ";
 	width: 0;
 	height: 0;
-	border-left: 20px solid transparent;
-	border-right: 20px solid transparent;	
-	border-top: 20px solid #58bb62;
-	margin-left: -20px;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;	
+	border-top: 10px solid #58bb62;
+	margin-left: -10px;
 }
 
 #research-areas {

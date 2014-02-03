@@ -89,7 +89,7 @@ a {
 }
 
 a:hover, a.active {
-	color: #937AA9;
+	color: #937AA9; /* purple */
 }
 
 a.active {

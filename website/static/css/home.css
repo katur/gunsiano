@@ -31,8 +31,23 @@ body#home #content {
 	left: 50%;
 	margin-left: -430px; 
 	margin-top: 80px;
+	margin-bottom: 80px;
 	background: #58bb62;
 	text-align: center;
+}
+
+#research-bubble:after {
+	display: block;
+	position: absolute;
+	left: 50%;
+	bottom: -20px;
+	content: " ";
+	width: 0;
+	height: 0;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;	
+	border-top: 20px solid #58bb62;
+	margin-left: -20px;
 }
 
 #research-areas {
@@ -46,37 +61,103 @@ body#home #content {
 
 .research-area {
 	float: left;
+	position: relative;
+	overflow: hidden;
 	width: 100%;
+	padding: 120px 0;
 }
 
-.research-area div {
-	width: 50%;
-	margin: 100px 15%;
+.research-area .blurb {
+	width: 40%;
+	margin: 0 10%;
 }
 
-.research-area .left {
+.research-area.left .blurb {
 	float: left;
+	margin-right: 0;
 }
 
-.research-area .right {
+.research-area.right .blurb {
+	float: right;
+	margin-left: 0;
+}
+
+.research-area img {
+	width: 30%;
+	margin: 0 10%;
+}
+
+.research-area.left img {
 	float: right;
 }
 
-#gi-screen.research-area {
+.research-area.right img {
+	float: left;
+}
+
+.research-area video {
+	width: 40%;
+	margin: 0 10%;
+}
+
+.research-area.left video {
+	float: right;
+	margin-left: 0;
+}
+
+.research-area.right video {
+	float: left;
+	margin-right: 0;
+}
+
+.research-area .background {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 800px;
+	background-repeat: repeat;
 }
 
 #network.research-area {
+	background: #937AA9; /* purple */
+	color: white;
+}
+
+#gi-screen.research-area .blurb {
+	position: relative;
+	z-index: 2;
+	display: block;
+	background: rgba(255,255,255,0.7); /* to partially obscure worms */
+}
+
+#gi-screen.research-area .layer-1.background {
+	background-image: url('../img/worms/worms-layer-1.png');
+	opacity: 0.4;
+}
+
+#gi-screen.research-area .layer-2.background {
+	background-image: url('../img/worms/worms-layer-2.png');
+	opacity: 0.25;
+}
+
+#gi-screen.research-area .layer-3.background {
+	background-image: url('../img/worms/worms-layer-3.png');
+	opacity: 0.15;
+}
+
+#cell-bio.research-area {
 	background: black;
 	color: white;
 }
 
-#cell-bio.research-area {
+#rna.research-area {
 }
 
 #evolution.research-area {
-}
-
-#rna.research-area {
+	background: #5d543b; /* brown */
+	color: white;
 }
 
 #mouse.research-area {

@@ -22,17 +22,36 @@
 
 	<div id="research-areas">
 		{% for area in research_areas %}
-			<div id="{{ area.style_name }}" class="research-area"> 
-				<div class="
-					{% if forloop.counter0|divisibleby:"2" %}
-						left
-					{% else %}
-						right
-					{% endif %}
-				">
+			<div id="{{ area.style_name }}" class="research-area
+				{% if forloop.counter0|divisibleby:"2" %}
+					left
+				{% else %}
+					right
+				{% endif %}
+			"> 
+			
+				<div class="blurb">
 					<h3>{{ area }}</h3>
 					{{ area.description|enhanced_markdown }}
 				</div>
+				
+				{% if area.filename %}
+					{% if "mp4" in area.filename %}
+						<video loop autoplay>
+							<source src='{{ STATIC_URL }}videos/{{ area.filename }}' type="video/mp4">
+							Your browser does not support HTML5 video
+						</video>
+					{% else %}
+						<img src="{{ STATIC_URL }}img/research_areas/{{ area.filename }}" />
+					{% endif %}
+				{% endif %}
+
+				{% if area.style_name == "gi-screen" or area.style_name == "network" %}
+					<div class="background layer-1"></div>
+					<div class="background layer-2"></div>
+					<div class="background layer-3"></div>
+				{% endif %}
+
 			</div>
 		{% endfor %}
 	</div>

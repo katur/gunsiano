@@ -12,16 +12,35 @@ body#home #content {
 	float: left;
 	position: relative;
 	left: 50%; 
-	width: 568px;
-	height: 542px;
-	margin-left: -284px;
+	width: 562px;
+	height: 536px;
+	margin-left: -281px;
 	margin-top: 40px;
+	background-image: url("../img/world.jpg");
 }
 
-#world-wrapper img, #world-wrapper canvas {
+#world-wrapper canvas {
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+#world-wrapper .dot {
+	position: absolute;
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	background: #57068c; /* nyu purple */
+}
+
+#world-wrapper #nyc.dot {
+	left: 122px;
+	top: 242px;
+}
+
+#world-wrapper #abu-dhabi.dot {
+	left: 400px;
+	top: 295px;
 }
 
 #research-bubble {
@@ -95,22 +114,42 @@ body#home #content {
 	float: left;
 }
 
-.research-area video {
-	width: 40%;
-	margin: 0 10%;
-}
-
-.research-area.left video {
+.research-area.left .video-wrapper {
 	float: right;
 	margin-left: 0;
 }
 
-.research-area.right video {
+.research-area.right .video-wrapper {
 	float: left;
 	margin-right: 0;
 }
 
-.research-area .background {
+.research-area .video-wrapper {
+	position: relative;
+	width: 40%;
+	margin: 0 10%;
+}
+
+.research-area video {
+	width: 100%;
+}
+
+.research-area .video-gradient-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 21%, rgba(0,0,0,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(21%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.research-area .background-image {
 	position: absolute;
 	z-index: 1;
 	top: 0;
@@ -120,31 +159,31 @@ body#home #content {
 	background-repeat: repeat;
 }
 
-#network.research-area {
-	background: #937AA9; /* purple */
-	color: white;
-}
-
 #gi-screen.research-area .blurb {
 	position: relative;
 	z-index: 2;
 	display: block;
-	background: rgba(255,255,255,0.7); /* to partially obscure worms */
+	background: rgba(255,255,255,0.7);
 }
 
-#gi-screen.research-area .layer-1.background {
+#gi-screen.research-area .layer-1.background-image {
 	background-image: url('../img/worms/worms-layer-1.png');
 	opacity: 0.4;
 }
 
-#gi-screen.research-area .layer-2.background {
+#gi-screen.research-area .layer-2.background-image {
 	background-image: url('../img/worms/worms-layer-2.png');
 	opacity: 0.25;
 }
 
-#gi-screen.research-area .layer-3.background {
+#gi-screen.research-area .layer-3.background-image {
 	background-image: url('../img/worms/worms-layer-3.png');
 	opacity: 0.15;
+}
+
+#network.research-area {
+	background: #937AA9; /* purple */
+	color: white;
 }
 
 #cell-bio.research-area {
@@ -158,6 +197,16 @@ body#home #content {
 #evolution.research-area {
 	background: #5d543b; /* brown */
 	color: white;
+}
+
+#evolution-background-block {
+	position: absolute;
+	right: 10%;
+	bottom: 0;
+	width: 30%;
+	height: 100%;
+	display: block;
+	background: #5d543b; /* brown */
 }
 
 #mouse.research-area {

@@ -29,13 +29,13 @@
 				{% else %}
 					right
 				{% endif %}
-			"> 
-			
+			">
+
 				<div class="blurb">
 					<h3>{{ area }}</h3>
 					{{ area.description|enhanced_markdown }}
 				</div>
-				
+
 				{% if area.filename %}
 					{% if "mp4" in area.filename %}
 						<div class="video-wrapper">
@@ -43,7 +43,7 @@
 								<source src='{{ STATIC_URL }}videos/{{ area.filename }}' type="video/mp4">
 								Your browser does not support HTML5 video
 							</video>
-							
+
 							<div class="video-gradient-overlay">
 							</div>
 						</div>
@@ -53,8 +53,8 @@
 				{% endif %}
 
 				{% if area.style_name == "gi-screen" or area.style_name == "network" %}
-					<div class="background-image layer-1" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -800px;"></div>
-					<div class="background-image layer-2" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -400px;"></div>
+					<div class="background-image layer-1" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -1000px;"></div>
+					<div class="background-image layer-2" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -500px;"></div>
 					<div class="background-image layer-3" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -100px;"></div>
 				{% endif %}
 

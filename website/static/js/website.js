@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	draw();
 	togglePublications();
+	homepageScrollEffects();
 })
 
 draw = function() {
@@ -85,4 +86,13 @@ togglePublications = function() {
 		selector = $(this).attr("id");
 		$("." + selector).removeClass("invisible");
 	})
+}
+
+homepageScrollEffects = function() {
+	if ($('body#home').length) {
+		skrollr.init({
+			smoothScrolling: false,
+			forceHeight: false
+		});
+	}
 }

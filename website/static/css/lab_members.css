@@ -24,14 +24,14 @@
 }
 
 #former-lab-members {
-	font-size: 14px; 
+	font-size: 14px;
 }
 
 .lab-members .column {
 	float: left;
 	width: 30%;
 	margin: 0 0 0 5%;
-	padding: none;
+	padding: 0;
 }
 
 .lab-members .column:first-child {

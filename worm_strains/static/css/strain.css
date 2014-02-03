@@ -1,8 +1,8 @@
-#strain-sections {
+#strain {
 	float: left;
 }
 
-#strain-sections h4 {
+#strain h4 {
 	text-align: center;
 	color: #aaa;
 	font-weight: bold;
@@ -18,7 +18,7 @@
 	width: 1000px;
 }
 
-#strain-sections .strain-section:first-child {
+.strain-section:first-child {
 	margin-top: 0;
 }
 
@@ -27,20 +27,39 @@
 	float: left;
 }
 
-.lines {
-	list-style-position: inside;
-	padding-left: 0;
+#strain ul {
 	width: 100%;
+	padding: 0px;
+	margin: 0px;
 	line-height: 150%;
+	list-style-type: none;
+	list-style-position: inside;
 }
 
-.lines .tubes {
-	display: inline-block;
+#strain ul li {
+	list-style-type: disc;
+	list-style-position: inside;
+	padding-left: 25px;
+	margin-top: 20px;
 }
 
-.lines table, .lines td {
+#strain ul ul li {
+	list-style-type: circle;
+	margin-top: 10px;
+}
+
+#strain ul ul ul li {
+	list-style-type: square;
+	margin-top: 0;
+}
+
+#strain ul table, #strain ul td {
 	border: 1px solid #ddd;
 	border-collapse: collapse;
 	padding: 3px;
 	margin-top: 5px;
+}
+
+#strain ul table {
+	margin-left: 15px;
 }

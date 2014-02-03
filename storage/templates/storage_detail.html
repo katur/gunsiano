@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load extra_tags %}
 
 {% block page_title %}
 	<h2>Contents of {{ container_title }} </h2>
@@ -28,7 +29,7 @@
 							</a>
 						</span>
 					{% elif child.stock.notes %}
-						<span>{{ child.stock.notes }}</span>
+						<span>{{ child.stock.notes|enhanced_markdown }}</span>
 					{% endif %}
 
 					{% if child.owner %}

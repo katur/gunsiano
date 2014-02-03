@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 from vectors.models import Vector
 from storage.models import Stockable
@@ -42,7 +43,9 @@ class WormStrain(models.Model):
 	mutagen = models.ForeignKey(Mutagen, null=True)
 	date_created = models.DateField(null=True)
 	created_by = models.ForeignKey(User, null=True)
-	remarks = models.TextField(blank=True)
+	remarks = models.TextField(blank=True,
+		help_text = settings.MARKDOWN_ADMIN_PROMPT,
+	)
 	def __unicode__(self):
 		return self.name
 
@@ -87,6 +90,8 @@ class WormStrainLine(models.Model):
 	received_from = models.CharField(max_length=100, blank=True)
 	received_by = models.ForeignKey(User, null=True)
 	date_received = models.DateField(null=True)
-	remarks = models.TextField(blank=True)
+	remarks = models.TextField(blank=True,
+		help_text = settings.MARKDOWN_ADMIN_PROMPT,
+	)
 	def __unicode__(self):
 		return self.strain.name

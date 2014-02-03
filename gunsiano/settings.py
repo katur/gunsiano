@@ -197,3 +197,10 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 # http://python.6.x6.nabble.com/Django-18336-Static-files-randomly-fail-to-load-in-Google-Chrome-td4974987.html
 from django.core.servers.basehttp import WSGIServer
 WSGIServer.request_queue_size = 10
+
+MARKDOWN_ADMIN_PROMPT = '''Use Markdown syntax.
+			See
+			<a href="http://www.darkcoding.net/software/markdown-quick-reference" target="_blank">
+			a quick reference</a>,
+			<a href="http://www.markdowntutorial.com/" target="_blank">a tutorial</a>,
+			or practice <a href="http://dillinger.io/" target="_blank">here</a>.'''

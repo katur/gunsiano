@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load markup %}
 {% load extra_tags %}
 
 {% block page_title %}
@@ -7,9 +6,12 @@
 {% endblock %}
 
 {% block content %}
-	<div id="protocol-body">
+	<span id="protocol-authorship">
 		Protocol updated by {{ protocol.author.get_full_name }}
 		on {{ protocol.pub_date }}
+	</span>
+
+	<div id="protocol">
 		{{ protocol.body_markdown|enhanced_markdown }}
 	</div>
 {% endblock %}

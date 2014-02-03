@@ -1,7 +1,32 @@
-#protocol-body h1, #protocol-body h2, #protocol-body h3, #protocol-body h4 {
-	margin: 0;
+#protocol-title {
+	float: left;
+	clear: none;
 }
 
-#protocols p, #protocol-title p {
+#protocol-authorship {
+	float: right;
+	clear: none;
+}
+
+/* within the protocol */
+#protocol h1, #protocol h2, #protocol h3, #protocol h4 {
+	clear: both;
 	margin: 0;
+	margin-bottom: 10px;
+}
+
+#protocol p, #protocol ol, #protocol ul {
+	clear: both;
+	margin: 0;
+	margin-bottom: 20px;
+}
+
+#protocol ul {
+	list-style-type: disc;
+	list-style-position: inside;
+}
+
+#protocol ol {
+	list-style-type: decimal;
+	list-style-position: inside;
 }

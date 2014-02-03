@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_init
 
@@ -18,16 +19,11 @@ class UserProfile(models.Model):
 	net_id = models.CharField(max_length=25, blank=True)
 	url = models.URLField(blank=True)
 	blurb = models.TextField('Blurb',
-		help_text='''Use Markdown syntax.
-			See
-			<a href="http://www.darkcoding.net/software/markdown-quick-reference" target="_blank">
-			a quick reference</a>,
-			<a href="http://www.markdowntutorial.com/" target="_blank">a tutorial</a>,
-			or practice <a href="http://dillinger.io/" target="_blank">here</a>.''',
+		help_text = settings.MARKDOWN_ADMIN_PROMPT,
 		blank=True
 	)
 	image_filename = models.CharField(max_length=100, blank=True)
-	
+
 	def __unicode__(self):
 		return self.user.get_full_name()
 	class Meta:
@@ -41,7 +37,7 @@ def add_user_location(**kwargs):
 		instance.location = "NYUNY"
 	else:
 		instance.location = "NYUAD/NY"
-	
+
 post_init.connect(add_user_location, UserProfile)
 
 class ResearchArea(models.Model):
@@ -50,12 +46,7 @@ class ResearchArea(models.Model):
 	display_order = models.PositiveSmallIntegerField(unique=True)
 	filename = models.CharField(max_length=50, blank=True)
 	description = models.TextField('Description',
-		help_text='''Use Markdown syntax.
-			See
-			<a href="http://www.darkcoding.net/software/markdown-quick-reference" target="_blank">
-			a quick reference</a>,
-			<a href="http://www.markdowntutorial.com/" target="_blank">a tutorial</a>,
-			or practice <a href="http://dillinger.io/" target="_blank">here</a>.''',
+		help_text = settings.MARKDOWN_ADMIN_PROMPT,
 	)
 	def __unicode__(self):
 		return self.name
@@ -68,12 +59,7 @@ class Resource(models.Model):
 	logo_filename = models.CharField(max_length=50, blank=True)
 	url = models.CharField(max_length=100, blank=True)
 	description = models.TextField('Description',
-		help_text='''Use Markdown syntax.
-			See
-			<a href="http://www.darkcoding.net/software/markdown-quick-reference" target="_blank">
-			a quick reference</a>,
-			<a href="http://www.markdowntutorial.com/" target="_blank">a tutorial</a>,
-			or practice <a href="http://dillinger.io/" target="_blank">here</a>.''',
+		help_text = settings.MARKDOWN_ADMIN_PROMPT,
 	)
 	def __unicode__(self):
 		return self.name

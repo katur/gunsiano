@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load extra_tags %}
 
 {% block page_title %}
 	<h2>{{ strain }}</h2>
 {% endblock %}
 
 {% block content %}
-	<div id="strain-sections">
+	<div id="strain">
 
 		<!-- STRAIN IDENTIFICATION -->
 		{% if strain.species or strain.on_wormbase or strain.genotype %}
@@ -54,7 +55,7 @@
 			<hr>
 			<h4>Remarks</h4>
 			<div class="strain-section">
-				<span>{{ strain.remarks }}</span>
+				<span>{{ strain.remarks|enhanced_markdown }}</span>
 			</div>
 		{% endif %}
 
@@ -63,7 +64,8 @@
 			<hr>
 			<h4>Stock</h4>
 
-			<ul class="lines">
+			Lines of this strain that the lab has created or received:
+			<ul>
 				{% for line in lines %}
 					<li>
 						{% if line.created_internally %}
@@ -84,13 +86,13 @@
 							{% endif %}
 
 						{% else %}
-							Line with unrecorded receipt
+							Line with no recorded information about receipt
 						{% endif %}
 
 
 						<ul> <!-- more details about this line -->
 							{% if line.remarks %}
-								<li>{{ line.remarks }}</li>
+								<li>{{ line.remarks|enhanced_markdown }}</li>
 							{% endif %}
 
 							{% if line.times_outcrossed %}
@@ -153,12 +155,15 @@
 
 										<li class="tubes">
 											{% if stock.tubes %}
+												Tubes recorded:
 												<table>
 													{% for tube in stock.tubes %}
 														<tr><td>{{ tube.position }}</td></tr>
 													{% endfor %}
 												</table>
-											{% else %}No remaining tubes recorded{% endif %}
+											{% else %}
+												No remaining tubes recorded
+											{% endif %}
 										</li>
 									</ul> <!-- stock details -->
 								</li>

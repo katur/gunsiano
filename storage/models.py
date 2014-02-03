@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 
 class StockableType(models.Model):
@@ -16,7 +17,9 @@ class Stock(models.Model):
 	concentration = models.CharField(max_length=30, blank=True)
 	prepared_by = models.ForeignKey(User, null=True)
 	date_prepared = models.DateField(null=True)
-	notes = models.TextField(blank=True)
+	notes = models.TextField(blank=True,
+		help_text = settings.MARKDOWN_ADMIN_PROMPT,
+	)
 	def __unicode__(self):
 		return str(self.stockable) + " " + str(self.date_prepared)
 
@@ -39,7 +42,9 @@ class ContainerType(models.Model):
 class Container(models.Model):
 	type = models.ForeignKey(ContainerType, null=True)
 	name = models.CharField(max_length=200, blank=True)
-	notes = models.TextField(blank=True)
+	notes = models.TextField(blank=True,
+		help_text = settings.MARKDOWN_ADMIN_PROMPT,
+	)
 	parent = models.ForeignKey('self', null=True)
 	vertical_position = models.PositiveSmallIntegerField(null=True)
 	horizontal_position = models.PositiveSmallIntegerField(null=True)

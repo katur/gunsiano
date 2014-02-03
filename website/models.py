@@ -46,9 +46,9 @@ post_init.connect(add_user_location, UserProfile)
 
 class ResearchArea(models.Model):
 	name = models.CharField(max_length=60, unique=True)
+	style_name = models.CharField(max_length=15, blank=True)
 	display_order = models.PositiveSmallIntegerField(unique=True)
-	filename = models.CharField(max_length=50, unique=True, blank=True)
-	filename_is_video = models.BooleanField(default=False)
+	filename = models.CharField(max_length=50, blank=True)
 	description = models.TextField('Description',
 		help_text='''Use Markdown syntax.
 			See

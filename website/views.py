@@ -11,22 +11,9 @@ def home(request):
 	"""
 	Homepage
 	"""
-	# render page
-	return render_to_response('home.html', context_instance=RequestContext(request))
-
-
-def research(request):
-	"""
-	Research Areas
-	"""
 	r = ResearchArea.objects.all().order_by('display_order')
 
-	o = "right"
-	for area in r:
-		area.orientation = o
-		o = "left" if (o == "right") else "right"
-
-	return render_to_response('research.html', {
+	return render_to_response('home.html', {
 		'research_areas':r
 	}, context_instance=RequestContext(request))
 

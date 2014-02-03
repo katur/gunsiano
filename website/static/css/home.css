@@ -1,18 +1,213 @@
-#home-page {
+body#home #content {
 	width: 100%;
 }
 
-#world-wrapper {
-	width: 568px;
-	height: 542px;
-	margin-top: 40px;
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
+#welcome-sentence {
+	float: left;
+	width: 100%;
+	text-align: center;
 }
 
-#world-wrapper img, #world-wrapper canvas {
+#world-wrapper {
+	float: left;
+	position: relative;
+	left: 50%; 
+	width: 562px;
+	height: 536px;
+	margin-left: -281px;
+	margin-top: 40px;
+	background-image: url("../img/world.jpg");
+}
+
+#world-wrapper canvas {
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+#world-wrapper .dot {
+	position: absolute;
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	background: #57068c; /* nyu purple */
+}
+
+#world-wrapper #nyc.dot {
+	left: 122px;
+	top: 242px;
+}
+
+#world-wrapper #abu-dhabi.dot {
+	left: 400px;
+	top: 295px;
+}
+
+#research-bubble {
+	width: 800px;
+	float: left;
+	position: relative;
+	left: 50%;
+	margin-left: -430px; 
+	margin-top: 80px;
+	margin-bottom: 80px;
+	background: #58bb62;
+	text-align: center;
+}
+
+#research-bubble:after {
+	display: block;
+	position: absolute;
+	left: 50%;
+	bottom: -20px;
+	content: " ";
+	width: 0;
+	height: 0;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;	
+	border-top: 20px solid #58bb62;
+	margin-left: -20px;
+}
+
+#research-areas {
+	font-size: 20px;
+	line-height: 175%;
+}
+
+#research-areas h3 {
+	font-size: 20px;
+}
+
+.research-area {
+	float: left;
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	padding: 120px 0;
+}
+
+.research-area .blurb {
+	width: 40%;
+	margin: 0 10%;
+}
+
+.research-area.left .blurb {
+	float: left;
+	margin-right: 0;
+}
+
+.research-area.right .blurb {
+	float: right;
+	margin-left: 0;
+}
+
+.research-area img {
+	width: 30%;
+	margin: 0 10%;
+}
+
+.research-area.left img {
+	float: right;
+}
+
+.research-area.right img {
+	float: left;
+}
+
+.research-area.left .video-wrapper {
+	float: right;
+	margin-left: 0;
+}
+
+.research-area.right .video-wrapper {
+	float: left;
+	margin-right: 0;
+}
+
+.research-area .video-wrapper {
+	position: relative;
+	width: 40%;
+	margin: 0 10%;
+}
+
+.research-area video {
+	width: 100%;
+}
+
+.research-area .video-gradient-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 21%, rgba(0,0,0,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(21%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.research-area .background-image {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 1000px;
+	background-repeat: repeat;
+}
+
+#gi-screen.research-area .blurb {
+	position: relative;
+	z-index: 2;
+	display: block;
+	background: rgba(255,255,255,0.7);
+}
+
+#gi-screen.research-area .layer-1.background-image {
+	background-image: url('../img/worms/worms-layer-1.png');
+	opacity: 0.4;
+}
+
+#gi-screen.research-area .layer-2.background-image {
+	background-image: url('../img/worms/worms-layer-2.png');
+	opacity: 0.25;
+}
+
+#gi-screen.research-area .layer-3.background-image {
+	background-image: url('../img/worms/worms-layer-3.png');
+	opacity: 0.15;
+}
+
+#network.research-area {
+	background: #937AA9; /* purple */
+	color: white;
+}
+
+#cell-bio.research-area {
+	background: black;
+	color: white;
+}
+
+#rna.research-area {
+}
+
+#evolution.research-area {
+	background: #5d543b; /* brown */
+	color: white;
+}
+
+#evolution-background-block {
+	position: absolute;
+	right: 10%;
+	bottom: 0;
+	width: 30%;
+	height: 100%;
+	display: block;
+	background: #5d543b; /* brown */
+}
+
+#mouse.research-area {
 }

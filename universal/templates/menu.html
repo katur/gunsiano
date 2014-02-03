@@ -1,24 +1,16 @@
 <div id="menu">
 	{% url 'home_url' as home_url %}
-	{% url 'research_url' as research_url %}
 	{% url 'lab_members_url' as lab_members_url %}
 	{% url 'publications_url' as publications_url %}
 	{% url 'resources_url' as resources_url %}
 	{% url 'jobs_url' as jobs_url %}
 	{% url 'contact_url' as contact_url %}
-	{% url 'lab_tools_url' as lab_tools_url %}
 
 	<a href="{{ home_url }}"
 		{% ifequal request.path home_url %}
 			class="active"
 		{% endifequal %}>
 		Home
-	</a>
-	<a href="{{ research_url }}"
-		{% ifequal request.path research_url %}
-			class="active"
-		{% endifequal %}>
-		Research
 	</a>
 	<a href="{{ lab_members_url }}"
 		{% ifequal request.path lab_members_url %}
@@ -30,7 +22,7 @@
 		{% ifequal request.path resources_url %}
 			class="active"
 		{% endifequal %}>
-		Resources and Data
+		Resources
 	</a>
 	<a href="{{ publications_url }}"
 		{% ifequal request.path publications_url %}
@@ -50,12 +42,4 @@
 		{% endifequal %}>
 		Contact
 	</a>
-	{% if user.is_authenticated %}
-		<a href="{{ lab_tools_url }}"
-			{% ifequal request.path lab_tools_url %}
-				class="active"
-			{% endifequal %}>
-			Internal Lab Tools
-		</a>
-	{% endif %}
 </div>

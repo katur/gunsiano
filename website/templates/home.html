@@ -1,16 +1,68 @@
 {% extends "base.html" %}
+{% load markup %}
+{% load extra_tags %}
+
+{% block body_id %}home{% endblock %}
 
 {% block content %}
-	<div id="home-page">
-		Welcome to the labs of Drs. <a href="" title="Kris Gunsalus">Kris Gunsalus</a>
-		and <a href="" title="Fabio Piano">Fabio Piano</a>
-		at NYU New York City and NYU Abu Dhabi.
+	<span id="welcome-sentence">Welcome to the labs of Drs. <a href="" title="Kris Gunsalus">Kris Gunsalus</a>
+	and <a href="" title="Fabio Piano">Fabio Piano</a>
+	at NYU New York City and NYU Abu Dhabi.</span>
 
-		<div id="world-wrapper">
-			<img src="{{ STATIC_URL }}img/world.jpg" width="568" height="542" />
-			<canvas id="world-worms" width="568" height="542">
-				<!-- here, add static picture of worms for browsers that do not support html5 -->
-			</canvas>
-		</div>
+	<div id="world-wrapper">
+		<canvas id="world-worms" width="562" height="536">
+			<!-- here, add static picture of worm for browsers that do not support html5 -->
+		</canvas>
+		<div id="nyc" class="dot"></div>
+		<div id="abu-dhabi" class="dot"></div>
+	</div>
+
+	<div id="research-bubble" class="colorful-bubble">
+		We study the genetic and evolutionary mechanisms underlying early embryonic development.
+	</div>
+
+	<div id="research-areas">
+		{% for area in research_areas %}
+			<div id="{{ area.style_name }}" class="research-area
+				{% if forloop.counter0|divisibleby:"2" %}
+					left
+				{% else %}
+					right
+				{% endif %}
+			"> 
+			
+				<div class="blurb">
+					<h3>{{ area }}</h3>
+					{{ area.description|enhanced_markdown }}
+				</div>
+				
+				{% if area.filename %}
+					{% if "mp4" in area.filename %}
+						<div class="video-wrapper">
+							<video loop autoplay>
+								<source src='{{ STATIC_URL }}videos/{{ area.filename }}' type="video/mp4">
+								Your browser does not support HTML5 video
+							</video>
+							
+							<div class="video-gradient-overlay">
+							</div>
+						</div>
+					{% else %}
+						<img src="{{ STATIC_URL }}img/research_areas/{{ area.filename }}" />
+					{% endif %}
+				{% endif %}
+
+				{% if area.style_name == "gi-screen" or area.style_name == "network" %}
+					<div class="background-image layer-1" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -700px;"></div>
+					<div class="background-image layer-2" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -400px;"></div>
+					<div class="background-image layer-3" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -100px;"></div>
+				{% endif %}
+
+				{% if area.style_name == "evolution" %}
+					<div id="evolution-background-block" data--300-bottom-top="height: 100%" data-600-top-bottom="height: 0%"></div>
+				{% endif %}
+
+			</div>
+		{% endfor %}
 	</div>
 {% endblock content %}

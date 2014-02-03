@@ -75,10 +75,10 @@ h3 {
 	text-transform: uppercase;
 }
 
-.subtitle { /* light gray span */
+.subtitle {
 	float: left;
-	clear: both;
-	font-size: 12px;
+	clear: left;
+	font-size: 14px;
 	color: #999;
 }
 
@@ -89,7 +89,7 @@ a {
 }
 
 a:hover, a.active {
-	color: #937AA9;
+	color: #937AA9; /* purple */
 }
 
 a.active {
@@ -177,14 +177,14 @@ html, body {
 }
 
 #header {
-	padding-top: 10px;
+	padding-top: 20px;
 }
 
 #header h1 {
 	float: left;
+	clear: none;
 	line-height: 1.2;
 	font-size: 36px;
-	margin-bottom: 10px;
 }
 
 #header h1 a, #header h1 a:hover {
@@ -198,6 +198,7 @@ html, body {
 
 #login {
 	float: right;
+	clear: none;
 	font-size: 13px;
 }
 

@@ -1,23 +1,18 @@
-#protocol-title {
-	float: left;
-	clear: none;
-}
-
 #protocol-authorship {
 	float: right;
 	clear: none;
 }
 
-/* within the protocol */
+#protocol {
+	float: left;
+	width: 100%;
+}
+
 #protocol h1, #protocol h2, #protocol h3, #protocol h4 {
-	clear: both;
-	margin: 0;
 	margin-bottom: 10px;
 }
 
 #protocol p, #protocol ol, #protocol ul {
-	clear: both;
-	margin: 0;
 	margin-bottom: 20px;
 }
 

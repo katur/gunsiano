@@ -28,7 +28,9 @@
 					{% endif %}
 				</div>
 
-				<span class="subtitle">at New York University's Center for Genomics and Systems Biology</span>
+				<span class="subtitle">
+					at New York University's Center for Genomics and Systems Biology
+				</span>
 
 				<!-- MENU -->
 				{% include "menu.html" %}
@@ -38,7 +40,11 @@
 		<div id="wrap-content">
 			<div id="content">
 				<!-- PAGE TITLE -->
-				{% block page_title %}{% endblock %}
+				<h2 id="page-title"
+						{% block page_title_style %}{% endblock %}
+				>
+					{% block page_title %}{% endblock %}
+				</h2>
 
 				<!-- REST OF CONTENT -->
 				{% block content %}{% endblock %}

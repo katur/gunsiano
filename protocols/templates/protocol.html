@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% load extra_tags %}
 
+{% block page_title_style %}
+	class="clear-and-float"
+{% endblock%}
+
 {% block page_title %}
-	<h2 id="protocol-title">{{ protocol|enhanced_markdown }}</h2>
+	{{ protocol|enhanced_markdown }}
 {% endblock %}
 
 {% block content %}

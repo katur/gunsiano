@@ -11,7 +11,7 @@ body#home #content {
 #world-wrapper {
 	float: left;
 	position: relative;
-	left: 50%; 
+	left: 50%;
 	width: 562px;
 	height: 536px;
 	margin-left: -281px;
@@ -48,7 +48,7 @@ body#home #content {
 	float: left;
 	position: relative;
 	left: 50%;
-	margin-left: -430px; 
+	margin-left: -430px;
 	margin-top: 80px;
 	margin-bottom: 80px;
 	background: #58bb62;
@@ -65,7 +65,7 @@ body#home #content {
 	width: 0;
 	height: 0;
 	border-left: 10px solid transparent;
-	border-right: 10px solid transparent;	
+	border-right: 10px solid transparent;
 	border-top: 10px solid #58bb62;
 	margin-left: -10px;
 }
@@ -77,6 +77,7 @@ body#home #content {
 
 #research-areas h3 {
 	font-size: 20px;
+	margin-bottom: 20px;
 }
 
 .research-area {

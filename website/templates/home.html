@@ -4,10 +4,15 @@
 
 {% block body_id %}home{% endblock %}
 
+{% block page_title_style %}class="no-page-title"{% endblock %}
+
 {% block content %}
-	<span id="welcome-sentence">Welcome to the labs of Drs. <a href="" title="Kris Gunsalus">Kris Gunsalus</a>
-	and <a href="" title="Fabio Piano">Fabio Piano</a>
-	at NYU New York City and NYU Abu Dhabi.</span>
+	<span id="welcome-sentence">
+		Welcome to the labs of Drs.
+		<a href="" title="Kris Gunsalus">Kris Gunsalus</a>
+		and <a href="" title="Fabio Piano">Fabio Piano</a>
+		at NYU New York City and NYU Abu Dhabi.
+	</span>
 
 	<div id="world-wrapper">
 		<canvas id="world-worms" width="562" height="536">
@@ -53,13 +58,25 @@
 				{% endif %}
 
 				{% if area.style_name == "gi-screen" or area.style_name == "network" %}
-					<div class="background-image layer-1" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -4000px;"></div>
-					<div class="background-image layer-2" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -1000px;"></div>
-					<div class="background-image layer-3" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -100px;"></div>
+					<div class="background-image layer-1"
+							data-bottom-top="background-position:0px 0px;"
+							data-top-bottom="background-position:0px -4000px;">
+					</div>
+					<div class="background-image layer-2"
+							data-bottom-top="background-position:0px 0px;"
+							data-top-bottom="background-position:0px -1000px;">
+					</div>
+					<div class="background-image layer-3"
+							data-bottom-top="background-position:0px 0px;"
+							data-top-bottom="background-position:0px -100px;">
+					</div>
 				{% endif %}
 
 				{% if area.style_name == "evolution" %}
-					<div id="evolution-background-block" data--300-bottom-top="height: 100%" data-600-top-bottom="height: 0%"></div>
+					<div id="evolution-background-block"
+							data--300-bottom-top="height: 100%"
+							data-600-top-bottom="height: 0%">
+					</div>
 				{% endif %}
 
 			</div>

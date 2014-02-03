@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block page_title %}
-	<h2>Lab Members</h2>
+	Lab Members
 {% endblock %}
 
 {% block content %}
-	<div id="lab-members-photo" class="colorful-bubble">
+	<div id="lab-members-photo-wrapper" class="colorful-bubble">
 		<img
 			title="LabRetreat2011"
 			src="{{ STATIC_URL }}img/LabRetreat2011.jpg"
@@ -21,11 +21,14 @@
 		<div class="column">
 			{% for position in position_list %}
 				{% if forloop.counter0|divisibleby:"3" and not forloop.first %}
-					</div><div class="column">
+					</div>
+					<div class="column">
 				{% endif %}
-					
-				<h3>{{ position.grouper }}{% if "Faculty" not in position.grouper %}s{% endif %}</h3>
-				
+
+				<h3>
+					{{ position.grouper }}{% if "Faculty" not in position.grouper %}s{% endif %}
+				</h3>
+
 				<ul>
 					{% for profile in position.list %}
 						<li>
@@ -34,9 +37,16 @@
 							{% elif profile.url %}
 								<a class="external-link" href="{{ profile.url }}">
 							{% endif %}
-							{{ profile.user.get_full_name }}{% if profile.blurb or profile.url %}</a>{% endif %}
 
-							<span class="nyu-location">{{ profile.location }}</span>
+							{{ profile.user.get_full_name }}
+
+							{% if profile.blurb or profile.url %}
+								</a>
+							{% endif %}
+
+							<span class="nyu-location">
+								{{ profile.location }}
+							</span>
 						</li>
 					{% endfor %}
 				</ul>
@@ -44,7 +54,7 @@
 		</div>
 	</div>
 
-	<div id="former-lab-members" class="lab-members">
+	<div id="former" class="lab-members">
 		<h3>Former Lab Members</h3>
 		<div>
 			<ul class="column">
@@ -58,7 +68,12 @@
 						{% elif profile.url %}
 							<a class="external-link" href="{{ profile.url }}">
 						{% endif %}
-						{{ profile.user.get_full_name }}{% if profile.blurb or profile.url %}</a>{% endif %}
+
+						{{ profile.user.get_full_name }}
+
+						{% if profile.blurb or profile.url %}
+							</a>
+						{% endif %}
 						<span class="former-position">{{ profile.position.position }}</span>
 
 						<span class="nyu-location">{{ profile.location }}</span>

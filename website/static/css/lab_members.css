@@ -1,19 +1,15 @@
-#lab-members-photo {
+#lab-members-photo-wrapper {
 	background: #efefef;
-	/* background: #FADBAC; */
-	/* background: #FFF7EB; */
 	border: 1px solid #ddd;
 }
 
-#lab-members-photo img {
+#lab-members-photo-wrapper img {
 	float: left;
-	clear: both;
 	margin-left: 100px;
 }
 
-#lab-members-photo span {
+#lab-members-photo-wrapper span {
 	float: left;
-	clear: both;
 	margin-left: 100px;
 }
 
@@ -23,32 +19,26 @@
 	width: 100%;
 }
 
-#former-lab-members {
+#former.lab-members {
 	font-size: 14px;
 }
 
 .lab-members .column {
 	float: left;
 	width: 30%;
-	margin: 0 0 0 5%;
-	padding: 0;
+	margin-left: 5%;
 }
 
 .lab-members .column:first-child {
-	margin: 0;
-}
-
-.lab-members .column ul {
-	padding: 0;
-	margin: 0 0 30px;
-}
-
-.lab-members li {
-	list-style-type: none;
+	margin-left: 0;
 }
 
 .lab-members h3 {
-	margin: 0 0 10px;
+	margin-bottom: 10px;
+}
+
+.lab-members .column ul {
+	margin-bottom: 30px;
 }
 
 .former-position {

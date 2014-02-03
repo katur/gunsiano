@@ -3,7 +3,6 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -45,7 +44,7 @@ table {
 	border-spacing: 0;
 }
 
-/********** FONTS / HEADERS **********/
+/********** FONTS / BACKGROUND **********/
 body {
 	font-family: 'Computer Modern Bright', Helvetica, sans-serif;
 	background: #fff;
@@ -69,14 +68,31 @@ h1, h2, h3, h4 {
 
 h2 {
 	font-size: 24px;
-	margin: 0 0 30px;
+}
+
+h2#page-title {
+	margin-bottom: 30px;
+}
+
+h2#page-title.no-page-title {
+	display: none;
+}
+
+h2#page-title.clear-and-float {
+	clear: none;
+	float: left;
 }
 
 h3 {
-	font-size: 15px;
-	margin: 0 0 20px;
-	letter-spacing: 1px;
 	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 15px;
+}
+
+h4 {
+	color: #aaa;
+	font-weight: bold;
+	font-size: 20px;
 }
 
 .subtitle {
@@ -100,25 +116,9 @@ a.active {
 	cursor: default;
 }
 
-.external-link { /* icon for external links */
-	padding-right: 15px;
-	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAElJREFUeNpiZMACInYnzQdSCSA2C5DzHyq+YIXrvER0xSwgAijBiEX3ArgCbJIw05iwOAHVKiQ3YHMoVhNgIAHuBlymgABAgAEAuZUbEqLsuG0AAAAASUVORK5CYII=) center right no-repeat;
-}
-
 /********** MISCELLANOUS **********/
-.colorful-bubble {
-	float: left;
-	clear: both;
-	width: 920px;
-	padding: 30px;
-	margin-bottom: 40px;
-	border-radius: 10px;
-	font-size: 20px;
-	color: black;
-}
-
-.colorful-bubble a {
-	color: white;
+.invisible {
+	display: none;
 }
 
 /* add to parent elements when their children are floating
@@ -135,11 +135,8 @@ and parent needs to expand to the children's size. */
   visibility: hidden;
 }
 
-.invisible {
-	display: none;
-}
-
-hr { /* horizontal rule line */
+/* horizontal rule line */
+hr {
 	height: 1px;
 	width: 70%;
 	color: #ddd;
@@ -147,6 +144,28 @@ hr { /* horizontal rule line */
 	border-width: 0;
 	margin-top: 0;
 	margin-bottom: 0;
+}
+
+/* icon for external links */
+.external-link {
+	padding-right: 15px;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAElJREFUeNpiZMACInYnzQdSCSA2C5DzHyq+YIXrvER0xSwgAijBiEX3ArgCbJIw05iwOAHVKiQ3YHMoVhNgIAHuBlymgABAgAEAuZUbEqLsuG0AAAAASUVORK5CYII=) center right no-repeat;
+}
+
+/* rounded text bubble */
+.colorful-bubble {
+	float: left;
+	clear: both;
+	width: 920px;
+	padding: 30px;
+	margin-bottom: 40px;
+	border-radius: 10px;
+	font-size: 20px;
+	color: black;
+}
+
+.colorful-bubble a {
+	color: white;
 }
 
 /********** PAGE LAYOUT **********/

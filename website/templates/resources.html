@@ -3,7 +3,7 @@
 {% load extra_tags %}
 
 {% block page_title %}
-	<h2>Resources</h2>
+	Resources
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,8 @@
 	{% for resource in resources %}
 		<a target="_blank" href="{{ resource.url }}">
 			<div class="resource">
-				<img width="160px" src="{{ STATIC_URL }}img/resource_logos/{{ resource.logo_filename }}" />
+				<img width="160px"
+						src="{{ STATIC_URL }}img/resource_logos/{{ resource.logo_filename }}" />
 				<span>
 					{{ resource.description|enhanced_markdown }}
 				</span>

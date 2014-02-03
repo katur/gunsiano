@@ -1,16 +1,3 @@
-#strain {
-	float: left;
-}
-
-#strain h4 {
-	text-align: center;
-	color: #aaa;
-	font-weight: bold;
-	font-size: 20px;
-	margin-top: 40px;
-	margin-bottom: 20px;
-}
-
 .strain-section {
 	float: left;
 	width: 100%;
@@ -25,6 +12,12 @@
 .strain-section span {
 	margin: 10px;
 	float: left;
+}
+
+#strain h4 {
+	margin-top: 40px;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 #strain ul {

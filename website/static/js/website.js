@@ -61,7 +61,7 @@ draw = function() {
 		ctx.lineWidth=3;
 
 		var startTime = 0;
-		var x = -30;
+		var x = 128;
 		var y = 250;
 
 		for (var i=0; i<33; i++) {

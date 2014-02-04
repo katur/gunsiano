@@ -41,23 +41,18 @@
 					{{ area.description|enhanced_markdown }}
 				</div>
 
-				{% if area.filename %}
-					{% if "mp4" in area.filename %}
-						<div class="video-wrapper">
-							<video loop autoplay>
-								<source src='{{ STATIC_URL }}videos/{{ area.filename }}' type="video/mp4">
-								Your browser does not support HTML5 video
-							</video>
+				{% if area.style_name == "cell-bio" %}
+					<div class="video-wrapper">
+						<video loop autoplay>
+							<source src='{{ STATIC_URL }}videos/nathalie.mp4' type="video/mp4">
+							Your browser does not support HTML5 video
+						</video>
 
-							<div class="video-gradient-overlay">
-							</div>
+						<div class="video-gradient-overlay">
 						</div>
-					{% else %}
-						<img src="{{ STATIC_URL }}img/research_areas/{{ area.filename }}" />
-					{% endif %}
-				{% endif %}
+					</div>
 
-				{% if area.style_name == "gi-screen" or area.style_name == "network" %}
+				{% elif area.style_name == "gi-screen" or area.style_name == "network" %}
 					<div class="background-image layer-1"
 							data-bottom-top="background-position:0px 0px;"
 							data-top-bottom="background-position:0px -4000px;">
@@ -70,15 +65,21 @@
 							data-bottom-top="background-position:0px 0px;"
 							data-top-bottom="background-position:0px -100px;">
 					</div>
-				{% endif %}
 
-				{% if area.style_name == "evolution" %}
+
+				{% elif area.style_name == "evolution" %}
+					<img src="{{ STATIC_URL }}img/research_areas/evolution/tree.png" />
 					<div id="evolution-background-block"
 							data-center-top="height: 100%"
 							data-top-center="height: 0%">
 					</div>
-				{% endif %}
 
+				{% elif area.style_name == "rna" %}
+					<img src="{{ STATIC_URL }}img/research_areas/rna/frame0001.png" />
+
+				{% elif area.style_name == "mouse" %}
+
+				{% endif %}
 			</div>
 		{% endfor %}
 	</div>

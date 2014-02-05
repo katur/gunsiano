@@ -103,31 +103,33 @@ body#home #content {
 }
 
 .research-area img {
-	width: 30%;
+	width: 35%;
 	margin: 0 10%;
 }
 
 .research-area.left img {
 	float: right;
+	margin-left: 5%;
 }
 
 .research-area.right img {
 	float: left;
+	margin-right: 5%;
 }
 
 .research-area.left .video-wrapper {
 	float: right;
-	margin-left: 0;
+	margin-left: 5%;
 }
 
 .research-area.right .video-wrapper {
 	float: left;
-	margin-right: 0;
+	margin-right: 5%;
 }
 
 .research-area .video-wrapper {
 	position: relative;
-	width: 40%;
+	width: 35%;
 	margin: 0 10%;
 }
 
@@ -200,7 +202,7 @@ body#home #content {
 	position: absolute;
 	right: 10%;
 	bottom: 0;
-	width: 30%;
+	width: 35%;
 	height: 100%;
 	display: block;
 	background: #5d543b; /* brown */

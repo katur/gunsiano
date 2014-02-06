@@ -20,6 +20,7 @@ body#home #content {
 }
 
 #world-wrapper canvas {
+	-webkit-transform: rotate(10deg);
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -107,12 +108,14 @@ body#home #content {
 	margin: 0 10%;
 }
 
-.research-area.left img {
+.research-area.left img,
+.research-area.left #rna-image {
 	float: right;
 	margin-left: 5%;
 }
 
-.research-area.right img {
+.research-area.right img,
+.research-area.right #rna-image {
 	float: left;
 	margin-right: 5%;
 }
@@ -210,6 +213,14 @@ body#home #content {
 
 #rna.research-area {
 	background: #FCECCB; /* cream */
+}
+
+#rna-image {
+	margin: 0;
+	float: left;
+	background-image: url("../img/research/rna/pq_rna_sprite.png");
+	height: 722px;
+	width: 678px;
 }
 
 #mouse.research-area {

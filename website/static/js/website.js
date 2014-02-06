@@ -90,9 +90,33 @@ togglePublications = function() {
 
 homepageScrollEffects = function() {
 	if ($('body#home').length) {
+		rotateMolecule();
 		skrollr.init({
 			smoothScrolling: false,
 			forceHeight: false
 		});
+	}
+}
+
+var moleculeFrameHeight = 722;
+var moleculeFrameWidth = 678;
+var moleculeFrameCount = 20;
+
+rotateMolecule = function() {
+	var molecule = $("#rna-image");
+	var step = 100 / moleculeFrameCount;
+	
+	var viewportHeight = $(window).height();
+	var stepsInViewport = viewportHeight / step;
+
+	var totalSteps = moleculeFrameCount + stepsInViewport;
+
+	molecule.attr("data-bottom-top", "background-position:!0px 0px");
+	
+	var spritePosition;
+	for (var i = 1; i < totalSteps; i++) {
+		spritePosition = moleculeFrameWidth * i * -1;
+		molecule.attr("data--" +  (step * i) + "p-bottom-top",
+				"background-position:!" + spritePosition + "px 0px");
 	}
 }

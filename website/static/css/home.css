@@ -167,23 +167,23 @@ body#home #content {
 	background-repeat: repeat;
 }
 
-#gi-screen.research-area .layer-1.background-image {
+#gi.research-area .layer-1.background-image {
 	background-image: url('../img/research/gi_screens/worms-layer-1.png');
 	opacity: 0.4;
 }
 
-#gi-screen.research-area .layer-2.background-image {
+#gi.research-area .layer-2.background-image {
 	background-image: url('../img/research/gi_screens/worms-layer-2.png');
 	opacity: 0.25;
 }
 
-#gi-screen.research-area .layer-3.background-image {
+#gi.research-area .layer-3.background-image {
 	background-image: url('../img/research/gi_screens/worms-layer-3.png');
 	opacity: 0.15;
 }
 
 /* transparent white layer to make text easier to read over worms */
-#gi-screen.research-area .blurb {
+#gi.research-area .blurb {
 	position: relative;
 	z-index: 2;
 	display: block;

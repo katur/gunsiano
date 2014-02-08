@@ -11,10 +11,17 @@ def home(request):
 	"""
 	Homepage
 	"""
-	r = ResearchArea.objects.all().order_by('display_order')
+	research_areas = {
+		'network': get_object_or_404(ResearchArea, id=1),
+		'cell-bio': get_object_or_404(ResearchArea, id=2),
+		'evolution': get_object_or_404(ResearchArea, id=3),
+		'gi': get_object_or_404(ResearchArea, id=4),
+		'rna': get_object_or_404(ResearchArea, id=5),
+		'mouse': get_object_or_404(ResearchArea, id=6),
+	}
 
 	return render_to_response('home.html', {
-		'research_areas':r
+		'r':research_areas
 	}, context_instance=RequestContext(request))
 
 

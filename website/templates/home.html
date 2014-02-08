@@ -23,64 +23,88 @@
 	</div>
 
 	<div id="research-bubble" class="colorful-bubble">
-		We study the genetic and evolutionary mechanisms underlying early embryonic development.
+		We study the genetic and evolutionary mechanisms
+		underlying early embryonic development.
 	</div>
 
 	<div id="research-areas">
-		{% for area in research_areas %}
-			<div id="{{ area.style_name }}" class="research-area
-				{% if forloop.counter0|divisibleby:"2" %}
-					left
-				{% else %}
-					right
-				{% endif %}
-			">
-
-				<div class="blurb">
-					<h3>{{ area }}</h3>
-					{{ area.description|enhanced_markdown }}
-				</div>
-
-				{% if area.style_name == "cell-bio" %}
-					<div class="video-wrapper">
-						<video loop autoplay>
-							<source src='{{ STATIC_URL }}videos/nathalie.mp4' type="video/mp4">
-							Your browser does not support HTML5 video
-						</video>
-
-						<div class="video-gradient-overlay">
-						</div>
-					</div>
-
-				{% elif area.style_name == "gi-screen" or area.style_name == "network" %}
-					<div class="background-image layer-1"
-							data-bottom-top="background-position:0px 0px;"
-							data-top-bottom="background-position:0px -4000px;">
-					</div>
-					<div class="background-image layer-2"
-							data-bottom-top="background-position:0px 0px;"
-							data-top-bottom="background-position:0px -1000px;">
-					</div>
-					<div class="background-image layer-3"
-							data-bottom-top="background-position:0px 0px;"
-							data-top-bottom="background-position:0px -100px;">
-					</div>
-
-
-				{% elif area.style_name == "evolution" %}
-					<img src="{{ STATIC_URL }}img/research/evolution/tree.png" />
-					<div id="evolution-background-block"
-							data-center-top="height: 100%"
-							data-top-center="height: 0%">
-					</div>
-
-				{% elif area.style_name == "rna" %}
-					<div id="rna-image"></div>
-
-				{% elif area.style_name == "mouse" %}
-
-				{% endif %}
+		<!-- CELL BIO -->
+		<div id="cell-bio" class="research-area left">
+			<div class="blurb">
+				<h3>{{ r.cell-bio.name }}</h3>
+				{{ r.cell-bio.description|enhanced_markdown }}
 			</div>
-		{% endfor %}
+
+			<div class="video-wrapper">
+				<video loop autoplay>
+					<source src='{{ STATIC_URL }}videos/nathalie.mp4' type="video/mp4">
+					Your browser does not support HTML5 video
+				</video>
+				<div class="video-gradient-overlay"></div>
+			</div>
+		</div>
+
+
+		<!-- GI -->
+		<div id="gi" class="research-area right">
+			<div class="blurb">
+				<h3>{{ r.gi.name }}</h3>
+				{{ r.gi.description|enhanced_markdown }}
+			</div>
+
+			<div class="background-image layer-1"
+					data-bottom-top="background-position:0px 0px;"
+					data-top-bottom="background-position:0px -2000px;">
+			</div>
+			<div class="background-image layer-2"
+					data-bottom-top="background-position:0px 0px;"
+					data-top-bottom="background-position:0px -1000px;">
+			</div>
+			<div class="background-image layer-3"
+					data-bottom-top="background-position:0px 0px;"
+					data-top-bottom="background-position:0px -100px;">
+			</div>
+		</div>
+
+		<!-- EVOLUTION -->
+		<div id="evolution" class="research-area left">
+			<div class="blurb">
+				<h3>{{ r.evolution.name }}</h3>
+				{{ r.evolution.description|enhanced_markdown }}
+			</div>
+
+			<img src="{{ STATIC_URL }}img/research/evolution/tree.png" />
+
+			<div id="evolution-background-block"
+					data-center-top="height: 100%"
+					data-top-center="height: 0%">
+			</div>
+		</div>
+
+		<!-- RNA -->
+		<div id="rna" class="research-area right">
+			<div class="blurb">
+				<h3>{{ r.rna.name }}</h3>
+				{{ r.rna.description|enhanced_markdown }}
+			</div>
+
+			<div id="rna-image"></div>
+		</div>
+
+		<!-- NETWORK -->
+		<div id="network" class="research-area left">
+			<div class="blurb">
+				<h3>{{ r.network.name }}</h3>
+				{{ r.network.description|enhanced_markdown }}
+			</div>
+		</div>
+
+		<!-- MOUSE -->
+		<div id="mouse" class="research-area right">
+			<div class="blurb">
+				<h3>{{ r.mouse.name }}</h3>
+				{{ r.mouse.description|enhanced_markdown }}
+			</div>
+		</div>
 	</div>
 {% endblock content %}

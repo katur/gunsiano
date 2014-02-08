@@ -42,15 +42,11 @@ post_init.connect(add_user_location, UserProfile)
 
 class ResearchArea(models.Model):
 	name = models.CharField(max_length=60, unique=True)
-	style_name = models.CharField(max_length=15, blank=True)
-	display_order = models.PositiveSmallIntegerField(unique=True)
 	description = models.TextField('Description',
 		help_text = settings.MARKDOWN_ADMIN_PROMPT,
 	)
 	def __unicode__(self):
 		return self.name
-	class Meta:
-		ordering = ["display_order"]
 
 class Resource(models.Model):
 	name = models.CharField(max_length=40, unique=True)

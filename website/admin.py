@@ -32,13 +32,11 @@ class PositionAdmin(admin.ModelAdmin):
 class ResearchAreaAdmin(admin.ModelAdmin):
 	list_display = (
 		'__unicode__',
-		'display_order'
 	)
 
 class ResourceAdmin(admin.ModelAdmin):
 	list_display = (
 		'__unicode__',
-		'display_order'
 	)
 
 admin.site.register(UserProfile, UserProfileAdmin)

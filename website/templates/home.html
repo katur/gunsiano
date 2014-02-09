@@ -31,36 +31,41 @@
 		<!-- CELL BIO -->
 		<div id="cell-bio" class="research-area left">
 			<div class="blurb">
-				<h3>{{ r.cell-bio.name }}</h3>
-				{{ r.cell-bio.description|enhanced_markdown }}
+				<div class="text">
+					<h3>{{ cell.name }}</h3>
+					{{ cell.description|enhanced_markdown }}
+				</div>
 			</div>
 
-			<div class="video-wrapper">
-				<video loop autoplay>
-					<source src='{{ STATIC_URL }}videos/nathalie.mp4' type="video/mp4">
-					Your browser does not support HTML5 video
-				</video>
-				<div class="video-gradient-overlay"></div>
+			<div class="bling">
+				<div id="cell-video-wrapper">
+					<video loop autoplay>
+						<source src='{{ STATIC_URL }}videos/nathalie.mp4' type="video/mp4">
+						Your browser does not support HTML5 video
+					</video>
+					<div id="cell-video-gradient-overlay"></div>
+				</div>
 			</div>
 		</div>
-
 
 		<!-- GI -->
 		<div id="gi" class="research-area right">
 			<div class="blurb">
-				<h3>{{ r.gi.name }}</h3>
-				{{ r.gi.description|enhanced_markdown }}
+				<div class="text">
+					<h3>{{ gi.name }}</h3>
+					{{ gi.description|enhanced_markdown }}
+				</div>
 			</div>
-
-			<div class="background-image layer-1"
+			
+			<div class="worm-background-image layer-1"
 					data-bottom-top="background-position:0px 0px;"
 					data-top-bottom="background-position:0px -2000px;">
 			</div>
-			<div class="background-image layer-2"
+			<div class="worm-background-image layer-2"
 					data-bottom-top="background-position:0px 0px;"
 					data-top-bottom="background-position:0px -1000px;">
 			</div>
-			<div class="background-image layer-3"
+			<div class="worm-background-image layer-3"
 					data-bottom-top="background-position:0px 0px;"
 					data-top-bottom="background-position:0px -100px;">
 			</div>
@@ -69,41 +74,53 @@
 		<!-- EVOLUTION -->
 		<div id="evolution" class="research-area left">
 			<div class="blurb">
-				<h3>{{ r.evolution.name }}</h3>
-				{{ r.evolution.description|enhanced_markdown }}
+				<div class="text">
+					<h3>{{ evolution.name }}</h3>
+					{{ evolution.description|enhanced_markdown }}
+				</div>
 			</div>
 
-			<img src="{{ STATIC_URL }}img/research/evolution/tree.png" />
+			<div class="bling">
+				<img src="{{ STATIC_URL }}img/research/evolution/tree.png" />
 
-			<div id="evolution-background-block"
-					data-center-top="height: 100%"
-					data-top-center="height: 0%">
+				<div id="evolution-background-block"
+						data-center-top="height: 100%"
+						data-top-center="height: 0%">
+				</div>
 			</div>
 		</div>
 
 		<!-- RNA -->
 		<div id="rna" class="research-area right">
 			<div class="blurb">
-				<h3>{{ r.rna.name }}</h3>
-				{{ r.rna.description|enhanced_markdown }}
+				<div class="text">
+					<h3>{{ rna.name }}</h3>
+					{{ rna.description|enhanced_markdown }}
+				</div>
 			</div>
 
-			<div id="rna-image"></div>
+			<div class="bling">
+				<div id="rna-image"></div>
+			</div>
 		</div>
 
 		<!-- NETWORK -->
 		<div id="network" class="research-area left">
 			<div class="blurb">
-				<h3>{{ r.network.name }}</h3>
-				{{ r.network.description|enhanced_markdown }}
+				<div class="text">
+					<h3>{{ network.name }}</h3>
+					{{ network.description|enhanced_markdown }}
+				</div>
 			</div>
 		</div>
 
 		<!-- MOUSE -->
 		<div id="mouse" class="research-area right">
 			<div class="blurb">
-				<h3>{{ r.mouse.name }}</h3>
-				{{ r.mouse.description|enhanced_markdown }}
+				<div class="text">
+					<h3>{{ mouse.name }}</h3>
+					{{ mouse.description|enhanced_markdown }}
+				</div>
 			</div>
 		</div>
 	</div>

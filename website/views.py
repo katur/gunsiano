@@ -11,17 +11,20 @@ def home(request):
 	"""
 	Homepage
 	"""
-	research_areas = {
-		'network': get_object_or_404(ResearchArea, id=1),
-		'cell-bio': get_object_or_404(ResearchArea, id=2),
-		'evolution': get_object_or_404(ResearchArea, id=3),
-		'gi': get_object_or_404(ResearchArea, id=4),
-		'rna': get_object_or_404(ResearchArea, id=5),
-		'mouse': get_object_or_404(ResearchArea, id=6),
-	}
+	n = get_object_or_404(ResearchArea, id=1)
+	c = get_object_or_404(ResearchArea, id=2)
+	e = get_object_or_404(ResearchArea, id=3)
+	g = get_object_or_404(ResearchArea, id=4)
+	r = get_object_or_404(ResearchArea, id=5)
+	m = get_object_or_404(ResearchArea, id=6)
 
 	return render_to_response('home.html', {
-		'r':research_areas
+		'network':n,
+		'cell':c,
+		'evolution':e,
+		'gi':g,
+		'rna':r,
+		'mouse':m
 	}, context_instance=RequestContext(request))
 
 

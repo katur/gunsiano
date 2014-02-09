@@ -9,6 +9,7 @@ body#home #content {
 	text-align: center;
 }
 
+/* world stuff */
 #world-wrapper {
 	float: left;
 	position: relative;
@@ -45,6 +46,7 @@ body#home #content {
 	top: 295px;
 }
 
+/* green bubble */
 #research-bubble {
 	width: 800px;
 	float: left;
@@ -70,16 +72,7 @@ body#home #content {
 	margin-left: -10px;
 }
 
-#research-areas {
-	font-size: 20px;
-	line-height: 175%;
-}
-
-#research-areas h3 {
-	font-size: 20px;
-	margin-bottom: 20px;
-}
-
+/* universal to research areas */
 .research-area {
 	float: left;
 	position: relative;
@@ -88,60 +81,59 @@ body#home #content {
 	padding: 120px 0;
 }
 
-.research-area .blurb {
-	width: 40%;
-	margin: 0 10%;
+.research-area .blurb, .research-area .bling {
+	width: 50%;
 }
 
-.research-area.left .blurb {
+.research-area.left .blurb, .research-area.right .bling {
 	float: left;
-	margin-right: 0;
 }
 
-.research-area.right .blurb {
+.research-area.right .blurb, .research-area.left .bling {
 	float: right;
-	margin-left: 0;
 }
 
-.research-area img {
-	width: 35%;
-	margin: 0 10%;
+.research-area .blurb .text {
+	width: 90%;
+	margin: 0;
+	line-height: 175%;
+	font-size: 20px;
 }
 
-.research-area.left img,
-.research-area.left #rna-image {
-	float: right;
-	margin-left: 5%;
+.research-area.left .blurb .text {
+	margin-left: 10%;
 }
 
-.research-area.right img,
-.research-area.right #rna-image {
-	float: left;
-	margin-right: 5%;
+.research-area.right .blurb .text {
+	margin-right: 10%;
 }
 
-.research-area.left .video-wrapper {
-	float: right;
-	margin-left: 5%;
+.research-area h3 {
+	margin-bottom: 20px;
+	font-size: 20px;
 }
 
-.research-area.right .video-wrapper {
-	float: left;
-	margin-right: 5%;
+/************
+ * CELL BIO *
+ * **********/
+#cell-bio.research-area {
+	background: black;
+	color: white;
 }
 
-.research-area .video-wrapper {
+#cell-video-wrapper {
+	/* relative for gradient overlay to work */
 	position: relative;
-	width: 35%;
-	margin: 0 10%;
+	width: 90%;
+	margin: 0 5%;
 }
 
-.research-area video {
+#cell-video-wrapper video {
 	width: 100%;
 }
 
 /* overlay helps obscure the almost-black rectangular background of video */
-.research-area .video-gradient-overlay {
+#cell-video-gradient-overlay {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -156,8 +148,11 @@ body#home #content {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
+/******
+ * GI *
+ * ****/
 /* each skrollr layer */
-.research-area .background-image {
+.worm-background-image {
 	position: absolute;
 	z-index: 1;
 	top: 0;
@@ -167,17 +162,17 @@ body#home #content {
 	background-repeat: repeat;
 }
 
-#gi.research-area .layer-1.background-image {
+.layer-1.worm-background-image {
 	background-image: url('../img/research/gi_screens/worms-layer-1.png');
 	opacity: 0.4;
 }
 
-#gi.research-area .layer-2.background-image {
+.layer-2.worm-background-image {
 	background-image: url('../img/research/gi_screens/worms-layer-2.png');
 	opacity: 0.25;
 }
 
-#gi.research-area .layer-3.background-image {
+.layer-3.worm-background-image {
 	background-image: url('../img/research/gi_screens/worms-layer-3.png');
 	opacity: 0.15;
 }
@@ -190,43 +185,58 @@ body#home #content {
 	background: rgba(255,255,255,0.7);
 }
 
+/*************
+ * EVOLUTION *
+ * ***********/
+#evolution.research-area {
+	/* brown */
+	background: #5d543b;
+	color: white;
+}
+
+#evolution.research-area img {
+	width: 60%;
+	margin: 0 20%;
+}
+
+#evolution-background-block {
+	position: absolute;
+	display: block;
+	width: 50%;
+	height: 100%;
+	right: 0;
+	bottom: 0;
+	
+	/* brown */
+	background: #5d543b;
+}
+
+/*******
+ * RNA *
+ * *****/
+#rna.research-area {
+	/* cream */
+	background: #FCECCB;
+}
+
+#rna-image {
+	height: 722px;
+	width: 678px;
+	margin: auto;
+	background-image: url("../img/research/rna/pq_rna_sprite.png");
+}
+
+/***********
+ * NETWORK *
+ * *********/
 #network.research-area {
 	/* same purple as links */
 	background: #937AA9;
 	color: white;
 }
 
-#evolution.research-area {
-	background: #5d543b; /* brown */
-	color: white;
-}
-
-#evolution-background-block {
-	position: absolute;
-	right: 10%;
-	bottom: 0;
-	width: 35%;
-	height: 100%;
-	display: block;
-	background: #5d543b; /* brown */
-}
-
-#rna.research-area {
-	background: #FCECCB; /* cream */
-}
-
-#rna-image {
-	margin: 0;
-	float: left;
-	background-image: url("../img/research/rna/pq_rna_sprite.png");
-	height: 722px;
-	width: 678px;
-}
-
+/*********
+ * MOUSE *
+ * *******/
 #mouse.research-area {
-}
-
-#cell-bio.research-area {
-	background: black;
-	color: white;
 }

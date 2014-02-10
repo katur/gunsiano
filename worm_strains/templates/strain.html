@@ -16,9 +16,12 @@
 				{% endif %}
 
 				{% if strain.on_wormbase %}
-					<span><a href="http://www.wormbase.org/species/c_elegans/strain/{{ strain }}" target="_blank">
-						See strain on wormbase
-					</a></span>
+					<span>
+						<a class="external-link"
+								href="http://www.wormbase.org/species/c_elegans/strain/{{ strain }}">
+							See strain on wormbase
+						</a>
+					</span>
 				{% endif %}
 
 				{% if strain.genotype%}

@@ -9,7 +9,7 @@
 {% block content %}
 	<div id="resources">
 	{% for resource in resources %}
-		<a target="_blank" href="{{ resource.url }}">
+		<a href="{{ resource.url }}">
 			<div class="resource">
 				<img width="160px"
 						src="{{ STATIC_URL }}img/resource_logos/{{ resource.logo_filename }}" />

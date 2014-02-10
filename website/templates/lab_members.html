@@ -38,11 +38,7 @@
 								<a class="external-link" href="{{ profile.url }}">
 							{% endif %}
 
-							{{ profile.user.get_full_name }}
-
-							{% if profile.blurb or profile.url %}
-								</a>
-							{% endif %}
+							{{ profile.user.get_full_name }}{% if profile.blurb or profile.url %}</a>{% endif %}
 
 							<span class="nyu-location">
 								{{ profile.location }}
@@ -70,11 +66,7 @@
 							<a class="external-link" href="{{ profile.url }}">
 						{% endif %}
 
-						{{ profile.user.get_full_name }}
-
-						{% if profile.blurb or profile.url %}
-							</a>
-						{% endif %}
+						{{ profile.user.get_full_name }}{% if profile.blurb or profile.url %}</a>{% endif %}
 						<span class="position">{{ profile.position.position }}</span>
 
 						<span class="nyu-location">{{ profile.location }}</span>

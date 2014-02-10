@@ -82,11 +82,11 @@ def contact(request):
 	return render_to_response('contact.html', context_instance=RequestContext(request))
 
 
-def jobs(request):
+def join(request):
 	"""
-	Jobs Page
+	Join the Lab Page
 	"""
-	return render_to_response('jobs.html', context_instance=RequestContext(request))
+	return render_to_response('join.html', context_instance=RequestContext(request))
 
 
 def publications(request):

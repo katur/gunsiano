@@ -3,7 +3,7 @@
 	{% url 'lab_members_url' as lab_members_url %}
 	{% url 'publications_url' as publications_url %}
 	{% url 'resources_url' as resources_url %}
-	{% url 'jobs_url' as jobs_url %}
+	{% url 'join_url' as join_url %}
 	{% url 'contact_url' as contact_url %}
 
 	<a href="{{ home_url }}"
@@ -30,8 +30,8 @@
 		{% endifequal %}>
 		Publications
 	</a>
-	<a href="{{ jobs_url }}"
-		{% ifequal request.path jobs_url %}
+	<a href="{{ join_url }}"
+		{% ifequal request.path join_url %}
 			class="active"
 		{% endifequal %}>
 		Join the Lab

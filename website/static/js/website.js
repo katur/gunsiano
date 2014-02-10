@@ -61,13 +61,14 @@ draw = function() {
 		ctx.lineWidth=3;
 
 		var startTime = 0;
-		var x = 128;
-		var y = 250;
+		var xStart = 128;
+		var x = 0;
+		var y = 275;
 
-		for (var i=0; i<33; i++) {
-			drawWormCycle(startTime, x, y);
+		for (i=0; i<1000; i++) {
+			drawWormCycle(startTime, xStart + x, y);
 			startTime += 800;
-			x+=20;
+			x = (x + 20) % 260;
 		}
 	}
 }
@@ -105,14 +106,14 @@ var moleculeFrameCount = 20;
 rotateMolecule = function() {
 	var molecule = $("#rna-image");
 	var step = 100 / moleculeFrameCount;
-	
+
 	var viewportHeight = $(window).height();
 	var stepsInViewport = viewportHeight / step;
 
 	var totalSteps = moleculeFrameCount + stepsInViewport;
 
 	molecule.attr("data-bottom-top", "background-position:!0px 0px");
-	
+
 	var spritePosition;
 	for (var i = 1; i < totalSteps; i++) {
 		spritePosition = moleculeFrameWidth * i * -1;

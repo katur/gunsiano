@@ -1,6 +1,6 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
-from website.models import User, UserProfile, ResearchArea, Resource
+from website.models import User, UserProfile, ResearchArea, Resource, JoinLabSection
 from django.contrib.auth.decorators import login_required
 import string, math
 import xml.etree.ElementTree as ET
@@ -86,7 +86,11 @@ def join(request):
 	"""
 	Join the Lab Page
 	"""
-	return render_to_response('join.html', context_instance=RequestContext(request))
+	j = JoinLabSection.objects.all().order_by('display_order')
+
+	return render_to_response('join.html', {
+		'sections':j
+	}, context_instance=RequestContext(request))
 
 
 def publications(request):

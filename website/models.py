@@ -60,3 +60,12 @@ class Resource(models.Model):
 		return self.name
 	class Meta:
 		ordering = ["display_order"]
+
+class JoinLabSection(models.Model):
+	title = models.CharField(max_length=100, unique=True)
+	description = models.TextField('Description',
+		help_text = settings.MARKDOWN_ADMIN_PROMPT,
+	)
+	display_order = models.PositiveSmallIntegerField(unique=True)
+	def __unicode__(self):
+		return self.title

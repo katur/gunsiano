@@ -9,20 +9,17 @@
 {% block content %}
 	<span id="welcome-sentence">
 		Welcome to the labs of Drs.
-		<a href="http://biology.as.nyu.edu/object/KrisGunsalus.html"
-				title="Kris Gunsalus Faculty Page">
-			Kris Gunsalus
-		</a>
+		<a href="http://biology.as.nyu.edu/object/KrisGunsalus.html">
+			Kris Gunsalus</a>
 		and
-		<a href="http://biology.as.nyu.edu/object/FabioPiano.html"
-				title="Fabio Piano Faculty Page">
-			Fabio Piano
-		</a>
+		<a href="http://biology.as.nyu.edu/object/FabioPiano.html">
+			Fabio Piano</a>
 		at NYU New York City and NYU Abu Dhabi.
 	</span>
 
 	<div id="world-wrapper">
-		<canvas id="world-worms" width="562" height="536">
+		<canvas id="world-worms" width="562" height="536"
+				title="image of world with worm moving between NYC and Abu Dhabi">
 			<!-- here, add pic of worm for browsers that do not support html5 -->
 		</canvas>
 		<div id="nyc" class="dot"></div>
@@ -46,8 +43,8 @@
 
 			<div class="bling">
 				<div id="cell-video-wrapper">
-					<video loop autoplay>
-						<source src='{{ STATIC_URL }}videos/nathalie.mp4' type="video/mp4">
+					<video loop autoplay title="GFP::Moesin in early embryogenesis">
+						<source src="{{ STATIC_URL }}videos/nathalie.mp4" type="video/mp4">
 						Your browser does not support HTML5 video
 					</video>
 					<div id="cell-video-gradient-overlay"></div>
@@ -65,14 +62,17 @@
 			</div>
 
 			<div class="worm-background-image layer-1"
+					title="background image of gray worms that shift position on scroll"
 					data-bottom-top="background-position:0px 0px;"
 					data-top-bottom="background-position:0px -2000px;">
 			</div>
 			<div class="worm-background-image layer-2"
+					title="background image of gray worms that shift position on scroll"
 					data-bottom-top="background-position:0px 0px;"
 					data-top-bottom="background-position:0px -1000px;">
 			</div>
 			<div class="worm-background-image layer-3"
+					title="background image of gray worms that shift position on scroll"
 					data-bottom-top="background-position:0px 0px;"
 					data-top-bottom="background-position:0px -100px;">
 			</div>
@@ -88,7 +88,8 @@
 			</div>
 
 			<div class="bling">
-				<img src="{{ STATIC_URL }}img/research/evolution/tree.png" />
+				<img alt="nematode phylogeny tree"
+						src="{{ STATIC_URL }}img/research/evolution/tree.png" />
 
 				<div id="evolution-background-block"
 						data-center-top="height: 100%"
@@ -107,7 +108,7 @@
 			</div>
 
 			<div class="bling">
-				<div id="rna-image"></div>
+				<div id="rna-image" title="rotating molecule"></div>
 			</div>
 		</div>
 

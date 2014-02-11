@@ -15,7 +15,10 @@
 		{% endif %}
 
 		{% if member.get_profile.image_filename %}
-			<img src="{{ STATIC_URL }}img/lab_members/{{ member.get_profile.image_filename }}" />
+			<img
+					src="{{ STATIC_URL }}img/lab_members/{{ member.get_profile.image_filename }}"
+					alt="profile pic for this lab member"
+			/>
 		{% endif %}
 	</div>
 {% endblock content %}

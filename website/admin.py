@@ -1,12 +1,13 @@
 from django.contrib import admin
 from moderation.admin import ModerationAdmin
-from website.models import UserProfile, Position, ResearchArea, Resource
+from website.models import *
 
 class UserProfileAdmin(admin.ModelAdmin):
 	list_display = (
 		'__unicode__',
 		'net_id',
 		'url',
+		'image_filename',
 		'is_current',
 		'in_abu_dhabi'
 	)
@@ -25,7 +26,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 class PositionAdmin(admin.ModelAdmin):
 	list_display = (
-		'position',
+		'__unicode__',
 		'display_order'
 	)
 
@@ -37,9 +38,18 @@ class ResearchAreaAdmin(admin.ModelAdmin):
 class ResourceAdmin(admin.ModelAdmin):
 	list_display = (
 		'__unicode__',
+		'url',
+		'display_order'
+	)
+
+class JoinLabSectionAdmin(admin.ModelAdmin):
+	list_display = (
+		'__unicode__',
+		'display_order'
 	)
 
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Position, PositionAdmin)
 admin.site.register(ResearchArea, ResearchAreaAdmin)
 admin.site.register(Resource, ResourceAdmin)
+admin.site.register(JoinLabSection, JoinLabSectionAdmin)

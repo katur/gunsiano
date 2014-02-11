@@ -6,14 +6,26 @@ class WormStrainAdmin(admin.ModelAdmin):
 		'name',
 		'species',
 		'genotype',
+		'mutagen',
+		'created_by',
+		'date_created',
+		'on_wormbase'
 	)
 	list_filter = ('created_by',)
+
+
+class WormLabAdmin(admin.ModelAdmin):
+	list_display = (
+		'lab',
+		'strain_code',
+		'allele_code'
+	)
+
 
 class WormStrainLineAdmin(admin.ModelAdmin):
 	list_display = (
 		'strain',
 		'created_internally',
-		'times_outcrossed',
 		'received_from',
 		'received_by',
 		'date_received'
@@ -26,6 +38,6 @@ class WormStrainLineAdmin(admin.ModelAdmin):
 admin.site.register(WormSpecies)
 admin.site.register(Mutagen)
 admin.site.register(Transgene)
-admin.site.register(WormLab)
+admin.site.register(WormLab, WormLabAdmin)
 admin.site.register(WormStrain, WormStrainAdmin)
 admin.site.register(WormStrainLine, WormStrainLineAdmin)

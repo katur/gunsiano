@@ -27,7 +27,7 @@ class UserProfile(models.Model):
 	def __unicode__(self):
 		return self.user.get_full_name()
 	class Meta:
-		ordering = ["net_id"]
+		ordering = ["user__last_name", "user__first_name"]
 
 def add_user_location(**kwargs):
 	instance = kwargs.get('instance')
@@ -45,6 +45,8 @@ class ResearchArea(models.Model):
 	description = models.TextField('Description',
 		help_text = settings.MARKDOWN_ADMIN_PROMPT,
 	)
+	class Meta:
+		ordering = ["name"]
 	def __unicode__(self):
 		return self.name
 
@@ -69,3 +71,5 @@ class JoinLabSection(models.Model):
 	display_order = models.PositiveSmallIntegerField(unique=True)
 	def __unicode__(self):
 		return self.title
+	class Meta:
+		ordering = ["display_order"]

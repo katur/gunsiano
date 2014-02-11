@@ -19,8 +19,8 @@ class StockAdmin(admin.ModelAdmin):
 
 class ContainerTypeAdmin(admin.ModelAdmin):
 	list_display = (
-		'name',
 		'supertype',
+		'name',
 		'slots_vertical',
 		'slots_horizontal',
 	)
@@ -28,13 +28,15 @@ class ContainerTypeAdmin(admin.ModelAdmin):
 
 class ContainerAdmin(admin.ModelAdmin):
 	list_display = (
-		'name',
+		'id',
 		'type',
-		'owner',
+		'name',
 		'parent',
 		'vertical_position',
 		'horizontal_position',
+		'owner',
 		'stock',
+		'is_thawed',
 	)
 	list_filter = ('type', 'owner')
 

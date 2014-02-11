@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
 class MyUserAdmin(UserAdmin):
-	list_display = UserAdmin.list_display + ('is_active', 'is_superuser',)
+	list_display = ('get_full_name',) + UserAdmin.list_display + ('is_active', 'is_superuser',)
 
 	# for non-superusers, limit the editable users to the logged in user
 	def queryset(self, request):
@@ -21,9 +21,7 @@ class MyUserAdmin(UserAdmin):
 	def change_view(self, request, object_id, extra_context=None):
 		if not request.user.is_superuser:
 			self.fieldsets = self.safe_fieldsets
-			return UserAdmin.change_view(self, request, object_id, extra_context=None)
-		else:
-			return UserAdmin.change_view(self, request, object_id, extra_context=None)
+		return UserAdmin.change_view(self, request, object_id, extra_context=None)
 
 admin.site.unregister(User)
 admin.site.register(User, MyUserAdmin)

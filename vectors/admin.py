@@ -3,6 +3,7 @@ from vectors.models import Vector
 
 class VectorAdmin(admin.ModelAdmin):
 	list_display = (
+		'id',
 		'name',
 		'parent_vector',
 		'created_by',

@@ -8,12 +8,16 @@ import string, re
 
 class WormSpecies(models.Model):
 	name = models.CharField(max_length=50, unique=True)
+	class Meta:
+		ordering = ["name"]
 	def __unicode__(self):
 		return self.name
 
 
 class Mutagen(models.Model):
 	mutagen = models.CharField(max_length=50)
+	class Meta:
+		ordering = ["mutagen"]
 	def __unicode__(self):
 		return self.mutagen
 
@@ -21,6 +25,8 @@ class Mutagen(models.Model):
 class Transgene(models.Model):
 	name = models.CharField(max_length=10, blank=True)
 	vector = models.ForeignKey(Vector, null=True)
+	class Meta:
+		ordering = ["name"]
 	def __unicode__(self):
 		return self.name
 
@@ -29,6 +35,8 @@ class WormLab(models.Model):
 	lab = models.CharField(max_length=200)
 	strain_code = models.CharField(max_length=5)
 	allele_code = models.CharField(max_length=5, blank=True)
+	class Meta:
+		ordering = ["lab"]
 	def __unicode__(self):
 		return self.lab
 
@@ -46,6 +54,9 @@ class WormStrain(models.Model):
 	remarks = models.TextField(blank=True,
 		help_text = settings.MARKDOWN_ADMIN_PROMPT,
 	)
+	class Meta:
+		ordering = ["name"]
+
 	def __unicode__(self):
 		return self.name
 
@@ -93,5 +104,7 @@ class WormStrainLine(models.Model):
 	remarks = models.TextField(blank=True,
 		help_text = settings.MARKDOWN_ADMIN_PROMPT,
 	)
+	class Meta:
+		ordering = ["strain__name"]
 	def __unicode__(self):
 		return self.strain.name

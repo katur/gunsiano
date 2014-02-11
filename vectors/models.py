@@ -9,5 +9,7 @@ class Vector(models.Model):
 	gene = models.CharField(max_length=50, blank=True)
 	promoter = models.CharField(max_length=50, blank=True)
 	three_prime_utr = models.CharField(max_length=50, blank=True)
+	class Meta:
+		ordering = ["id"]
 	def __unicode__(self):
 		return self.name

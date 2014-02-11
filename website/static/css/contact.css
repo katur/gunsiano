@@ -29,12 +29,11 @@
 }
 
 #contact ul {
-	margin-top: 2px;
-	margin-bottom: 0px;
 	list-style-type: disc;
 	list-style-position: inside;
 }
 
 #contact ul li {
+	margin-top: 4px;
 	padding-left: 20px;
 }

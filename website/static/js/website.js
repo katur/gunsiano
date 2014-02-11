@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	draw();
-	togglePublications();
 	homepageScrollEffects();
+	togglePublications();
 })
 
 draw = function() {
@@ -73,22 +73,6 @@ draw = function() {
 	}
 }
 
-togglePublications = function() {
-	$("#pub-menu a").click(function() {
-		// have only clicked menu item be active
-		$("#pub-menu a").removeClass("active");
-		$(this).addClass("active");
-
-		// make counts and publications invisible
-		$("#pub-count span").addClass("invisible");
-		$(".publications").addClass("invisible");
-
-		// make only the relevant count and publications display
-		selector = $(this).attr("id");
-		$("." + selector).removeClass("invisible");
-	})
-}
-
 homepageScrollEffects = function() {
 	if ($('body#home').length) {
 		rotateMolecule();
@@ -120,4 +104,20 @@ rotateMolecule = function() {
 		molecule.attr("data--" +  (step * i) + "p-bottom-top",
 				"background-position:!" + spritePosition + "px 0px");
 	}
+}
+
+togglePublications = function() {
+	$("#pub-menu a").click(function() {
+		// have only clicked menu item be active
+		$("#pub-menu a").removeClass("active");
+		$(this).addClass("active");
+
+		// make counts and publications invisible
+		$("#pub-count span").addClass("invisible");
+		$(".publications").addClass("invisible");
+
+		// make only the relevant count and publications display
+		selector = $(this).attr("id");
+		$("." + selector).removeClass("invisible");
+	})
 }

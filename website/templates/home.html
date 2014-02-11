@@ -9,11 +9,11 @@
 {% block content %}
 	<span id="welcome-sentence">
 		Welcome to the labs of Drs.
-		<a href="http://biology.as.nyu.edu/object/KrisGunsalus.html">
-			Kris Gunsalus</a>
+		<a href="{{ fabio.get_profile.url }}">
+			{{ fabio.get_full_name }}</a>
 		and
-		<a href="http://biology.as.nyu.edu/object/FabioPiano.html">
-			Fabio Piano</a>
+		<a href="{{ kris.get_profile.url }}">
+			{{ kris.get_full_name }}</a>
 		at NYU New York City and NYU Abu Dhabi.
 	</span>
 

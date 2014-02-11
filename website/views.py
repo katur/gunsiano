@@ -17,6 +17,8 @@ def home(request):
 	g = get_object_or_404(ResearchArea, id=4)
 	r = get_object_or_404(ResearchArea, id=5)
 	m = get_object_or_404(ResearchArea, id=6)
+	kris = get_object_or_404(User, username='kris')
+	fabio = get_object_or_404(User, username='fabio')
 
 	return render_to_response('home.html', {
 		'network':n,
@@ -24,7 +26,9 @@ def home(request):
 		'evolution':e,
 		'gi':g,
 		'rna':r,
-		'mouse':m
+		'mouse':m,
+		'fabio':fabio,
+		'kris':kris,
 	}, context_instance=RequestContext(request))
 
 
@@ -32,7 +36,7 @@ def lab_members(request):
 	"""
 	Page listing all lab members
 	"""
-	# current lab members must be ordered by position to utilize "group by" in template
+	# current lab members must be ordered by position to "group by" in template
 	current = UserProfile.objects.all().filter(is_current=True).order_by(
 		'position__display_order',
 		'user__last_name'
@@ -75,24 +79,6 @@ def resources(request):
 	}, context_instance=RequestContext(request))
 
 
-def contact(request):
-	"""
-	Contact Page
-	"""
-	return render_to_response('contact.html', context_instance=RequestContext(request))
-
-
-def join(request):
-	"""
-	Join the Lab Page
-	"""
-	j = JoinLabSection.objects.all().order_by('display_order')
-
-	return render_to_response('join.html', {
-		'sections':j
-	}, context_instance=RequestContext(request))
-
-
 def publications(request):
 	"""
 	Page for publications, fetched dynamically from PubMed
@@ -103,7 +89,7 @@ def publications(request):
 	# used to work: xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=18qVEVbjJjoq2mO-bQKE6E_-D4pje3l2O5Jd1cFE70SdwIYw_1")
 	# used to work: xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy")
 
-	# fxns to bolden or italicize a search term in a string
+	# make a search term in a string bold or italicized
 	def embolden(s, term):
 		return string.replace(s, term, "<b>" + term + "</b>")
 
@@ -119,7 +105,6 @@ def publications(request):
 	tree = ET.parse(xml_file)
 	root = tree.getroot()
 	for publication in root.iter('item'):
-		# extract the description for manipulation
 		d = publication.find('description').text
 
 		# italicize species names
@@ -130,7 +115,6 @@ def publications(request):
 		d = italicize(d, "Protorhabditis")
 		d = italicize(d, "S. cerevisiae")
 
-		# embolden PI names, and add the publication to PI-specific lists
 		if "Piano F" in d:
 			pub_fabio.append(publication)
 			d = embolden(d, "Piano F")
@@ -150,10 +134,36 @@ def publications(request):
 	}, context_instance=RequestContext(request))
 
 
+def join(request):
+	"""
+	Join the Lab Page
+	"""
+	sections = JoinLabSection.objects.all().order_by('display_order')
+	jessica = get_object_or_404(User, username='jessica')
+
+	return render_to_response('join.html', {
+		'sections':sections,
+		'jessica':jessica,
+	}, context_instance=RequestContext(request))
+
+
+def contact(request):
+	"""
+	Contact Page
+	"""
+	fabio = get_object_or_404(User, username='fabio')
+	jessica = get_object_or_404(User, username='jessica')
+	kris = get_object_or_404(User, username='kris')
+	return render_to_response('contact.html', {
+		'fabio':fabio,
+		'jessica':jessica,
+		'kris':kris,
+	}, context_instance=RequestContext(request))
+
+
 @login_required
 def lab_tools(request):
 	"""
 	Internal Lab Tools landing page
 	"""
-	# render page
 	return render_to_response('lab_tools.html', context_instance=RequestContext(request))

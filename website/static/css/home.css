@@ -240,3 +240,15 @@ body#home #content {
  * *******/
 #mouse.research-area {
 }
+
+@media (max-width: 1200px) {
+	.research-area .blurb .text {
+		font-size: 18px;
+	}
+}
+
+@media (max-width: 600px) {
+	.research-area .blurb .text {
+		font-size: 16px;
+	}
+}

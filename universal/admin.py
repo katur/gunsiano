@@ -12,14 +12,17 @@ class MyUserAdmin(UserAdmin):
 			return qs
 		return qs.filter(username=request.user)
 
-	# define a subset of safe fieldsets that non-superusers can access
+	# fieldsets that are safe for non-superusers to access
 	safe_fieldsets = (
 		(None, {'fields': ('username', 'password')}),
 		(('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
 	)
 
 	def change_view(self, request, object_id, extra_context=None):
-		if not request.user.is_superuser:
+		# both cases necessary to toggle between types of users being logged in
+		if request.user.is_superuser:
+			self.fieldsets = UserAdmin.fieldsets
+		else:
 			self.fieldsets = self.safe_fieldsets
 		return UserAdmin.change_view(self, request, object_id, extra_context=None)
 

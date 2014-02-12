@@ -37,13 +37,21 @@ def lab_members(request):
 	Page listing all lab members
 	"""
 	# current lab members must be ordered by position to "group by" in template
-	current = UserProfile.objects.all().filter(is_current=True).order_by(
+	current = UserProfile.objects.all().filter(
+		user__is_active=True,
+		is_current=True,
+	).order_by(
 		'position__display_order',
-		'user__last_name'
+		'user__last_name',
+		'user__first_name',
 	)
 
-	former = UserProfile.objects.all().filter(is_current=False).order_by(
-		'user__last_name'
+	former = UserProfile.objects.all().filter(
+		user__is_active=True,
+		is_current=False,
+	).order_by(
+		'user__last_name',
+		'user__first_name'
 	)
 
 	column_length = math.ceil(len(former) / 3.0)

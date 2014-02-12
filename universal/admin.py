@@ -26,7 +26,7 @@ class MyUserAdmin(UserAdmin):
 
 	def get_fieldsets(self, request, obj=None):
 		unprivileged_fieldsets = (
-			(None, {'fields': ('password', )}),
+			(('Password'), {'fields': ('password', )}),
 			(('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
 		)
 		if request.user.has_personnel_admin_privileges():

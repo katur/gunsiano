@@ -26,7 +26,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 	def get_fieldsets(self, request, obj=None):
 		unprivileged_fieldsets = (
 			(('Personal info'), {'fields': ('net_id',)}),
-			(('Shows on Public Website'), {'fields': ('url', 'blurb',)}),
+			(('Public Profile info'), {'fields': ('url', 'blurb',)}),
 		)
 		if request.user.has_personnel_admin_privileges():
 			return super(UserProfileAdmin, self).get_fieldsets(request, obj)

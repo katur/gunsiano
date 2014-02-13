@@ -27,14 +27,17 @@ class MyUserAdmin(UserAdmin):
 		return qs.filter(username=request.user)
 
 	def get_fieldsets(self, request, obj=None):
-		unprivileged_fieldsets = (
-			(('Password'), {'fields': ('password', )}),
-			(('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
-		)
-		if request.user.has_personnel_admin_privileges():
-			return UserAdmin.fieldsets
+		if obj:
+			unprivileged_fieldsets = (
+				(('Password'), {'fields': ('password', )}),
+				(('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+			)
+			if request.user.has_personnel_admin_privileges():
+				return self.declared_fieldsets
+			else:
+				return unprivileged_fieldsets
 		else:
-			return unprivileged_fieldsets
+			return self.add_fieldsets
 
 
 admin.site.unregister(User)

@@ -4,7 +4,7 @@
 
 {% block branding %}
 <h1 id="site-name">
-	Lab Website Administration
+	<a href="{% url 'admin:index' %}">Lab Website Administration</a>
 </h1>
 {% endblock %}
 
@@ -17,8 +17,8 @@
 </style>
 
 <a href="/" id="admin-menu-site-home" class="admin-menu-item">Back To Lab Website</a>
-<a href="/admin/" class="admin-menu-item">Admin Home</a>
-<a href="/admin/auth/user/" class="admin-menu-item">Django Default User Info</a>
-<a href="/admin/website/userprofile/" class="admin-menu-item">Custom User Info</a>
+<a href="{% url 'admin:index' %}" class="admin-menu-item">Admin Home</a>
+<a href="{% url 'admin:index' %}auth/user/" class="admin-menu-item">Django Default User Admin</a>
+<a href="{% url 'admin:index' %}website/userprofile/" class="admin-menu-item">Custom User Admin</a>
 
 {% endblock %}

@@ -6,7 +6,7 @@ from website.models import *
 
 class UserProfileAdmin(admin.ModelAdmin):
 	list_display = (
-		'user', 'first_name', 'last_name',
+		'first_name', 'last_name', 'user',
 		'net_id', 'url', 'image_filename',
 		'is_current', 'in_abu_dhabi'
 	)

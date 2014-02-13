@@ -40,7 +40,7 @@ class UserProfile(models.Model):
 		return self.user.last_name
 
 	class Meta:
-		ordering = ["user__username"]
+		ordering = ["user__first_name", "user__last_name"]
 
 
 def add_user_location(**kwargs):

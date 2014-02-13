@@ -9,10 +9,12 @@ class MyUserAdmin(UserAdmin):
 	are editable by non-privileged users
 	"""
 	list_display = (
-		'username', 'first_name', 'last_name', 'email',
+		'first_name', 'last_name', 'username', 'email',
 		'is_active', 'is_staff', 'has_personnel_admin_privileges',
 		'is_superuser',
 	)
+
+	ordering = ('first_name', 'last_name')
 
 	def queryset(self, request):
 		"""

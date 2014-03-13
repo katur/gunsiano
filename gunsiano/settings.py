@@ -199,7 +199,7 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 from django.core.servers.basehttp import WSGIServer
 WSGIServer.request_queue_size = 10
 
-MARKDOWN_ADMIN_PROMPT = '''Use Markdown syntax.
+MARKDOWN_PROMPT = '''Use Markdown syntax.
 			See
 			<a href="http://www.darkcoding.net/software/markdown-quick-reference" target="_blank">
 			a quick reference</a>,

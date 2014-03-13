@@ -8,25 +8,31 @@ import string, re
 
 class WormSpecies(models.Model):
 	name = models.CharField(max_length=50, unique=True)
+
 	class Meta:
 		ordering = ["name"]
+
 	def __unicode__(self):
 		return self.name
 
 
 class Mutagen(models.Model):
 	mutagen = models.CharField(max_length=50)
+
 	class Meta:
 		ordering = ["mutagen"]
+
 	def __unicode__(self):
 		return self.mutagen
 
 
 class Transgene(models.Model):
 	name = models.CharField(max_length=10, blank=True)
-	vector = models.ForeignKey(Vector, null=True)
+	vector = models.ForeignKey(Vector, null=True, blank=True)
+
 	class Meta:
 		ordering = ["name"]
+
 	def __unicode__(self):
 		return self.name
 
@@ -35,8 +41,10 @@ class WormLab(models.Model):
 	lab = models.CharField(max_length=200)
 	strain_code = models.CharField(max_length=5)
 	allele_code = models.CharField(max_length=5, blank=True)
+
 	class Meta:
 		ordering = ["lab"]
+
 	def __unicode__(self):
 		return self.lab
 
@@ -46,14 +54,13 @@ class WormStrain(models.Model):
 	on_wormbase = models.BooleanField(default=False)
 	species = models.ForeignKey(WormSpecies, default=1)
 	genotype = models.CharField(max_length=500, blank=True)
-	parent_strain = models.ForeignKey('self', null=True)
-	transgene = models.ForeignKey(Transgene, null=True)
-	mutagen = models.ForeignKey(Mutagen, null=True)
-	date_created = models.DateField(null=True)
-	created_by = models.ForeignKey(User, null=True)
-	remarks = models.TextField(blank=True,
-		help_text = settings.MARKDOWN_ADMIN_PROMPT,
-	)
+	parent_strain = models.ForeignKey('self', null=True, blank=True)
+	transgene = models.ForeignKey(Transgene, null=True, blank=True)
+	mutagen = models.ForeignKey(Mutagen, null=True, blank=True)
+	date_created = models.DateField(null=True, blank=True)
+	created_by = models.ForeignKey(User, null=True, blank=True)
+	remarks = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
+
 	class Meta:
 		ordering = ["name"]
 
@@ -82,6 +89,7 @@ class WormStrain(models.Model):
 					return -1
 				else: # strain names must be unique, so necessarily >
 					return 1
+
 		else: # if one or both strains are not properly named
 			slower = self.name.lower()
 			olower = other.name.lower()
@@ -94,17 +102,17 @@ class WormStrain(models.Model):
 
 
 class WormStrainLine(models.Model):
-	stockable = models.ForeignKey(Stockable, null=True)
-	strain = models.ForeignKey(WormStrain, null=True)
+	stockable = models.ForeignKey(Stockable, null=True, blank=True)
+	strain = models.ForeignKey(WormStrain, null=True, blank=True)
 	created_internally = models.BooleanField(default=False)
-	times_outcrossed = models.PositiveSmallIntegerField(null=True)
+	times_outcrossed = models.PositiveSmallIntegerField(null=True, blank=True)
 	received_from = models.CharField(max_length=100, blank=True)
-	received_by = models.ForeignKey(User, null=True)
-	date_received = models.DateField(null=True)
-	remarks = models.TextField(blank=True,
-		help_text = settings.MARKDOWN_ADMIN_PROMPT,
-	)
+	received_by = models.ForeignKey(User, null=True, blank=True)
+	date_received = models.DateField(null=True, blank=True)
+	remarks = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
+
 	class Meta:
 		ordering = ["strain__name"]
+
 	def __unicode__(self):
 		return self.strain.name

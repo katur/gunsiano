@@ -11,8 +11,6 @@ class StockableType(models.Model):
 
 class Stockable(models.Model):
 	type = models.ForeignKey(StockableType)
-	class Meta:
-		ordering = ["type"]
 	def __unicode__(self):
 		return str(self.id)
 
@@ -27,7 +25,7 @@ class Stock(models.Model):
 	class Meta:
 		ordering = ["stockable"]
 	def __unicode__(self):
-		return "stock of " + str(self.stockable) + " prepared on " + str(self.date_prepared)
+		return str(self.stockable)
 
 class ContainerSupertype(models.Model):
 	name = models.CharField(max_length=20)
@@ -38,11 +36,11 @@ class ContainerSupertype(models.Model):
 		return self.name
 
 class ContainerType(models.Model):
-	supertype = models.ForeignKey(ContainerSupertype, null=True)
-	name = models.CharField(max_length=50, blank=True)
-	slots_vertical = models.IntegerField(null=True)
-	slots_horizontal = models.IntegerField(null=True)
-	slot_type = models.ForeignKey(ContainerSupertype, null=True, related_name="container_slot_type")
+	name = models.CharField(max_length=50)
+	supertype = models.ForeignKey(ContainerSupertype)
+	slots_vertical = models.IntegerField(null=True, blank=True)
+	slots_horizontal = models.IntegerField(null=True, blank=True)
+	slot_type = models.ForeignKey(ContainerSupertype, null=True, blank=True, related_name="container_slot_type")
 	image_filename = models.CharField(max_length=30, blank=True)
 	class Meta:
 		ordering = ["supertype", "name"]
@@ -50,19 +48,19 @@ class ContainerType(models.Model):
 		return self.name
 
 class Container(models.Model):
-	type = models.ForeignKey(ContainerType, null=True)
 	name = models.CharField(max_length=200, blank=True)
+	type = models.ForeignKey(ContainerType)
 	notes = models.TextField(blank=True,
 		help_text = settings.MARKDOWN_ADMIN_PROMPT,
 	)
-	parent = models.ForeignKey('self', null=True)
-	vertical_position = models.PositiveSmallIntegerField(null=True)
-	horizontal_position = models.PositiveSmallIntegerField(null=True)
-	owner = models.ForeignKey(User, null=True)
-	stock = models.ForeignKey(Stock, null=True)
+	parent = models.ForeignKey('self', null=True, blank=True)
+	vertical_position = models.PositiveSmallIntegerField(null=True, blank=True)
+	horizontal_position = models.PositiveSmallIntegerField(null=True, blank=True)
+	owner = models.ForeignKey(User, null=True, blank=True)
+	stock = models.ForeignKey(Stock, null=True, blank=True)
 	is_thawed = models.BooleanField(default=False)
-	thawed_by = models.ForeignKey(User, null=True, related_name="container_thawed_by")
-	date_thawed = models.DateField(null=True)
+	thawed_by = models.ForeignKey(User, null=True, blank=True, related_name="container_thawed_by")
+	date_thawed = models.DateField(null=True, blank=True)
 	thaw_results = models.CharField(max_length=100, blank=True)
 	class Meta:
 		ordering = ["id"]

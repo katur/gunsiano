@@ -19,8 +19,8 @@ class StockAdmin(admin.ModelAdmin):
 
 class ContainerTypeAdmin(admin.ModelAdmin):
 	list_display = (
-		'supertype',
 		'name',
+		'supertype',
 		'slots_vertical',
 		'slots_horizontal',
 	)

@@ -24,12 +24,11 @@ class Stockable(models.Model):
 
 
 class Stock(models.Model):
-	stockable = models.ForeignKey(Stockable, null=True, blank=True)
+	stockable = models.ForeignKey(Stockable)
 	concentration = models.CharField(max_length=30, blank=True)
 	prepared_by = models.ForeignKey(User, null=True, blank=True)
 	date_prepared = models.DateField(null=True, blank=True)
-	notes = models.TextField(
-			blank=True, help_text=settings.MARKDOWN_PROMPT)
+	notes = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
 
 	class Meta:
 		ordering = ["stockable"]

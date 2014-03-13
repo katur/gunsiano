@@ -9,7 +9,7 @@ class StockableAdmin(admin.ModelAdmin):
 
 class StockAdmin(admin.ModelAdmin):
 	list_display = (
-			'stockable', 'concentration', 'prepared_by', 'date_prepared',)
+			'stockable', 'date_prepared', 'prepared_by', 'concentration',)
 	list_filter = ('prepared_by',)
 
 

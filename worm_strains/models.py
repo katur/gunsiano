@@ -50,7 +50,7 @@ class WormLab(models.Model):
 
 
 class WormStrain(models.Model):
-	name = models.CharField(max_length=20, primary_key=True)
+	name = models.CharField(max_length=30, primary_key=True)
 	on_wormbase = models.BooleanField(default=False)
 	species = models.ForeignKey(WormSpecies, default=1)
 	genotype = models.CharField(max_length=500, blank=True)
@@ -102,8 +102,8 @@ class WormStrain(models.Model):
 
 
 class WormStrainLine(models.Model):
-	stockable = models.ForeignKey(Stockable, null=True, blank=True)
-	strain = models.ForeignKey(WormStrain, null=True, blank=True)
+	strain = models.ForeignKey(WormStrain)
+	stockable = models.ForeignKey(Stockable)
 	created_internally = models.BooleanField(default=False)
 	times_outcrossed = models.PositiveSmallIntegerField(null=True, blank=True)
 	received_from = models.CharField(max_length=100, blank=True)

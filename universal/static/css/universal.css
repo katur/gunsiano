@@ -16,110 +16,110 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-	display: block;
+  display: block;
 }
 ol, ul {
-	list-style: none;
+  list-style: none;
 }
 blockquote, q {
-	quotes: none;
+  quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
-	content: none;
+  content: '';
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 /********** FONTS / BACKGROUND **********/
 body {
-	font-family: 'Computer Modern Bright', Helvetica, sans-serif;
-	background: #fff;
-	color: #333;
-	font-size: 16px;
-	line-height: 130%;
+  font-family: 'Computer Modern Bright', Helvetica, sans-serif;
+  background: #fff;
+  color: #333;
+  font-size: 16px;
+  line-height: 130%;
 }
 
 i, em {
-	font-style: italic;
+  font-style: italic;
 }
 
 b, strong {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 h1, h2, h3, h4 {
-	font-family: 'Computer Modern Bright', Helvetica, sans-serif;
-	font-weight: normal;
+  font-family: 'Computer Modern Bright', Helvetica, sans-serif;
+  font-weight: normal;
 }
 
 h2 {
-	font-size: 24px;
+  font-size: 24px;
 }
 
 h2#page-title {
-	margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 h2#page-title.no-page-title {
-	display: none;
+  display: none;
 }
 
 h2#page-title.clear-and-float {
-	clear: none;
-	float: left;
+  clear: none;
+  float: left;
 }
 
 h3 {
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 15px;
 }
 
 h4 {
-	color: #aaa;
-	font-weight: bold;
-	font-size: 20px;
+  color: #aaa;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .subtitle {
-	float: left;
-	clear: left;
-	font-size: 14px;
-	color: #999;
+  float: left;
+  clear: left;
+  font-size: 14px;
+  color: #999;
 }
 
 /********** LINKS **********/
 a {
-	text-decoration: none;
-	color: #58bb62;
+  text-decoration: none;
+  color: #58bb62;
 }
 
 a:hover, a.active {
-	/* purple */
-	color: #937AA9;
+  /* purple */
+  color: #937AA9;
 }
 
 a.active {
-	cursor: default;
+  cursor: default;
 }
 
 /********** MISCELLANOUS **********/
 .invisible {
-	display: none;
+  display: none;
 }
 
 /* add to parent elements when their children are floating
@@ -138,136 +138,136 @@ and parent needs to expand to the children's size. */
 
 /* horizontal rule line */
 hr {
-	height: 1px;
-	width: 70%;
-	color: #ddd;
-	background-color: #ddd;
-	border-width: 0;
-	margin-top: 0;
-	margin-bottom: 0;
+  height: 1px;
+  width: 70%;
+  color: #ddd;
+  background-color: #ddd;
+  border-width: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 /* icon for external links */
 .external-link {
-	display: inline-block;
-	padding-right: 15px;
-	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAElJREFUeNpiZMACInYnzQdSCSA2C5DzHyq+YIXrvER0xSwgAijBiEX3ArgCbJIw05iwOAHVKiQ3YHMoVhNgIAHuBlymgABAgAEAuZUbEqLsuG0AAAAASUVORK5CYII=) center right no-repeat;
+  display: inline-block;
+  padding-right: 15px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAElJREFUeNpiZMACInYnzQdSCSA2C5DzHyq+YIXrvER0xSwgAijBiEX3ArgCbJIw05iwOAHVKiQ3YHMoVhNgIAHuBlymgABAgAEAuZUbEqLsuG0AAAAASUVORK5CYII=) center right no-repeat;
 }
 
 /* rounded text bubble */
 .colorful-bubble {
-	float: left;
-	clear: both;
-	width: 920px;
-	padding: 30px;
-	margin-bottom: 40px;
-	border-radius: 10px;
-	font-size: 20px;
-	color: black;
+  float: left;
+  clear: both;
+  width: 920px;
+  padding: 30px;
+  margin-bottom: 40px;
+  border-radius: 10px;
+  font-size: 20px;
+  color: black;
 }
 
 .colorful-bubble a {
-	color: white;
+  color: white;
 }
 
 /********** PAGE LAYOUT **********/
 html, body {
-	min-width: 100%;
-	margin: 0;
+  min-width: 100%;
+  margin: 0;
 }
 
 #wrap-header, #wrap-content, #wrap-footer {
-	width: 100%;
-	clear: both;
-	float: left;
-	min-width: 1000px;
+  width: 100%;
+  clear: both;
+  float: left;
+  min-width: 1000px;
 }
 
 #wrap-content {
-	padding: 50px 0 150px 0;
+  padding: 50px 0 150px 0;
 }
 
 #header, #content, #footer {
-	width: 980px;
-	margin: 0 auto;
+  width: 980px;
+  margin: 0 auto;
 }
 /********** HEADER ONLY **********/
 #wrap-header {
-	position: relative; /* to accept z-index */
-	z-index: 1;
-	-moz-box-shadow: 0 0 8px rgba(0,0,0,0.3);
-	-webkit-box-shadow: 0 0 8px rgba(0,0,0,0.3);
-	box-shadow: 0 0 8px rgba(0,0,0,0.3);
-	background: black;
+  position: relative; /* to accept z-index */
+  z-index: 1;
+  -moz-box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  background: black;
 }
 
 #header {
-	padding-top: 20px;
+  padding-top: 20px;
 }
 
 #header h1 {
-	float: left;
-	clear: none;
-	line-height: 1.2;
-	font-size: 36px;
+  float: left;
+  clear: none;
+  line-height: 1.2;
+  font-size: 36px;
 }
 
 #header h1 a, #header h1 a:hover {
-	color: white;
-	text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 #header h1:hover {
-	color: #58bb62;
+  color: #58bb62;
 }
 
 #login {
-	float: right;
-	clear: none;
-	font-size: 13px;
+  float: right;
+  clear: none;
+  font-size: 13px;
 }
 
 #login a {
-	float: left;
-	clear: both;
+  float: left;
+  clear: both;
 }
 
 #menu {
-	float: left;
-	font-size: 18px;
-	padding: 20px 0;
+  float: left;
+  font-size: 18px;
+  padding: 20px 0;
 }
 
 #menu a {
-	margin-right: 36px;
-	float: left;
+  margin-right: 36px;
+  float: left;
 }
 
 /********** FOOTER ONLY **********/
 #wrap-footer {
-	padding: 15px 0 12px 0;
-	background: #efefef;
-	font-size: 14px;
-	color: #333;
-	line-height: 1.3;
-	border-top: 1px solid #ddd;
+  padding: 15px 0 12px 0;
+  background: #efefef;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.3;
+  border-top: 1px solid #ddd;
 }
 
 #copyright {
-	float: left;
+  float: left;
 }
 
 #copyright span {
-	float: left;
-	clear: both;
-	padding: 10px 0;
+  float: left;
+  clear: both;
+  padding: 10px 0;
 }
 
 #logos {
-	float: right;
+  float: right;
 }
 
 #logos img {
-	float: left;
-	margin-left: 40px;
+  float: left;
+  margin-left: 40px;
 }

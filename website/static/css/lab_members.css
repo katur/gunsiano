@@ -1,62 +1,62 @@
 #lab-members-photo-wrapper {
-	background: #efefef;
-	border: 1px solid #ddd;
+  background: #efefef;
+  border: 1px solid #ddd;
 }
 
 #lab-members-photo-wrapper img {
-	float: left;
-	margin-left: 100px;
+  float: left;
+  margin-left: 100px;
 }
 
 #lab-members-photo-wrapper span {
-	float: left;
-	margin-left: 100px;
+  float: left;
+  margin-left: 100px;
 }
 
 .lab-members {
-	float: left;
-	clear: both;
-	width: 100%;
+  float: left;
+  clear: both;
+  width: 100%;
 }
 
 .lab-members .column {
-	float: left;
-	width: 30%;
-	margin-left: 5%;
+  float: left;
+  width: 30%;
+  margin-left: 5%;
 }
 
 .lab-members .column:first-child {
-	margin-left: 0;
+  margin-left: 0;
 }
 
 .lab-members h3 {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .lab-members .column ul {
-	margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .nyu-location, #former.lab-members .position {
-	font-size: 10px;
-	padding-left: 5px;
+  font-size: 10px;
+  padding-left: 5px;
 }
 
 #former.lab-members {
-	font-size: 14px;
+  font-size: 14px;
 }
 
 #former.lab-members h3 {
-	float: left;
+  float: left;
 }
 
 #former.lab-members #position-disclaimer {
-	float: left;
-	font-style: italic;
-	margin-left: 20px;
+  float: left;
+  font-style: italic;
+  margin-left: 20px;
 }
 
 #former.lab-members .columns {
-	float: left;
-	width: 100%;
+  float: left;
+  width: 100%;
 }

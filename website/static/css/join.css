@@ -1,26 +1,26 @@
 #employment {
-	width: 60%;
+  width: 60%;
 }
 
 #employment div {
-	margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 #employment h3, #employment h4 {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 #employment ul {
-	list-style-type: disc;
-	list-style-position: inside;
+  list-style-type: disc;
+  list-style-position: inside;
 }
 
 #employment ul li {
-	margin-top: 8px;
+  margin-top: 8px;
 }
 
 #employment span {
-	float: left;
-	clear: both;
-	margin-bottom: 20px;
+  float: left;
+  clear: both;
+  margin-bottom: 20px;
 }

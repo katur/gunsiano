@@ -1,56 +1,60 @@
 {% extends 'base.html' %}
 {% load extra_tags %}
 
-{% block page_title %}
-	Contents of {{ container_title }}
-{% endblock %}
+{% block page_title %}Contents of {{ container_title }}{% endblock %}
 
 {% block content %}
-	<table id="storage">
-	{% for row in grid %}
-		<tr>
-		{% for compartment in row %}
-			<td>
+<table id="storage">
 
-			{% for child in compartment %}
-				{% if child.type.supertype.has_children %}
-					<a href={% url 'storage_detail_url' container_id=child.id %}>
-				{% endif %}
+  {% for row in grid %}
+  <tr>
 
-				{% if child.name or child.stock or child.owner %}
-					{% if child.name %}
-						<span>{{ child }}</span>
-					{% endif %}
+    {% for compartment in row %}
+    <td>
+      {% for child in compartment %}
+        {% if child.type.supertype.has_children %}
+        <a href={% url 'storage_detail_url' container_id=child.id %}>
+        {% endif %}
 
-					{% if child.strain %}
-						<span>
-							<a href={% url 'strain_url' name=child.strain %}>
-								{{ child.strain }}
-							</a>
-						</span>
-					{% elif child.stock.notes %}
-						<span>{{ child.stock.notes|enhanced_markdown }}</span>
-					{% endif %}
+        {% if child.name or child.stock or child.owner %}
+          {% if child.name %}
+          <span>{{ child }}</span>
+          {% endif %}
 
-					{% if child.owner %}
-						<br><span>{{ child.owner.get_full_name }}<span>
-					{% endif %}
-				{% else %}
-					Unnamed object
-				{% endif %}
+          {% if child.strain %}
+          <span>
+            <a href={% url 'strain_url' name=child.strain %}>
+              {{ child.strain }}
+            </a>
+          </span>
 
+          {% elif child.stock.notes %}
+          <span>{{ child.stock.notes|enhanced_markdown }}</span>
 
-				{% if container.type.supertype.has_children %}
-					</a>
-				{% endif %}
+          {% endif %}
 
-			{% empty %}
-				No record
-			{% endfor %}
+          {% if child.owner %}
+          <br>
+          <span>{{ child.owner.get_full_name }}<span>
+          {% endif %}
 
-			</td>
-		{% endfor %}
-		</tr>
-	{% endfor %}
-	</table>
+        {% else %}
+        Unnamed object
+        {% endif %}
+
+        {% if container.type.supertype.has_children %}
+          </a>
+        {% endif %}
+
+      {% empty %}
+        No record
+      {% endfor %}
+
+    </td>
+    {% endfor %}
+
+  </tr>
+  {% endfor %}
+
+</table>
 {% endblock %}

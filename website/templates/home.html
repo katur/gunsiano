@@ -7,129 +7,129 @@
 {% block page_title_style %}class="no-page-title"{% endblock %}
 
 {% block content %}
-	<span id="welcome-sentence">
-		Welcome to the labs of Drs.
-		<a href="{{ fabio.get_profile.url }}">
-			{{ fabio.get_full_name }}</a>
-		and
-		<a href="{{ kris.get_profile.url }}">
-			{{ kris.get_full_name }}</a>
-		at NYU New York City and NYU Abu Dhabi.
-	</span>
+<span id="welcome-sentence">
+  Welcome to the labs of Drs.
+  <a href="{{ fabio.get_profile.url }}">
+    {{ fabio.get_full_name }}</a>
+  and
+  <a href="{{ kris.get_profile.url }}">
+    {{ kris.get_full_name }}</a>
+  at NYU New York City and NYU Abu Dhabi.
+</span>
 
-	<div id="world-wrapper">
-		<canvas id="world-worms" width="562" height="536"
-				title="image of world with worm moving between NYC and Abu Dhabi">
-			<!-- here, add pic of worm for browsers that do not support html5 -->
-		</canvas>
-		<div id="nyc" class="dot"></div>
-		<div id="abu-dhabi" class="dot"></div>
-	</div>
+<div id="world-wrapper">
+  <canvas id="world-worms" width="562" height="536"
+      title="image of world with worm moving between NYC and Abu Dhabi">
+    <!-- here, add pic of worm for browsers that do not support html5 -->
+  </canvas>
+  <div id="nyc" class="dot"></div>
+  <div id="abu-dhabi" class="dot"></div>
+</div>
 
-	<div id="research-bubble" class="colorful-bubble">
-		We study the genetic and evolutionary mechanisms
-		underlying early embryonic development.
-	</div>
+<div id="research-bubble" class="colorful-bubble">
+  We study the genetic and evolutionary mechanisms
+  underlying early embryonic development.
+</div>
 
-	<div id="research-areas">
-		<!-- CELL BIO -->
-		<div id="cell-bio" class="research-area left">
-			<div class="blurb">
-				<div class="text">
-					<h3>{{ cell.name }}</h3>
-					{{ cell.description|enhanced_markdown }}
-				</div>
-			</div>
+<div id="research-areas">
+  <!-- CELL BIO -->
+  <div id="cell-bio" class="research-area left">
+    <div class="blurb">
+      <div class="text">
+        <h3>{{ cell.name }}</h3>
+        {{ cell.description|enhanced_markdown }}
+      </div>
+    </div>
 
-			<div class="bling">
-				<div id="cell-video-wrapper">
-					<video loop autoplay title="GFP::Moesin in early embryogenesis">
-						<source src="{{ STATIC_URL }}videos/nathalie.mp4" type="video/mp4">
-						Your browser does not support HTML5 video
-					</video>
-					<div id="cell-video-gradient-overlay"></div>
-				</div>
-			</div>
-		</div>
+    <div class="bling">
+      <div id="cell-video-wrapper">
+        <video loop autoplay title="GFP::Moesin in early embryogenesis">
+          <source src="{{ STATIC_URL }}videos/nathalie.mp4" type="video/mp4">
+          Your browser does not support HTML5 video
+        </video>
+        <div id="cell-video-gradient-overlay"></div>
+      </div>
+    </div>
+  </div>
 
-		<!-- GI -->
-		<div id="gi" class="research-area right">
-			<div class="blurb">
-				<div class="text">
-					<h3>{{ gi.name }}</h3>
-					{{ gi.description|enhanced_markdown }}
-				</div>
-			</div>
+  <!-- GI -->
+  <div id="gi" class="research-area right">
+    <div class="blurb">
+      <div class="text">
+        <h3>{{ gi.name }}</h3>
+        {{ gi.description|enhanced_markdown }}
+      </div>
+    </div>
 
-			<div class="worm-background-image layer-1"
-					title="background image of gray worms that shift position on scroll"
-					data-bottom-top="background-position:0px 0px;"
-					data-top-bottom="background-position:0px -2000px;">
-			</div>
-			<div class="worm-background-image layer-2"
-					title="background image of gray worms that shift position on scroll"
-					data-bottom-top="background-position:0px 0px;"
-					data-top-bottom="background-position:0px -1000px;">
-			</div>
-			<div class="worm-background-image layer-3"
-					title="background image of gray worms that shift position on scroll"
-					data-bottom-top="background-position:0px 0px;"
-					data-top-bottom="background-position:0px -100px;">
-			</div>
-		</div>
+    <div class="worm-background-image layer-1"
+        title="background image of gray worms that shift position on scroll"
+        data-bottom-top="background-position:0px 0px;"
+        data-top-bottom="background-position:0px -2000px;">
+    </div>
+    <div class="worm-background-image layer-2"
+        title="background image of gray worms that shift position on scroll"
+        data-bottom-top="background-position:0px 0px;"
+        data-top-bottom="background-position:0px -1000px;">
+    </div>
+    <div class="worm-background-image layer-3"
+        title="background image of gray worms that shift position on scroll"
+        data-bottom-top="background-position:0px 0px;"
+        data-top-bottom="background-position:0px -100px;">
+    </div>
+  </div>
 
-		<!-- EVOLUTION -->
-		<div id="evolution" class="research-area left">
-			<div class="blurb">
-				<div class="text">
-					<h3>{{ evolution.name }}</h3>
-					{{ evolution.description|enhanced_markdown }}
-				</div>
-			</div>
+  <!-- EVOLUTION -->
+  <div id="evolution" class="research-area left">
+    <div class="blurb">
+      <div class="text">
+        <h3>{{ evolution.name }}</h3>
+        {{ evolution.description|enhanced_markdown }}
+      </div>
+    </div>
 
-			<div class="bling">
-				<img alt="nematode phylogeny tree"
-						src="{{ STATIC_URL }}img/research/evolution/tree.png" />
+    <div class="bling">
+      <img alt="nematode phylogeny tree"
+          src="{{ STATIC_URL }}img/research/evolution/tree.png" />
 
-				<div id="evolution-background-block"
-						data-center-top="height: 100%"
-						data-top-center="height: 0%">
-				</div>
-			</div>
-		</div>
+      <div id="evolution-background-block"
+          data-center-top="height: 100%"
+          data-top-center="height: 0%">
+      </div>
+    </div>
+  </div>
 
-		<!-- RNA -->
-		<div id="rna" class="research-area right">
-			<div class="blurb">
-				<div class="text">
-					<h3>{{ rna.name }}</h3>
-					{{ rna.description|enhanced_markdown }}
-				</div>
-			</div>
+  <!-- RNA -->
+  <div id="rna" class="research-area right">
+    <div class="blurb">
+      <div class="text">
+        <h3>{{ rna.name }}</h3>
+        {{ rna.description|enhanced_markdown }}
+      </div>
+    </div>
 
-			<div class="bling">
-				<div id="rna-image" title="rotating molecule"></div>
-			</div>
-		</div>
+    <div class="bling">
+      <div id="rna-image" title="rotating molecule"></div>
+    </div>
+  </div>
 
-		<!-- NETWORK -->
-		<div id="network" class="research-area left">
-			<div class="blurb">
-				<div class="text">
-					<h3>{{ network.name }}</h3>
-					{{ network.description|enhanced_markdown }}
-				</div>
-			</div>
-		</div>
+  <!-- NETWORK -->
+  <div id="network" class="research-area left">
+    <div class="blurb">
+      <div class="text">
+        <h3>{{ network.name }}</h3>
+        {{ network.description|enhanced_markdown }}
+      </div>
+    </div>
+  </div>
 
-		<!-- MOUSE -->
-		<div id="mouse" class="research-area right">
-			<div class="blurb">
-				<div class="text">
-					<h3>{{ mouse.name }}</h3>
-					{{ mouse.description|enhanced_markdown }}
-				</div>
-			</div>
-		</div>
-	</div>
+  <!-- MOUSE -->
+  <div id="mouse" class="research-area right">
+    <div class="blurb">
+      <div class="text">
+        <h3>{{ mouse.name }}</h3>
+        {{ mouse.description|enhanced_markdown }}
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}

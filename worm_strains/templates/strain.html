@@ -1,181 +1,212 @@
 {% extends 'base.html' %}
 {% load extra_tags %}
 
-{% block page_title %}
-	{{ strain }}
-{% endblock %}
+{% block page_title %}{{ strain }}{% endblock %}
 
 {% block content %}
-	<div id="strain">
+<div id="strain">
 
-		<!-- STRAIN IDENTIFICATION -->
-		{% if strain.species or strain.on_wormbase or strain.genotype %}
-			<div class="strain-section">
-				{% if strain.species %}
-					<span><b>Species:</b> <i>{{ strain.species }}</i></span>
-				{% endif %}
+  <!-- identification -->
+  {% if strain.species or strain.on_wormbase or strain.genotype %}
+  <div class="strain-section">
+    {% if strain.species %}
+    <span>
+      <b>Species:</b> <i>{{ strain.species }}</i>
+    </span>
+    {% endif %}
 
-				{% if strain.on_wormbase %}
-					<span>
-						<a class="external-link"
-								href="http://www.wormbase.org/species/c_elegans/strain/{{ strain }}">
-							See strain on wormbase
-						</a>
-					</span>
-				{% endif %}
+    {% if strain.on_wormbase %}
+    <span>
+      <a class="external-link"
+          href="http://www.wormbase.org/species/c_elegans/strain/{{ strain }}">
+        See strain on wormbase
+      </a>
+    </span>
+    {% endif %}
 
-				{% if strain.genotype%}
-					<span><b>Genotype:</b> {{ strain.genotype }}</span>
-				{% endif %}
-			</div>
-		{% endif %}
+    {% if strain.genotype%}
+    <span>
+      <b>Genotype:</b> {{ strain.genotype }}
+    </span>
+    {% endif %}
+  </div>
+  {% endif %}
 
-		<!-- STRAIN ORIGIN -->
-		{% if strain.created_by or strain.lab or strain.date_created or strain.mutagen %}
-			<hr>
-			<h4>Origin</h4>
-			<div class="strain-section">
-				{% if strain.created_by %}
-					<span><b>Made by:</b> {{ strain.created_by.get_full_name }}</span>
-				{% endif %}
+  <!-- origin -->
+  {% if strain.created_by or strain.lab or strain.date_created or strain.mutagen %}
+  <hr>
+  <h4>Origin</h4>
 
-				{% if strain.lab %}
-					<span><b>Lab:</b> {{ strain.lab }}</span>
-				{% endif %}
+  <div class="strain-section">
+    {% if strain.created_by %}
+    <span>
+      <b>Made by:</b> {{ strain.created_by.get_full_name }}
+    </span>
+    {% endif %}
 
-				{% if strain.date_created %}
-					<span><b>Made on:</b> {{ strain.date_created }}</span>
-				{% endif %}
+    {% if strain.lab %}
+    <span>
+      <b>Lab:</b> {{ strain.lab }}
+    </span>
+    {% endif %}
 
-				{% if strain.mutagen %}
-					<span><b>Mutagen or Method Used:</b> {{ strain.mutagen }}</span>
-				{% endif %}
-			</div>
-		{% endif %}
+    {% if strain.date_created %}
+    <span>
+      <b>Made on:</b> {{ strain.date_created }}
+    </span>
+    {% endif %}
 
-		<!-- OTHER INFORMATION -->
-		{% if strain.remarks %}
-			<hr>
-			<h4>Remarks</h4>
-			<div class="strain-section">
-				<span>{{ strain.remarks|enhanced_markdown }}</span>
-			</div>
-		{% endif %}
+    {% if strain.mutagen %}
+    <span>
+      <b>Mutagen or Method Used:</b> {{ strain.mutagen }}
+    </span>
+    {% endif %}
+  </div>
+  {% endif %}
 
-		<!-- STOCK -->
-		{% if lines %}
-			<hr>
-			<h4>Stock</h4>
+  <!-- other information -->
+  {% if strain.remarks %}
+  <hr>
+  <h4>Remarks</h4>
 
-			Lines of this strain that the lab has created or received:
-			<ul>
-				{% for line in lines %}
-					<li>
-						{% if line.created_internally %}
-							Internal line
+  <div class="strain-section">
+    <span>
+      {{ strain.remarks|enhanced_markdown }}
+    </span>
+  </div>
+  {% endif %}
 
-						{% elif line.received_from or line.received_by or line.date_received %}
-							Received
-							{% if line.received_by %}
-								by {{ line.received_by.get_full_name }}
-							{% endif %}
+  <!-- stock -->
+  {% if lines %}
+  <hr>
+  <h4>Stock</h4>
 
-							{% if line.received_from %}
-								from {{ line.received_from }}
-							{% endif %}
+  Lines of this strain that the lab has created or received:
+  <ul> <!-- all worm lines -->
+    {% for line in lines %}
+    <li>
+      {% if line.created_internally %}
+      Internal line
 
-							{% if line.date_received %}
-								on {{ line.date_received }}
-							{% endif %}
+      {% elif line.received_from or line.received_by or line.date_received %}
+      Received
+        {% if line.received_by %}
+        by {{ line.received_by.get_full_name }}
+        {% endif %}
 
-						{% else %}
-							Line with no recorded information about receipt
-						{% endif %}
+        {% if line.received_from %}
+        from {{ line.received_from }}
+        {% endif %}
 
+        {% if line.date_received %}
+        on {{ line.date_received }}
+        {% endif %}
 
-						<ul> <!-- more details about this line -->
-							{% if line.remarks %}
-								<li>{{ line.remarks|enhanced_markdown }}</li>
-							{% endif %}
+      {% else %}
+      Line with no recorded information about receipt
+      {% endif %}
 
-							{% if line.times_outcrossed %}
-								<li>Outcrossed {{ line.times_outcrossed }}x
-									{% if line.received_by %}
-										by {{ line.received_by.get_full_name }}
-									{% endif %}
-									{% if line.date_received %}
-										on {{ line.date_received }}
-									{% endif %}
-								</li>
-							{% endif %}
+      <ul> <!-- per worm line -->
+        {% if line.remarks %}
+        <li>{{ line.remarks|enhanced_markdown }}</li>
+        {% endif %}
 
-							{% for stock in line.stocks %}
-								<li>Frozen
-									{% if stock.prepared_by %}
-										by {{ stock.prepared_by.get_full_name }}
-									{% endif %}
+        {% if line.times_outcrossed %}
+        <li>Outcrossed {{ line.times_outcrossed }}x</li>
+        {% endif %}
 
-									{% if stock.date_prepared %}
-										on {{ stock.date_prepared }}
-									{% endif %}
+        {% for stock in line.stocks %}
+        <li>Frozen
+          {% if stock.prepared_by %}
+           by {{ stock.prepared_by.get_full_name }}
+          {% endif %}
 
-									<ul> <!-- more details about this stock -->
-										{% if stock.notes %}
-											<li>{{ stock.notes }}</li>
-										{% endif %}
+          {% if stock.date_prepared %}
+          on {{ stock.date_prepared }}
+          {% endif %}
 
-										<li>-80C test
-											{% if stock.thaw_80 %}
-												{% if stock.thaw_80.is_thawed %}thaw
-													{% if stock.thaw_80.thawed_by.get_full_name %}
-														by {{ stock.thaw_80.thawed_by.get_full_name }}
-													{% endif %}
-													{% if stock.thaw_80.date_thawed %}
-														on {{ stock.thaw_80.date_thawed }}
-													{% endif %}
-													{% if stock.thaw_80.thaw_results %}
-														was {{ stock.thaw_80.thaw_results }}
-													{% endif %}
-												{% else %}not thawed yet{% endif %}
-											{% else %}not available{% endif %}
-										</li>
+          <ul> <!-- per stock of this line -->
+            {% if stock.notes %}
+            <li>{{ stock.notes }}</li>
+            {% endif %}
 
-										<li>Liquid Nitrogen test
-											{% if stock.thaw_N %}
-												{% if stock.thaw_N.is_thawed %}thaw
-													{% if stock.thaw_N.thawed_by.get_full_name %}
-														by {{ stock.thaw_N.thawed_by.get_full_name }}
-													{% endif %}
-													{% if stock.thaw_N.date_thawed %}
-														on {{ stock.thaw_N.date_thawed }}
-													{% endif %}
-													{% if stock.thaw_N.thaw_results %}
-														was {{ stock.thaw_N.thaw_results }}
-													{% endif %}
-												{% else %}not thawed yet{% endif %}
-											{% else %}not available{% endif %}
-										</li>
+            <li>
+              -80C test
+              {% if stock.thaw_80 %}
+                {% if stock.thaw_80.is_thawed %}
+                thaw
+                  {% if stock.thaw_80.thawed_by.get_full_name %}
+                  by {{ stock.thaw_80.thawed_by.get_full_name }}
+                  {% endif %}
 
-										<li class="tubes">
-											{% if stock.tubes %}
-												Tubes recorded:
-												<table>
-													{% for tube in stock.tubes %}
-														<tr><td>{{ tube.position }}</td></tr>
-													{% endfor %}
-												</table>
-											{% else %}
-												No remaining tubes recorded
-											{% endif %}
-										</li>
-									</ul> <!-- stock details -->
-								</li>
+                  {% if stock.thaw_80.date_thawed %}
+                  on {{ stock.thaw_80.date_thawed }}
+                  {% endif %}
 
-							{% empty %}<li>No stocks recorded</li>{% endfor %}
-						</ul>
-					</li> <!-- line details -->
-				{% endfor %}
-			</ul>
-		{% endif %} <!-- if any lines -->
-	</div>
+                  {% if stock.thaw_80.thaw_results %}
+                  was {{ stock.thaw_80.thaw_results }}
+                  {% endif %}
+
+                {% else %}
+                not thawed yet
+                {% endif %}
+
+              {% else %}
+              not available
+              {% endif %}
+            </li>
+
+            <li>
+              Liquid Nitrogen test
+              {% if stock.thaw_N %}
+                {% if stock.thaw_N.is_thawed %}
+                thaw
+                  {% if stock.thaw_N.thawed_by.get_full_name %}
+                  by {{ stock.thaw_N.thawed_by.get_full_name }}
+                  {% endif %}
+
+                  {% if stock.thaw_N.date_thawed %}
+                  on {{ stock.thaw_N.date_thawed }}
+                  {% endif %}
+
+                  {% if stock.thaw_N.thaw_results %}
+                  was {{ stock.thaw_N.thaw_results }}
+                  {% endif %}
+
+                {% else %}
+                not thawed yet
+                {% endif %}
+
+              {% else %}
+              not available
+              {% endif %}
+            </li>
+
+            <li class="tubes">
+              {% if stock.tubes %}
+              Tubes recorded:
+              <table>
+                {% for tube in stock.tubes %}
+                <tr><td>{{ tube.position }}</td></tr>
+                {% endfor %}
+              </table>
+
+              {% else %}
+              No remaining tubes recorded
+              {% endif %}
+            </li>
+          </ul> <!-- stock details -->
+        </li>
+
+        {% empty %} <!-- no stocks -->
+        <li>No stocks recorded</li>
+        {% endfor %}
+
+      </ul>
+
+    </li> <!-- this worm line -->
+    {% endfor %}
+  </ul> <!-- all worm lines -->
+  {% endif %}
+</div>
 {% endblock %}

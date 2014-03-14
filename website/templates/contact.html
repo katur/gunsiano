@@ -1,64 +1,61 @@
 {% extends 'base.html' %}
 
-{% block page_title %}
-	Contact
-{% endblock %}
+{% block page_title %}Contact{% endblock %}
 
 {% block content %}
-	<div id="contact">
-		<span>
-			Dr. Kris Gunsalus:
-			<a href="mailto:{{ kris.email }}">{{ kris.email }}</a>
-		</span>
+<div id="contact">
+  <span>
+    Dr. Kris Gunsalus:
+    <a href="mailto:{{ kris.email }}">{{ kris.email }}</a>
+  </span>
 
-		<span>
-			Dr. Fabio Piano:
-			<a href="mailto:{{ fabio.email }}">{{ fabio.email }}</a>
-		</span>
+  <span>
+    Dr. Fabio Piano:
+    <a href="mailto:{{ fabio.email }}">{{ fabio.email }}</a>
+  </span>
 
-		<span>
-			Jessica Lucas, Lab Manager:
-			<ul>
-				<li>
-				<a href="mailto:{{ jessica.email }}">{{ jessica.email }}</a>
-				</li>
-				<li>
-					<a href="tel:212.992.6958">212-992-6958</a>
-				</li>
-			</ul>
-		</span>
+  <span>
+    Jessica Lucas, Lab Manager:
+    <ul>
+      <li>
+      <a href="mailto:{{ jessica.email }}">{{ jessica.email }}</a>
+      </li>
+      <li>
+        <a href="tel:212.992.6958">212-992-6958</a>
+      </li>
+    </ul>
+  </span>
 
+  <div id="columns">
+    <div class="column">
+      <h3>New York City</h3>
+      <span>
+        NYU Center for Genomics & Systems Biology<br>
+        12 Waverly Place<br>
+        Floor L2, Room L2-17<br>
+        New York, NY, U.S.A., 10003-6758
+      </span>
 
-		<div id="columns">
-			<div class="column">
-				<h3>New York City</h3>
-				<span>
-					NYU Center for Genomics & Systems Biology<br>
-					12 Waverly Place<br>
-					Floor L2, Room L2-17<br>
-					New York, NY, U.S.A., 10003-6758
-				</span>
+      <span>
+        Gunsalus Lab Phone:
+        <a href="tel:212.998.7794">212-998-7794</a>
+      </span>
 
-				<span>
-					Gunsalus Lab Phone:
-					<a href="tel:212.998.7794">212-998-7794</a>
-				</span>
+      <span>
+        Piano Lab Phone:
+        <a href="tel:212.992.9563">212-992-9563</a>
+      </span>
+    </div>
 
-				<span>
-					Piano Lab Phone:
-					<a href="tel:212.992.9563">212-992-9563</a>
-				</span>
-			</div>
-
-			<div class="column">
-				<h3>Abu Dhabi</h3>
-				<span>
-					NYU Abu Dhabi, Center for Science and Engineering<br>
-					Block C Building, Abu Dhabi Business Hub<br>
-					Industrial City of Abu Dhabi (ICAD 1), Plot No. 1, Sector M41<br>
-					Musaffah, Abu Dhabi, United Arab Emirates<br>
-				</span>
-			</div>
-		</div>
-	</div>
+    <div class="column">
+      <h3>Abu Dhabi</h3>
+      <span>
+        NYU Abu Dhabi, Center for Science and Engineering<br>
+        Block C Building, Abu Dhabi Business Hub<br>
+        Industrial City of Abu Dhabi (ICAD 1), Plot No. 1, Sector M41<br>
+        Musaffah, Abu Dhabi, United Arab Emirates<br>
+      </span>
+    </div>
+  </div>
+</div>
 {% endblock content %}

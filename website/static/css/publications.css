@@ -1,28 +1,28 @@
 #pub-menu {
-	margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 #pub-menu a {
-	margin-right: 50px;
+  margin-right: 50px;
 }
 
 #pub-line {
-	width: 100%;
-	background: #666;
+  width: 100%;
+  background: #666;
 }
 
 #pub-count {
-	margin: 20px 0 40px 0;
+  margin: 20px 0 40px 0;
 }
 
 .publications {
-	font-size: 15px;
+  font-size: 15px;
 }
 
 .publication {
-	margin: 40px 0;
+  margin: 40px 0;
 }
 
 .publications hr:last-child {
-	display: none;
+  display: none;
 }

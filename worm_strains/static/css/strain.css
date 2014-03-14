@@ -1,58 +1,58 @@
 .strain-section {
-	float: left;
-	width: 100%;
-	margin: 10px -10px;
-	width: 1000px;
+  float: left;
+  width: 100%;
+  margin: 10px -10px;
+  width: 1000px;
 }
 
 .strain-section:first-child {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 .strain-section span {
-	margin: 10px;
-	float: left;
+  margin: 10px;
+  float: left;
 }
 
 #strain h4 {
-	margin-top: 40px;
-	margin-bottom: 20px;
-	text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 #strain ul {
-	width: 100%;
-	padding: 0px;
-	margin: 0px;
-	line-height: 150%;
-	list-style-type: none;
-	list-style-position: inside;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  line-height: 150%;
+  list-style-type: none;
+  list-style-position: inside;
 }
 
 #strain ul li {
-	list-style-type: disc;
-	list-style-position: inside;
-	padding-left: 25px;
-	margin-top: 20px;
+  list-style-type: disc;
+  list-style-position: inside;
+  padding-left: 25px;
+  margin-top: 20px;
 }
 
 #strain ul ul li {
-	list-style-type: circle;
-	margin-top: 10px;
+  list-style-type: circle;
+  margin-top: 10px;
 }
 
 #strain ul ul ul li {
-	list-style-type: square;
-	margin-top: 0;
+  list-style-type: square;
+  margin-top: 0;
 }
 
 #strain ul table, #strain ul td {
-	border: 1px solid #ddd;
-	border-collapse: collapse;
-	padding: 3px;
-	margin-top: 5px;
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+  padding: 3px;
+  margin-top: 5px;
 }
 
 #strain ul table {
-	margin-left: 15px;
+  margin-left: 15px;
 }

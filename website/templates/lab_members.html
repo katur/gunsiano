@@ -1,87 +1,85 @@
 {% extends 'base.html' %}
 
-{% block page_title %}
-	Lab Members
-{% endblock %}
+{% block page_title %}Lab Members{% endblock %}
 
 {% block content %}
-	<div id="lab-members-photo-wrapper" class="colorful-bubble">
-		<img src="{{ STATIC_URL }}img/LabRetreat2011.jpg"
-				alt="Lab Retreat in Catskills, 2011"
-				width="720" height="481"
-		/>
-		<span class="subtitle">
-			Gunsiano Lab Retreat, Catskills, 2011
-		</span>
-	</div>
+<div id="lab-members-photo-wrapper" class="colorful-bubble">
+  <img src="{{ STATIC_URL }}img/LabRetreat2011.jpg"
+      alt="Lab Retreat in Catskills, 2011"
+      width="720" height="481" />
+  <span class="subtitle">
+    Gunsiano Lab Retreat, Catskills, 2011
+  </span>
+</div>
 
-	<div class="lab-members">
-		{% regroup current by position.position as position_list %}
-		<div class="column">
-			{% for position in position_list %}
-				{% if forloop.counter0|divisibleby:"3" and not forloop.first %}
-					</div>
-					<div class="column">
-				{% endif %}
+<div class="lab-members">
+  {% regroup current by position.position as position_list %}
+  <div class="column">
+    {% for position in position_list %}
+    {% if forloop.counter0|divisibleby:"3" and not forloop.first %}
+    </div>
+    <div class="column">
+    {% endif %}
 
-				<h3>
-					{{ position.grouper }}{% if "Faculty" not in position.grouper %}s{% endif %}
-				</h3>
+    <h3>
+      {{ position.grouper }}{% if "Faculty" not in position.grouper %}s{% endif %}
+    </h3>
 
-				<ul>
-					{% for profile in position.list %}
-						<li>
-							{% if profile.blurb %}
-								<a href="{% url 'lab_member_url' username=profile.user.get_username %}">
-							{% elif profile.url %}
-								<a class="external-link" href="{{ profile.url }}">
-							{% endif %}
+    <ul>
+      {% for profile in position.list %}
+      <li>
+        {% if profile.blurb %}
+        <a href="{% url 'lab_member_url' username=profile.user.get_username %}">
+        {% elif profile.url %}
+        <a class="external-link" href="{{ profile.url }}">
+        {% endif %}
 
-							{{ profile.user.get_full_name }}
+        {{ profile.user.get_full_name }}
 
-							{% if profile.blurb or profile.url %}
-								</a>
-							{% endif %}
+        {% if profile.blurb or profile.url %}
+        </a>
+        {% endif %}
 
-							<span class="nyu-location">
-								{{ profile.location }}
-							</span>
-						</li>
-					{% endfor %}
-				</ul>
-			{% endfor %}
-		</div>
-	</div>
+        <span class="nyu-location">
+          {{ profile.location }}
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endfor %}
+  </div>
+</div>
 
-	<div id="former" class="lab-members">
-		<h3>Former Lab Members</h3>
-		<span id="position-disclaimer">Lists position last held in this lab</span>
-		<div class="columns">
-			<ul class="column">
-				{% for profile in former %}
-					{% if forloop.counter0|divisibleby:column_length and not forloop.first %}
-						</ul><ul class="column">
-					{% endif %}
+<div id="former" class="lab-members">
+  <h3>Former Lab Members</h3>
+  <span id="position-disclaimer">Lists position last held in this lab</span>
+  <div class="columns">
+    <ul class="column">
+      {% for profile in former %}
 
-					<li>
-						{% if profile.blurb %}
-							<a href="{% url 'lab_member_url' username=profile.user.get_username %}">
-						{% elif profile.url %}
-							<a class="external-link" href="{{ profile.url }}">
-						{% endif %}
+      {% if forloop.counter0|divisibleby:column_length and not forloop.first %}
+      </ul><ul class="column">
+      {% endif %}
 
-						{{ profile.user.get_full_name }}
+      <li>
+        {% if profile.blurb %}
+        <a href="{% url 'lab_member_url' username=profile.user.get_username %}">
+        {% elif profile.url %}
+        <a class="external-link" href="{{ profile.url }}">
+        {% endif %}
 
-						{% if profile.blurb or profile.url %}
-							</a>
-						{% endif %}
+        {{ profile.user.get_full_name }}
 
-						<span class="position">{{ profile.position.position }}</span>
+        {% if profile.blurb or profile.url %}
+        </a>
+        {% endif %}
 
-						<span class="nyu-location">{{ profile.location }}</span>
-					</li>
-				{% endfor %}
-			</ul>
-		</div>
-	</div>
+        <span class="position">{{ profile.position.position }}</span>
+
+        <span class="nyu-location">{{ profile.location }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
 {% endblock content %}

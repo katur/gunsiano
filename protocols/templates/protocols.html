@@ -2,15 +2,17 @@
 {% load extra_tags %}
 
 {% block page_title %}
-	Protocols and Recipes
+Protocols and Recipes
 {% endblock %}
 
 {% block content %}
-	<ul id="protocols">
-		{% for protocol in protocols %}
-			<li><a href={% url 'protocol_url' title_url=protocol.title_url %}>
-				{{ protocol|enhanced_markdown }}
-			</a></li>
-		{% endfor %}
-	</ul>
+<ul id="protocols">
+  {% for protocol in protocols %}
+  <li>
+  <a href={% url 'protocol_url' title_url=protocol.title_url %}>
+    {{ protocol|enhanced_markdown }}
+  </a>
+  </li>
+  {% endfor %}
+</ul>
 {% endblock %}

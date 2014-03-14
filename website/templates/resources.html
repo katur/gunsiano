@@ -2,26 +2,23 @@
 {% load markup %}
 {% load extra_tags %}
 
-{% block page_title %}
-	Resources
-{% endblock %}
+{% block page_title %}Resources{% endblock %}
 
 {% block content %}
-	<div id="resources">
-	{% for resource in resources %}
-		<a href="{{ resource.url }}">
-			<div class="resource">
-				<img width="160px"
-						src="{{ STATIC_URL }}img/resource_logos/{{ resource.logo_filename }}"
-						alt="logo for this resource"
-				/>
-				<span>
-					{{ resource.description|enhanced_markdown }}
-				</span>
-			</div>
-		</a>
+<div id="resources">
+  {% for resource in resources %}
+  <a href="{{ resource.url }}">
+    <div class="resource">
+      <img width="160px"
+          src="{{ STATIC_URL }}img/resource_logos/{{ resource.logo_filename }}"
+          alt="logo for this resource" />
+      <span>
+        {{ resource.description|enhanced_markdown }}
+      </span>
+    </div>
+  </a>
 
-		<hr>
-		{% endfor %}
-	</div>
+  <hr>
+  {% endfor %}
+</div>
 {% endblock content %}

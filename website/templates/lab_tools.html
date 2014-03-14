@@ -1,63 +1,33 @@
 {% extends "base.html" %}
 
-{% block page_title %}
-	Internal Lab Tools
-{% endblock %}
+{% block page_title %}Internal Lab Tools{% endblock %}
 
 {% block content %}
-	<ul id="lab-tools">
-		<!--
-		<li><a href="">
-			Protocols and Recipes
-		</a></li>
-		-->
+<ul id="lab-tools">
+  <li><a href="{% url 'strains_url' %}">
+    Worm Strains
+  </a></li>
 
-		<li><a href="{% url 'strains_url' %}">
-			Worm Strains
-		</a></li>
+  <li><a href="{% url 'storage_url' %}">
+    Storage
+  </a></li>
 
-		<li><a href="{% url 'storage_url' %}">
-			Storage
-		</a></li>
+  <li><a href="{% url 'protocols_url' %}">
+    Protocols
+  </a></li>
 
-		<li><a href="{% url 'protocols_url' %}">
-			Protocols
-		</a></li>
+  <li>
+    <a class="external-link"
+        href="http://aquila.bio.nyu.edu/EEGI/">
+      Genetic Interactions: Pilot
+    </a>
+  </li>
 
-		<li>
-			<a class="external-link"
-					href="http://aquila.bio.nyu.edu/EEGI/">
-				Genetic Interactions: Pilot
-			</a>
-		</li>
-
-		<li>
-			<a class="external-link"
-					href="http://pleiades.bio.nyu.edu/GenomeWideGI/">
-				Genetic Interactions: Genome-Wide
-			</a>
-		</li>
-
-		<!--
-		<li><a href="">
-			Bacterial Clones</li>
-		</a></li>
-
-		<li><a href="">
-			Vectors (& Plasmids)</li>
-		</a></li>
-
-		<li><a href="">
-			Primers
-		</a></li>
-
-		<li><a href="">
-			Antibodies
-		</a></li>
-
-		<li><a href="">
-			Chemicals
-		</a></li>
-		-->
-	</ul>
+  <li>
+    <a class="external-link"
+        href="http://pleiades.bio.nyu.edu/GenomeWideGI/">
+      Genetic Interactions: Genome-Wide
+    </a>
+  </li>
+</ul>
 {% endblock content %}

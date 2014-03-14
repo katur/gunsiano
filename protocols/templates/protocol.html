@@ -2,20 +2,20 @@
 {% load extra_tags %}
 
 {% block page_title_style %}
-	class="clear-and-float"
+class="clear-and-float"
 {% endblock%}
 
 {% block page_title %}
-	{{ protocol|enhanced_markdown }}
+{{ protocol|enhanced_markdown }}
 {% endblock %}
 
 {% block content %}
-	<span id="protocol-authorship">
-		Protocol updated by {{ protocol.author.get_full_name }}
-		on {{ protocol.pub_date }}
-	</span>
+<span id="protocol-authorship">
+  Protocol updated by {{ protocol.author.get_full_name }}
+  on {{ protocol.pub_date }}
+</span>
 
-	<div id="protocol">
-		{{ protocol.body_markdown|enhanced_markdown }}
-	</div>
+<div id="protocol">
+  {{ protocol.body_markdown|enhanced_markdown }}
+</div>
 {% endblock %}

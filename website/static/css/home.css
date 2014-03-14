@@ -1,151 +1,151 @@
 /* homepage has content that spans width of screen */
 body#home #content {
-	width: 100%;
+  width: 100%;
 }
 
 #welcome-sentence {
-	float: left;
-	width: 100%;
-	text-align: center;
+  float: left;
+  width: 100%;
+  text-align: center;
 }
 
 /* world stuff */
 #world-wrapper {
-	float: left;
-	position: relative;
-	left: 50%;
-	width: 562px;
-	height: 536px;
-	margin: 40px 0 0 -281px;
-	background-image: url("../img/world.jpg");
+  float: left;
+  position: relative;
+  left: 50%;
+  width: 562px;
+  height: 536px;
+  margin: 40px 0 0 -281px;
+  background-image: url("../img/world.jpg");
 }
 
 #world-wrapper canvas {
-	-webkit-transform: rotate(10deg);
-	position: absolute;
-	top: 0;
-	left: 0;
+  -webkit-transform: rotate(10deg);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #world-wrapper .dot {
-	position: absolute;
-	border-radius: 50%;
-	width: 10px;
-	height: 10px;
-	/* nyu purple */
-	background: #57068c;
+  position: absolute;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  /* nyu purple */
+  background: #57068c;
 }
 
 #world-wrapper #nyc.dot {
-	left: 122px;
-	top: 242px;
+  left: 122px;
+  top: 242px;
 }
 
 #world-wrapper #abu-dhabi.dot {
-	left: 400px;
-	top: 295px;
+  left: 400px;
+  top: 295px;
 }
 
 /* green bubble */
 #research-bubble {
-	width: 800px;
-	float: left;
-	position: relative;
-	left: 50%;
-	margin: 80px 0 80px -430px;
-	background: #58bb62;
-	text-align: center;
+  width: 800px;
+  float: left;
+  position: relative;
+  left: 50%;
+  margin: 80px 0 80px -430px;
+  background: #58bb62;
+  text-align: center;
 }
 
 /* triangle beneath research bubble */
 #research-bubble:after {
-	display: block;
-	position: absolute;
-	left: 50%;
-	bottom: -10px;
-	content: " ";
-	width: 0;
-	height: 0;
-	border-left: 10px solid transparent;
-	border-right: 10px solid transparent;
-	border-top: 10px solid #58bb62;
-	margin-left: -10px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  content: " ";
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #58bb62;
+  margin-left: -10px;
 }
 
 /* universal to research areas */
 .research-area {
-	float: left;
-	position: relative;
-	overflow: hidden;
-	width: 100%;
-	padding: 120px 0;
+  float: left;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 120px 0;
 }
 
 .research-area .blurb, .research-area .bling {
-	width: 50%;
+  width: 50%;
 }
 
 .research-area.left .blurb, .research-area.right .bling {
-	float: left;
+  float: left;
 }
 
 .research-area.right .blurb, .research-area.left .bling {
-	float: right;
+  float: right;
 }
 
 .research-area .blurb .text {
-	width: 90%;
-	margin: 0;
-	line-height: 175%;
-	font-size: 20px;
+  width: 90%;
+  margin: 0;
+  line-height: 175%;
+  font-size: 20px;
 }
 
 .research-area.left .blurb .text {
-	margin-left: 10%;
+  margin-left: 10%;
 }
 
 .research-area.right .blurb .text {
-	margin-right: 10%;
+  margin-right: 10%;
 }
 
 .research-area h3 {
-	margin-bottom: 20px;
-	font-size: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
 /************
  * CELL BIO *
  * **********/
 #cell-bio.research-area {
-	background: black;
-	color: white;
+  background: black;
+  color: white;
 }
 
 #cell-video-wrapper {
-	/* relative for gradient overlay to work */
-	position: relative;
-	width: 90%;
-	margin: 0 5%;
+  /* relative for gradient overlay to work */
+  position: relative;
+  width: 90%;
+  margin: 0 5%;
 }
 
 #cell-video-wrapper video {
-	width: 100%;
+  width: 100%;
 }
 
 /* overlay helps obscure the almost-black rectangular background of video */
 #cell-video-gradient-overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 21%, rgba(0,0,0,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(21%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* Opera 12+ */
-	background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* IE10+ */
-	background: radial-gradient(ellipse at center,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 21%, rgba(0,0,0,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(21%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 21%,rgba(0,0,0,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 /******
@@ -153,86 +153,86 @@ body#home #content {
  * ****/
 /* each skrollr layer */
 .worm-background-image {
-	position: absolute;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 1000px;
-	background-repeat: repeat;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1000px;
+  background-repeat: repeat;
 }
 
 .layer-1.worm-background-image {
-	background-image: url('../img/research/gi_screens/worms-layer-1.png');
-	opacity: 0.4;
+  background-image: url('../img/research/gi_screens/worms-layer-1.png');
+  opacity: 0.4;
 }
 
 .layer-2.worm-background-image {
-	background-image: url('../img/research/gi_screens/worms-layer-2.png');
-	opacity: 0.25;
+  background-image: url('../img/research/gi_screens/worms-layer-2.png');
+  opacity: 0.25;
 }
 
 .layer-3.worm-background-image {
-	background-image: url('../img/research/gi_screens/worms-layer-3.png');
-	opacity: 0.15;
+  background-image: url('../img/research/gi_screens/worms-layer-3.png');
+  opacity: 0.15;
 }
 
 /* transparent white layer to make text easier to read over worms */
 #gi.research-area .blurb {
-	position: relative;
-	z-index: 2;
-	display: block;
-	background: rgba(255,255,255,0.7);
+  position: relative;
+  z-index: 2;
+  display: block;
+  background: rgba(255,255,255,0.7);
 }
 
 /*************
  * EVOLUTION *
  * ***********/
 #evolution.research-area {
-	/* brown */
-	background: #5d543b;
-	color: white;
+  /* brown */
+  background: #5d543b;
+  color: white;
 }
 
 #evolution.research-area img {
-	width: 60%;
-	margin: 0 20%;
+  width: 60%;
+  margin: 0 20%;
 }
 
 #evolution-background-block {
-	position: absolute;
-	display: block;
-	width: 50%;
-	height: 100%;
-	right: 0;
-	bottom: 0;
-	
-	/* brown */
-	background: #5d543b;
+  position: absolute;
+  display: block;
+  width: 50%;
+  height: 100%;
+  right: 0;
+  bottom: 0;
+
+  /* brown */
+  background: #5d543b;
 }
 
 /*******
  * RNA *
  * *****/
 #rna.research-area {
-	/* cream */
-	background: #FCECCB;
+  /* cream */
+  background: #FCECCB;
 }
 
 #rna-image {
-	height: 722px;
-	width: 678px;
-	margin: auto;
-	background-image: url("../img/research/rna/pq_rna_sprite.png");
+  height: 722px;
+  width: 678px;
+  margin: auto;
+  background-image: url("../img/research/rna/pq_rna_sprite.png");
 }
 
 /***********
  * NETWORK *
  * *********/
 #network.research-area {
-	/* same purple as links */
-	background: #937AA9;
-	color: white;
+  /* same purple as links */
+  background: #937AA9;
+  color: white;
 }
 
 /*********
@@ -242,13 +242,13 @@ body#home #content {
 }
 
 @media (max-width: 1200px) {
-	.research-area .blurb .text {
-		font-size: 18px;
-	}
+  .research-area .blurb .text {
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 600px) {
-	.research-area .blurb .text {
-		font-size: 16px;
-	}
+  .research-area .blurb .text {
+    font-size: 16px;
+  }
 }

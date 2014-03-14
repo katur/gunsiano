@@ -1,27 +1,27 @@
 #protocol-authorship {
-	float: right;
-	clear: none;
+  float: right;
+  clear: none;
 }
 
 #protocol {
-	float: left;
-	width: 100%;
+  float: left;
+  width: 100%;
 }
 
 #protocol h1, #protocol h2, #protocol h3, #protocol h4 {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 #protocol p, #protocol ol, #protocol ul {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 #protocol ul {
-	list-style-type: disc;
-	list-style-position: inside;
+  list-style-type: disc;
+  list-style-position: inside;
 }
 
 #protocol ol {
-	list-style-type: decimal;
-	list-style-position: inside;
+  list-style-type: decimal;
+  list-style-position: inside;
 }

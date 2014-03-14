@@ -1,20 +1,19 @@
 {% extends 'base.html' %}
 
-{% block page_title %}
-	Outermost Storage Containers
-{% endblock %}
+{% block page_title %}Outermost Storage Containers{% endblock %}
 
 {% block content %}
-	<div id="vats">
-	{% for vat in vats %}
-		<div>
-			<a href={% url 'storage_detail_url' container_id=vat.id %}>
-				<img src="{{ STATIC_URL }}img/{{ vat.type.image_filename }}"
-						alt="photo of this storage vat"
-				/>
-				<span>{{ vat }}</span>
-			</a>
-		</div>
- 	{% endfor %}
-	</div>
+<div id="vats">
+
+  {% for vat in vats %}
+  <div>
+    <a href={% url 'storage_detail_url' container_id=vat.id %}>
+      <img src="{{ STATIC_URL }}img/{{ vat.type.image_filename }}"
+          alt="photo of this storage vat"/>
+      <span>{{ vat }}</span>
+    </a>
+  </div>
+  {% endfor %}
+
+</div>
 {% endblock %}

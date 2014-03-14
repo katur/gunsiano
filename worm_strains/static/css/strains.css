@@ -1,27 +1,27 @@
 .strains {
-	width: 980px;
-	table-layout: fixed;
-	float: left;
-	border-collapse: collapse;
+  width: 980px;
+  table-layout: fixed;
+  float: left;
+  border-collapse: collapse;
 }
 
 .strains, .strains td, .strains tr, .strains th {
-	border: 1px solid #ddd;
-	padding: 4px 6px;
+  border: 1px solid #ddd;
+  padding: 4px 6px;
 }
 
 .strains th {
-	font-weight: bold;
-	text-align: center;
+  font-weight: bold;
+  text-align: center;
 }
 
 #strain-column {
-	width: 95px;
+  width: 95px;
 }
 
 #table-thead-fixed {
-	position: fixed;
-	top: 0px;
-	display: none;
-	background-color: white;
+  position: fixed;
+  top: 0px;
+  display: none;
+  background-color: white;
 }

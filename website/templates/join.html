@@ -1,17 +1,15 @@
 {% extends 'base.html' %}
 {% load extra_tags %}
 
-{% block page_title %}
-	Join the Lab
-{% endblock %}
+{% block page_title %}Join the Lab{% endblock %}
 
 {% block content %}
-	<div id="employment">
-		{% for section in sections %}
-			<div>
-				<h3>{{ section.title }}</h3>
-				{{ section.description|enhanced_markdown }}
-			</div>
-		{% endfor %}
-	</div>
+<div id="employment">
+  {% for section in sections %}
+  <div>
+    <h3>{{ section.title }}</h3>
+    {{ section.description|enhanced_markdown }}
+  </div>
+  {% endfor %}
+</div>
 {% endblock content %}

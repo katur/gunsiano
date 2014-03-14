@@ -1,21 +1,21 @@
 #lab-member-profile {
-	float: left;
-	width: 100%;
+  float: left;
+  width: 100%;
 }
 
 #lab-member-profile span {
-	float: left;
-	width: 60%;
-	clear: none;
+  float: left;
+  width: 60%;
+  clear: none;
 }
 
 #lab-member-profile img {
-	float: right;
-	width: 35%;
-	clear: none;
-	margin: 0 0 5% 5%;
+  float: right;
+  width: 35%;
+  clear: none;
+  margin: 0 0 5% 5%;
 }
 
 #lab-member-profile h3 {
-	margin-top: 40px;
+  margin-top: 40px;
 }

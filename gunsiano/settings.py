@@ -11,7 +11,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Katherine Erickson', 'katherine.erickson@gmail.com'),
+	('Katherine Erickson', 'katherine.erickson@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -92,9 +92,9 @@ STATICFILES_DIRS = (
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+	'django.contrib.staticfiles.finders.FileSystemFinder',
+	'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#	'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 '''

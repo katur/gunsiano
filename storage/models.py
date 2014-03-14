@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.contrib.auth.models import User
 
@@ -16,11 +17,13 @@ class StockableType(models.Model):
 class Stockable(models.Model):
 	type = models.ForeignKey(StockableType)
 
-	class Meta:
-		ordering = ["id"]
-
 	def __unicode__(self):
-		return str(self.id)
+		result = str(self.type)
+		if result == "worm strain":
+			from worm_strains.models import WormStrainLine
+			line = get_object_or_404(WormStrainLine, stockable=self)
+			result += " " + str(line)
+		return result
 
 
 class Stock(models.Model):
@@ -34,7 +37,12 @@ class Stock(models.Model):
 		ordering = ["stockable"]
 
 	def __unicode__(self):
-		return str(self.stockable)
+		result = str(self.stockable)
+		if self.date_prepared:
+			result += ", " + str(self.date_prepared)
+		if self.prepared_by:
+			result += ", " + str(self.prepared_by.get_full_name())
+		return result
 
 
 class ContainerSupertype(models.Model):
@@ -82,7 +90,14 @@ class Container(models.Model):
 	thaw_results = models.CharField(max_length=100, blank=True)
 
 	class Meta:
-		ordering = ["id"]
+		ordering = ["type", "name"]
 
 	def __unicode__(self):
-		return self.name
+		result = str(self.type.supertype) + ": "
+		if self.name:
+			result += self.name
+		elif self.stock:
+			result += str(self.stock)
+		else:
+			result += "id_" + str(self.id)
+		return result

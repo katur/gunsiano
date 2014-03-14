@@ -78,11 +78,11 @@ class WormStrain(models.Model):
 
 	def __cmp__(self, other):
 		if self.is_properly_named() and other.is_properly_named():
-			scode = self.extract_lab_code()
-			ocode = other.extract_lab_code()
-			if scode < ocode:
+			s_code = self.extract_lab_code()
+			o_code = other.extract_lab_code()
+			if s_code < o_code:
 				return -1
-			elif scode > ocode:
+			elif s_code > o_code:
 				return 1
 			else: # if same lab prefix
 				if self.extract_number() < other.extract_number():
@@ -91,11 +91,11 @@ class WormStrain(models.Model):
 					return 1
 
 		else: # if one or both strains are not properly named
-			slower = self.name.lower()
-			olower = other.name.lower()
-			if slower < olower:
+			s_lower = self.name.lower()
+			o_lower = other.name.lower()
+			if s_lower < o_lower:
 				return -1
-			elif slower > olower:
+			elif s_lower > o_lower:
 				return 1
 			else:
 				return 0
@@ -103,7 +103,7 @@ class WormStrain(models.Model):
 
 class WormStrainLine(models.Model):
 	strain = models.ForeignKey(WormStrain)
-	stockable = models.ForeignKey(Stockable)
+	stockable = models.ForeignKey(Stockable, unique=True)
 	created_internally = models.BooleanField(default=False)
 	times_outcrossed = models.PositiveSmallIntegerField(null=True, blank=True)
 	received_from = models.CharField(max_length=100, blank=True)
@@ -115,4 +115,4 @@ class WormStrainLine(models.Model):
 		ordering = ["strain__name"]
 
 	def __unicode__(self):
-		return self.strain.name
+		return str(self.strain)

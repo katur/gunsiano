@@ -29,7 +29,7 @@ class ContainerTypeAdmin(admin.ModelAdmin):
 class ContainerAdmin(admin.ModelAdmin):
 	list_display = ('__unicode__', 'parent', 'vertical_position',
 									'horizontal_position', 'owner', 'is_thawed',)
-	list_filter = ('type__supertype', 'type', 'owner')
+	list_filter = ('type__supertype', 'type', 'owner', 'is_thawed')
 	search_fields = ('name', 'owner__username',
 									'owner__first_name', 'owner__last_name',)
 

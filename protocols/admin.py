@@ -1,6 +1,8 @@
-from django.contrib import admin
-from protocols.models import Protocol
 from slugify import slugify
+
+from django.contrib import admin
+
+from protocols.models import Protocol
 
 
 class ProtocolAdmin(admin.ModelAdmin):

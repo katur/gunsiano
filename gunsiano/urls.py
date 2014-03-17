@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from moderation.helpers import auto_discover
 
+
 admin.autodiscover()
 auto_discover()
 

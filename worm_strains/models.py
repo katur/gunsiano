@@ -1,9 +1,12 @@
-from django.db import models
-from django.conf import settings
+import re
+import string
+
 from django.contrib.auth.models import User
-from vectors.models import Vector
+from django.db import models
+
+from gunsiano.settings import MARKDOWN_PROMPT
 from storage.models import Stockable
-import string, re
+from vectors.models import Vector
 
 
 class WormSpecies(models.Model):
@@ -59,7 +62,7 @@ class WormStrain(models.Model):
   mutagen = models.ForeignKey(Mutagen, null=True, blank=True)
   date_created = models.DateField(null=True, blank=True)
   created_by = models.ForeignKey(User, null=True, blank=True)
-  remarks = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
+  remarks = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
 
   class Meta:
     ordering = ["name"]
@@ -109,7 +112,7 @@ class WormStrainLine(models.Model):
   received_from = models.CharField(max_length=100, blank=True)
   received_by = models.ForeignKey(User, null=True, blank=True)
   date_received = models.DateField(null=True, blank=True)
-  remarks = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
+  remarks = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
 
   class Meta:
     ordering = ["strain__name"]

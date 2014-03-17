@@ -1,6 +1,8 @@
 from django.contrib import admin
 from moderation.admin import ModerationAdmin
-from website.models import *
+
+from website.models import (JoinLabSection, Position, ResearchArea,
+    Resource, UserProfile)
 
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -72,8 +74,8 @@ class JoinLabSectionAdmin(admin.ModelAdmin):
   )
 
 
-admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(JoinLabSection, JoinLabSectionAdmin)
 admin.site.register(Position, PositionAdmin)
 admin.site.register(ResearchArea, ResearchAreaAdmin)
 admin.site.register(Resource, ResourceAdmin)
-admin.site.register(JoinLabSection, JoinLabSectionAdmin)
+admin.site.register(UserProfile, UserProfileAdmin)

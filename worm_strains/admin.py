@@ -1,5 +1,7 @@
 from django.contrib import admin
-from worm_strains.models import *
+
+from worm_strains.models import (Mutagen, Transgene, WormLab,
+    WormSpecies, WormStrain, WormStrainLine)
 
 
 class WormStrainAdmin(admin.ModelAdmin):
@@ -42,9 +44,9 @@ class WormLabAdmin(admin.ModelAdmin):
   )
 
 
-admin.site.register(WormSpecies)
 admin.site.register(Mutagen)
 admin.site.register(Transgene)
 admin.site.register(WormLab, WormLabAdmin)
+admin.site.register(WormSpecies)
 admin.site.register(WormStrain, WormStrainAdmin)
 admin.site.register(WormStrainLine, WormStrainLineAdmin)

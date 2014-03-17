@@ -1,8 +1,9 @@
-from django.template import RequestContext
-from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from worm_strains.models import *
-from storage.models import *
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
+
+from worm_strains.models import WormLab, WormStrain, WormStrainLine
+from storage.models import Stock, Container
 
 
 @login_required

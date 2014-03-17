@@ -1,5 +1,7 @@
 from django.contrib import admin
-from storage.models import *
+
+from storage.models import (Container, ContainerSupertype, ContainerType,
+    Stock, Stockable, StockableType)
 
 
 class StockableAdmin(admin.ModelAdmin):
@@ -86,9 +88,9 @@ class ContainerAdmin(admin.ModelAdmin):
   )
 
 
-admin.site.register(StockableType)
-admin.site.register(Stockable, StockableAdmin)
-admin.site.register(Stock, StockAdmin)
+admin.site.register(Container, ContainerAdmin)
 admin.site.register(ContainerSupertype, ContainerSupertypeAdmin)
 admin.site.register(ContainerType, ContainerTypeAdmin)
-admin.site.register(Container, ContainerAdmin)
+admin.site.register(Stock, StockAdmin)
+admin.site.register(Stockable, StockableAdmin)
+admin.site.register(StockableType)

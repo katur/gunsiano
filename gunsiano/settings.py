@@ -1,7 +1,6 @@
 # Django settings
 
-# to keep db connection and secret key out of git repo
-from secret_settings import *
+from gunsiano.secret_settings import DATABASES, SECRET_KEY
 
 # to use dynamically generated roots throughout settings file
 import os.path

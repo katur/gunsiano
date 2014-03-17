@@ -1,11 +1,14 @@
-from django.template import RequestContext
-from django.shortcuts import render_to_response, get_object_or_404
-from website.models import (User, UserProfile, ResearchArea, Resource,
-    JoinLabSection)
-from django.contrib.auth.decorators import login_required
-import string, math
-import xml.etree.ElementTree as ET
+import math
 import urllib2
+import string
+import xml.etree.ElementTree as ET
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
+
+from website.models import (JoinLabSection, ResearchArea,
+    Resource, User, UserProfile)
 
 
 def home(request):

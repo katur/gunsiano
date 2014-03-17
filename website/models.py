@@ -1,7 +1,7 @@
-from django.db import models
-from django.conf import settings
 from django.contrib.auth.models import User
-from django.db.models.signals import post_init
+from django.db import models
+
+from gunsiano.settings import MARKDOWN_PROMPT
 
 
 class Position(models.Model):
@@ -28,10 +28,10 @@ class UserProfile(models.Model):
   url = models.URLField(blank=True)
   image_filename = models.CharField(max_length=100, blank=True)
   blurb = models.TextField(
-      'Blurb', help_text=settings.MARKDOWN_PROMPT, blank=True)
+      'Blurb', help_text=MARKDOWN_PROMPT, blank=True)
 
   class Meta:
-    ordering = ["user__get_full_name"]
+    ordering = ["user__first_name", "user__last_name"]
 
   def __unicode__(self):
     return self.user.get_full_name()
@@ -54,13 +54,13 @@ def add_user_location(**kwargs):
     instance.location = "NYUAD/NY"
 
 
-post_init.connect(add_user_location, UserProfile)
+models.signals.post_init.connect(add_user_location, UserProfile)
 
 
 class ResearchArea(models.Model):
   name = models.CharField(max_length=60, unique=True)
   description = models.TextField(
-      'Description', help_text=settings.MARKDOWN_PROMPT)
+      'Description', help_text=MARKDOWN_PROMPT)
 
   class Meta:
     ordering = ["name"]
@@ -75,7 +75,7 @@ class Resource(models.Model):
   logo_filename = models.CharField(max_length=50, blank=True)
   url = models.CharField(max_length=100, blank=True)
   description = models.TextField(
-      'Description', help_text=settings.MARKDOWN_PROMPT)
+      'Description', help_text=MARKDOWN_PROMPT)
 
   class Meta:
     ordering = ["display_order"]
@@ -87,7 +87,7 @@ class Resource(models.Model):
 class JoinLabSection(models.Model):
   title = models.CharField(max_length=100, unique=True)
   description = models.TextField(
-      'Description', help_text=settings.MARKDOWN_PROMPT)
+      'Description', help_text=MARKDOWN_PROMPT)
   display_order = models.PositiveSmallIntegerField(unique=True)
 
   class Meta:

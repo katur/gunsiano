@@ -1,7 +1,8 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.shortcuts import get_object_or_404
-from django.conf import settings
-from django.contrib.auth.models import User
+
+from gunsiano.settings import MARKDOWN_PROMPT
 
 
 class StockableType(models.Model):
@@ -31,7 +32,7 @@ class Stock(models.Model):
   concentration = models.CharField(max_length=30, blank=True)
   prepared_by = models.ForeignKey(User, null=True, blank=True)
   date_prepared = models.DateField(null=True, blank=True)
-  notes = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
+  notes = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
 
   class Meta:
     ordering = ["stockable"]
@@ -76,7 +77,7 @@ class ContainerType(models.Model):
 class Container(models.Model):
   name = models.CharField(max_length=200, blank=True)
   type = models.ForeignKey(ContainerType)
-  notes = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
+  notes = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
   parent = models.ForeignKey('self', null=True, blank=True)
   vertical_position = models.PositiveSmallIntegerField(null=True, blank=True)
   horizontal_position = models.PositiveSmallIntegerField(null=True, blank=True)

@@ -1,7 +1,8 @@
-from django.template import RequestContext
-from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from protocols.models import *
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
+
+from protocols.models import Protocol
 
 
 @login_required

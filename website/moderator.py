@@ -1,7 +1,9 @@
 from moderation import moderation
 
-from website.models import Resource, UserProfile
+from website.models import JoinLabSection, ResearchArea, Resource, UserProfile
 
 
-# moderation.register(Resource)
-# moderation.register(UserProfile)
+moderation.register(JoinLabSection)
+moderation.register(ResearchArea)
+moderation.register(Resource)
+moderation.register(UserProfile)

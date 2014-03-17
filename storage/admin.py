@@ -71,6 +71,7 @@ class ContainerAdmin(admin.ModelAdmin):
       'horizontal_position',
       'owner',
       'is_thawed',
+      'date_thawed',
   )
 
   list_filter = (

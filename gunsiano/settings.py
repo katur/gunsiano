@@ -2,7 +2,7 @@
 
 from gunsiano.secret_settings import DATABASES, SECRET_KEY
 
-# to use dynamically generated roots throughout settings file
+# To use dynamically generated roots throughout settings file.
 import os.path
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -10,7 +10,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-  ('Katherine Erickson', 'katherine.erickson@gmail.com'),
+    ('Katherine Erickson', 'katherine.erickson@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -23,19 +23,19 @@ LOGIN_REDIRECT_URL = "home_url"
 '''
 # include this, filled in, in settings_secret.py
 DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-    'NAME': '', # Or path to database file if using sqlite3.
-    'USER': '', # Not used with sqlite3.
-    'PASSWORD': '', # Not used with sqlite3.
-    'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
-    'PORT': '', # Set to empty string for default. Not used with sqlite3.
-  }
+    'default': {
+        'ENGINE': 'django.db.backends.'
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    }
 }
 
 '''
 
-# Hosts/domain names that are valid for this site; required if DEBUG is False
+# Domain names that are valid for this site; required if DEBUG is False.
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
 
@@ -83,17 +83,17 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-  # Put strings here, like "/home/html/static" or "C:/www/django/static".
-  # Always use forward slashes, even on Windows.
-  # Don't forget to use absolute paths, not relative paths.
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
 )
 
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-  'django.contrib.staticfiles.finders.FileSystemFinder',
-  'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-# 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 '''
@@ -104,19 +104,19 @@ SECRET_KEY = ''
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-  'django.template.loaders.filesystem.Loader',
-  'django.template.loaders.app_directories.Loader',
-  # 'django.template.loaders.eggs.Loader',
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
-  'django.middleware.common.CommonMiddleware',
-  'django.contrib.sessions.middleware.SessionMiddleware',
-  'django.middleware.csrf.CsrfViewMiddleware',
-  'django.contrib.auth.middleware.AuthenticationMiddleware',
-  'django.contrib.messages.middleware.MessageMiddleware',
-  # Uncomment the next line for simple clickjacking protection:
-  # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    # Uncomment the next line for simple clickjacking protection:
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'gunsiano.urls'
@@ -125,38 +125,38 @@ ROOT_URLCONF = 'gunsiano.urls'
 WSGI_APPLICATION = 'gunsiano.wsgi.application'
 
 TEMPLATE_DIRS = (
-  # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-  # Always use forward slashes, even on Windows.
-  # Don't forget to use absolute paths, not relative paths.
-  '/Users/katherine/ka73r/websites/gunsiano/universal/templates/'
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    '/Users/katherine/ka73r/websites/gunsiano/universal/templates/'
 )
 
 INSTALLED_APPS = (
-  'django.contrib.auth',
-  'django.contrib.contenttypes',
-  'django.contrib.sessions',
-  'django.contrib.sites',
-  'django.contrib.messages',
-  'django.contrib.staticfiles',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 
-  # Uncomment the next line to enable the admin:
-  'django.contrib.admin',
+    # Uncomment the next line to enable the admin:
+    'django.contrib.admin',
 
-  # Uncomment the next line to enable admin documentation:
-  'django.contrib.admindocs',
+    # Uncomment the next line to enable admin documentation:
+    'django.contrib.admindocs',
 
-  # Added by Katherine
-  'south', # for database migrations
-  'django.contrib.markup', # needed to use markdown
+    # Added by Katherine
+    'south', # for database migrations
+    'django.contrib.markup', # needed to use markdown
 
-  # Apps
-  'moderation',
-  'universal',
-  'website',
-  'worm_strains',
-  'vectors',
-  'storage',
-  'protocols',
+    # Apps
+    'moderation',
+    'universal',
+    'website',
+    'worm_strains',
+    'vectors',
+    'storage',
+    'protocols',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -165,44 +165,43 @@ INSTALLED_APPS = (
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 LOGGING = {
-  'version': 1,
-  'disable_existing_loggers': False,
-  'filters': {
-    'require_debug_false': {
-      '()': 'django.utils.log.RequireDebugFalse'
-    }
-  },
-  'handlers': {
-    'mail_admins': {
-      'level': 'ERROR',
-      'filters': ['require_debug_false'],
-      'class': 'django.utils.log.AdminEmailHandler'
-    }
-  },
-  'loggers': {
-    'django.request': {
-      'handlers': ['mail_admins'],
-      'level': 'ERROR',
-      'propagate': True,
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
     },
-  }
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
 }
-# below added by Katherine
-# to have request object in templates
+
+
+#####################################
+# Everything below added by Katherine
+#####################################
+
+# To have request object in templates
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
-  'django.core.context_processors.request',
+    'django.core.context_processors.request',
 )
 
-# to fix Chrome bug of too many concurrent requests of static files:
-# http://python.6.x6.nabble.com/Django-18336-Static-files-randomly-fail-to-load-in-Google-Chrome-td4974987.html
-from django.core.servers.basehttp import WSGIServer
-WSGIServer.request_queue_size = 10
-
-# constants
-MARKDOWN_PROMPT = '''Use Markdown syntax.
-  See
-  <a href="http://www.darkcoding.net/software/markdown-quick-reference" target="_blank">
-  a quick reference</a>,
-  <a href="http://www.markdowntutorial.com/" target="_blank">a tutorial</a>,
-  or practice <a href="http://dillinger.io/" target="_blank">here</a>.'''
+# Constants
+MARKDOWN_PROMPT = '''Use Markdown syntax. See
+    <a href="http://www.darkcoding.net/software/markdown-quick-reference"
+    target="_blank">a quick reference</a>,
+    <a href="http://www.markdowntutorial.com/" target="_blank">a tutorial</a>,
+    or practice <a href="http://dillinger.io/" target="_blank">here</a>.'''

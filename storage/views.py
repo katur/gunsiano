@@ -8,62 +8,57 @@ from worm_strains.models import WormStrainLine
 
 @login_required
 def storage(request):
-  """
-  Page showing all available vats
-  """
-  vats = Container.objects.all().filter(
-      type_id__supertype_id__is_outermost=True)
+    """
+    Page showing all available vats
+    """
+    containers = (
+        Container.objects.all()
+        .filter(parent_id__isnull=True)
+    )
 
-  return render_to_response('storage.html', {
-      'vats':vats
-  }, context_instance=RequestContext(request))
+    return render_to_response('storage.html', {
+        'containers': containers
+    }, context_instance=RequestContext(request))
 
 
 @login_required
 def storage_detail(request, container_id):
-  """
-  Page showing the contents of some container
-  """
-  container = get_object_or_404(Container, id=container_id)
-  children = Container.objects.all().filter(parent_id=container, is_thawed=0)
+    """
+    Page showing the contents of some container
+    """
+    container = get_object_or_404(
+        Container,
+        id=container_id,
+        type__slots_vertical__isnull=False,
+        type__slots_horizontal__isnull=False)
+    children = Container.objects.all().filter(parent_id=container, is_thawed=0)
 
-  try:
+    # create empty grid with this container's dimensions
     grid = [
         [list() for i in range(container.type.slots_horizontal)]
         for j in range(container.type.slots_vertical)
     ]
-
     for child in children:
-      (grid[child.vertical_position-1][child.horizontal_position-1]).append(
-          child)
-      try:
-        if child.stock.stockable.type.id == 1:
-          child.strain = get_object_or_404(WormStrainLine,
-              stockable=child.stock.stockable).strain
-      except AttributeError:
-        child.strain = None
+        x = child.horizontal_position - 1
+        y = child.vertical_position - 1
+        (grid[y][x]).append(child)
 
-  except AttributeError:
-    grid = [[list()]]
-    for child in children:
-      grid[0][0].append(child)
+        if child.has_children():
+            child.has_children = True
+        elif child.stock:
+            s = child.stock.stockable
+            if s.type.name == "worm strain":
+                line = get_object_or_404(WormStrainLine, stockable=s)
+                child.worm = line.strain
 
-  # generate page title
-  temp = container
-  try:
-    title = """%s %s""" % ( temp.type.supertype.name, temp.name )
-  except AttributeError:
-    title = temp.name
+    title = str(container)
+    temp = container
+    while temp.parent:
+        temp = temp.parent
+        title = "{0} -> {1}".format(str(temp), title)
 
-  while temp.parent:
-    temp = temp.parent
-    try:
-      title = """%s %s -> %s""" % ( temp.type.supertype.name, temp.name, title)
-    except AttributeError:
-      title = """%s -> %s""" % ( temp.name, title )
-
-  return render_to_response('storage_detail.html', {
-      'container':container,
-      'container_title':title,
-      'grid':grid,
-  }, context_instance=RequestContext(request))
+    return render_to_response('storage_detail.html', {
+        'container':container,
+        'container_title':title,
+        'grid':grid,
+    }, context_instance=RequestContext(request))

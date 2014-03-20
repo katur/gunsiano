@@ -8,51 +8,26 @@
 
   {% for row in grid %}
   <tr>
-
     {% for compartment in row %}
     <td>
       {% for child in compartment %}
-        {% if child.type.supertype.has_children %}
+        {% if child.has_children %}
         <a href={% url 'storage_detail_url' container_id=child.id %}>
+        {% elif child.worm %}
+        <a href={% url 'strain_url' name=child.worm %}>
         {% endif %}
 
-        {% if child.name or child.stock or child.owner %}
-          {% if child.name %}
-          <span>{{ child }}</span>
-          {% endif %}
+        <span>{{ child }}</span>
 
-          {% if child.strain %}
-          <span>
-            <a href={% url 'strain_url' name=child.strain %}>
-              {{ child.strain }}
-            </a>
-          </span>
-
-          {% elif child.stock.notes %}
-          <span>{{ child.stock.notes|enhanced_markdown }}</span>
-
-          {% endif %}
-
-          {% if child.owner %}
-          <br>
-          <span>{{ child.owner.get_full_name }}<span>
-          {% endif %}
-
-        {% else %}
-        Unnamed object
-        {% endif %}
-
-        {% if container.type.supertype.has_children %}
+        {% if container.has_children or container.worm %}
           </a>
         {% endif %}
-
+      <br>
       {% empty %}
         No record
       {% endfor %}
-
     </td>
     {% endfor %}
-
   </tr>
   {% endfor %}
 

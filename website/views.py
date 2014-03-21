@@ -1,5 +1,5 @@
 from __future__ import division # force float division
-
+from itertools import chain
 import math
 import urllib2
 import string
@@ -25,7 +25,8 @@ def home(request):
     m = get_object_or_404(ResearchArea, id=6)
     kris = get_object_or_404(User, username='kris')
     fabio = get_object_or_404(User, username='fabio')
-    return render_to_response('home.html', {
+
+    dictionary = {
         'network': n,
         'cell': c,
         'evolution': e,
@@ -34,14 +35,16 @@ def home(request):
         'mouse': m,
         'fabio': fabio,
         'kris': kris,
-    }, context_instance=RequestContext(request))
+    }
+    return render_to_response('home.html', dictionary,
+                              context_instance=RequestContext(request))
 
 
 def lab_members(request):
     """
     Page listing all lab members
     """
-    # current lab members must be ordered by position to "group by" in template
+    # Order current lab members by position (for "group by" in template)
     current = (UserProfile.objects.all()
                .filter(user__is_active=True, is_current=True)
                .order_by('position__display_order', 'user__last_name',
@@ -49,14 +52,21 @@ def lab_members(request):
     former = (UserProfile.objects.all()
               .filter(user__is_active=True, is_current=False)
               .order_by('user__last_name', 'user__first_name'))
-    num_columns = 3
-    column_length = math.ceil(len(former) / num_columns)
 
-    return render_to_response('lab_members.html', {
+    all_members = list(chain(current, former))
+    for member in all_members:
+        member.location = member.get_location()
+
+    num_former_columns = 3
+    former_column_length = math.ceil(len(former) / num_former_columns)
+
+    dictionary = {
         'current': current,
         'former': former,
-        'column_length': column_length,
-    }, context_instance=RequestContext(request))
+        'former_column_length': former_column_length,
+    }
+    return render_to_response('lab_members.html', dictionary,
+                              context_instance=RequestContext(request))
 
 
 def lab_member(request, username):
@@ -66,9 +76,12 @@ def lab_member(request, username):
     variable (which is referenced for authentication purposes)
     """
     member = get_object_or_404(User, username=username)
-    return render_to_response('lab_member.html', {
+
+    dictionary = {
         'member': member,
-    }, context_instance=RequestContext(request))
+    }
+    return render_to_response('lab_member.html', dictionary,
+                              context_instance=RequestContext(request))
 
 
 def resources(request):
@@ -76,14 +89,17 @@ def resources(request):
     Resources Page
     """
     r = Resource.objects.all()
-    return render_to_response('resources.html', {
+
+    dictionary = {
         'resources': r,
-    }, context_instance=RequestContext(request))
+    }
+    return render_to_response('resources.html', dictionary,
+                              context_instance=RequestContext(request))
 
 
 def publications(request):
     """
-    Page for publications, fetched dynamically from PubMed
+    Page for publications, fetched dynamically from PubMed.
     PubMed search term:
     (Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author]) OR
       (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author])
@@ -91,32 +107,29 @@ def publications(request):
     xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/"
                                "erss.cgi?rss_guid=12Wu35auLMyC-bw6heubsB4Aa"
                                "1vq6MH4xOLj1ILBD4Wimwikba")
-
-    # below used to work
+    # NOTE: below used to work; not sure why they stopped
     # xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/"
     #   "erss.cgi?rss_guid=18qVEVbjJjoq2mO-bQKE6E_-D4pje3l2O5Jd1cFE70SdwIYw_1")
     # xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/"
     #   "erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy")
 
-    # make a search term in a string bold or italicized
     def embolden(s, term):
-        return string.replace(s, term, "<b>" + term + "</b>")
+        return string.replace(s, term, "<b>{0}</b>".format(term))
 
     def italicize(s, term):
-        return string.replace(s, term, "<i>" + term + "</i>")
+        return string.replace(s, term, "<i>{0}</i>".format(term))
 
-    # empty lists to fill with publications from the xml file
+    # Lists to populate with publications from the xml file
     pub_both = []
     pub_kris = []
     pub_fabio = []
 
-    # create tree of the xml file tags, and iterate over the items/publications
     tree = ET.parse(xml_file)
     root = tree.getroot()
     for publication in root.iter('item'):
         d = publication.find('description').text
 
-        # italicize species names
+        # Italicize species names
         d = string.replace(d, "Caenorhabditis  elegans",
                            "Caenorhabditis elegans")
         d = italicize(d, "Caenorhabditis elegans")
@@ -136,11 +149,13 @@ def publications(request):
         publication.description = d
         pub_both.append(publication)
 
-    return render_to_response('publications.html', {
+    dictionary = {
         'pub_both': pub_both,
         'pub_kris': pub_kris,
         'pub_fabio': pub_fabio,
-    }, context_instance=RequestContext(request))
+    }
+    return render_to_response('publications.html', dictionary,
+                              context_instance=RequestContext(request))
 
 
 def join(request):
@@ -149,10 +164,13 @@ def join(request):
     """
     sections = JoinLabSection.objects.all().order_by('display_order')
     jessica = get_object_or_404(User, username='jessica')
-    return render_to_response('join.html', {
+
+    dictionary = {
         'sections': sections,
         'jessica': jessica,
-    }, context_instance=RequestContext(request))
+    }
+    return render_to_response('join.html', dictionary,
+                              context_instance=RequestContext(request))
 
 
 def contact(request):
@@ -162,11 +180,14 @@ def contact(request):
     fabio = get_object_or_404(User, username='fabio')
     jessica = get_object_or_404(User, username='jessica')
     kris = get_object_or_404(User, username='kris')
-    return render_to_response('contact.html', {
+
+    dictionary = {
         'kris': kris,
         'fabio': fabio,
         'jessica': jessica,
-    }, context_instance=RequestContext(request))
+    }
+    return render_to_response('contact.html', dictionary,
+                              context_instance=RequestContext(request))
 
 
 @login_required

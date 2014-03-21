@@ -12,7 +12,7 @@ class Vector(models.Model):
     three_prime_utr = models.CharField(max_length=50, blank=True)
 
     class Meta:
-        ordering = ["name"]
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name

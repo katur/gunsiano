@@ -57,7 +57,7 @@
     <ul class="column">
       {% for profile in former %}
 
-      {% if forloop.counter0|divisibleby:column_length and not forloop.first %}
+      {% if forloop.counter0|divisibleby:former_column_length and not forloop.first %}
       </ul><ul class="column">
       {% endif %}
 

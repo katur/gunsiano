@@ -9,7 +9,7 @@ class StockableType(models.Model):
     name = models.CharField(max_length=20)
 
     class Meta:
-        ordering = ["name"]
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name
@@ -23,7 +23,7 @@ class Stockable(models.Model):
         if result == "worm strain":
             from worm_strains.models import WormStrainLine
             line = get_object_or_404(WormStrainLine, stockable=self)
-            result += " " + str(line)
+            result = str(line)
         return result
 
 
@@ -35,14 +35,16 @@ class Stock(models.Model):
     notes = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
 
     class Meta:
-        ordering = ["stockable"]
+        ordering = ['stockable']
 
     def __unicode__(self):
         result = str(self.stockable)
-        if self.date_prepared:
-            result += ", " + str(self.date_prepared)
-        if self.prepared_by:
-            result += ", " + str(self.prepared_by.get_full_name())
+        date = str(self.date_prepared)
+        preparer = self.prepared_by.get_full_name()
+        if date:
+            result = ", ".join((result, date))
+        if preparer:
+            result = ", ".join((result, preparer))
         return result
 
 
@@ -51,7 +53,7 @@ class ContainerSupertype(models.Model):
     has_children = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ["name"]
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name
@@ -62,19 +64,18 @@ class ContainerType(models.Model):
     supertype = models.ForeignKey(ContainerSupertype)
     slots_vertical = models.IntegerField(null=True, blank=True)
     slots_horizontal = models.IntegerField(null=True, blank=True)
-    slot_type = models.ForeignKey(
-        ContainerSupertype, null=True, blank=True,
-        related_name="container_slot_type")
+    slot_type = models.ForeignKey(ContainerSupertype, null=True, blank=True,
+                                  related_name='container_slot_type')
     image_filename = models.CharField(max_length=30, blank=True)
 
     class Meta:
-        ordering = ["supertype", "name"]
-
-    def has_children(self):
-        return self.supertype.has_children
+        ordering = ['supertype', 'name']
 
     def __unicode__(self):
         return self.name
+
+    def has_children(self):
+        return self.supertype.has_children
 
 
 class Container(models.Model):
@@ -82,29 +83,22 @@ class Container(models.Model):
     type = models.ForeignKey(ContainerType)
     parent = models.ForeignKey('self', null=True, blank=True)
     vertical_position = models.PositiveSmallIntegerField(null=True, blank=True)
-    horizontal_position = models.PositiveSmallIntegerField(
-        null=True, blank=True)
+    horizontal_position = models.PositiveSmallIntegerField(null=True,
+                                                           blank=True)
     stock = models.ForeignKey(Stock, null=True, blank=True)
     owner = models.ForeignKey(User, null=True, blank=True)
     is_thawed = models.BooleanField(default=False)
-    thawed_by = models.ForeignKey(
-        User, null=True, blank=True, related_name="container_thawed_by")
+    thawed_by = models.ForeignKey(User, null=True, blank=True,
+                                  related_name='container_thawed_by')
     date_thawed = models.DateField(null=True, blank=True)
     thaw_results = models.CharField(max_length=100, blank=True)
     notes = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
 
     class Meta:
-        ordering = ["type", "name"]
-
-    def supertype(self):
-        return self.type.supertype
-
-    def has_children(self):
-        return self.type.has_children()
+        ordering = ['type', 'name']
 
     def __unicode__(self):
-        kind = str(self.supertype())
-
+        supertype = str(self.get_supertype())
         if self.name:
             detail = self.name
         elif self.stock:
@@ -115,5 +109,10 @@ class Container(models.Model):
             detail= self.notes
         else:
             detail= "Unnamed Container"
+        return "{0}: {1}".format(supertype, detail)
 
-        return "{0}: {1}".format(kind, detail)
+    def has_children(self):
+        return self.type.has_children()
+
+    def get_supertype(self):
+        return self.type.supertype

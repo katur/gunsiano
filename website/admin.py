@@ -7,8 +7,7 @@ from website.models import (JoinLabSection, Position, ResearchArea, Resource,
 
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = (
-        'first_name',
-        'last_name',
+        '__unicode__',
         'user',
         'net_id',
         'url',
@@ -36,12 +35,18 @@ class UserProfileAdmin(admin.ModelAdmin):
 
     def get_fieldsets(self, request, obj=None):
         unprivileged_fieldsets = (
-            (('Personal info'), {
-                'fields': ('net_id',)
-            }),
-            (('Public Profile info'), {
-                'fields': ('url', 'blurb',)
-            }),
+            (
+                ('Personal info'),
+                {'fields':
+                    ('net_id',)
+                }
+            ),
+            (
+                ('Public Profile info'),
+                {'fields':
+                    ('url', 'blurb',)
+                }
+            ),
         )
 
         if request.user.has_personnel_admin_privileges():

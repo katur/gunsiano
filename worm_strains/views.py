@@ -11,25 +11,23 @@ def strains(request):
     """
     Page listing worms strains, with possible filtering
     """
-    # get all worm strains
     strains = WormStrain.objects.all()
-
-    # sort uses overridden cmp method (in WormStrain model)
     strains = sorted(strains)
 
-    # for strain in strains:
-        # Dynamically generate genotype from the background and a single
-        # transgene. For performance, all genotypes are instead hard-coded
-        # into the database, using the generate_genotype function in this
-        # module along with
-        # worm_strains/management/commands/insert_genotypes_into_database.py
-        # (run as: python manage.py insert_genotypes_into_database).
+    # The following lines dynamically generate the genotype, using the strain's
+    # background and transgene. For performance reasons, the genotype
+    # is now hard-coded into the database (done using this same
+    # generate_genotype function, run as:
+    # ./manage.py insert_genotypes_into_database
 
+    # for strain in strains:
         # generate_genotype(strain)
 
-    return render_to_response('strains.html', {
-        'strains':strains
-    }, context_instance=RequestContext(request))
+    dictionary = {
+        'strains': strains,
+    }
+    return render_to_response('strains.html', dictionary,
+                              context_instance=RequestContext(request))
 
 
 @login_required
@@ -46,7 +44,7 @@ def strain(request, name):
                        .order_by('date_prepared'))
 
         for stock in line.stocks:
-            # get the tester thaws, regardless of whether thawed
+            # Get the tester thaws no matter what
             try:
                 stock.thaw_80 = Container.objects.get(stock=stock, parent=7)
             except Container.DoesNotExist:
@@ -57,21 +55,21 @@ def strain(request, name):
             except Container.DoesNotExist:
                 stock.thaw_N = None
 
-            # for non-tester tubes, get only unthawed tubes
+            # Get only unthawed tubes for non-testers
             stock.tubes = (Container.objects
                            .filter(stock=stock, is_thawed=False)
                            .exclude(parent=7).exclude(parent=8))
 
             for tube in stock.tubes:
-                # get position inside the box, using char for row
-                position_in_box = """%s%s""" % (
+                # Get position inside the box
+                position_in_box = "{0}{1}".format(
                     chr(tube.vertical_position + 64),
                     tube.horizontal_position
                 )
 
-                # follow parent pointers for detailed position
+                # Follow parent pointers for detailed position
                 try:
-                    tube.position = """%s - Rack %s - Box %s - %s """ % (
+                    tube.position = "{0} - Rack {1} - Box {2} - {3}".format(
                         tube.parent.parent.parent.name,
                         tube.parent.parent.name,
                         tube.parent.name,
@@ -83,10 +81,10 @@ def strain(request, name):
                 if tube.notes:
                     tube.position += ": " + tube.notes
 
-    # sort tubes by position
+    # Sort tubes by position
     stock.tubes = sorted(stock.tubes, key=lambda x: x.position)
 
-    # lab can be determined from first 2+ letters of strain name
+    # Lab determined from first 2+ letters of strain name
     if strain.is_properly_named():
         lab_code = strain.extract_lab_code()
         try:
@@ -94,20 +92,22 @@ def strain(request, name):
         except WormLab.DoesNotExist:
             strain.lab = None
 
-    return render_to_response('strain.html', {
-        'lines':lines,
-        'strain':strain,
-    }, context_instance=RequestContext(request))
+    dictionary = {
+        'lines': lines,
+        'strain': strain,
+    }
+    return render_to_response('strain.html', dictionary,
+                              context_instance=RequestContext(request))
 
 
 def generate_genotype(strain):
-  if strain.transgene and strain.parent_strain:
-    vector = strain.transgene.vector
-    strain.genotype = (strain.transgene.name + "[" +
-        vector.parent_vector.genotype_pattern + "]")
-    strain.genotype = strain.genotype.replace("gene", vector.gene)
-    strain.genotype = strain.genotype.replace("promoter", vector.promoter)
-    strain.genotype = strain.genotype.replace(
-        "threePrimeUTR", vector.three_prime_utr)
-    if strain.parent_strain.name == "DP38":
-      strain.genotype = "unc-119(ed3) III; " + strain.genotype
+    if strain.transgene and strain.parent_strain:
+        vector = strain.transgene.vector
+        strain.genotype = (strain.transgene.name + "[" +
+            vector.parent_vector.genotype_pattern + "]")
+        strain.genotype = strain.genotype.replace("gene", vector.gene)
+        strain.genotype = strain.genotype.replace("promoter", vector.promoter)
+        strain.genotype = strain.genotype.replace(
+            "threePrimeUTR", vector.three_prime_utr)
+        if strain.parent_strain.name == "DP38":
+            strain.genotype = "unc-119(ed3) III; " + strain.genotype

@@ -1,5 +1,4 @@
 # Django settings
-
 from gunsiano.secret_settings import DATABASES, SECRET_KEY
 
 # To use dynamically generated roots throughout settings file.
@@ -24,7 +23,7 @@ LOGIN_REDIRECT_URL = "home_url"
 # include this, filled in, in settings_secret.py
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.'
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': '',
         'USER': '',
         'PASSWORD': '',

@@ -11,15 +11,20 @@ class ProtocolAdmin(admin.ModelAdmin):
         'pub_date',
     )
 
-    fieldsets = [
-        (None, {'fields': [('title_markdown', 'body_markdown')]}),
-    ]
+    fieldsets = (
+        (
+            None,
+            {'fields':
+                ('title_markdown', 'body_markdown')
+            }
+        ),
+    )
 
     def save_model(self, request, obj, form, change):
-        # update the author to whoever is logged in to admin interface
+        # Set author to whoever is logged in
         obj.author = request.user
 
-        # if no url already determined, create it from the title
+        # If no url already given for this protocol, create it from the title
         if obj.title_url == "":
             obj.title_url = slugify(obj.title_markdown)
 

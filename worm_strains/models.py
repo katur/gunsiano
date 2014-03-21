@@ -1,5 +1,4 @@
 import re
-import string
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -13,7 +12,7 @@ class WormSpecies(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
     class Meta:
-        ordering = ["name"]
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name
@@ -23,7 +22,7 @@ class Mutagen(models.Model):
     mutagen = models.CharField(max_length=50)
 
     class Meta:
-        ordering = ["mutagen"]
+        ordering = ['mutagen']
 
     def __unicode__(self):
         return self.mutagen
@@ -34,7 +33,7 @@ class Transgene(models.Model):
     vector = models.ForeignKey(Vector, null=True, blank=True)
 
     class Meta:
-        ordering = ["name"]
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name
@@ -46,7 +45,7 @@ class WormLab(models.Model):
     allele_code = models.CharField(max_length=5, blank=True)
 
     class Meta:
-        ordering = ["lab"]
+        ordering = ['lab']
 
     def __unicode__(self):
         return self.lab
@@ -65,12 +64,18 @@ class WormStrain(models.Model):
     remarks = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
 
     class Meta:
-        ordering = ["name"]
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name
 
     def __cmp__(self, other):
+        """
+        Compare two strains. Don't just order alphabetically, because
+        PF99 should precede PF100. If both strains are properly named,
+        order by lab code and then by number. If a strain is not
+        properly named, just order it alphabetically.
+        """
         if self.is_properly_named() and other.is_properly_named():
             s_code = self.extract_lab_code()
             o_code = other.extract_lab_code()
@@ -78,17 +83,17 @@ class WormStrain(models.Model):
                 return -1
             elif s_code > o_code:
                 return 1
-            else: # same lab prefix
+            else: # Same lab prefix, so order by number
                 if self.extract_number() < other.extract_number():
                     return -1
-                else: # necessarily > because strain names unique
+                else:
                     return 1
-        else: # one or both strains not conventionally named
+        else: # One or both strains not conventionally named
             s_lower = self.name.lower()
             o_lower = other.name.lower()
             if s_lower < o_lower:
                 return -1
-            else: # necessarily > because strain names unique
+            else:
                 return 1
 
     def is_properly_named(self):
@@ -99,8 +104,6 @@ class WormStrain(models.Model):
 
     def extract_number(self):
         return int(re.search('\d+$', self.name).group(0))
-
-
 
 
 class WormStrainLine(models.Model):
@@ -114,7 +117,7 @@ class WormStrainLine(models.Model):
     remarks = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
 
     class Meta:
-        ordering = ["strain__name"]
+        ordering = ['strain__name']
 
     def __unicode__(self):
         return str(self.strain)

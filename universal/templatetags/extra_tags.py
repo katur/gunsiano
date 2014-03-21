@@ -1,4 +1,5 @@
 import markdown
+
 from django import template
 from django.template.defaultfilters import stringfilter
 from django.utils.encoding import force_unicode
@@ -12,16 +13,12 @@ register = template.Library()
 @stringfilter
 def enhanced_markdown(value):
     extensions = [
-        # for newline to create line break / more intuitive
-        # "nl2br",
-
-        # for emdash, endash, pretty quotes
-        "smartypants",
-
+        # "nl2br", # more intuitive linebreak
+        "smartypants", # emdash, endash, pretty quotes
         "subscript",
         "superscript",
     ]
 
-    return mark_safe(markdown.markdown(
-        force_unicode(value), extensions, safe_mode=True,
-        enable_attributes=False))
+    return mark_safe(markdown.markdown(force_unicode(value), extensions,
+                                       safe_mode=True,
+                                       enable_attributes=False))

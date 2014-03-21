@@ -19,7 +19,10 @@ class MyUserAdmin(UserAdmin):
         'is_superuser',
     )
 
-    ordering = ('first_name', 'last_name')
+    ordering = (
+        'first_name',
+        'last_name',
+    )
 
     def queryset(self, request):
         """
@@ -36,10 +39,18 @@ class MyUserAdmin(UserAdmin):
     def get_fieldsets(self, request, obj=None):
         if obj:
             unprivileged_fieldsets = (
-                (('Password'), {'fields': ('password', )}),
-                (('Personal info'), {
-                    'fields': ('first_name', 'last_name', 'email')
-                }),
+                (
+                    ('Password'),
+                    {'fields':
+                        ('password',)
+                    }
+                ),
+                (
+                    ('Personal info'),
+                    {'fields':
+                        ('first_name', 'last_name', 'email',)
+                    }
+                ),
             )
 
             if request.user.has_personnel_admin_privileges():

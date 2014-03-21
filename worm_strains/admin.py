@@ -1,47 +1,47 @@
 from django.contrib import admin
 
-from worm_strains.models import (Mutagen, Transgene, WormLab,
-    WormSpecies, WormStrain, WormStrainLine)
+from worm_strains.models import (Mutagen, Transgene, WormLab, WormSpecies,
+    WormStrain, WormStrainLine)
 
 
 class WormStrainAdmin(admin.ModelAdmin):
-  list_display = (
-      'name',
-      'species',
-      'genotype',
-      'mutagen',
-      'created_by',
-      'date_created',
-      'on_wormbase',
-  )
+    list_display = (
+        'name',
+        'species',
+        'genotype',
+        'mutagen',
+        'created_by',
+        'date_created',
+        'on_wormbase',
+    )
 
-  list_filter = (
-      'created_by',
-  )
+    list_filter = (
+        'created_by',
+    )
 
 
 class WormStrainLineAdmin(admin.ModelAdmin):
-  list_display = (
-      'strain',
-      'stockable',
-      'created_internally',
-      'received_from',
-      'received_by',
-      'date_received',
-  )
+    list_display = (
+        'strain',
+        'stockable',
+        'created_internally',
+        'received_from',
+        'received_by',
+        'date_received',
+    )
 
-  list_filter = (
-      'created_internally',
-      'received_by',
-  )
+    list_filter = (
+        'created_internally',
+        'received_by',
+    )
 
 
 class WormLabAdmin(admin.ModelAdmin):
-  list_display = (
-      'lab',
-      'strain_code',
-      'allele_code',
-  )
+    list_display = (
+        'lab',
+        'strain_code',
+        'allele_code',
+    )
 
 
 admin.site.register(Mutagen)

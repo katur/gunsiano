@@ -8,99 +8,96 @@ from storage.models import Stock, Container
 
 @login_required
 def strains(request):
-  """
-  Page listing worms strains, with possible filtering
-  """
-  # get all worm strains
-  strains = WormStrain.objects.all()
+    """
+    Page listing worms strains, with possible filtering
+    """
+    # get all worm strains
+    strains = WormStrain.objects.all()
 
-  # sort uses overridden cmp method (in WormStrain model)
-  strains = sorted(strains)
+    # sort uses overridden cmp method (in WormStrain model)
+    strains = sorted(strains)
 
-  # for strain in strains:
-    # The following line (commented out) would dynamically generate genotypes
-    # when they can be created from the background and a single transgene.
-    # For performance, all genotypes are instead hard-coded into the database,
-    # using the generate_genotype function in this module along with
-    # the script worm_strains/management/commands/insert_genotypes_into_database.py
-    # (which can be run with "python manage.py insert_genotypes_into_database").
+    # for strain in strains:
+        # Dynamically generate genotype from the background and a single
+        # transgene. For performance, all genotypes are instead hard-coded
+        # into the database, using the generate_genotype function in this
+        # module along with
+        # worm_strains/management/commands/insert_genotypes_into_database.py
+        # (run as: python manage.py insert_genotypes_into_database).
 
-    # generate_genotype(strain)
+        # generate_genotype(strain)
 
-    # The following line, commented out, is needed to add shortened species name
-    # strain.truncated_species = strain.species.name.replace("Caenorhabditis", "C.")
-
-  # render page
-  return render_to_response('strains.html', {
-      'strains':strains
-  }, context_instance=RequestContext(request))
+    return render_to_response('strains.html', {
+        'strains':strains
+    }, context_instance=RequestContext(request))
 
 
 @login_required
 def strain(request, name):
-  """
-  Page showing information on a particular worm strain.
-  """
-  strain = get_object_or_404(WormStrain, name=name)
-  lines = WormStrainLine.objects.filter(strain=strain) \
-      .order_by('date_received')
+    """
+    Page showing information on a particular worm strain.
+    """
+    strain = get_object_or_404(WormStrain, name=name)
+    lines = (WormStrainLine.objects.filter(strain=strain)
+             .order_by('date_received'))
 
-  for line in lines:
-    line.stocks = Stock.objects.filter(stockable=line.stockable) \
-        .order_by('date_prepared')
+    for line in lines:
+        line.stocks = (Stock.objects.filter(stockable=line.stockable)
+                       .order_by('date_prepared'))
 
-    for stock in line.stocks:
-      # get the tester thaws, regardless of whether thawed
-      try:
-        stock.thaw_80 = Container.objects.get(stock=stock, parent=7)
-      except Container.DoesNotExist:
-        stock.thaw_80 = None
+        for stock in line.stocks:
+            # get the tester thaws, regardless of whether thawed
+            try:
+                stock.thaw_80 = Container.objects.get(stock=stock, parent=7)
+            except Container.DoesNotExist:
+                stock.thaw_80 = None
 
-      try:
-        stock.thaw_N = Container.objects.get(stock=stock, parent=8)
-      except Container.DoesNotExist:
-        stock.thaw_N = None
+            try:
+                stock.thaw_N = Container.objects.get(stock=stock, parent=8)
+            except Container.DoesNotExist:
+                stock.thaw_N = None
 
-      # for non-tester tubes, get only unthawed tubes
-      stock.tubes = Container.objects.filter(stock=stock, is_thawed=False) \
-          .exclude(parent=7).exclude(parent=8)
+            # for non-tester tubes, get only unthawed tubes
+            stock.tubes = (Container.objects
+                           .filter(stock=stock, is_thawed=False)
+                           .exclude(parent=7).exclude(parent=8))
 
-      for tube in stock.tubes:
-        # get position inside the box, using char for row
-        position_in_box = """%s%s""" % (
-            chr(tube.vertical_position + 64),
-            tube.horizontal_position
-        )
+            for tube in stock.tubes:
+                # get position inside the box, using char for row
+                position_in_box = """%s%s""" % (
+                    chr(tube.vertical_position + 64),
+                    tube.horizontal_position
+                )
 
-        # follow parent pointers to generate string of detailed position
+                # follow parent pointers for detailed position
+                try:
+                    tube.position = """%s - Rack %s - Box %s - %s """ % (
+                        tube.parent.parent.parent.name,
+                        tube.parent.parent.name,
+                        tube.parent.name,
+                        position_in_box
+                    )
+                except AttributeError:
+                    tube.position = position_in_box
+
+                if tube.notes:
+                    tube.position += ": " + tube.notes
+
+    # sort tubes by position
+    stock.tubes = sorted(stock.tubes, key=lambda x: x.position)
+
+    # lab can be determined from first 2+ letters of strain name
+    if strain.is_properly_named():
+        lab_code = strain.extract_lab_code()
         try:
-          tube.position = """%s - Rack %s - Box %s - %s """ % (
-              tube.parent.parent.parent.name,
-              tube.parent.parent.name,
-              tube.parent.name,
-              position_in_box
-          )
-        except AttributeError:
-          tube.position = position_in_box
+            strain.lab = WormLab.objects.get(strain_code=lab_code)
+        except WormLab.DoesNotExist:
+            strain.lab = None
 
-        if tube.notes:
-          tube.position += ": " + tube.notes
-
-      # sort the tubes by position
-      stock.tubes = sorted(stock.tubes, key=lambda x: x.position)
-
-  # get lab code from the strain name (usually 2 letters but sometimes more)
-  if strain.is_properly_named():
-    lab_code = strain.extract_lab_code()
-    try:
-      strain.lab = WormLab.objects.get(strain_code=lab_code)
-    except WormLab.DoesNotExist:
-      strain.lab = None
-
-  return render_to_response('strain.html', {
-      'lines':lines,
-      'strain':strain,
-  }, context_instance=RequestContext(request))
+    return render_to_response('strain.html', {
+        'lines':lines,
+        'strain':strain,
+    }, context_instance=RequestContext(request))
 
 
 def generate_genotype(strain):

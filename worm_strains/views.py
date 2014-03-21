@@ -39,6 +39,14 @@ def strain(request, name):
     lines = (WormStrainLine.objects.filter(strain=strain)
              .order_by('date_received'))
 
+    # Lab determined from first 2+ letters of strain name
+    if strain.is_properly_named():
+        lab_code = strain.extract_lab_code()
+        try:
+            strain.lab = WormLab.objects.get(strain_code=lab_code)
+        except WormLab.DoesNotExist:
+            strain.lab = None
+
     for line in lines:
         line.stocks = (Stock.objects.filter(stockable=line.stockable)
                        .order_by('date_prepared'))
@@ -81,16 +89,8 @@ def strain(request, name):
                 if tube.notes:
                     tube.position += ": " + tube.notes
 
-    # Sort tubes by position
-    stock.tubes = sorted(stock.tubes, key=lambda x: x.position)
-
-    # Lab determined from first 2+ letters of strain name
-    if strain.is_properly_named():
-        lab_code = strain.extract_lab_code()
-        try:
-            strain.lab = WormLab.objects.get(strain_code=lab_code)
-        except WormLab.DoesNotExist:
-            strain.lab = None
+            # Sort tubes by position
+            stock.tubes = sorted(stock.tubes, key=lambda x: x.position)
 
     dictionary = {
         'lines': lines,

@@ -43,11 +43,11 @@ class UserProfile(models.Model):
         return self.user.last_name
 
     def get_location(self):
-        if self.in_abu_dhabi:
+        if self.in_abu_dhabi == 1:
             return "NYUAD"
         elif self.in_abu_dhabi == 0:
             return "NYUNY"
-        else:
+        else: # self.in_abu_dhabi == -1
             return "NYUAD/NY"
 
 

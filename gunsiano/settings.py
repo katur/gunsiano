@@ -140,13 +140,10 @@ INSTALLED_APPS = (
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-
-    # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
 
-    # Added by Katherine
-    'south', # for database migrations
-    'django.contrib.markup', # needed to use markdown
+    # For database migrations
+    'south',
 
     # Apps
     'moderation',

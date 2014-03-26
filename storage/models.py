@@ -111,21 +111,44 @@ class Container(models.Model):
             detail= "Unnamed Container"
         return "{0}: {1}".format(supertype, detail)
 
-    def has_children(self):
-        return self.type.has_children()
-
     def get_supertype(self):
         return self.type.supertype
 
-    def get_grandparent(self):
-        if self.parent:
-            return self.parent.parent
+    def has_children(self):
+        return self.type.has_children()
+
+    def get_position_in_box(self):
+        if self.vertical_position and self.horizontal_position:
+            return "{0}{1}".format(
+                chr(self.vertical_position + 64), self.horizontal_position
+            )
         else:
             return None
 
-    def get_greatgrandparent(self):
-        grandparent = self.get_grandparent()
-        if grandparent:
-            return grandparent.parent
-        else:
-            return None
+    def get_ancestors(self):
+        """ Return a list of this tubes ancestors.
+        List starts with parent, then grandparent, etc.
+        Returns an empty list if no parent.
+        """
+        ancestors = []
+        temp = self.parent
+        while temp:
+            ancestors.append(temp)
+            temp = temp.parent
+        return ancestors
+
+    def get_overall_position(self):
+        """ Return a string of the tubes overall position,
+        including any ancestors, and including the box position
+        """
+        ancestors = self.get_ancestors()
+        ancestors.reverse()
+        ancestors_as_string = []
+        for ancestor in ancestors:
+            ancestors_as_string.append(str(ancestor))
+        position = ', '.join(ancestors_as_string)
+
+        box_position = self.get_position_in_box()
+        if box_position:
+            position = '{0}, Position: {1}'.format(position, box_position)
+        return position

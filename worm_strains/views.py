@@ -39,9 +39,8 @@ def strain(request, name):
     lines = (WormStrainLine.objects.filter(strain=strain)
              .order_by('date_received'))
 
-    # Lab determined from first 2+ letters of strain name
-    if strain.is_properly_named():
-        lab_code = strain.extract_lab_code()
+    lab_code = strain.get_lab_code()
+    if lab_code:
         strain.lab = WormLab.objects.filter(strain_code=lab_code).first()
 
     for line in lines:
@@ -62,24 +61,7 @@ def strain(request, name):
                            .exclude(parent=7).exclude(parent=8))
 
             for tube in stock.tubes:
-                position_in_box = "{0}{1}".format(
-                    chr(tube.vertical_position + 64),
-                    tube.horizontal_position
-                )
-
-                # Follow parent pointers for detailed position
-                great_grandparent = tube.get_greatgrandparent()
-                if great_grandparent:
-                    tube.position = "{0}, {1}, {2}, Position: {3}".format(
-                        str(great_grandparent),
-                        str(tube.get_grandparent()),
-                        str(tube.parent),
-                        position_in_box
-                    )
-                if tube.notes:
-                    tube.position += ". " + tube.notes
-
-            # Sort tubes by position
+                tube.position = tube.get_overall_position()
             stock.tubes = sorted(stock.tubes, key=lambda x: x.position)
 
     dictionary = {

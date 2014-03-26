@@ -77,14 +77,14 @@ class WormStrain(models.Model):
         properly named, just order it alphabetically.
         """
         if self.is_properly_named() and other.is_properly_named():
-            s_code = self.extract_lab_code()
-            o_code = other.extract_lab_code()
+            s_code = self.get_lab_code()
+            o_code = other.get_lab_code()
             if s_code < o_code:
                 return -1
             elif s_code > o_code:
                 return 1
             else: # Same lab prefix, so order by number
-                if self.extract_number() < other.extract_number():
+                if self.get_number() < other.get_number():
                     return -1
                 else:
                     return 1
@@ -99,11 +99,17 @@ class WormStrain(models.Model):
     def is_properly_named(self):
         return re.search('^[A-Z]+\d+$', self.name)
 
-    def extract_lab_code(self):
-        return re.search('^[A-Z]+', self.name).group(0)
+    def get_lab_code(self):
+        if self.is_properly_named:
+            return re.search('^[A-Z]+', self.name).group(0)
+        else:
+            return None
 
-    def extract_number(self):
-        return int(re.search('\d+$', self.name).group(0))
+    def get_number(self):
+        if self.is_properly_named:
+            return int(re.search('\d+$', self.name).group(0))
+        else:
+            return None
 
 
 class WormStrainLine(models.Model):

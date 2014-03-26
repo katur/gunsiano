@@ -13,16 +13,6 @@ def strains(request):
     """
     strains = WormStrain.objects.all()
     strains = sorted(strains)
-
-    # The following lines dynamically generate the genotype, using the strain's
-    # background and transgene. For performance reasons, the genotype
-    # is now hard-coded into the database (done using this same
-    # generate_genotype function, run as:
-    # ./manage.py insert_genotypes_into_database
-
-    # for strain in strains:
-        # generate_genotype(strain)
-
     template_dictionary = {
         'strains': strains,
     }
@@ -70,16 +60,3 @@ def strain(request, name):
     }
     return render_to_response('strain.html', template_dictionary,
                               context_instance=RequestContext(request))
-
-
-def generate_genotype(strain):
-    if strain.transgene and strain.parent_strain:
-        vector = strain.transgene.vector
-        strain.genotype = (strain.transgene.name + "[" +
-            vector.parent_vector.genotype_pattern + "]")
-        strain.genotype = strain.genotype.replace("gene", vector.gene)
-        strain.genotype = strain.genotype.replace("promoter", vector.promoter)
-        strain.genotype = strain.genotype.replace(
-            "threePrimeUTR", vector.three_prime_utr)
-        if strain.parent_strain.name == "DP38":
-            strain.genotype = "unc-119(ed3) III; " + strain.genotype

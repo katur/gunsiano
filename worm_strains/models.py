@@ -76,7 +76,7 @@ class WormStrain(models.Model):
         order by lab code and then by number. If a strain is not
         properly named, just order it alphabetically.
         """
-        if self.is_properly_named() and other.is_properly_named():
+        if self.is_conventionally_named() and other.is_conventionally_named():
             s_code = self.get_lab_code()
             o_code = other.get_lab_code()
             if s_code < o_code:
@@ -96,18 +96,50 @@ class WormStrain(models.Model):
             else:
                 return 1
 
-    def is_properly_named(self):
+    def is_conventionally_named(self):
         return re.search('^[A-Z]+\d+$', self.name)
 
     def get_lab_code(self):
-        if self.is_properly_named:
+        if self.is_conventionally_named:
             return re.search('^[A-Z]+', self.name).group(0)
         else:
             return None
 
     def get_number(self):
-        if self.is_properly_named:
+        if self.is_conventionally_named:
             return int(re.search('\d+$', self.name).group(0))
+        else:
+            return None
+
+    def generate_genotype(self):
+        """
+        Return string of genotype by calculating it from transgene name
+        and parent strain. If these fields do not exist, return None.
+        """
+        if self.transgene and self.parent_strain:
+            transgene_name = self.transgene.name
+            vector = self.transgene.vector
+            pattern = ''
+            if vector and vector.parent_vector:
+                pattern = vector.parent_vector.genotype_pattern
+                if pattern and vector.promoter:
+                    pattern = pattern.replace('promoter', vector.promoter)
+                if pattern and vector.three_prime_utr:
+                    pattern = pattern.replace('threePrimeUTR',
+                                              vector.three_prime_utr)
+                if pattern and vector.gene:
+                    pattern = pattern.replace('gene', vector.gene)
+            genotype = '{0}[{1}]'.format(transgene_name, pattern)
+
+            if self.parent_strain.name == 'DP38':
+                background = 'unc-119(ed3) III;'
+            else:
+                background = None
+            if background:
+                genotype = '{0} {1}'.format(background, genotype)
+
+            return genotype
+
         else:
             return None
 

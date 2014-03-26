@@ -1,23 +1,36 @@
 from django.core.management.base import BaseCommand, CommandError
 
 from worm_strains.models import WormStrain
-from worm_strains.views import generate_genotype
 
 
 class Command(BaseCommand):
-    help = ("Updates strain database to add genotypes based on "
-            "parent strain, transgene, and the generate_genotype function")
+    """
+    Update worm strain genotypes in the database that are derived
+    from the worm's background strain and transgene.
+
+    WARNING: this modifies the database!! Please back up the database
+    before running this program.
+
+    Run with: ./manage.py insert_genotypes_into_database
+
+    Any updated genotypes will print to standard output, along with
+    total number of updates.
+    """
+    help = ('Update WormStrain table for genotypes based on '
+            'parent strain, transgene, and the generate_genotype function')
 
     def handle(self, *args, **options):
         strains = WormStrain.objects.all()
-        i = 0
+        changed = 0
         for strain in strains:
-            original_genotype = strain.genotype
-            generate_genotype(strain)
-            if original_genotype != strain.genotype:
-                message = "Generated genotype is: {0}".format(strain.genotype)
-                self.stdout.write(message)
+            old_genotype = strain.genotype
+            new_genotype = strain.generate_genotype()
+            if new_genotype and new_genotype != old_genotype:
+                strain.genotype = new_genotype
                 strain.save()
-                i += 1
+                self.stdout.write('New genotype inserted: {0} was {1}, now {2}'
+                                  .format(strain.name, old_genotype,
+                                          new_genotype))
+                changed += 1
 
-        self.stdout.write("Number of strains changed: {0}".format(str(i)))
+        self.stdout.write('Total changed: {0}'.format(str(changed)))

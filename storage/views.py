@@ -13,10 +13,10 @@ def storage(request):
     """
     containers = Container.objects.all().filter(parent_id__isnull=True)
 
-    dictionary = {
+    template_dictionary = {
         'containers': containers,
     }
-    return render_to_response('storage.html', dictionary,
+    return render_to_response('storage.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 
@@ -59,10 +59,10 @@ def storage_detail(request, container_id):
         temp = temp.parent
         title = "{0} -> {1}".format(str(temp), title)
 
-    dictionary = {
+    template_dictionary = {
         'container': container,
         'container_title': title,
         'grid': grid,
     }
-    return render_to_response('storage_detail.html', dictionary,
+    return render_to_response('storage_detail.html', template_dictionary,
                               context_instance=RequestContext(request))

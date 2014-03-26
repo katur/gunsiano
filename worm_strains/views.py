@@ -23,10 +23,10 @@ def strains(request):
     # for strain in strains:
         # generate_genotype(strain)
 
-    dictionary = {
+    template_dictionary = {
         'strains': strains,
     }
-    return render_to_response('strains.html', dictionary,
+    return render_to_response('strains.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 
@@ -64,11 +64,11 @@ def strain(request, name):
                 tube.position = tube.get_overall_position()
             stock.tubes = sorted(stock.tubes, key=lambda x: x.position)
 
-    dictionary = {
+    template_dictionary = {
         'lines': lines,
         'strain': strain,
     }
-    return render_to_response('strain.html', dictionary,
+    return render_to_response('strain.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 

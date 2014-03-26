@@ -26,7 +26,7 @@ def home(request):
     kris = get_object_or_404(User, username='kris')
     fabio = get_object_or_404(User, username='fabio')
 
-    dictionary = {
+    template_dictionary = {
         'network': n,
         'cell': c,
         'evolution': e,
@@ -36,7 +36,7 @@ def home(request):
         'fabio': fabio,
         'kris': kris,
     }
-    return render_to_response('home.html', dictionary,
+    return render_to_response('home.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 
@@ -60,12 +60,12 @@ def lab_members(request):
     num_former_columns = 3
     former_column_length = math.ceil(len(former) / num_former_columns)
 
-    dictionary = {
+    template_dictionary = {
         'current': current,
         'former': former,
         'former_column_length': former_column_length,
     }
-    return render_to_response('lab_members.html', dictionary,
+    return render_to_response('lab_members.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 
@@ -77,10 +77,10 @@ def lab_member(request, username):
     """
     member = get_object_or_404(User, username=username)
 
-    dictionary = {
+    template_dictionary = {
         'member': member,
     }
-    return render_to_response('lab_member.html', dictionary,
+    return render_to_response('lab_member.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 
@@ -90,10 +90,10 @@ def resources(request):
     """
     r = Resource.objects.all()
 
-    dictionary = {
+    template_dictionary = {
         'resources': r,
     }
-    return render_to_response('resources.html', dictionary,
+    return render_to_response('resources.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 
@@ -149,12 +149,12 @@ def publications(request):
         publication.description = d
         pub_both.append(publication)
 
-    dictionary = {
+    template_dictionary = {
         'pub_both': pub_both,
         'pub_kris': pub_kris,
         'pub_fabio': pub_fabio,
     }
-    return render_to_response('publications.html', dictionary,
+    return render_to_response('publications.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 
@@ -165,11 +165,11 @@ def join(request):
     sections = JoinLabSection.objects.all().order_by('display_order')
     jessica = get_object_or_404(User, username='jessica')
 
-    dictionary = {
+    template_dictionary = {
         'sections': sections,
         'jessica': jessica,
     }
-    return render_to_response('join.html', dictionary,
+    return render_to_response('join.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 
@@ -181,12 +181,12 @@ def contact(request):
     jessica = get_object_or_404(User, username='jessica')
     kris = get_object_or_404(User, username='kris')
 
-    dictionary = {
+    template_dictionary = {
         'kris': kris,
         'fabio': fabio,
         'jessica': jessica,
     }
-    return render_to_response('contact.html', dictionary,
+    return render_to_response('contact.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 

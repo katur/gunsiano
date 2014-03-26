@@ -12,10 +12,10 @@ def protocols(request):
     """
     protocols = Protocol.objects.all().order_by('title_markdown')
 
-    dictionary = {
+    template_dictionary = {
         'protocols': protocols,
     }
-    return render_to_response('protocols.html', dictionary,
+    return render_to_response('protocols.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 
@@ -26,8 +26,8 @@ def protocol(request, title_url):
     """
     protocol = get_object_or_404(Protocol, title_url=title_url)
 
-    dictionary = {
+    template_dictionary = {
         'protocol': protocol,
     }
-    return render_to_response('protocol.html', dictionary,
+    return render_to_response('protocol.html', template_dictionary,
                               context_instance=RequestContext(request))

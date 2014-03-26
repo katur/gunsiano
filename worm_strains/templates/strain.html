@@ -188,7 +188,7 @@
               <table>
                 {% for tube in stock.tubes %}
                 <tr><td>
-                  {{ tube.position }}{% if tube.notes %};
+                  {{ tube.position }}{% if tube.notes %}.
                   Note: {{ tube.notes }}
                   {% endif %}
                 </td></tr>
@@ -199,10 +199,10 @@
               No remaining tubes recorded
               {% endif %}
             </li>
-          </ul> <!-- stock details -->
+          </ul>
         </li>
 
-        {% empty %} <!-- no stocks -->
+        {% empty %}
         <li>No stocks recorded</li>
         {% endfor %}
 

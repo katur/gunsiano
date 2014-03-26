@@ -1,5 +1,4 @@
 from django.contrib import admin
-from moderation.admin import ModerationAdmin
 
 from website.models import (JoinLabSection, Position, ResearchArea, Resource,
     UserProfile)

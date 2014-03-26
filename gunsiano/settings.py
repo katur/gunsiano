@@ -146,7 +146,6 @@ INSTALLED_APPS = (
     'south',
 
     # Apps
-    'moderation',
     'universal',
     'website',
     'worm_strains',

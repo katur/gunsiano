@@ -116,3 +116,16 @@ class Container(models.Model):
 
     def get_supertype(self):
         return self.type.supertype
+
+    def get_grandparent(self):
+        if self.parent:
+            return self.parent.parent
+        else:
+            return None
+
+    def get_greatgrandparent(self):
+        grandparent = self.get_grandparent()
+        if grandparent:
+            return grandparent.parent
+        else:
+            return None

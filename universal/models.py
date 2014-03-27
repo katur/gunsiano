@@ -13,5 +13,5 @@ def has_personnel_admin_privileges(self):
         return False
 
 
-auth.models.User.add_to_class(
-    'has_personnel_admin_privileges', has_personnel_admin_privileges)
+auth.models.User.add_to_class('has_personnel_admin_privileges',
+                              has_personnel_admin_privileges)

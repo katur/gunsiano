@@ -30,7 +30,7 @@ def storage_detail(request, container_id):
                                   type__slots_horizontal__isnull=False)
     children = Container.objects.all().filter(parent_id=container, is_thawed=0)
 
-    # Create an empty grid with this container's dimensions
+    # Create an empty 2D grid with this container's dimensions
     grid = [[list() for i in range(container.type.slots_horizontal)]
             for j in range(container.type.slots_vertical)]
 

@@ -40,11 +40,11 @@ class Stock(models.Model):
     def __unicode__(self):
         result = str(self.stockable)
         date = str(self.date_prepared)
-        preparer = self.prepared_by.get_full_name()
+        preparer = self.prepared_by
         if date:
             result = ', '.join((result, date))
         if preparer:
-            result = ', '.join((result, preparer))
+            result = ', '.join((result, preparer.get_full_name()))
         return result
 
 

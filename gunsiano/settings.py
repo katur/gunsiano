@@ -14,8 +14,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-AUTH_PROFILE_MODULE = 'website.UserProfile'
-
 LOGIN_URL = 'login_url'
 LOGIN_REDIRECT_URL = 'home_url'
 
@@ -122,7 +120,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/Users/katherine/ka73r/websites/gunsiano/universal/templates/'
+    '/Users/katherine/ka73r/websites/gunsiano/universal/templates/',
 )
 
 INSTALLED_APPS = (

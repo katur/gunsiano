@@ -1,8 +1,9 @@
 from __future__ import division # force float division
 from itertools import chain
 import math
-import urllib2
+import re
 import string
+import urllib2
 import xml.etree.ElementTree as ET
 
 from django.contrib.auth.decorators import login_required
@@ -113,46 +114,55 @@ def publications(request):
     # xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/"
     #   "erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy")
 
-    def embolden(s, term):
-        return string.replace(s, term, '<b>{0}</b>'.format(term))
+    def italicize_all_species(text):
+        # Add here if new publications mention new species
+        species = (
+            ('C', 'elegans'),
+            ('C', 'briggsae'),
+            ('S', 'cerevisiae'),
+            ('D', 'melanogaster'),
+            ('D', 'grimshawi'),
+        )
 
-    def italicize(s, term):
-        return string.replace(s, term, '<i>{0}</i>'.format(term))
+        re_terms = []
+        for s in species:
+            re_terms.append(get_species_re(*s))
 
-    # Lists to populate with publications from the xml file
-    pub_both = []
+        # Add any other terms to italicize (e.g. genus only cases)
+        re_terms.append(r'Protorhabditis')
+        re_terms.append(r'Drosophila')
+
+        re_pattern = '|'.join(['{}' for t in re_terms])
+        re_net = re_pattern.format(*(tuple(re_terms)))
+        species_found = re.findall(re_net, text)
+        for s in species_found:
+            text = italicize(s, text)
+        return text
+
     pub_kris = []
     pub_fabio = []
+    pub_both = []
 
     tree = ET.parse(xml_file)
     root = tree.getroot()
     for publication in root.iter('item'):
-        d = publication.find('description').text
-
-        # Italicize species names
-        d = string.replace(d, 'Caenorhabditis  elegans',
-                           'Caenorhabditis elegans')
-        d = italicize(d, 'Caenorhabditis elegans')
-        d = italicize(d, 'C. elegans')
-        d = italicize(d, 'Drosophila')
-        d = italicize(d, 'Protorhabditis')
-        d = italicize(d, 'S. cerevisiae')
-
-        if 'Piano F' in d:
+        text = publication.find('description').text
+        text = italicize_all_species(text)
+        if 'Piano F' in text:
+            text = embolden('Piano F', text)
             pub_fabio.append(publication)
-            d = embolden(d, 'Piano F')
-        if 'Gunsalus K' in d:
+        if 'Gunsalus K' in text:
+            text = embolden('Gunsalus K', text)
+            text = embolden('Gunsalus KC', text)
             pub_kris.append(publication)
-            d = embolden(d, 'Gunsalus KC')
-            d = embolden(d, 'Gunsalus K')
 
-        publication.description = d
+        publication.description = text
         pub_both.append(publication)
 
     template_dictionary = {
-        'pub_both': pub_both,
         'pub_kris': pub_kris,
         'pub_fabio': pub_fabio,
+        'pub_both': pub_both,
     }
     return render_to_response('publications.html', template_dictionary,
                               context_instance=RequestContext(request))
@@ -197,3 +207,34 @@ def lab_tools(request):
     """
     return render_to_response('lab_tools.html',
                               context_instance=RequestContext(request))
+
+
+def embolden(term, s):
+    """
+    Make bold for HTML all occurrences of 'term' in string 's'
+    """
+    return string.replace(s, term, '<b>{0}</b>'.format(term))
+
+
+def italicize(term, s):
+    """
+    Italicize for HTML all occurrences of 'term' in string 's'
+    """
+    return string.replace(s, term, '<i>{0}</i>'.format(term))
+
+
+def get_species_re(first_letter_genus, species):
+    """
+    Get a regular expression for a particular species from
+    the first letter of its genus and its exact species name.
+
+    For example, with arguments 'C' and 'elegans',
+    the resulting regex will match the common cases 'C. elegans'
+    and 'Caenorhabditis elegans'.
+    In addition, it will accommodate 'C elegans' (no period),
+    any number of lowercase letters directly following the 'C'
+    (e.g. misspelled 'Ceanorhabditis elegans'),
+    and repeated spaces directly preceding 'elegans'
+    (e.g. C.    elegans).
+    """
+    return r'{0}[\.a-z]*[ ]*{1}'.format(first_letter_genus, species)

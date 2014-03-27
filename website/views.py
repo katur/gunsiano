@@ -123,7 +123,6 @@ def publications(request):
             ('D', 'melanogaster'),
             ('D', 'grimshawi'),
         )
-
         re_terms = []
         for s in species:
             re_terms.append(get_species_re(*s))

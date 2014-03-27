@@ -31,12 +31,8 @@ def storage_detail(request, container_id):
     children = Container.objects.all().filter(parent_id=container, is_thawed=0)
 
     # Create an empty grid with this container's dimensions
-    grid = [
-        [
-            list() for i in range(container.type.slots_horizontal)
-        ]
-        for j in range(container.type.slots_vertical)
-    ]
+    grid = [[list() for i in range(container.type.slots_horizontal)]
+            for j in range(container.type.slots_vertical)]
 
     # Populate this grid with this container's children
     for child in children:

@@ -119,9 +119,8 @@ class Container(models.Model):
 
     def get_position_in_box(self):
         if self.vertical_position and self.horizontal_position:
-            return '{0}{1}'.format(
-                chr(self.vertical_position + 64), self.horizontal_position
-            )
+            return '{0}{1}'.format(chr(self.vertical_position + 64),
+                                   self.horizontal_position)
         else:
             return None
 

@@ -48,7 +48,7 @@ def storage_detail(request, container_id):
             child.has_children = True
         elif child.stock:
             s = child.stock.stockable
-            if s.type.name == "worm strain":
+            if s.type.name == 'worm strain':
                 line = get_object_or_404(WormStrainLine, stockable=s)
                 child.worm = line.strain
 

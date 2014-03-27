@@ -25,7 +25,7 @@ class ProtocolAdmin(admin.ModelAdmin):
         obj.author = request.user
 
         # If no url already given for this protocol, create it from the title
-        if obj.title_url == "":
+        if obj.title_url == '':
             obj.title_url = slugify(obj.title_markdown)
 
         obj.save()

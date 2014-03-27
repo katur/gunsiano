@@ -44,11 +44,11 @@ class UserProfile(models.Model):
 
     def get_location(self):
         if self.in_abu_dhabi == 1:
-            return "NYUAD"
+            return 'NYUAD'
         elif self.in_abu_dhabi == 0:
-            return "NYUNY"
+            return 'NYUNY'
         else: # self.in_abu_dhabi == -1
-            return "NYUAD/NY"
+            return 'NYUAD/NY'
 
 
 class ResearchArea(models.Model):

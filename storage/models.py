@@ -20,7 +20,7 @@ class Stockable(models.Model):
 
     def __unicode__(self):
         result = str(self.type)
-        if result == "worm strain":
+        if result == 'worm strain':
             from worm_strains.models import WormStrainLine
             line = get_object_or_404(WormStrainLine, stockable=self)
             result = str(line)
@@ -42,9 +42,9 @@ class Stock(models.Model):
         date = str(self.date_prepared)
         preparer = self.prepared_by.get_full_name()
         if date:
-            result = ", ".join((result, date))
+            result = ', '.join((result, date))
         if preparer:
-            result = ", ".join((result, preparer))
+            result = ', '.join((result, preparer))
         return result
 
 
@@ -108,8 +108,8 @@ class Container(models.Model):
         elif self.notes:
             detail= self.notes
         else:
-            detail= "Unnamed Container"
-        return "{0}: {1}".format(supertype, detail)
+            detail= 'Unnamed Container'
+        return '{0}: {1}'.format(supertype, detail)
 
     def get_supertype(self):
         return self.type.supertype
@@ -119,7 +119,7 @@ class Container(models.Model):
 
     def get_position_in_box(self):
         if self.vertical_position and self.horizontal_position:
-            return "{0}{1}".format(
+            return '{0}{1}'.format(
                 chr(self.vertical_position + 64), self.horizontal_position
             )
         else:

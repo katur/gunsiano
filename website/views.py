@@ -104,9 +104,9 @@ def publications(request):
     (Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author]) OR
       (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author])
     """
-    xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/"
-                               "erss.cgi?rss_guid=12Wu35auLMyC-bw6heubsB4Aa"
-                               "1vq6MH4xOLj1ILBD4Wimwikba")
+    xml_file = urllib2.urlopen('http://www.ncbi.nlm.nih.gov/entrez/eutils/'
+                               'erss.cgi?rss_guid=12Wu35auLMyC-bw6heubsB4Aa'
+                               '1vq6MH4xOLj1ILBD4Wimwikba')
     # NOTE: below used to work; not sure why they stopped
     # xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/"
     #   "erss.cgi?rss_guid=18qVEVbjJjoq2mO-bQKE6E_-D4pje3l2O5Jd1cFE70SdwIYw_1")
@@ -114,10 +114,10 @@ def publications(request):
     #   "erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy")
 
     def embolden(s, term):
-        return string.replace(s, term, "<b>{0}</b>".format(term))
+        return string.replace(s, term, '<b>{0}</b>'.format(term))
 
     def italicize(s, term):
-        return string.replace(s, term, "<i>{0}</i>".format(term))
+        return string.replace(s, term, '<i>{0}</i>'.format(term))
 
     # Lists to populate with publications from the xml file
     pub_both = []
@@ -130,21 +130,21 @@ def publications(request):
         d = publication.find('description').text
 
         # Italicize species names
-        d = string.replace(d, "Caenorhabditis  elegans",
-                           "Caenorhabditis elegans")
-        d = italicize(d, "Caenorhabditis elegans")
-        d = italicize(d, "C. elegans")
-        d = italicize(d, "Drosophila")
-        d = italicize(d, "Protorhabditis")
-        d = italicize(d, "S. cerevisiae")
+        d = string.replace(d, 'Caenorhabditis  elegans',
+                           'Caenorhabditis elegans')
+        d = italicize(d, 'Caenorhabditis elegans')
+        d = italicize(d, 'C. elegans')
+        d = italicize(d, 'Drosophila')
+        d = italicize(d, 'Protorhabditis')
+        d = italicize(d, 'S. cerevisiae')
 
-        if "Piano F" in d:
+        if 'Piano F' in d:
             pub_fabio.append(publication)
-            d = embolden(d, "Piano F")
-        if "Gunsalus K" in d:
+            d = embolden(d, 'Piano F')
+        if 'Gunsalus K' in d:
             pub_kris.append(publication)
-            d = embolden(d, "Gunsalus KC")
-            d = embolden(d, "Gunsalus K")
+            d = embolden(d, 'Gunsalus KC')
+            d = embolden(d, 'Gunsalus K')
 
         publication.description = d
         pub_both.append(publication)

@@ -14,25 +14,22 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-AUTH_PROFILE_MODULE = "website.UserProfile"
+AUTH_PROFILE_MODULE = 'website.UserProfile'
 
-LOGIN_URL = "login_url"
-LOGIN_REDIRECT_URL = "home_url"
+LOGIN_URL = 'login_url'
+LOGIN_REDIRECT_URL = 'home_url'
 
-'''
 # include this, filled in, in settings_secret.py
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-    }
-}
-
-'''
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': '',
+#        'USER': '',
+#        'PASSWORD': '',
+#        'HOST': '',
+#        'PORT': '',
+#    }
+#}
 
 # Domain names that are valid for this site; required if DEBUG is False.
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -95,11 +92,9 @@ STATICFILES_FINDERS = (
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-'''
 # include this, filled in, in settings_secret.py
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = ''
-'''
+# SECRET_KEY = ''
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -138,14 +133,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Uncomment the next line to enable the admin:
+    # These enable the admin:
     'django.contrib.admin',
     'django.contrib.admindocs',
 
     # For database migrations
     'south',
 
-    # Apps
+    # Apps within the project
     'universal',
     'website',
     'worm_strains',
@@ -195,8 +190,8 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 )
 
 # Constants
-MARKDOWN_PROMPT = '''Use Markdown syntax. See
-    <a href="http://www.darkcoding.net/software/markdown-quick-reference"
-    target="_blank">a quick reference</a>,
-    <a href="http://www.markdowntutorial.com/" target="_blank">a tutorial</a>,
-    or practice <a href="http://dillinger.io/" target="_blank">here</a>.'''
+MARKDOWN_PROMPT = ('Use Markdown syntax. See '
+    '<a href="http://www.darkcoding.net/software/markdown-quick-reference">'
+    'a quick reference</a>, '
+    '<a href="http://www.markdowntutorial.com/">a tutorial</a>, '
+    'or practice <a href="http://dillinger.io/">here</a>.')

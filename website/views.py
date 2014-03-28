@@ -2,7 +2,6 @@ from __future__ import division # force float division
 from itertools import chain
 import math
 import re
-import string
 import urllib2
 import xml.etree.ElementTree as ET
 
@@ -212,14 +211,14 @@ def embolden(term, s):
     """
     Make bold for HTML all occurrences of 'term' in string 's'
     """
-    return string.replace(s, term, '<b>{0}</b>'.format(term))
+    return s.replace(term, '<b>{0}</b>'.format(term))
 
 
 def italicize(term, s):
     """
     Italicize for HTML all occurrences of 'term' in string 's'
     """
-    return string.replace(s, term, '<i>{0}</i>'.format(term))
+    return s.replace(term, '<i>{0}</i>'.format(term))
 
 
 def get_species_re(first_letter_genus, species):

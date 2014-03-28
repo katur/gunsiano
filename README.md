@@ -8,14 +8,15 @@ Click [here](https://www.lucidchart.com/documents/view/492c-0ebc-51d33178-9110-7
 See dependencies in `requirements.txt`. Some notes about those that are
 not obvious:
 * `wsgiref` is part of the Python standard library, but appears in pip by
-accident (this bug fixed in Python3.3)
+accident/default (this bug fixed in Python3.3)
+* `Django` and `MySQL-Python`: straightforward
 * `South` is for database migrations. Migrations will be built into Django 1.7.
-* `mdx-smartypants` is a Python-Markdown extension for nicer curly quotes
-and proper em/en dashes. In addition to `Markdown`, it requires `namedentities`
-and `guess-language`
+* `mdx-smartypants` is a Python Markdown extension for nicer curly quotes
+and proper em/en dashes. It requires `Markdown`, `namedentities`
+and `guess-language-spirit`
 * `python-slugify` is used to convert text to be url-safe (removing whitespace,
-certain symbols, etc.). Used to turn protocol titles into urls.
-* `Unidecode`
+certain symbols, etc.). Used to turn protocol titles into urls. Requires
+`Unidecode`
 
 Public interface includes basic information about the lab and its research.
 The pages are:

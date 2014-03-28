@@ -5,6 +5,18 @@ Django-based website for a _Caenorhabditis elegans_ genomics lab.
 
 Click [here](https://www.lucidchart.com/documents/view/492c-0ebc-51d33178-9110-78400a001d4e) for database schema on Lucidchart.
 
+See dependencies in `requirements.txt`. Some notes about those that are
+not obvious:
+* `wsgiref` is part of the Python standard library, but appears in pip by
+accident (this bug fixed in Python3.3)
+* `South` is for database migrations. Migrations will be built into Django 1.7.
+* `mdx-smartypants` is a Python-Markdown extension for nicer curly quotes
+and proper em/en dashes. In addition to `Markdown`, it requires `namedentities`
+and `guess-language`
+* `python-slugify` is used to convert text to be url-safe (removing whitespace,
+certain symbols, etc.). Used to turn protocol titles into urls.
+* `Unidecode`
+
 Public interface includes basic information about the lab and its research.
 The pages are:
 * home, with skrollr effects describing research areas for the lab
@@ -14,7 +26,8 @@ The pages are:
 * join the lab
 * contact
 
-Logging in provides access to interfaces to navigate the following internal databases:
+Logging in provides access to interfaces to navigate the following internal lab
+databases:
 * worm strains
 * bacterial clones
 * vectors and plasmids

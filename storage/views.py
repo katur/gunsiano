@@ -53,7 +53,7 @@ def storage_detail(request, container_id):
     temp = container
     while temp.parent:
         temp = temp.parent
-        title = "{0} -> {1}".format(str(temp), title)
+        title = u"{0} \u2192 {1}".format(str(temp), title)
 
     template_dictionary = {
         'container': container,

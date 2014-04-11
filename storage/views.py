@@ -30,11 +30,11 @@ def storage_detail(request, container_id):
                                   type__slots_horizontal__isnull=False)
     children = Container.objects.all().filter(parent_id=container, is_thawed=0)
 
-    # Create an empty 2D grid with this container's dimensions
+    # Create an empty 2D grid
     grid = [[list() for i in range(container.type.slots_horizontal)]
             for j in range(container.type.slots_vertical)]
 
-    # Populate this grid with this container's children
+    # Populate the grid
     for child in children:
         x = child.horizontal_position - 1 # Position is 1-indexed
         y = child.vertical_position - 1

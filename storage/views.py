@@ -34,7 +34,7 @@ def storage_detail(request, container_id):
     grid = [[list() for i in range(container.type.slots_horizontal)]
             for j in range(container.type.slots_vertical)]
 
-    # Populate the grid
+    # Populate with this container's children
     for child in children:
         x = child.horizontal_position - 1 # Position is 1-indexed
         y = child.vertical_position - 1
@@ -53,6 +53,7 @@ def storage_detail(request, container_id):
     temp = container
     while temp.parent:
         temp = temp.parent
+        # Unicode rightarrow
         title = u"{0} \u2192 {1}".format(str(temp), title)
 
     template_dictionary = {

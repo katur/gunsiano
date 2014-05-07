@@ -11,6 +11,10 @@ class ProtocolAdmin(admin.ModelAdmin):
         'pub_date',
     )
 
+    list_editable = (
+        'author',
+    )
+
     fieldsets = (
         (
             None,

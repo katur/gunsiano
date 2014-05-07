@@ -1,5 +1,5 @@
-Gunsiano Lab Website and Organizational Tools
-=============================================
+Gunsiano Lab Website
+====================
 
 Django-based website for a _Caenorhabditis elegans_ genomics lab.
 

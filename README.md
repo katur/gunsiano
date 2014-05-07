@@ -5,8 +5,7 @@ Django-based website for a _Caenorhabditis elegans_ genomics lab.
 
 Click [here](https://www.lucidchart.com/documents/view/492c-0ebc-51d33178-9110-78400a001d4e) for database schema on Lucidchart.
 
-See dependencies in `requirements.txt`. Some notes about those that are
-not obvious:
+See dependencies in `requirements.txt`. Some notes about these:
 * `wsgiref` is part of the Python standard library, but appears in pip by
 accident/default (this bug fixed in Python3.3)
 * `Django` and `MySQL-Python`: straightforward

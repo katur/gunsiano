@@ -27,7 +27,7 @@ LOGIN_REDIRECT_URL = 'home_url'
 #        'HOST': '',
 #        'PORT': '',
 #    }
-#}
+# }
 
 # Domain names that are valid for this site; required if DEBUG is False.
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -117,9 +117,6 @@ ROOT_URLCONF = 'gunsiano.urls'
 WSGI_APPLICATION = 'gunsiano.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
     '/Users/katherine/ka73r/websites/gunsiano/universal/templates/',
 )
 
@@ -130,12 +127,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # These enable the admin:
     'django.contrib.admin',
     'django.contrib.admindocs',
-
-    # For database migrations
     'south',
 
     # Apps within the project
@@ -188,8 +181,10 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 )
 
 # Constants
-MARKDOWN_PROMPT = ('Use Markdown syntax. See '
+MARKDOWN_PROMPT = (
+    'Use Markdown syntax. See '
     '<a href="http://www.darkcoding.net/software/markdown-quick-reference">'
     'a quick reference</a>, '
     '<a href="http://www.markdowntutorial.com/">a tutorial</a>, '
-    'or practice <a href="http://dillinger.io/">here</a>.')
+    'or practice <a href="http://dillinger.io/">here</a>.'
+)

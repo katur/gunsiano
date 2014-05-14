@@ -106,9 +106,9 @@ class Container(models.Model):
         elif self.owner:
             detail = self.owner.get_full_name()
         elif self.notes:
-            detail= self.notes
+            detail = self.notes
         else:
-            detail= 'Unnamed Container'
+            detail = 'Unnamed Container'
         return '{0}: {1}'.format(supertype, detail)
 
     def get_supertype(self):

@@ -18,9 +18,7 @@ class ProtocolAdmin(admin.ModelAdmin):
     fieldsets = (
         (
             None,
-            {'fields':
-                ('title_markdown', 'body_markdown')
-            }
+            {'fields': ('title_markdown', 'body_markdown')}
         ),
     )
 

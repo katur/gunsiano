@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from website.models import (JoinLabSection, Position, ResearchArea, Resource,
-    UserProfile)
+                            UserProfile)
 
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -36,15 +36,11 @@ class UserProfileAdmin(admin.ModelAdmin):
         unprivileged_fieldsets = (
             (
                 ('Personal info'),
-                {'fields':
-                    ('net_id',)
-                }
+                {'fields': ('net_id',)}
             ),
             (
                 ('Public Profile info'),
-                {'fields':
-                    ('url', 'blurb',)
-                }
+                {'fields': ('url', 'blurb',)}
             ),
         )
 

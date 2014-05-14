@@ -41,15 +41,11 @@ class MyUserAdmin(UserAdmin):
             unprivileged_fieldsets = (
                 (
                     ('Password'),
-                    {'fields':
-                        ('password',)
-                    }
+                    {'fields': ('password',)}
                 ),
                 (
                     ('Personal info'),
-                    {'fields':
-                        ('first_name', 'last_name', 'email',)
-                    }
+                    {'fields': ('first_name', 'last_name', 'email',)}
                 ),
             )
 

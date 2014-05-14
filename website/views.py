@@ -1,4 +1,5 @@
-from __future__ import division # force float division
+# to force float division
+from __future__ import division
 from itertools import chain
 import math
 import re

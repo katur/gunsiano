@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from worm_strains.models import (Mutagen, Transgene, WormLab, WormSpecies,
-    WormStrain, WormStrainLine)
+                                 WormStrain, WormStrainLine)
 
 
 class WormStrainAdmin(admin.ModelAdmin):

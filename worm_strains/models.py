@@ -83,12 +83,16 @@ class WormStrain(models.Model):
                 return -1
             elif s_code > o_code:
                 return 1
-            else: # Same lab prefix, so order by number
+
+            # If same lab prefix, order by number
+            else:
                 if self.get_number() < other.get_number():
                     return -1
                 else:
                     return 1
-        else: # One or both strains not conventionally named
+
+        # One or both strains not conventionally named
+        else:
             s_lower = self.name.lower()
             o_lower = other.name.lower()
             if s_lower < o_lower:

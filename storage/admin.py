@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from storage.models import (Container, ContainerSupertype, ContainerType,
-    Stock, Stockable, StockableType)
+                            Stock, Stockable, StockableType)
 
 
 class StockableAdmin(admin.ModelAdmin):

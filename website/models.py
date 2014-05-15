@@ -47,7 +47,7 @@ class UserProfile(models.Model):
             return 'NYUAD'
         elif self.in_abu_dhabi == 0:
             return 'NYUNY'
-        else: # self.in_abu_dhabi == -1
+        else:
             return 'NYUAD/NY'
 
 

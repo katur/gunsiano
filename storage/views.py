@@ -36,7 +36,8 @@ def storage_detail(request, container_id):
 
     # Populate with this container's children
     for child in children:
-        x = child.horizontal_position - 1 # Position is 1-indexed
+        # position is 1-indexed
+        x = child.horizontal_position - 1
         y = child.vertical_position - 1
         (grid[y][x]).append(child)
 

@@ -19,23 +19,8 @@ certain symbols, etc.). Used to turn protocol titles into urls. Requires
 `Unidecode`
 
 Public interface includes basic information about the lab and its research.
-The pages are:
-* home, with skrollr effects describing research areas for the lab
-* lab members, which links to pages for individual lab members
-* resources, which links to the lab's published computational resources
-* publications
-* join the lab
-* contact
 
-Logging in provides access to interfaces to navigate the following internal lab
-databases:
-* worm strains
-* bacterial clones
-* vectors and plasmids
-* antibodies
-* primers
-* chemicals
-
+Logging in provides access to interfaces for various internal lab databases.
 Logging in also provides access to the Django admin interface,
 where every user is minimally granted update privileges for limited
 information about their own user and user profile.

@@ -27,14 +27,7 @@ The pages are:
 * join the lab
 * contact
 
-Logging in provides access to interfaces to navigate the following internal lab
-databases:
-* worm strains
-* bacterial clones
-* vectors and plasmids
-* antibodies
-* primers
-* chemicals
+Logging in provides access to interfaces for various internal lab databases.
 
 Logging in also provides access to the Django admin interface,
 where every user is minimally granted update privileges for limited

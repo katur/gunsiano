@@ -19,6 +19,7 @@ certain symbols, etc.). Used to turn protocol titles into urls. Requires
 `Unidecode`
 
 Public interface includes basic information about the lab and its research.
+Logging in provides access to interfaces for various internal lab databases.
 
 Logging in provides access to interfaces for various internal lab databases.
 Logging in also provides access to the Django admin interface,

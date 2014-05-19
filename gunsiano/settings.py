@@ -98,7 +98,6 @@ STATICFILES_FINDERS = (
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-    # 'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -117,7 +116,7 @@ ROOT_URLCONF = 'gunsiano.urls'
 WSGI_APPLICATION = 'gunsiano.wsgi.application'
 
 TEMPLATE_DIRS = (
-    '/Users/katherine/ka73r/websites/gunsiano/universal/templates/',
+    '/Users/katherine/ka73r/projects/gunsiano/universal/templates/',
 )
 
 INSTALLED_APPS = (
@@ -178,6 +177,7 @@ LOGGING = {
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
 )
 
 # Constants

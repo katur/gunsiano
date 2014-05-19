@@ -130,63 +130,67 @@
             <li>{{ stock.notes }}</li>
             {% endif %}
 
-            <li>
-              -80C test
-              {% if stock.thaw_80 %}
-                {% if stock.thaw_80.is_thawed %}
-                thaw
-                  {% if stock.thaw_80.thawed_by.get_full_name %}
-                  by {{ stock.thaw_80.thawed_by.get_full_name }}
+            <li>Thawed tubes:
+              <table>
+                <tr><td>-80C test thaw
+                  {% if stock.thaw_80 %}
+                    {% if stock.thaw_80.is_thawed %}
+                      {% if stock.thaw_80.thawed_by %}
+                      by {{ stock.thaw_80.thawed_by.get_full_name }}
+                      {% endif %}
+
+                      {% if stock.thaw_80.date_thawed %}
+                      on {{ stock.thaw_80.date_thawed }}
+                      {% endif %}
+
+                      {% if stock.thaw_80.thaw_results %}
+                      was {{ stock.thaw_80.thaw_results }}
+                      {% endif %}
+                    {% else %}not thawed yet{% endif %}
+                  {% else %}not available{% endif %}
+                </td></tr>
+
+                <tr><td>Liquid Nitrogen test thaw
+                  {% if stock.thaw_N %}
+                    {% if stock.thaw_N.is_thawed %}
+                      {% if stock.thaw_N.thawed_by %}
+                      by {{ stock.thaw_N.thawed_by.get_full_name }}
+                      {% endif %}
+
+                      {% if stock.thaw_N.date_thawed %}
+                      on {{ stock.thaw_N.date_thawed }}
+                      {% endif %}
+
+                      {% if stock.thaw_N.thaw_results %}
+                      was {{ stock.thaw_N.thaw_results }}
+                      {% endif %}
+                    {% else %}not thawed yet{% endif %}
+                  {% else %}not available{% endif %}
+                </td></tr>
+
+                {% for tube in stock.thawed_tubes %}
+                <tr><td>{{ tube.position }} thaw
+                  {% if tube.thawed_by %}
+                  by {{ tube.thawed_by.get_full_name }}
                   {% endif %}
 
-                  {% if stock.thaw_80.date_thawed %}
-                  on {{ stock.thaw_80.date_thawed }}
+                  {% if tube.date_thawed %}
+                  on {{ tube.date_thawed }}
                   {% endif %}
 
-                  {% if stock.thaw_80.thaw_results %}
-                  was {{ stock.thaw_80.thaw_results }}
+                  {% if tube.thaw_results %}
+                  was {{ tube.thaw_results }}
                   {% endif %}
-
-                {% else %}
-                not thawed yet
-                {% endif %}
-
-              {% else %}
-              not available
-              {% endif %}
-            </li>
-
-            <li>
-              Liquid Nitrogen test
-              {% if stock.thaw_N %}
-                {% if stock.thaw_N.is_thawed %}
-                thaw
-                  {% if stock.thaw_N.thawed_by.get_full_name %}
-                  by {{ stock.thaw_N.thawed_by.get_full_name }}
-                  {% endif %}
-
-                  {% if stock.thaw_N.date_thawed %}
-                  on {{ stock.thaw_N.date_thawed }}
-                  {% endif %}
-
-                  {% if stock.thaw_N.thaw_results %}
-                  was {{ stock.thaw_N.thaw_results }}
-                  {% endif %}
-
-                {% else %}
-                not thawed yet
-                {% endif %}
-
-              {% else %}
-              not available
-              {% endif %}
+                </td></tr>
+                {% endfor %}
+              </table>
             </li>
 
             <li class="tubes">
-              {% if stock.tubes %}
-              Tubes recorded:
+              {% if stock.unthawed_tubes %}
+              Available tubes:
               <table>
-                {% for tube in stock.tubes %}
+                {% for tube in stock.unthawed_tubes %}
                 <tr><td>
                   {{ tube.position }}{% if tube.notes %}.
                   Note: {{ tube.notes }}
@@ -196,7 +200,7 @@
               </table>
 
               {% else %}
-              No remaining tubes recorded
+              No available tubes recorded
               {% endif %}
             </li>
           </ul>

@@ -39,20 +39,31 @@ def strain(request, name):
                        .order_by('date_prepared'))
 
         for stock in line.stocks:
-            # Get the tester thaws no matter what
+            # Get the tester thaws
             stock.thaw_80 = (Container.objects
                              .filter(stock=stock, parent=7).first())
             stock.thaw_N = (Container.objects
                             .filter(stock=stock, parent=8).first())
 
-            # Get non-tester tubes only if unthawed
-            stock.tubes = (Container.objects
-                           .filter(stock=stock, is_thawed=False)
-                           .exclude(parent=7).exclude(parent=8))
+            # Get other thaws
+            all_tubes = (Container.objects.filter(stock=stock)
+                         .exclude(parent=7).exclude(parent=8))
 
-            for tube in stock.tubes:
+            thawed_tubes = []
+            unthawed_tubes = []
+
+            for tube in all_tubes:
                 tube.position = tube.get_overall_position()
-            stock.tubes = sorted(stock.tubes, key=lambda x: x.position)
+                if tube.is_thawed:
+                    thawed_tubes.append(tube)
+                else:
+                    unthawed_tubes.append(tube)
+
+            stock.thawed_tubes = sorted(
+                thawed_tubes, key=lambda x: x.date_thawed if x.date_thawed else
+                x.position)
+            stock.unthawed_tubes = sorted(unthawed_tubes,
+                                          key=lambda x: x.position)
 
     template_dictionary = {
         'lines': lines,

@@ -1,5 +1,5 @@
 # Database connection and other secret settings
-*secret_settings.py
+*local_settings.py
 
 # Compiled source
 *.com

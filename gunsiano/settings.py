@@ -1,23 +1,9 @@
-# Django settings
-from gunsiano.secret_settings import DATABASES, SECRET_KEY
-
-# To use dynamically generated roots throughout settings file.
-import os.path
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
-ADMINS = (
-    ('Katherine Erickson', 'katherine.erickson@gmail.com'),
-)
-
-MANAGERS = ADMINS
-
-LOGIN_URL = 'login_url'
-LOGIN_REDIRECT_URL = 'home_url'
-
-# include this, filled in, in settings_secret.py
+"""
+Django settings for Gunsiano lab website.
+"""
+from local_settings import DEBUG, DATABASES, SECRET_KEY
+# SECRET_KEY = ''
+# DEBUG = True
 # DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.mysql',
@@ -28,6 +14,21 @@ LOGIN_REDIRECT_URL = 'home_url'
 #        'PORT': '',
 #    }
 # }
+
+# To use dynamically generated roots throughout settings file.
+import os.path
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    ('Katherine Erickson', 'katherine.erickson@gmail.com'),
+)
+
+MANAGERS = ADMINS
+
+LOGIN_URL = 'login_url'
+LOGIN_REDIRECT_URL = 'home_url'
 
 # Domain names that are valid for this site; required if DEBUG is False.
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -89,10 +90,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
-# include this, filled in, in settings_secret.py
-# Make this unique, and don't share it with anybody.
-# SECRET_KEY = ''
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

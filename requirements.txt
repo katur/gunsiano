@@ -4,8 +4,8 @@ MySQL-python==1.2.5
 South==0.8.4
 Unidecode==0.04.16
 django-lockdown==1.0
-guess-language-spirit==0.5a4
+guess-language-spirit==0.5a5
 mdx-smartypants==1.5.1
-namedentities==1.301
+namedentities==1.5.2
 python-slugify==0.0.7
 wsgiref==0.1.2

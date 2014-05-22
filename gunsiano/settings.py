@@ -1,7 +1,7 @@
 """
 Django settings for Gunsiano lab website.
 """
-from local_settings import DEBUG, DATABASES, SECRET_KEY
+from local_settings import DEBUG, DATABASES, SECRET_KEY, LOCKDOWN_PASSWORDS
 # SECRET_KEY = ''
 # DEBUG = True
 # DATABASES = {
@@ -105,6 +105,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'lockdown.middleware.LockdownMiddleware',
 )
 
 ROOT_URLCONF = 'gunsiano.urls'
@@ -113,7 +114,6 @@ ROOT_URLCONF = 'gunsiano.urls'
 WSGI_APPLICATION = 'gunsiano.wsgi.application'
 
 TEMPLATE_DIRS = (
-    '/Users/katherine/ka73r/projects/gunsiano/universal/templates/',
 )
 
 INSTALLED_APPS = (
@@ -125,7 +125,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'south',
 
     # Apps within the project
     'universal',
@@ -134,6 +133,9 @@ INSTALLED_APPS = (
     'vectors',
     'storage',
     'protocols',
+
+    'south',
+    'lockdown',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -185,3 +187,4 @@ MARKDOWN_PROMPT = (
     '<a href="http://www.markdowntutorial.com/">a tutorial</a>, '
     'or practice <a href="http://dillinger.io/">here</a>.'
 )
+

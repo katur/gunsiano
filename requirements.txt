@@ -3,6 +3,7 @@ Markdown==2.4
 MySQL-python==1.2.5
 South==0.8.4
 Unidecode==0.04.14
+django-lockdown==1.0
 guess-language-spirit==0.5a4
 mdx-smartypants==1.5.1
 namedentities==1.5.2

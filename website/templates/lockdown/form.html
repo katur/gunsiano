@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="lockdown">
+  <p>This is not yet available to the public. Please log in.</p>
+
+  {% if form %}
+
+  <form action="" method="post">
+    <div>
+      {% for field in form %}
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+      {% endfor %}
+    </div>
+    <input type="submit" value="Preview">
+  </form>
+
+  {% endif %}
+
+</div>
+{% endblock %}

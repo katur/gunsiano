@@ -14,7 +14,7 @@ register = template.Library()
 def enhanced_markdown(value):
     extensions = [
         # 'nl2br', # more intuitive linebreak
-        'smartypants', # emdash, endash, pretty quotes
+        'smarty', # emdash, endash, pretty quotes
         'subscript',
         'superscript',
     ]

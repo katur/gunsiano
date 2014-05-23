@@ -1,5 +1,6 @@
 # Collected static files (can be recollected with collectstatic)
 staticfiles/
+website/static/videos/nathalie_sizes
 
 # Database connection and other secret settings
 *local_settings.py
@@ -46,10 +47,3 @@ sql_backups
 
 # Photoshop files
 *.psd
-
-# Videos #
-*.avi
-*.mp4
-*.ogg
-*.ogv
-*.webm

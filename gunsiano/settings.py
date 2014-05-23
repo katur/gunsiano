@@ -1,19 +1,16 @@
 """
 Django settings for Gunsiano lab website.
 """
-from local_settings import DEBUG, DATABASES, SECRET_KEY, LOCKDOWN_PASSWORDS
-# SECRET_KEY = ''
-# DEBUG = True
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': '',
-#        'USER': '',
-#        'PASSWORD': '',
-#        'HOST': '',
-#        'PORT': '',
-#    }
-# }
+try:
+    from local_settings import DEBUG, SECRET_KEY, LOCKDOWN_PASSWORDS, DATABASES
+except Exception as e:
+    DEBUG = False
+    SECRET_KEY = ''
+    LOCKDOWN_PASSWORDS = ('silly')
+    import dj_database_url
+    DATABASES = {}
+    DATABASES['default'] = dj_database_url.config()
+
 
 TEMPLATE_DEBUG = DEBUG
 

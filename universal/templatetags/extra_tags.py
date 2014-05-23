@@ -13,10 +13,10 @@ register = template.Library()
 @stringfilter
 def enhanced_markdown(value):
     extensions = [
-        # 'nl2br', # more intuitive linebreak
-        'smarty', # emdash, endash, pretty quotes
-        'subscript',
-        'superscript',
+        'nl2br',  # more intuitive linebreak
+        'smarty',  # emdash, endash, pretty quotes
+        # 'subscript',
+        # 'superscript',
     ]
 
     return mark_safe(markdown.markdown(force_unicode(value),

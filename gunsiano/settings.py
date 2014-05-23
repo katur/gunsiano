@@ -6,7 +6,7 @@ import os
 try:
     from local_settings import DEBUG, SECRET_KEY, LOCKDOWN_PASSWORDS, DATABASES
 except Exception as e:
-    DEBUG = True
+    DEBUG = False
     SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
     LOCKDOWN_PASSWORDS = (os.environ['LOCKDOWN_PASSWORD'])
     import dj_database_url

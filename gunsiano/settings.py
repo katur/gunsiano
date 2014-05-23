@@ -1,16 +1,7 @@
 """
 Django settings for Gunsiano lab website.
 """
-try:
-    from local_settings import DEBUG, SECRET_KEY, LOCKDOWN_PASSWORDS, DATABASES
-except Exception as e:
-    DEBUG = True
-    SECRET_KEY = 'silly'
-    LOCKDOWN_PASSWORDS = ('silly')
-    import dj_database_url
-    DATABASES = {}
-    DATABASES['default'] = dj_database_url.config()
-
+from local_settings import DEBUG, SECRET_KEY, LOCKDOWN_PASSWORDS, DATABASES
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -46,7 +37,6 @@ STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    # os.path.join(BASE_DIR, 'static'),
 )
 
 STATICFILES_FINDERS = (
@@ -127,22 +117,17 @@ LOGGING = {
     }
 }
 
-
-#####################################
-# Everything below added by Katherine
-#####################################
-
-# For request object in templates
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
-TEMPLATE_CONTEXT_PROCESSORS = TCP + (
-    'django.core.context_processors.request',
-    'django.contrib.messages.context_processors.messages',
-)
-
 MARKDOWN_PROMPT = (
     'Use Markdown syntax. See '
     '<a href="http://www.darkcoding.net/software/markdown-quick-reference">'
     'a quick reference</a>, '
     '<a href="http://www.markdowntutorial.com/">a tutorial</a>, '
     'or practice <a href="http://dillinger.io/">here</a>.'
+)
+
+# For request object in templates
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
 )

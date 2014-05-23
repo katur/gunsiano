@@ -1,8 +1,0 @@
-Django==1.6.2
-Markdown==2.4
-MySQL-python==1.2.5
-South==0.8.4
-Unidecode==0.04.16
-django-lockdown==1.0
-python-slugify==0.0.7
-wsgiref==0.1.2

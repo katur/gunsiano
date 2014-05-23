@@ -4,8 +4,8 @@ Django settings for Gunsiano lab website.
 try:
     from local_settings import DEBUG, SECRET_KEY, LOCKDOWN_PASSWORDS, DATABASES
 except Exception as e:
-    DEBUG = False
-    SECRET_KEY = ''
+    DEBUG = True
+    SECRET_KEY = 'silly'
     LOCKDOWN_PASSWORDS = ('silly')
     import dj_database_url
     DATABASES = {}

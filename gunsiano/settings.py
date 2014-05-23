@@ -1,7 +1,18 @@
 """
 Django settings for Gunsiano lab website.
 """
-from local_settings import DEBUG, SECRET_KEY, LOCKDOWN_PASSWORDS, DATABASES
+import os
+
+try:
+    from local_settings import DEBUG, SECRET_KEY, LOCKDOWN_PASSWORDS, DATABASES
+except Exception as e:
+    DEBUG = True
+    SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+    LOCKDOWN_PASSWORDS = (os.environ['LOCKDOWN_PASSWORD'])
+    import dj_database_url
+    DATABASES = {}
+    DATABASES['default'] = dj_database_url.config()
+
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -31,7 +42,6 @@ MEDIA_ROOT = ''
 MEDIA_URL = ''
 
 # Static asset configuration
-import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'

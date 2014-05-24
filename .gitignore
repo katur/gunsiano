@@ -39,11 +39,7 @@ Thumbs.db
 *.zip
 
 # Logs and databases #
-sql_backups
 *.log
 *.sql
 *.sqlite
 *.csv
-
-# Photoshop files
-*.psd

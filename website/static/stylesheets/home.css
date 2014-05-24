@@ -17,7 +17,7 @@ body#home #content {
   width: 562px;
   height: 536px;
   margin: 40px 0 0 -281px;
-  background-image: url("../img/world.jpg");
+  background-image: url("../images/world.jpg");
 }
 
 #world-wrapper canvas {
@@ -163,17 +163,17 @@ body#home #content {
 }
 
 .layer-1.worm-background-image {
-  background-image: url('../img/research/gi_screens/worms-layer-1.png');
+  background-image: url('../images/research/gi_screens/worms-layer-1.png');
   opacity: 0.4;
 }
 
 .layer-2.worm-background-image {
-  background-image: url('../img/research/gi_screens/worms-layer-2.png');
+  background-image: url('../images/research/gi_screens/worms-layer-2.png');
   opacity: 0.25;
 }
 
 .layer-3.worm-background-image {
-  background-image: url('../img/research/gi_screens/worms-layer-3.png');
+  background-image: url('../images/research/gi_screens/worms-layer-3.png');
   opacity: 0.15;
 }
 
@@ -223,7 +223,7 @@ body#home #content {
   height: 722px;
   width: 678px;
   margin: auto;
-  background-image: url("../img/research/rna/pq_rna_sprite.png");
+  background-image: url("../images/research/rna/pq_rna_sprite.png");
 }
 
 /***********

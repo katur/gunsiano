@@ -1,75 +1,105 @@
+
 $(document).ready(function() {
-  draw();
+  drawWorm();
   homepageScrollEffects();
   togglePublications();
 })
 
-draw = function() {
-  function clearCanvas() {
-    ctx.save(); // store current transformation matrix
+drawWorm = function() {
+  var xStart = 131;
+  var xEnd = 385;
+  var yStart = 275;
+  var radius = 5;
+  var diameter = radius*2;
 
-    // Use the identity matrix while clearing the canvas
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.restore(); // restore transform
-  }
-
-  function drawWorm(position, x, y) {
-    ctx.beginPath();
-    if (position==0) {
-      ctx.moveTo(x, y);
-      // arc(x, y, radius, startAngle, endAngle, anticlockwise);
-      ctx.arc(x+5, y, 5, Math.PI, 0, false); // left half
-      ctx.moveTo(x+10, y);
-      ctx.arc(x+15, y, 5, Math.PI, 0, true); // right half
-    } else if (position==1) {
-      ctx.moveTo(x+5, y-5);
-      ctx.arc(x+5, y, 5, 3*Math.PI/2, 0, false); // left half
-      ctx.moveTo(x+10, y);
-      ctx.arc(x+15, y, 5, Math.PI, 0, true); // right half
-      ctx.moveTo(x+20, y);
-      ctx.arc(x+25, y, 5, Math.PI, 3*Math.PI/2, false); // right half
-    } else if (position==2) {
-      ctx.moveTo(x+10, y);
-      ctx.arc(x+15, y, 5, Math.PI, 0, true); // left half
-      ctx.moveTo(x+20, y);
-      ctx.arc(x+25, y, 5, Math.PI, 0, false); // right half
-    } else if (position==3) {
-      ctx.moveTo(x+15, y+5);
-      ctx.arc(x+15, y, 5, Math.PI/2, 0, true); // left half
-      ctx.moveTo(x+20, y);
-      ctx.arc(x+25, y, 5, Math.PI, 0, false); // right half
-      ctx.moveTo(x+30, y);
-      ctx.arc(x+35, y, 5, Math.PI, Math.PI/2,true); // right half
-    }
-    ctx.stroke();
-  }
-
-  function drawWormCycle(t, x, y) {
-    d = 200;
-    setTimeout( function(){clearCanvas(); drawWorm(0, x, y)}, t );
-    setTimeout( function(){clearCanvas(); drawWorm(1, x, y)}, t+=d );
-    setTimeout( function(){clearCanvas(); drawWorm(2, x, y)}, t+=d );
-    setTimeout( function(){clearCanvas(); drawWorm(3, x, y)}, t+=d );
-  }
+  var currentX = xStart;
+  var currentY = yStart;
+  var currentPosition = 0;
+  var isForward = true;
 
   var canvas = document.getElementById("world-worms");
   if (canvas && canvas.getContext) {
-    var ctx = canvas.getContext("2d");
-    ctx.lineCap="round";
-    ctx.lineWidth=3;
+    var context = canvas.getContext("2d");
+    context.lineCap="round";
+    context.lineWidth=3;
+    setInterval(drawWorm, 200);
+  }
 
-    var startTime = 0;
-    var xStart = 128;
-    var x = 0;
-    var y = 275;
+  // Draws a worm with leftmost point [x, y]
+  function drawWorm() {
+    // arc(x, y, radius, startAngle, endAngle, anticlockwise);
+    clearCanvas();
+    context.beginPath();
 
-    for (i=0; i<1000; i++) {
-      drawWormCycle(startTime, xStart + x, y);
-      startTime += 800;
-      x = (x + 20) % 260;
+    switch (currentPosition) {
+      case 0:
+        context.moveTo(currentX, currentY);
+        context.arc(currentX + radius, currentY, radius, Math.PI, 0, false);
+
+        context.moveTo(currentX + diameter, currentY);
+        context.arc(currentX + diameter + radius, currentY, radius, Math.PI, 0, true);
+        break;
+
+      case 1:
+        context.moveTo(currentX, currentY - radius);
+        context.arc(currentX, currentY, radius, 3*Math.PI/2, 0, false);
+
+        context.moveTo(currentX + radius, currentY);
+        context.arc(currentX + diameter, currentY, radius, Math.PI, 0, true);
+
+        context.moveTo(currentX + diameter + radius, currentY);
+        context.arc(currentX + diameter*2, currentY, radius, Math.PI, 3*Math.PI/2, false);
+        break;
+
+      case 2:
+        context.moveTo(currentX, currentY);
+        context.arc(currentX + radius, currentY, radius, Math.PI, 0, true);
+
+        context.moveTo(currentX + diameter, currentY);
+        context.arc(currentX + diameter + radius, currentY, radius, Math.PI, 0, false);
+        break;
+
+      case 3:
+        context.moveTo(currentX, currentY + radius);
+        context.arc(currentX, currentY, radius, Math.PI/2, 0, true);
+
+        context.moveTo(currentX + radius, currentY);
+        context.arc(currentX + diameter, currentY, radius, Math.PI, 0, false);
+
+        context.moveTo(currentX + (radius*3), currentY);
+        context.arc(currentX + diameter*2, currentY, radius, Math.PI, Math.PI/2, true);
+        break;
     }
+    context.stroke();
+
+    if (isForward) {
+      console.log('going forward');
+      currentX += radius;
+      currentPosition = (currentPosition + 1) % 4;
+      if (currentX > xEnd) {
+        isForward = false;
+      }
+    } else {
+      console.log('going backwards');
+      currentX -= radius;
+      currentPosition -= 1;
+      if (currentPosition <= -1) {
+        currentPosition = 3;
+      }
+      if (currentX < xStart) {
+        isForward = true;
+      }
+    }
+  }
+
+  function clearCanvas() {
+    context.save(); // store current transformation matrix
+
+    // Use the identity matrix while clearing the canvas
+    context.setTransform(1, 0, 0, 1, 0, 0);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    context.restore(); // restore transform
   }
 }
 

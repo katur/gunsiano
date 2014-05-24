@@ -42,7 +42,8 @@ MEDIA_ROOT = ''
 MEDIA_URL = ''
 
 # Static asset configuration
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
+PROJECT_DIR = os.path.join(SETTINGS_DIR, '..')
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
@@ -75,6 +76,8 @@ ROOT_URLCONF = 'gunsiano.urls'
 WSGI_APPLICATION = 'gunsiano.wsgi.application'
 
 TEMPLATE_DIRS = (
+    # Needed so overridden admin templates take precedence
+    PROJECT_DIR + '/universal/templates/'
 )
 
 INSTALLED_APPS = (

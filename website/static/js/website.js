@@ -69,6 +69,8 @@ drawWorm = function() {
         context.moveTo(currentX + (radius*3), currentY);
         context.arc(currentX + diameter*2, currentY, radius, Math.PI, Math.PI/2, true);
         break;
+      default:
+        break;
     }
     context.stroke();
 

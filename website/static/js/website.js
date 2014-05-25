@@ -136,37 +136,107 @@ rotateMolecule = function() {
   }
 }
 
+Node = (function() {
+  function Node(x, y, isHub) {
+    this.x = x;
+    this.y = y;
+    this.isHub = isHub;
+    this.radius = 4;
+    this.color = "#FFEC8B";
+  }
+
+  Node.prototype.draw = function() {
+    network.context.fillStyle = this.color;
+    network.context.beginPath();
+    network.context.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
+    network.context.fill();
+  }
+
+  return Node;
+})();
+
+Edge = (function() {
+  function Edge(nodeA, nodeB) {
+    this.nodeA = nodeA;
+    this.nodeB = nodeB;
+    this.thickness = 1;
+    this.color = "#8B6969";
+    this.draw();
+  }
+
+  Edge.prototype.draw = function() {
+    network.context.strokeStyle = this.color;
+    network.context.lineWidth = this.thickness;
+
+    network.context.beginPath();
+    network.context.moveTo(this.nodeA.x, this.nodeA.y);
+    network.context.lineTo(this.nodeB.x, this.nodeB.y);
+    network.context.stroke();
+  }
+
+  return Edge;
+})();
+
 network = {
-  nodeRadius: 10,
-  nodeColor: "yellow",
-  edgeWidth: 3,
-  edgeColor: "violet",
-  numberOfNodes: 40,
+  numberOfNodes: 150,
+  nodes: [],
+  hubPercentage: 0.05,
+  hubOutgoingEdges: 10,
 
   initialize: function() {
-    this.canvas = $(".network-background-image");
-    this.context = this.canvas.get(0).getContext("2d");
-    this.context.canvas.width = this.canvas.width();
-    this.context.canvas.height = this.canvas.height();
+    this.canvasElement = $(".network-background-image.layer-1");
+    this.context = this.canvasElement.get(0).getContext("2d");
+    this.initializeDimensions();
+    this.setContextCanvasDimensions();
+    this.createNodes();
+    this.createAndDrawEdges();
+    this.drawNodes();
+  },
 
-    this.getDimensions();
-    this.context.fillStyle = this.nodeColor;
+  initializeDimensions: function() {
+    this.width = this.canvasElement.width();
+    this.height = this.canvasElement.height();
+  },
+
+  setContextCanvasDimensions: function() {
+    this.context.canvas.width = this.width;
+    this.context.canvas.height = this.height;
+  },
+
+  createNodes: function() {
     for (i = 0; i < this.numberOfNodes; i++) {
-      this.drawRandomNode();
+      var x = Math.floor(Math.random() * this.width);
+      var y = Math.floor(Math.random() * this.height);
+      var isHub = Math.random() < this.hubPercentage;
+      var node = new Node(x, y, isHub);
+      this.nodes.push(node);
     }
   },
 
-  getDimensions: function() {
-    this.width = this.canvas.width();
-    this.height = this.canvas.height();
+  createAndDrawEdges: function() {
+    for (i = 0; i < this.numberOfNodes; i++) {
+      var node = this.nodes[i];
+      if (node.isHub) {
+        for (j = 0; j < this.hubOutgoingEdges; j++) {
+          this.drawEdgeToAnotherNode(node);
+        }
+      } else {
+        this.drawEdgeToAnotherNode(node);
+      }
+    }
   },
 
-  drawRandomNode: function() {
-    var x = Math.floor(Math.random() * this.width);
-    var y = Math.floor(Math.random() * this.height);
-    this.context.beginPath();
-    this.context.arc(x, y, this.nodeRadius, 0, 2*Math.PI);
-    this.context.fill();
+  drawEdgeToAnotherNode: function(node) {
+    var otherNodeIndex = Math.floor(Math.random() * this.numberOfNodes);
+    var otherNode = this.nodes[otherNodeIndex];
+    var edge = new Edge(node, otherNode);
+  },
+
+  drawNodes: function() {
+    for (i = 0; i < this.numberOfNodes; i++) {
+      var node = this.nodes[i];
+      node.draw();
+    }
   }
 }
 

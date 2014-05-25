@@ -105,7 +105,10 @@ drawWorm = function() {
 homepageScrollEffects = function() {
   if ($('body#home').length) {
     rotateMolecule();
-    network.initialize();
+    new Network($(".network-background-image.layer-3"), 150, 4, 1);
+    new Network($(".network-background-image.layer-2"), 75, 6, 1);
+    new Network($(".network-background-image.layer-1"), 30, 8, 2);
+
     skrollr.init({
       smoothScrolling: false,
       forceHeight: false
@@ -137,83 +140,87 @@ rotateMolecule = function() {
 }
 
 Node = (function() {
-  function Node(x, y, isHub) {
+  function Node(context, radius, x, y, isHub) {
+    this.context = context;
+    this.radius = radius;
     this.x = x;
     this.y = y;
     this.isHub = isHub;
-    this.radius = 4;
     this.color = "#FFEC8B";
   }
 
   Node.prototype.draw = function() {
-    network.context.fillStyle = this.color;
-    network.context.beginPath();
-    network.context.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
-    network.context.fill();
+    this.context.fillStyle = this.color;
+    this.context.beginPath();
+    this.context.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
+    this.context.fill();
   }
 
   return Node;
 })();
 
 Edge = (function() {
-  function Edge(nodeA, nodeB) {
+  function Edge(context, thickness, nodeA, nodeB) {
+    this.context = context;
+    this.thickness = thickness;
     this.nodeA = nodeA;
     this.nodeB = nodeB;
-    this.thickness = 1;
     this.color = "#8B6969";
     this.draw();
   }
 
   Edge.prototype.draw = function() {
-    network.context.strokeStyle = this.color;
-    network.context.lineWidth = this.thickness;
+    this.context.strokeStyle = this.color;
+    this.context.lineWidth = this.thickness;
 
-    network.context.beginPath();
-    network.context.moveTo(this.nodeA.x, this.nodeA.y);
-    network.context.lineTo(this.nodeB.x, this.nodeB.y);
-    network.context.stroke();
+    this.context.beginPath();
+    this.context.moveTo(this.nodeA.x, this.nodeA.y);
+    this.context.lineTo(this.nodeB.x, this.nodeB.y);
+    this.context.stroke();
   }
 
   return Edge;
 })();
 
-network = {
-  numberOfNodes: 150,
-  nodes: [],
-  hubPercentage: 0.05,
-  hubOutgoingEdges: 10,
+Network = (function() {
+  function Network(canvasElement, numberOfNodes, nodeRadius, edgeThickness) {
+    this.canvasElement = canvasElement;
+    this.numberOfNodes = numberOfNodes;
+    this.nodeRadius = nodeRadius;
+    this.edgeThickness = edgeThickness;
+    this.nodes = [];
+    this.hubPercentage = 0.05;
+    this.hubOutgoingEdges = 10;
 
-  initialize: function() {
-    this.canvasElement = $(".network-background-image.layer-1");
     this.context = this.canvasElement.get(0).getContext("2d");
     this.initializeDimensions();
     this.setContextCanvasDimensions();
     this.createNodes();
     this.createAndDrawEdges();
     this.drawNodes();
-  },
+  }
 
-  initializeDimensions: function() {
+  Network.prototype.initializeDimensions = function() {
     this.width = this.canvasElement.width();
     this.height = this.canvasElement.height();
-  },
+  }
 
-  setContextCanvasDimensions: function() {
+  Network.prototype.setContextCanvasDimensions = function() {
     this.context.canvas.width = this.width;
     this.context.canvas.height = this.height;
-  },
+  }
 
-  createNodes: function() {
+  Network.prototype.createNodes = function() {
     for (i = 0; i < this.numberOfNodes; i++) {
       var x = Math.floor(Math.random() * this.width);
       var y = Math.floor(Math.random() * this.height);
       var isHub = Math.random() < this.hubPercentage;
-      var node = new Node(x, y, isHub);
+      var node = new Node(this.context, this.nodeRadius, x, y, isHub);
       this.nodes.push(node);
     }
-  },
+  }
 
-  createAndDrawEdges: function() {
+  Network.prototype.createAndDrawEdges = function() {
     for (i = 0; i < this.numberOfNodes; i++) {
       var node = this.nodes[i];
       if (node.isHub) {
@@ -224,21 +231,25 @@ network = {
         this.drawEdgeToAnotherNode(node);
       }
     }
-  },
+  }
 
-  drawEdgeToAnotherNode: function(node) {
+  Network.prototype.drawEdgeToAnotherNode = function(node) {
     var otherNodeIndex = Math.floor(Math.random() * this.numberOfNodes);
     var otherNode = this.nodes[otherNodeIndex];
-    var edge = new Edge(node, otherNode);
+    var edge = new Edge(this.context, this.edgeThickness, node, otherNode);
   },
 
-  drawNodes: function() {
+  Network.prototype.drawNodes = function() {
     for (i = 0; i < this.numberOfNodes; i++) {
       var node = this.nodes[i];
       node.draw();
     }
   }
-}
+
+  return Network;
+})();
+
+
 
 togglePublications = function() {
   $("#pub-menu a").click(function() {

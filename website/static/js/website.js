@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
   drawWorm();
   homepageScrollEffects();
@@ -75,14 +74,12 @@ drawWorm = function() {
     context.stroke();
 
     if (isForward) {
-      console.log('going forward');
       currentX += radius;
       currentPosition = (currentPosition + 1) % 4;
       if (currentX > xEnd) {
         isForward = false;
       }
     } else {
-      console.log('going backwards');
       currentX -= radius;
       currentPosition -= 1;
       if (currentPosition <= -1) {
@@ -108,6 +105,7 @@ drawWorm = function() {
 homepageScrollEffects = function() {
   if ($('body#home').length) {
     rotateMolecule();
+    network.initialize();
     skrollr.init({
       smoothScrolling: false,
       forceHeight: false
@@ -135,6 +133,40 @@ rotateMolecule = function() {
     spritePosition = moleculeFrameWidth * i * -1;
     molecule.attr("data--" +  (step * i) + "p-bottom-top",
         "background-position:!" + spritePosition + "px 0px");
+  }
+}
+
+network = {
+  nodeRadius: 10,
+  nodeColor: "yellow",
+  edgeWidth: 3,
+  edgeColor: "violet",
+  numberOfNodes: 40,
+
+  initialize: function() {
+    this.canvas = $(".network-background-image");
+    this.context = this.canvas.get(0).getContext("2d");
+    this.context.canvas.width = this.canvas.width();
+    this.context.canvas.height = this.canvas.height();
+
+    this.getDimensions();
+    this.context.fillStyle = this.nodeColor;
+    for (i = 0; i < this.numberOfNodes; i++) {
+      this.drawRandomNode();
+    }
+  },
+
+  getDimensions: function() {
+    this.width = this.canvas.width();
+    this.height = this.canvas.height();
+  },
+
+  drawRandomNode: function() {
+    var x = Math.floor(Math.random() * this.width);
+    var y = Math.floor(Math.random() * this.height);
+    this.context.beginPath();
+    this.context.arc(x, y, this.nodeRadius, 0, 2*Math.PI);
+    this.context.fill();
   }
 }
 

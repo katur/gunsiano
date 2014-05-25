@@ -162,6 +162,14 @@ body#home #content {
   background-repeat: repeat;
 }
 
+/* transparent white layer to make text easier to read over worms */
+#gi.research-area .blurb {
+  position: relative;
+  z-index: 2;
+  display: block;
+  background: rgba(255,255,255,0.7);
+}
+
 .layer-1.worm-background-image {
   background-image: url('../images/research/gi_screens/worms-layer-1.png');
   opacity: 0.4;
@@ -175,14 +183,6 @@ body#home #content {
 .layer-3.worm-background-image {
   background-image: url('../images/research/gi_screens/worms-layer-3.png');
   opacity: 0.15;
-}
-
-/* transparent white layer to make text easier to read over worms */
-#gi.research-area .blurb {
-  position: relative;
-  z-index: 2;
-  display: block;
-  background: rgba(255,255,255,0.7);
 }
 
 /*************
@@ -233,6 +233,21 @@ body#home #content {
   /* same purple as links */
   background: #937AA9;
   color: white;
+}
+
+#network.research-area .blurb {
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+
+.network-background-image {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1000px;
 }
 
 /*********

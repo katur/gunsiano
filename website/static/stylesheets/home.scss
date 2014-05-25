@@ -1,4 +1,3 @@
-/* homepage has content that spans width of screen */
 body#home #content {
   width: 100%;
 }
@@ -9,7 +8,6 @@ body#home #content {
   text-align: center;
 }
 
-/* world stuff */
 #world-wrapper {
   float: left;
   position: relative;
@@ -32,8 +30,7 @@ body#home #content {
   border-radius: 50%;
   width: 10px;
   height: 10px;
-  /* nyu purple */
-  background: #57068c;
+  background: $nyu-purple;
 }
 
 #world-wrapper #nyc.dot {
@@ -46,18 +43,17 @@ body#home #content {
   top: 295px;
 }
 
-/* green bubble */
 #research-bubble {
   width: 800px;
   float: left;
   position: relative;
   left: 50%;
   margin: 80px 0 80px -430px;
-  background: #58bb62;
+  background: $green;
   text-align: center;
 }
 
-/* triangle beneath research bubble */
+// triangle beneath research bubble
 #research-bubble:after {
   display: block;
   position: absolute;
@@ -68,11 +64,10 @@ body#home #content {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid #58bb62;
+  border-top: 10px solid $green;
   margin-left: -10px;
 }
 
-/* universal to research areas */
 .research-area {
   float: left;
   position: relative;
@@ -122,7 +117,7 @@ body#home #content {
 }
 
 #cell-video-wrapper {
-  /* relative for gradient overlay to work */
+  // relative for gradient overlay to work
   position: relative;
   width: 90%;
   margin: 0 5%;
@@ -132,7 +127,7 @@ body#home #content {
   width: 100%;
 }
 
-/* overlay helps obscure the almost-black rectangular background of video */
+// help obscure the almost-black rectangular background of video
 #cell-video-gradient-overlay {
   position: absolute;
   top: 0;
@@ -151,7 +146,6 @@ body#home #content {
 /******
  * GI *
  * ****/
-/* each skrollr layer */
 .worm-background-image {
   position: absolute;
   z-index: 1;
@@ -162,12 +156,12 @@ body#home #content {
   background-repeat: repeat;
 }
 
-/* transparent white layer to make text easier to read over worms */
-#gi.research-area .blurb {
+// transparent layer to make text easier to read over background
+#gi.research-area .blurb .text {
   position: relative;
   z-index: 2;
   display: block;
-  background: rgba(255,255,255,0.7);
+  background: transparentize(white, 0.3);
 }
 
 .layer-1.worm-background-image {
@@ -189,8 +183,7 @@ body#home #content {
  * EVOLUTION *
  * ***********/
 #evolution.research-area {
-  /* brown */
-  background: #5d543b;
+  background: $brown;
   color: white;
 }
 
@@ -206,17 +199,14 @@ body#home #content {
   height: 100%;
   right: 0;
   bottom: 0;
-
-  /* brown */
-  background: #5d543b;
+  background: $brown;
 }
 
 /*******
  * RNA *
  * *****/
 #rna.research-area {
-  /* cream */
-  background: #FCECCB;
+  background: $cream;
 }
 
 #rna-image {
@@ -230,15 +220,16 @@ body#home #content {
  * NETWORK *
  * *********/
 #network.research-area {
-  /* same purple as links */
-  background: #937AA9;
+  background: $purple;
   color: white;
 }
 
-#network.research-area .blurb {
+// transparent layer to make text easier to read over background
+#network.research-area .blurb .text {
   position: relative;
   z-index: 2;
   display: block;
+  background: transparentize($purple, 0.6);
 }
 
 .network-background-image {

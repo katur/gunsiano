@@ -47,8 +47,8 @@ table {
 /********** FONTS / BACKGROUND **********/
 body {
   font-family: 'Computer Modern Bright', Helvetica, sans-serif;
-  background: #fff;
-  color: #333;
+  background: $gray-very-light;
+  color: $gray-dark;
   font-size: 16px;
   line-height: 130%;
 }
@@ -90,27 +90,26 @@ h3 {
 }
 
 h4 {
-  color: #aaa;
-  font-weight: bold;
   font-size: 20px;
+  font-weight: bold;
+  color: $gray-medium;
 }
 
 .subtitle {
   float: left;
   clear: left;
   font-size: 14px;
-  color: #999;
+  color: $gray-medium-dark;
 }
 
 /********** LINKS **********/
 a {
   text-decoration: none;
-  color: #58bb62;
+  color: $green;
 }
 
 a:hover, a.active {
-  /* purple */
-  color: #937AA9;
+  color: $purple;
 }
 
 a.active {
@@ -122,8 +121,8 @@ a.active {
   display: none;
 }
 
-/* add to parent elements when their children are floating
-and parent needs to expand to the children's size. */
+// add to parent elements when their children are floating
+// and parent needs to expand to the children's size.
 .clearfix {
   zoom: 1;
 }
@@ -136,25 +135,24 @@ and parent needs to expand to the children's size. */
   visibility: hidden;
 }
 
-/* horizontal rule line */
 hr {
   height: 1px;
   width: 70%;
-  color: #ddd;
-  background-color: #ddd;
+  color: $gray-medium-light;
+  background-color: $gray-medium-light;
   border-width: 0;
   margin-top: 0;
   margin-bottom: 0;
 }
 
-/* icon for external links */
+// icon for external links
 .external-link {
   display: inline-block;
   padding-right: 15px;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAElJREFUeNpiZMACInYnzQdSCSA2C5DzHyq+YIXrvER0xSwgAijBiEX3ArgCbJIw05iwOAHVKiQ3YHMoVhNgIAHuBlymgABAgAEAuZUbEqLsuG0AAAAASUVORK5CYII=) center right no-repeat;
 }
 
-/* rounded text bubble */
+// rounded text bubble
 .colorful-bubble {
   float: left;
   clear: both;
@@ -193,11 +191,9 @@ html, body {
 }
 /********** HEADER ONLY **********/
 #wrap-header {
-  position: relative; /* to accept z-index */
+  position: relative;
   z-index: 1;
-  -moz-box-shadow: 0 0 8px rgba(0,0,0,0.3);
-  -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.3);
-  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  box-shadow: 0 0 8px transparentize(black, 0.7);
   background: black;
 }
 
@@ -218,7 +214,7 @@ html, body {
 }
 
 #header h1:hover {
-  color: #58bb62;
+  color: $green;
 }
 
 #login {
@@ -246,11 +242,11 @@ html, body {
 /********** FOOTER ONLY **********/
 #wrap-footer {
   padding: 15px 0 12px 0;
-  background: #efefef;
+  background: $gray-light;
   font-size: 14px;
-  color: #333;
+  color: $gray-dark;
   line-height: 1.3;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid $gray-medium-light;
 }
 
 #copyright {

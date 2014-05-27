@@ -1,7 +1,8 @@
 $(document).ready(function() {
-  drawWorm();
-  homepageScrollEffects();
-  togglePublications();
+  if ($('body#home').length) {
+    drawWorm();
+    homepageScrollEffects();
+  }
 })
 
 drawWorm = function() {
@@ -103,30 +104,27 @@ drawWorm = function() {
 }
 
 homepageScrollEffects = function() {
-  if ($('body#home').length) {
-    rotateMolecule();
-    new Network($(".network-background-image.layer-3"), 150, 4, 1);
-    new Network($(".network-background-image.layer-2"), 75, 6, 1);
-    new Network($(".network-background-image.layer-1"), 30, 8, 2);
+  rotateMolecule();
+  new Network($(".network-background-image.layer-3"), 150, 4, 1);
+  new Network($(".network-background-image.layer-2"), 75, 6, 1);
+  new Network($(".network-background-image.layer-1"), 30, 8, 2);
 
-    skrollr.init({
-      smoothScrolling: false,
-      forceHeight: false
-    });
-  }
+  skrollr.init({
+    smoothScrolling: false,
+    forceHeight: false
+  });
 }
 
-var moleculeFrameHeight = 722;
-var moleculeFrameWidth = 678;
-var moleculeFrameCount = 20;
 
 rotateMolecule = function() {
+  var moleculeFrameHeight = 722;
+  var moleculeFrameWidth = 678;
+  var moleculeFrameCount = 20;
   var molecule = $("#rna-image");
-  var step = 100 / moleculeFrameCount;
 
+  var step = 100 / moleculeFrameCount;
   var viewportHeight = $(window).height();
   var stepsInViewport = viewportHeight / step;
-
   var totalSteps = moleculeFrameCount + stepsInViewport;
 
   molecule.attr("data-bottom-top", "background-position:!0px 0px");
@@ -248,21 +246,3 @@ Network = (function() {
 
   return Network;
 })();
-
-
-
-togglePublications = function() {
-  $("#pub-menu a").click(function() {
-    // have only clicked menu item be active
-    $("#pub-menu a").removeClass("active");
-    $(this).addClass("active");
-
-    // make counts and publications invisible
-    $("#pub-count span").addClass("invisible");
-    $(".publications").addClass("invisible");
-
-    // make only the relevant count and publications display
-    selector = $(this).attr("id");
-    $("." + selector).removeClass("invisible");
-  })
-}

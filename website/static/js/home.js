@@ -98,7 +98,7 @@ function startWormAnimation() {
         }
 
         if (currentX < xStart) {
-          isForward = true;
+          isMovingForward = true;
         }
       }
     }

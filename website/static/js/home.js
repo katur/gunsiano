@@ -119,7 +119,7 @@ function startHomepageScrollEffects() {
   rotateMolecule();
   new Network($(".network-background-image.layer-3"), 150, 4, 1);
   new Network($(".network-background-image.layer-2"), 75, 6, 1);
-  new Network($(".network-background-image.layer-1"), 30, 8, 2);
+  new Network($(".network-background-image.layer-1"), 40, 8, 2);
 
   skrollr.init({
     smoothScrolling: false,
@@ -199,7 +199,7 @@ Network = (function() {
     this.edgeThickness = edgeThickness;
     this.nodes = [];
     this.hubPercentage = 0.05;
-    this.hubOutgoingEdges = 10;
+    this.hubOutgoingEdges = 20;
 
     this.context = this.canvasElement.get(0).getContext("2d");
     this.initializeDimensions();

@@ -5,9 +5,9 @@
 {% block page_title %}Join the Lab{% endblock %}
 
 {% block content %}
-<div id="employment">
+<div id="sections">
   {% for section in sections %}
-  <div>
+  <div class="section">
     <h3>{{ section.title }}</h3>
     {{ section.description|enhanced_markdown }}
   </div>

@@ -1,0 +1,228 @@
+body#home #content
+  width: 100%
+
+#welcome-sentence
+  float: left
+  width: 100%
+  text-align: center
+
+#world-wrapper
+  float: left
+  position: relative
+  left: 50%
+  width: 562px
+  height: 536px
+  margin: 40px 0 0 -281px
+  background-image: url("../images/world.jpg")
+
+#world-wrapper canvas
+  -webkit-transform: rotate(10deg)
+  position: absolute
+  top: 0
+  left: 0
+
+#world-wrapper .dot
+  position: absolute
+  border-radius: 50%
+  width: 10px
+  height: 10px
+  background: $nyu-purple
+
+#world-wrapper #nyc.dot
+  left: 122px
+  top: 242px
+
+#world-wrapper #abu-dhabi.dot
+  left: 400px
+  top: 295px
+
+#research-bubble
+  width: 800px
+  float: left
+  position: relative
+  left: 50%
+  margin: 80px 0 80px -430px
+  background: $green
+  text-align: center
+
+// triangle beneath research bubble
+#research-bubble:after
+  display: block
+  position: absolute
+  left: 50%
+  bottom: -10px
+  content: " "
+  width: 0
+  height: 0
+  border-left: 10px solid transparent
+  border-right: 10px solid transparent
+  border-top: 10px solid $green
+  margin-left: -10px
+
+.research-area
+  float: left
+  position: relative
+  overflow: hidden
+  width: 100%
+  padding: 120px 0
+
+.research-area .blurb, .research-area .bling
+  width: 50%
+
+.research-area.left .blurb, .research-area.right .bling
+  float: left
+
+.research-area.right .blurb, .research-area.left .bling
+  float: right
+
+.research-area .blurb .text
+  width: 90%
+  margin: 0
+  line-height: 175%
+  font-size: 20px
+
+.research-area.left .blurb .text
+  margin-left: 10%
+
+.research-area.right .blurb .text
+  margin-right: 10%
+
+.research-area h3
+  margin-bottom: 20px
+  font-size: 20px
+
+/************
+ * CELL BIO *
+ * *********
+#cell-bio.research-area
+  background: black
+  color: white
+
+#cell-video-wrapper
+  // relative for gradient overlay to work
+  position: relative
+  width: 90%
+  margin: 0 5%
+
+#cell-video-wrapper video
+  width: 100%
+
+// help obscure the almost-black rectangular background of video
+#cell-video-gradient-overlay
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background: -moz-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 21%, rgba(0, 0, 0, 1) 100%)
+  /* FF3.6+
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(21%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 1)))
+  /* Chrome,Safari4+
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 21%, rgba(0, 0, 0, 1) 100%)
+  /* Chrome10+,Safari5.1+
+  background: -o-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 21%, rgba(0, 0, 0, 1) 100%)
+  /* Opera 12+
+  background: -ms-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 21%, rgba(0, 0, 0, 1) 100%)
+  /* IE10+
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 21%, rgba(0, 0, 0, 1) 100%)
+  /* W3C
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#000000',GradientType=1 )
+  /* IE6-9 fallback on horizontal gradient
+
+/******
+ * GI *
+ * ***
+.worm-background-image
+  position: absolute
+  z-index: 1
+  top: 0
+  left: 0
+  width: 100%
+  height: 1000px
+  background-repeat: repeat
+
+// transparent layer to make text easier to read over background
+#gi.research-area .blurb .text
+  position: relative
+  z-index: 2
+  display: block
+  background: transparentize(white, 0.3)
+
+.layer-1.worm-background-image
+  background-image: url("../images/research/gi_screens/worms-layer-1.png")
+  opacity: 0.4
+
+.layer-2.worm-background-image
+  background-image: url("../images/research/gi_screens/worms-layer-2.png")
+  opacity: 0.25
+
+.layer-3.worm-background-image
+  background-image: url("../images/research/gi_screens/worms-layer-3.png")
+  opacity: 0.15
+
+/*************
+ * EVOLUTION *
+ * **********
+#evolution.research-area
+  background: $brown
+  color: white
+
+#evolution.research-area img
+  width: 60%
+  margin: 0 20%
+
+#evolution-background-block
+  position: absolute
+  display: block
+  width: 50%
+  height: 100%
+  right: 0
+  bottom: 0
+  background: $brown
+
+/*******
+ * RNA *
+ * ****
+#rna.research-area
+  background: $cream
+
+#rna-image
+  height: 722px
+  width: 678px
+  margin: auto
+  background-image: url("../images/research/rna/pq_rna_sprite.png")
+
+/***********
+ * NETWORK *
+ * ********
+#network.research-area
+  background: $purple
+  color: white
+
+// transparent layer to make text easier to read over background
+#network.research-area .blurb .text
+  position: relative
+  z-index: 2
+  display: block
+  background: transparentize($purple, 0.6)
+
+.network-background-image
+  position: absolute
+  z-index: 1
+  top: -100px
+  left: -10%
+  width: 120%
+  height: 1000px
+
+/*********
+ * MOUSE *
+ * ******
+#mouse.research-area
+
+@media (max-width: 1200px)
+  .research-area .blurb .text
+    font-size: 18px
+
+@media (max-width: 600px)
+  .research-area .blurb .text
+    font-size: 16px

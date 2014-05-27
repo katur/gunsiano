@@ -1,13 +1,14 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load extra_tags %}
 
+{% block body_id %}protocols{% endblock %}
 {% block page_title %}Protocols and Recipes{% endblock %}
 
 {% block content %}
 <ul id="protocols">
   {% for protocol in protocols %}
   <li>
-  <a href={% url 'protocol_url' title_url=protocol.title_url %}>
+  <a href={% url "protocol_url" title_url=protocol.title_url %}>
     {{ protocol|enhanced_markdown }}
   </a>
   </li>

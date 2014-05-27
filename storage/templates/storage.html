@@ -1,10 +1,10 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
+{% block body_id %}storage{% endblock %}
 {% block page_title %}Outermost Storage Containers{% endblock %}
 
 {% block content %}
 <div id="vats">
-
   {% for container in containers %}
   <div>
     <a href={% url 'storage_detail_url' container_id=container.id %}>
@@ -14,6 +14,5 @@
     </a>
   </div>
   {% endfor %}
-
 </div>
 {% endblock %}

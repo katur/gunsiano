@@ -1,11 +1,11 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load extra_tags %}
 
+{% block body_id %}storage-detail{% endblock %}
 {% block page_title %}Contents of {{ container_title }}{% endblock %}
 
 {% block content %}
-<table id="storage">
-
+<table>
   {% for row in grid %}
   <tr>
     {% for compartment in row %}
@@ -30,6 +30,5 @@
     {% endfor %}
   </tr>
   {% endfor %}
-
 </table>
 {% endblock %}

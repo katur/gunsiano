@@ -5,9 +5,9 @@ $(document).ready(function() {
 })
 
 fixStrainsTopRow = function() {
-  var tableOffset = $(".strains").offset().top;
-  var header = $(".strains > thead").clone();
-  var fixedHeader = $("#table-thead-fixed").append(header);
+  var tableOffset = $("body#strains table").offset().top;
+  var header = $("body#strains table thead").clone();
+  var fixedHeader = $("body#strains #table-thead-fixed").append(header);
 
   $(window).bind("scroll", function() {
     var scrollDistance = $(this).scrollTop();

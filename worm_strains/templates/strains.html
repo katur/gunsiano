@@ -4,7 +4,7 @@
 {% block page_title %}Worm Strains{% endblock %}
 
 {% block content %}
-<table class="strains">
+<table>
   <thead>
     <tr>
       <th id="strain-column">Strain Name</th>
@@ -14,13 +14,16 @@
 
   {% for strain in strains %}
   <tr>
-    <td><a href={% url 'strain_url' name=strain %}>
-      {{ strain }}
-    </a></td>
+    <td>
+      <a href={% url 'strain_url' name=strain %}>
+        {{ strain }}
+      </a>
+    </td>
+
     <td>{{ strain.genotype }}</td>
   </tr>
   {% endfor %}
-
 </table>
-<table id="table-thead-fixed" class="strains"></table>
+
+<table id="table-thead-fixed"></table>
 {% endblock %}

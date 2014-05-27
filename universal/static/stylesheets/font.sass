@@ -1,0 +1,54 @@
+body
+  font-family: "Computer Modern Bright", Helvetica, sans-serif
+  background: $gray-very-light
+  color: $gray-dark
+  font-size: 16px
+  line-height: 130%
+
+i, em
+  font-style: italic
+
+b, strong
+  font-weight: bold
+
+h1, h2, h3, h4
+  font-weight: normal
+
+h2
+  font-size: 24px
+
+  &#page-title
+    margin-bottom: 30px
+
+    &.no-page-title
+      display: none
+
+    &.clear-and-float
+      clear: none
+      float: left
+
+h3
+  text-transform: uppercase
+  letter-spacing: 1px
+  font-size: 15px
+
+h4
+  font-size: 20px
+  font-weight: bold
+  color: $gray-medium
+
+.subtitle
+  float: left
+  clear: left
+  font-size: 14px
+  color: $gray-medium-dark
+
+a
+  text-decoration: none
+  color: $green
+
+  &:hover, &.active
+    color: $purple
+
+  &.active
+    cursor: default

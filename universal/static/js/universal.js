@@ -3,13 +3,13 @@ $(document).ready(function() {
   positionFooter();
 })
 
-setResizeHandler = function() {
+function setResizeHandler() {
   $(window).resize(function() {
     positionFooter();
   })
 }
 
-positionFooter = function() {
+function positionFooter() {
   footer = $("#wrap-footer");
   footerHeight = footer.outerHeight();
   windowHeight = $(window).height();

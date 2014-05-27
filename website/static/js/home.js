@@ -1,11 +1,11 @@
 $(document).ready(function() {
-  if ($('body#home').length) {
-    drawWorm();
-    homepageScrollEffects();
+  if ($("body#home").length) {
+    startWormAnimation();
+    startHomepageScrollEffects();
   }
 })
 
-drawWorm = function() {
+function startWormAnimation() {
   var xStart = 131;
   var xEnd = 385;
   var yStart = 275;
@@ -15,95 +15,107 @@ drawWorm = function() {
   var currentX = xStart;
   var currentY = yStart;
   var currentPosition = 0;
-  var isForward = true;
+  var isMovingForward = true;
 
-  var canvas = document.getElementById("world-worms");
+  var canvas = $("#world-worms")[0];
+
   if (canvas && canvas.getContext) {
     var context = canvas.getContext("2d");
-    context.lineCap="round";
-    context.lineWidth=3;
+    context.lineCap = "round";
+    context.lineWidth = 3;
     setInterval(drawWorm, 200);
   }
 
-  // Draws a worm with leftmost point [x, y]
   function drawWorm() {
-    // arc(x, y, radius, startAngle, endAngle, anticlockwise);
     clearCanvas();
     context.beginPath();
-
-    switch (currentPosition) {
-      case 0:
-        context.moveTo(currentX, currentY);
-        context.arc(currentX + radius, currentY, radius, Math.PI, 0, false);
-
-        context.moveTo(currentX + diameter, currentY);
-        context.arc(currentX + diameter + radius, currentY, radius, Math.PI, 0, true);
-        break;
-
-      case 1:
-        context.moveTo(currentX, currentY - radius);
-        context.arc(currentX, currentY, radius, 3*Math.PI/2, 0, false);
-
-        context.moveTo(currentX + radius, currentY);
-        context.arc(currentX + diameter, currentY, radius, Math.PI, 0, true);
-
-        context.moveTo(currentX + diameter + radius, currentY);
-        context.arc(currentX + diameter*2, currentY, radius, Math.PI, 3*Math.PI/2, false);
-        break;
-
-      case 2:
-        context.moveTo(currentX, currentY);
-        context.arc(currentX + radius, currentY, radius, Math.PI, 0, true);
-
-        context.moveTo(currentX + diameter, currentY);
-        context.arc(currentX + diameter + radius, currentY, radius, Math.PI, 0, false);
-        break;
-
-      case 3:
-        context.moveTo(currentX, currentY + radius);
-        context.arc(currentX, currentY, radius, Math.PI/2, 0, true);
-
-        context.moveTo(currentX + radius, currentY);
-        context.arc(currentX + diameter, currentY, radius, Math.PI, 0, false);
-
-        context.moveTo(currentX + (radius*3), currentY);
-        context.arc(currentX + diameter*2, currentY, radius, Math.PI, Math.PI/2, true);
-        break;
-      default:
-        break;
-    }
+    defineWormShape();
     context.stroke();
+    updateCurrentState();
 
-    if (isForward) {
-      currentX += radius;
-      currentPosition = (currentPosition + 1) % 4;
-      if (currentX > xEnd) {
-        isForward = false;
-      }
-    } else {
-      currentX -= radius;
-      currentPosition -= 1;
-      if (currentPosition <= -1) {
-        currentPosition = 3;
-      }
-      if (currentX < xStart) {
-        isForward = true;
+    function defineWormShape() {
+      switch (currentPosition) {
+        case 0:
+          context.moveTo(currentX, currentY);
+          context.arc(currentX + radius, currentY, radius, Math.PI, 0, false);
+
+          context.moveTo(currentX + diameter, currentY);
+          context.arc(currentX + diameter + radius, currentY, radius, Math.PI, 0,
+              true);
+          break;
+
+        case 1:
+          context.moveTo(currentX, currentY - radius);
+          context.arc(currentX, currentY, radius, 3*Math.PI/2, 0, false);
+
+          context.moveTo(currentX + radius, currentY);
+          context.arc(currentX + diameter, currentY, radius, Math.PI, 0, true);
+
+          context.moveTo(currentX + diameter + radius, currentY);
+          context.arc(currentX + diameter*2, currentY, radius, Math.PI,
+              3*Math.PI/2, false);
+          break;
+
+        case 2:
+          context.moveTo(currentX, currentY);
+          context.arc(currentX + radius, currentY, radius, Math.PI, 0, true);
+
+          context.moveTo(currentX + diameter, currentY);
+          context.arc(currentX + diameter + radius, currentY, radius, Math.PI, 0,
+              false);
+          break;
+
+        case 3:
+          context.moveTo(currentX, currentY + radius);
+          context.arc(currentX, currentY, radius, Math.PI/2, 0, true);
+
+          context.moveTo(currentX + radius, currentY);
+          context.arc(currentX + diameter, currentY, radius, Math.PI, 0, false);
+
+          context.moveTo(currentX + (radius*3), currentY);
+          context.arc(currentX + diameter*2, currentY, radius, Math.PI,
+              Math.PI/2, true);
+          break;
+
+        default:
+          break;
       }
     }
-  }
 
-  function clearCanvas() {
-    context.save(); // store current transformation matrix
+    function updateCurrentState() {
+      if (isMovingForward) {
+        currentX += radius;
+        currentPosition = (currentPosition + 1) % 4;
+        if (currentX > xEnd) {
+          isMovingForward = false;
+        }
 
-    // Use the identity matrix while clearing the canvas
-    context.setTransform(1, 0, 0, 1, 0, 0);
-    context.clearRect(0, 0, canvas.width, canvas.height);
+      } else {
+        currentX -= radius;
+        currentPosition -= 1;
+        if (currentPosition <= -1) {
+          currentPosition = 3;
+        }
 
-    context.restore(); // restore transform
+        if (currentX < xStart) {
+          isForward = true;
+        }
+      }
+    }
+
+    function clearCanvas() {
+      context.save();
+
+      // Use the identity matrix
+      context.setTransform(1, 0, 0, 1, 0, 0);
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      context.restore();
+    }
   }
 }
 
-homepageScrollEffects = function() {
+function startHomepageScrollEffects() {
   rotateMolecule();
   new Network($(".network-background-image.layer-3"), 150, 4, 1);
   new Network($(".network-background-image.layer-2"), 75, 6, 1);
@@ -113,27 +125,26 @@ homepageScrollEffects = function() {
     smoothScrolling: false,
     forceHeight: false
   });
-}
 
+  function rotateMolecule() {
+    var moleculeFrameHeight = 722;
+    var moleculeFrameWidth = 678;
+    var moleculeFrameCount = 20;
+    var molecule = $("#rna-image");
 
-rotateMolecule = function() {
-  var moleculeFrameHeight = 722;
-  var moleculeFrameWidth = 678;
-  var moleculeFrameCount = 20;
-  var molecule = $("#rna-image");
+    var step = 100 / moleculeFrameCount;
+    var viewportHeight = $(window).height();
+    var stepsInViewport = viewportHeight / step;
+    var totalSteps = moleculeFrameCount + stepsInViewport;
 
-  var step = 100 / moleculeFrameCount;
-  var viewportHeight = $(window).height();
-  var stepsInViewport = viewportHeight / step;
-  var totalSteps = moleculeFrameCount + stepsInViewport;
+    molecule.attr("data-bottom-top", "background-position:!0px 0px");
 
-  molecule.attr("data-bottom-top", "background-position:!0px 0px");
-
-  var spritePosition;
-  for (var i = 1; i < totalSteps; i++) {
-    spritePosition = moleculeFrameWidth * i * -1;
-    molecule.attr("data--" +  (step * i) + "p-bottom-top",
-        "background-position:!" + spritePosition + "px 0px");
+    var spritePosition;
+    for (var i = 1; i < totalSteps; i++) {
+      spritePosition = moleculeFrameWidth * i * -1;
+      molecule.attr("data--" +  (step * i) + "p-bottom-top",
+          "background-position:!" + spritePosition + "px 0px");
+    }
   }
 }
 

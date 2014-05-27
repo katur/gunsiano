@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  if (('body#publications').length) {
+  if (("body#publications").length) {
     togglePublications();
   }
 })

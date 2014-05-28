@@ -8,7 +8,7 @@ $(document).ready(function() {
 
 function expandResearchAreaHeight() {
   var width = $(document).width();
-  var minHeight = width / 3;
+  var minHeight = width / 4;
 
   var researchAreas = $(".research-area");
   researchAreas.each(function() {

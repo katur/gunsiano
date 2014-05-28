@@ -1,6 +1,6 @@
 $(document).ready(function() {
   if ($("body#home").length) {
-    expandResearchAreaHeight();
+    // expandResearchAreaHeight();
     startWormAnimation();
     startHomepageScrollEffects();
   }

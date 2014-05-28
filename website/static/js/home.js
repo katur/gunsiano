@@ -117,9 +117,9 @@ function startWormAnimation() {
 
 function startHomepageScrollEffects() {
   rotateMolecule();
-  new Network($("#network .layer-3"), 150, 4, 1);
-  new Network($("#network .layer-2"), 75, 6, 1);
-  new Network($("#network .layer-1"), 40, 8, 2);
+  new Network($("#network .layer-3"), 200, 4, 1);
+  new Network($("#network .layer-2"), 100, 6, 1);
+  new Network($("#network .layer-1"), 50, 8, 2);
 
   skrollr.init({
     smoothScrolling: false,

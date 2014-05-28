@@ -14,6 +14,7 @@ function expandResearchAreaHeight() {
   researchAreas.each(function() {
     var currentArea = $(this);
     if (currentArea.height() < minHeight) {
+      console.log(researchArea);
       console.log(currentArea.height());
       currentArea.height(minHeight);
       console.log(currentArea.height());

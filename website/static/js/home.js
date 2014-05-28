@@ -17,7 +17,7 @@ function startWormAnimation() {
   var currentPosition = 0;
   var isMovingForward = true;
 
-  var canvas = $("#world-worms")[0];
+  var canvas = $("#world canvas")[0];
 
   if (canvas && canvas.getContext) {
     var context = canvas.getContext("2d");
@@ -117,9 +117,9 @@ function startWormAnimation() {
 
 function startHomepageScrollEffects() {
   rotateMolecule();
-  new Network($(".network-background-image.layer-3"), 150, 4, 1);
-  new Network($(".network-background-image.layer-2"), 75, 6, 1);
-  new Network($(".network-background-image.layer-1"), 40, 8, 2);
+  new Network($("#network .layer-3"), 150, 4, 1);
+  new Network($("#network .layer-2"), 75, 6, 1);
+  new Network($("#network .layer-1"), 40, 8, 2);
 
   skrollr.init({
     smoothScrolling: false,
@@ -130,7 +130,7 @@ function startHomepageScrollEffects() {
     var moleculeFrameHeight = 722;
     var moleculeFrameWidth = 678;
     var moleculeFrameCount = 20;
-    var molecule = $("#rna-image");
+    var molecule = $("#molecule");
 
     var step = 100 / moleculeFrameCount;
     var viewportHeight = $(window).height();

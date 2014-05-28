@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block body_id %}lab_tools{% endblock %}
+{% block body_id %}lab-tools{% endblock %}
 {% block page_title %}Internal Lab Tools{% endblock %}
 
 {% block content %}
-<ul id="lab-tools">
+<ul id="lab-tool-list">
   <li><a href="{% url 'strains_url' %}">
     Worm Strains
   </a></li>
@@ -46,7 +46,7 @@
   </li>
 </ul>
 
-<div id="lab-tools-footnotes">
+<div id="footnotes">
   * Sensaphone site down? Try power-cycling the units.
   Disconnect the back-up battery, then the power adapter,
   and leave unplugged a few minutes. Then reconnect the battery

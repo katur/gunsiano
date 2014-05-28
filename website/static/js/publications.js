@@ -12,7 +12,7 @@ togglePublications = function() {
 
     // make counts and publications invisible
     $("#pub-count span").addClass("invisible");
-    $(".publications").addClass("invisible");
+    $(".pub-list").addClass("invisible");
 
     // make only the relevant count and publications display
     selector = $(this).attr("id");

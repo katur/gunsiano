@@ -26,7 +26,7 @@
   <a href="http://www.ncbi.nlm.nih.gov/pubmed">PubMed</a>)
 </div>
 
-<div class="publications pub-both">
+<div class="pub-list pub-both">
   {% for item in pub_both %}
   <div class="publication">
     {{ item.description|safe }}
@@ -35,7 +35,7 @@
   {% endfor %}
 </div>
 
-<div class="publications pub-kris invisible">
+<div class="pub-list pub-kris invisible">
   {% for item in pub_kris %}
   <div class="publication">
     {{ item.description|safe }}
@@ -44,7 +44,7 @@
   {% endfor %}
 </div>
 
-<div class="publications pub-fabio invisible">
+<div class="pub-list pub-fabio invisible">
   {% for item in pub_fabio %}
   <div class="publication">
     {{ item.description|safe }}

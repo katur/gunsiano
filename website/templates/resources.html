@@ -5,8 +5,8 @@
 {% block page_title %}Resources{% endblock %}
 
 {% block content %}
-<div id="resources">
-  {% for resource in resources %}
+{% for resource in resources %}
+<div id="resource-list">
   <a href="{{ resource.url }}">
     <div class="resource">
       <img width="160px"
@@ -17,8 +17,8 @@
       </span>
     </div>
   </a>
-
-  <hr>
-  {% endfor %}
 </div>
+
+<hr>
+{% endfor %}
 {% endblock content %}

@@ -1,9 +1,25 @@
 $(document).ready(function() {
   if ($("body#home").length) {
+    expandResearchAreaHeight();
     startWormAnimation();
     startHomepageScrollEffects();
   }
 })
+
+function expandResearchAreaHeight() {
+  var width = $(document).width();
+  var minHeight = width / 3;
+
+  var researchAreas = $(".research-area");
+  researchAreas.each(function() {
+    var currentArea = $(this);
+    if (currentArea.height() < minHeight) {
+      console.log(currentArea.height());
+      currentArea.height(minHeight);
+      console.log(currentArea.height());
+    }
+  });
+}
 
 function startWormAnimation() {
   var xStart = 131;

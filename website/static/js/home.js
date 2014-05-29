@@ -206,6 +206,7 @@ Network = (function() {
     this.viewportHeight = $(window).height();
     this.viewportWidth = $(window).width();
     this.verticalPadding = this.viewportWidth * 0.2;
+    // this.elementHeight = $("#network").height();
     this.setDimensions();
 
     this.context = this.canvasElement.get(0).getContext("2d");
@@ -219,11 +220,16 @@ Network = (function() {
     this.setSkrollrSettings();
   }
 
+  Network.prototype.setSkrollrSettings = function() {
+    var bottomTop = this.verticalPadding;
+    var topBottom = bottomTop + this.viewportHeight * this.scrollFactor;
+    this.canvasElement.attr("data-bottom-top", "top: -" + bottomTop + "px");
+    this.canvasElement.attr("data-top-bottom", "top: -" + topBottom + "px");
+  }
+
   Network.prototype.setDimensions = function() {
-    var divHeight = $("#network").height();
     this.height = this.viewportHeight * (1 + this.scrollFactor) +
         this.verticalPadding * 2;
-    console.log(this.height);
     this.canvasElement.height(this.height);
 
     // Canvas width set in css
@@ -277,13 +283,6 @@ Network = (function() {
       var node = this.nodes[i];
       node.draw();
     }
-  }
-
-  Network.prototype.setSkrollrSettings = function() {
-    var bottomTop = this.verticalPadding;
-    var topBottom = bottomTop + this.viewportHeight * this.scrollFactor;
-    this.canvasElement.attr("data-bottom-top", "top: -" + bottomTop + "px");
-    this.canvasElement.attr("data-top-bottom", "top: -" + topBottom + "px");
   }
 
   return Network;

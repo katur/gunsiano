@@ -123,7 +123,6 @@ function startWormAnimation() {
       // Use the identity matrix
       context.setTransform(1, 0, 0, 1, 0, 0);
       context.clearRect(0, 0, canvas.width, canvas.height);
-
       context.restore();
     }
   }
@@ -131,7 +130,8 @@ function startWormAnimation() {
 
 function startHomepageScrollEffects() {
   initializeWormLayers();
-  initializeMolecule();
+  initializePhylogenyMask();
+  initializeRotatingRNA();
   createNetworkLayers();
 
   skrollr.init({
@@ -139,28 +139,13 @@ function startHomepageScrollEffects() {
     forceHeight: false
   });
 
-  function initializeWormLayers() {
-    var layer1 = $("#gi .layer-1");
-    var layer2 = $("#gi .layer-2");
-    var layer3 = $("#gi .layer-3");
-
-    var viewportHeight = $(window).height();
-    var constant1 = 2.0;
-    var constant2 = 1.0;
-    var constant3 = .5;
-
-    layer1.attr("data-bottom-top", "background-position:0px 0px");
-    layer1.attr("data-top-bottom",
-        "background-position:0px -" + viewportHeight * constant1 + "px");
-    layer2.attr("data-bottom-top", "background-position:0px 0px");
-    layer2.attr("data-top-bottom",
-        "background-position:0px -" + viewportHeight * constant2 + "px");
-    layer3.attr("data-bottom-top", "background-position:0px 0px");
-    layer3.attr("data-top-bottom",
-        "background-position:0px -" + viewportHeight * constant3 + "px");
+  function initializePhylogenyMask() {
+    var mask = $("#evolution #mask");
+    mask.attr("data-center-top", "height: 100%");
+    mask.attr("data-top-center", "height: 0%");
   }
 
-  function initializeMolecule() {
+  function initializeRotatingRNA() {
     var moleculeFrameHeight = 722;
     var moleculeFrameWidth = 678;
     var moleculeFrameCount = 20;
@@ -181,55 +166,60 @@ function startHomepageScrollEffects() {
     }
   }
 
+  function getViewportHeight() {
+    return $(window).height();
+  }
+
+  function initializeWormLayers() {
+    var viewportHeight = getViewportHeight();
+
+    var layer1 = $("#gi .layer-1");
+    var layer2 = $("#gi .layer-2");
+    var layer3 = $("#gi .layer-3");
+
+    var scrollFactor1 = 2.0;
+    var scrollFactor2 = 1.0;
+    var scrollFactor3 = .5;
+
+    layer1.attr("data-bottom-top", "background-position: 0px 0px");
+    layer1.attr("data-top-bottom", "background-position: 0px -" +
+        viewportHeight * scrollFactor1 + "px");
+    layer2.attr("data-bottom-top", "background-position: 0px 0px");
+    layer2.attr("data-top-bottom", "background-position: 0px -" +
+        viewportHeight * scrollFactor2 + "px");
+    layer3.attr("data-bottom-top", "background-position: 0px 0px");
+    layer3.attr("data-top-bottom", "background-position: 0px -" +
+        viewportHeight * scrollFactor3 + "px");
+  }
+
   function createNetworkLayers() {
-    new Network($("#network .layer-3"), 200, 4, 1);
-    new Network($("#network .layer-2"), 100, 6, 1);
-    new Network($("#network .layer-1"), 50, 8, 2);
+    var viewportHeight = getViewportHeight();
+    var constant1 = 2.0;
+    var constant2 = 1.0;
+    var constant3 = .5;
+    var verticalOffset = viewportHeight / 2;
+    var networkHeight = viewportHeight * constant1 + 2*verticalOffset;
+    console.log(networkHeight);
+
+    var layer1 = $("#network .layer-1");
+    var layer2 = $("#network .layer-2");
+    var layer3 = $("#network .layer-3");
+
+    new Network(layer1, 50, 8, 2);
+    new Network(layer2, 100, 6, 1);
+    new Network(layer3, 200, 4, 1);
+
+    layer1.attr("data-bottom-top", "top: -" + verticalOffset + "px");
+    layer1.attr("data-top-bottom", "top: -" +
+        (verticalOffset + viewportHeight * constant1) + "px");
+    layer2.attr("data-bottom-top", "top: -" + verticalOffset + "px");
+    layer2.attr("data-top-bottom", "top: -" +
+        (verticalOffset + viewportHeight * constant2) + "px");
+    layer3.attr("data-bottom-top", "top: -" + verticalOffset + "px");
+    layer3.attr("data-top-bottom", "top: -" +
+        (verticalOffset + viewportHeight * constant3) + "px");
   }
 }
-
-Node = (function() {
-  function Node(context, radius, x, y, isHub) {
-    this.context = context;
-    this.radius = radius;
-    this.x = x;
-    this.y = y;
-    this.isHub = isHub;
-    this.color = "#FFEC8B";
-  }
-
-  Node.prototype.draw = function() {
-    this.context.fillStyle = this.color;
-    this.context.beginPath();
-    this.context.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
-    this.context.fill();
-  }
-
-  return Node;
-})();
-
-Edge = (function() {
-  function Edge(context, thickness, nodeA, nodeB) {
-    this.context = context;
-    this.thickness = thickness;
-    this.nodeA = nodeA;
-    this.nodeB = nodeB;
-    this.color = "#8B6969";
-    this.draw();
-  }
-
-  Edge.prototype.draw = function() {
-    this.context.strokeStyle = this.color;
-    this.context.lineWidth = this.thickness;
-
-    this.context.beginPath();
-    this.context.moveTo(this.nodeA.x, this.nodeA.y);
-    this.context.lineTo(this.nodeB.x, this.nodeB.y);
-    this.context.stroke();
-  }
-
-  return Edge;
-})();
 
 Network = (function() {
   function Network(canvasElement, numberOfNodes, nodeRadius, edgeThickness) {
@@ -296,4 +286,47 @@ Network = (function() {
   }
 
   return Network;
+})();
+
+Node = (function() {
+  function Node(context, radius, x, y, isHub) {
+    this.context = context;
+    this.radius = radius;
+    this.x = x;
+    this.y = y;
+    this.isHub = isHub;
+    this.color = "#FFEC8B";
+  }
+
+  Node.prototype.draw = function() {
+    this.context.fillStyle = this.color;
+    this.context.beginPath();
+    this.context.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
+    this.context.fill();
+  }
+
+  return Node;
+})();
+
+Edge = (function() {
+  function Edge(context, thickness, nodeA, nodeB) {
+    this.context = context;
+    this.thickness = thickness;
+    this.nodeA = nodeA;
+    this.nodeB = nodeB;
+    this.color = "#8B6969";
+    this.draw();
+  }
+
+  Edge.prototype.draw = function() {
+    this.context.strokeStyle = this.color;
+    this.context.lineWidth = this.thickness;
+
+    this.context.beginPath();
+    this.context.moveTo(this.nodeA.x, this.nodeA.y);
+    this.context.lineTo(this.nodeB.x, this.nodeB.y);
+    this.context.stroke();
+  }
+
+  return Edge;
 })();

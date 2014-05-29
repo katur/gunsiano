@@ -280,11 +280,10 @@ Network = (function() {
   }
 
   Network.prototype.setSkrollrSettings = function() {
-    this.canvasElement.attr("data-bottom-top",
-        "top: -" + this.verticalPadding + "px");
-    this.canvasElement.attr("data-top-bottom",
-        "top: -" + (this.verticalPadding +
-            this.viewportHeight * this.scrollFactor) + "px");
+    var bottomTop = this.verticalPadding;
+    var topBottom = bottomTop + this.viewportHeight * this.scrollFactor;
+    this.canvasElement.attr("data-bottom-top", "top: -" + bottomTop + "px");
+    this.canvasElement.attr("data-top-bottom", "top: -" + topBottom + "px");
   }
 
   return Network;

@@ -166,18 +166,14 @@ function startHomepageScrollEffects() {
     }
   }
 
-  function getViewportHeight() {
-    return $(window).height();
-  }
-
   function initializeWormLayers() {
-    var viewportHeight = getViewportHeight();
+    var viewportHeight = $(window).height();
 
     var layer1 = $("#gi .layer-1");
     var layer2 = $("#gi .layer-2");
     var layer3 = $("#gi .layer-3");
 
-    var scrollFactor1 = 2.0;
+    var scrollFactor1 = 1.5;
     var scrollFactor2 = 1.0;
     var scrollFactor3 = .5;
 
@@ -193,55 +189,47 @@ function startHomepageScrollEffects() {
   }
 
   function createNetworkLayers() {
-    var viewportHeight = getViewportHeight();
-    var constant1 = 2.0;
-    var constant2 = 1.0;
-    var constant3 = .5;
-    var verticalOffset = viewportHeight / 2;
-    var networkHeight = viewportHeight * constant1 + 2*verticalOffset;
-    console.log(networkHeight);
-
-    var layer1 = $("#network .layer-1");
-    var layer2 = $("#network .layer-2");
-    var layer3 = $("#network .layer-3");
-
-    new Network(layer1, 50, 8, 2);
-    new Network(layer2, 100, 6, 1);
-    new Network(layer3, 200, 4, 1);
-
-    layer1.attr("data-bottom-top", "top: -" + verticalOffset + "px");
-    layer1.attr("data-top-bottom", "top: -" +
-        (verticalOffset + viewportHeight * constant1) + "px");
-    layer2.attr("data-bottom-top", "top: -" + verticalOffset + "px");
-    layer2.attr("data-top-bottom", "top: -" +
-        (verticalOffset + viewportHeight * constant2) + "px");
-    layer3.attr("data-bottom-top", "top: -" + verticalOffset + "px");
-    layer3.attr("data-top-bottom", "top: -" +
-        (verticalOffset + viewportHeight * constant3) + "px");
+    new Network($("#network .layer-1"), 2.5, 60000, 8, 2);
+    new Network($("#network .layer-2"), 1.0, 30000, 6, 1);
+    new Network($("#network .layer-3"), .5, 15000, 4, 1);
   }
 }
 
 Network = (function() {
-  function Network(canvasElement, numberOfNodes, nodeRadius, edgeThickness) {
+  function Network(canvasElement, scrollFactor, pixelsPerNode, nodeRadius, edgeThickness) {
     this.canvasElement = canvasElement;
-    this.numberOfNodes = numberOfNodes;
+    this.scrollFactor = scrollFactor;
+    this.pixelsPerNode = pixelsPerNode;
     this.nodeRadius = nodeRadius;
     this.edgeThickness = edgeThickness;
-    this.nodes = [];
-    this.hubPercentage = 0.05;
-    this.hubOutgoingEdges = 20;
+
+    this.viewportHeight = $(window).height();
+    this.viewportWidth = $(window).width();
+    this.verticalPadding = this.viewportWidth * 0.2;
+    this.setDimensions();
 
     this.context = this.canvasElement.get(0).getContext("2d");
-    this.initializeDimensions();
     this.setContextCanvasDimensions();
+
+    this.nodes = [];
+    this.setNumberOfNodes();
     this.createNodes();
     this.createAndDrawEdges();
     this.drawNodes();
+    this.setSkrollrSettings();
   }
 
-  Network.prototype.initializeDimensions = function() {
+  Network.prototype.setDimensions = function() {
+    var divHeight = $("#network").height();
+    this.height = this.viewportHeight * (1 + this.scrollFactor) +
+        this.verticalPadding * 2;
+    console.log(this.height);
+    this.canvasElement.height(this.height);
+
+    // Canvas width set in css
     this.width = this.canvasElement.width();
-    this.height = this.canvasElement.height();
+
+    this.area = this.height * this.width;
   }
 
   Network.prototype.setContextCanvasDimensions = function() {
@@ -249,25 +237,31 @@ Network = (function() {
     this.context.canvas.height = this.height;
   }
 
+  Network.prototype.setNumberOfNodes = function() {
+    this.numberOfNodes = Math.floor(this.area / this.pixelsPerNode);
+  }
+
   Network.prototype.createNodes = function() {
+    var hubPercentage = 0.10;
     for (i = 0; i < this.numberOfNodes; i++) {
       var x = Math.floor(Math.random() * this.width);
       var y = Math.floor(Math.random() * this.height);
-      var isHub = Math.random() < this.hubPercentage;
+      var isHub = Math.random() < hubPercentage;
       var node = new Node(this.context, this.nodeRadius, x, y, isHub);
       this.nodes.push(node);
     }
   }
 
   Network.prototype.createAndDrawEdges = function() {
+    var hubOutgoingEdges = 15;
     for (i = 0; i < this.numberOfNodes; i++) {
       var node = this.nodes[i];
       if (node.isHub) {
-        for (j = 0; j < this.hubOutgoingEdges; j++) {
+        for (j = 0; j < hubOutgoingEdges; j++) {
           this.drawEdgeToAnotherNode(node);
         }
       } else {
-        this.drawEdgeToAnotherNode(node);
+        // this.drawEdgeToAnotherNode(node);
       }
     }
   }
@@ -276,13 +270,21 @@ Network = (function() {
     var otherNodeIndex = Math.floor(Math.random() * this.numberOfNodes);
     var otherNode = this.nodes[otherNodeIndex];
     var edge = new Edge(this.context, this.edgeThickness, node, otherNode);
-  },
+  }
 
   Network.prototype.drawNodes = function() {
     for (i = 0; i < this.numberOfNodes; i++) {
       var node = this.nodes[i];
       node.draw();
     }
+  }
+
+  Network.prototype.setSkrollrSettings = function() {
+    this.canvasElement.attr("data-bottom-top",
+        "top: -" + this.verticalPadding + "px");
+    this.canvasElement.attr("data-top-bottom",
+        "top: -" + (this.verticalPadding +
+            this.viewportHeight * this.scrollFactor) + "px");
   }
 
   return Network;

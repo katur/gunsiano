@@ -14,10 +14,7 @@ function expandResearchAreaHeight() {
   researchAreas.each(function() {
     var currentArea = $(this);
     if (currentArea.height() < minHeight) {
-      console.log($(this));
-      console.log(currentArea.height());
       currentArea.height(minHeight);
-      console.log(currentArea.height());
     }
   });
 }
@@ -133,17 +130,37 @@ function startWormAnimation() {
 }
 
 function startHomepageScrollEffects() {
-  rotateMolecule();
-  new Network($("#network .layer-3"), 200, 4, 1);
-  new Network($("#network .layer-2"), 100, 6, 1);
-  new Network($("#network .layer-1"), 50, 8, 2);
+  initializeWormLayers();
+  initializeMolecule();
+  createNetworkLayers();
 
   skrollr.init({
     smoothScrolling: false,
     forceHeight: false
   });
 
-  function rotateMolecule() {
+  function initializeWormLayers() {
+    var layer1 = $("#gi .layer-1");
+    var layer2 = $("#gi .layer-2");
+    var layer3 = $("#gi .layer-3");
+
+    var viewportHeight = $(window).height();
+    var constant1 = 2.0;
+    var constant2 = 1.0;
+    var constant3 = .5;
+
+    layer1.attr("data-bottom-top", "background-position:0px 0px");
+    layer1.attr("data-top-bottom",
+        "background-position:0px -" + viewportHeight * constant1 + "px");
+    layer2.attr("data-bottom-top", "background-position:0px 0px");
+    layer2.attr("data-top-bottom",
+        "background-position:0px -" + viewportHeight * constant2 + "px");
+    layer3.attr("data-bottom-top", "background-position:0px 0px");
+    layer3.attr("data-top-bottom",
+        "background-position:0px -" + viewportHeight * constant3 + "px");
+  }
+
+  function initializeMolecule() {
     var moleculeFrameHeight = 722;
     var moleculeFrameWidth = 678;
     var moleculeFrameCount = 20;
@@ -162,6 +179,12 @@ function startHomepageScrollEffects() {
       molecule.attr("data--" +  (step * i) + "p-bottom-top",
           "background-position:!" + spritePosition + "px 0px");
     }
+  }
+
+  function createNetworkLayers() {
+    new Network($("#network .layer-3"), 200, 4, 1);
+    new Network($("#network .layer-2"), 100, 6, 1);
+    new Network($("#network .layer-1"), 50, 8, 2);
   }
 }
 

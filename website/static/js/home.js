@@ -259,7 +259,7 @@ Network = (function() {
   }
 
   Network.prototype.createAndDrawEdges = function() {
-    var hubOutgoingEdges = 15;
+    var hubOutgoingEdges = 12;
     for (i = 0; i < this.numberOfNodes; i++) {
       var node = this.nodes[i];
       if (node.isHub) {

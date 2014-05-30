@@ -1,8 +1,12 @@
 $(document).ready(function() {
   if ($("body#home").length) {
-    console.log($("#evolution img").height());
     // expandResearchAreaHeight();
     startWormAnimation();
+  }
+})
+
+$(window).load(function() {
+  if ($("body#home").length) {
     startHomepageScrollEffects();
   }
 })
@@ -148,10 +152,10 @@ function startHomepageScrollEffects() {
     var mouseHeight = mouse.outerHeight();
     var startScroll = footerHeight + mouseDivHeight - mouseHeight;
     var endScroll = footerHeight;
-    console.log($("html").height());
 
     mouse.attr("data-start", "left: -100%");
-    mouse.attr("data-" + startScroll + "-end", "left: 0%");
+    mouse.attr("data-" + (startScroll+1) + "-end", "left: -100%");
+    mouse.attr("data-" + startScroll + "-end", "left: -10%");
     mouse.attr("data-" + endScroll + "-end", "left: 100%");
   }
 

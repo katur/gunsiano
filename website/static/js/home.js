@@ -1,5 +1,6 @@
 $(document).ready(function() {
   if ($("body#home").length) {
+    console.log($("#evolution img").height());
     // expandResearchAreaHeight();
     startWormAnimation();
     startHomepageScrollEffects();
@@ -133,11 +134,26 @@ function startHomepageScrollEffects() {
   initializePhylogenyMask();
   initializeRotatingRNA();
   createNetworkLayers();
+  initializeMouse();
 
   skrollr.init({
     smoothScrolling: false,
     forceHeight: false
   });
+
+  function initializeMouse() {
+    var footerHeight = $("#wrap-footer").outerHeight();
+    var mouseDivHeight = $("#mouse").outerHeight();
+    var mouse = $("#mouse #drawing");
+    var mouseHeight = mouse.outerHeight();
+    var startScroll = footerHeight + mouseDivHeight - mouseHeight;
+    var endScroll = footerHeight;
+    console.log($("html").height());
+
+    mouse.attr("data-start", "left: -100%");
+    mouse.attr("data-" + startScroll + "-end", "left: 0%");
+    mouse.attr("data-" + endScroll + "-end", "left: 100%");
+  }
 
   function initializePhylogenyMask() {
     var mask = $("#evolution #mask");

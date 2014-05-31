@@ -3,6 +3,10 @@ $(document).ready(function() {
   positionFooter();
 })
 
+$(window).load(function() {
+  positionFooter();
+})
+
 function setResizeHandler() {
   $(window).resize(function() {
     positionFooter();

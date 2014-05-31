@@ -2,6 +2,7 @@ $(document).ready(function() {
   if ($("body#home").length) {
     // expandResearchAreaHeight();
     startWormAnimation();
+    setScrollHandler();
   }
 })
 
@@ -11,18 +12,20 @@ $(window).load(function() {
   }
 })
 
-var previousScrollTop = 0;
-$(window).scroll(function(event){
-  var currentScrollTop = $(this).scrollTop();
-  var mouse = $("#mouse #drawing");
+function setScrollHandler() {
+  var previousScrollTop = 0;
+  $(window).scroll(function(event){
+    var currentScrollTop = $(this).scrollTop();
+    var mouse = $("#mouse #drawing");
 
-  if (currentScrollTop > previousScrollTop) {
-    mouse.addClass("scrollingDown");
-  } else {
-    mouse.removeClass("scrollingDown");
-  }
-  previousScrollTop = currentScrollTop;
-});
+    if (currentScrollTop > previousScrollTop) {
+      mouse.addClass("scrollingDown");
+    } else {
+      mouse.removeClass("scrollingDown");
+    }
+    previousScrollTop = currentScrollTop;
+  });
+}
 
 function expandResearchAreaHeight() {
   var width = $(document).width();

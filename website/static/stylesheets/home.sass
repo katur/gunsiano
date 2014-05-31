@@ -106,15 +106,24 @@ body#home
         margin: 0 5%
 
         video
-          width: 100%
-
-        // Help obscure the almost-black rectangular background of video
-        #video-gradient-overlay
           position: absolute
           top: 0
           left: 0
           width: 100%
-          height: 100%
+
+        &:after
+          content: ''
+          display: block
+          position: absolute
+          top: 0
+          left: 0
+          width: 100%
+
+          // Set aspect ratio according to video's width
+          // (css loads before video, helping skrollr effects position
+          // properly)
+          padding-top: 76.8%
+
           background: -moz-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 21%, rgba(0, 0, 0, 1) 100%)
           // FF3.6+
           background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(21%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 1)))

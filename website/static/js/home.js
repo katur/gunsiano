@@ -11,6 +11,19 @@ $(window).load(function() {
   }
 })
 
+var previousScrollTop = 0;
+$(window).scroll(function(event){
+  var currentScrollTop = $(this).scrollTop();
+  var mouse = $("#mouse #drawing");
+
+  if (currentScrollTop > previousScrollTop) {
+    mouse.addClass("scrollingDown");
+  } else {
+    mouse.removeClass("scrollingDown");
+  }
+  previousScrollTop = currentScrollTop;
+});
+
 function expandResearchAreaHeight() {
   var width = $(document).width();
   var minHeight = width / 4;
@@ -145,24 +158,37 @@ function startHomepageScrollEffects() {
     forceHeight: false
   });
 
-  function initializeMouse() {
-    var footerHeight = $("#wrap-footer").outerHeight();
-    var mouseDivHeight = $("#mouse").outerHeight();
-    var mouse = $("#mouse #drawing");
-    var mouseHeight = mouse.outerHeight();
-    var startScroll = footerHeight + mouseDivHeight - mouseHeight;
-    var endScroll = footerHeight;
-
-    mouse.attr("data-start", "left: -100%");
-    mouse.attr("data-" + (startScroll+1) + "-end", "left: -100%");
-    mouse.attr("data-" + startScroll + "-end", "left: -10%");
-    mouse.attr("data-" + endScroll + "-end", "left: 100%");
-  }
-
   function initializePhylogenyMask() {
     var mask = $("#evolution #mask");
     mask.attr("data-center-top", "height: 100%");
     mask.attr("data-top-center", "height: 0%");
+  }
+
+  function initializeMouse() {
+    var footerHeight = $("#wrap-footer").outerHeight();
+    var mouseDivHeight = $("#mouse").outerHeight();
+    var mouseWrapper = $("#mouse #drawing-wrapper");
+    var mouseHeight = mouseWrapper.outerHeight();
+    var startScroll = footerHeight + mouseDivHeight - mouseHeight;
+    var endScroll = footerHeight;
+
+    mouseWrapper.attr("data-start", "left: -100%");
+    mouseWrapper.attr("data-" + (startScroll+1) + "-end", "left: -100%");
+
+    mouseWrapper.attr("data-" + startScroll + "-end", "left: -100%");
+    mouseWrapper.attr("data-" + endScroll + "-end", "left: 100%");
+    var mouse = $("#mouse #drawing");
+    var numberOfSteps = 20;
+    var stepSize = (startScroll - endScroll) / numberOfSteps;
+    for (var i = 0; i < numberOfSteps; i++) {
+      var scrollDistance = endScroll + i * stepSize;
+      var position = 0;
+      if (i % 2) {
+        position = -380;
+      }
+      mouse.attr("data-" + scrollDistance + "-end",
+          "background-position:!" + position + "px 0px");
+    }
   }
 
   function initializeRotatingRNA() {

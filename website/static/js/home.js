@@ -181,7 +181,7 @@ function startHomepageScrollEffects() {
     mouseWrapper.attr("data-" + startScroll + "-end", "left: -100%");
     mouseWrapper.attr("data-" + endScroll + "-end", "left: 100%");
     var mouse = $("#mouse #drawing");
-    var numberOfSteps = 20;
+    var numberOfSteps = 40;
     var stepSize = (startScroll - endScroll) / numberOfSteps;
     for (var i = 0; i < numberOfSteps; i++) {
       var scrollDistance = endScroll + i * stepSize;

@@ -76,6 +76,21 @@ class Resource(models.Model):
         return self.name
 
 
+class Publication(models.Model):
+    pubmed_id = models.IntegerField(null=True, blank=True)
+    title = models.TextField(blank=True)
+    authors = models.TextField(blank=True)
+    journal = models.CharField(max_length="200", blank=True)
+    date = models.CharField(max_length="30", blank=True)
+    details = models.CharField(max_length="50", blank=True)
+
+    class Meta:
+        ordering = ['date']
+
+    def __unicode__(self):
+        return self.title
+
+
 class JoinLabSection(models.Model):
     title = models.CharField(max_length=100, unique=True)
     description = models.TextField('Description', help_text=MARKDOWN_PROMPT)

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from website.models import (JoinLabSection, Position, ResearchArea, Resource,
-                            UserProfile)
+                            Publication, UserProfile)
 
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -71,6 +71,14 @@ class ResourceAdmin(admin.ModelAdmin):
     )
 
 
+class PublicationAdmin(admin.ModelAdmin):
+    list_display = (
+        '__unicode__',
+        'pubmed_id',
+        'date',
+    )
+
+
 class JoinLabSectionAdmin(admin.ModelAdmin):
     list_display = (
         '__unicode__',
@@ -82,4 +90,5 @@ admin.site.register(JoinLabSection, JoinLabSectionAdmin)
 admin.site.register(Position, PositionAdmin)
 admin.site.register(ResearchArea, ResearchAreaAdmin)
 admin.site.register(Resource, ResourceAdmin)
+admin.site.register(Publication, PublicationAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)

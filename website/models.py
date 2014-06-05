@@ -77,12 +77,13 @@ class Resource(models.Model):
 
 
 class Publication(models.Model):
-    pubmed_id = models.IntegerField(null=True, blank=True)
+    pubmed_id = models.PositiveIntegerField(null=True, blank=True)
     title = models.TextField(blank=True)
     authors = models.TextField(blank=True)
-    journal = models.CharField(max_length="200", blank=True)
-    date = models.CharField(max_length="30", blank=True)
-    details = models.CharField(max_length="50", blank=True)
+    abstract = models.TextField(blank=True)
+    journal = models.CharField(max_length=100, blank=True)
+    date = models.CharField(max_length=30, blank=True)
+    detail = models.CharField(max_length=60, blank=True)
 
     class Meta:
         ordering = ['date']

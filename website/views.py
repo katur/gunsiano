@@ -108,14 +108,16 @@ def publications(request):
     xml_file = urllib2.urlopen('http://www.ncbi.nlm.nih.gov/entrez/eutils/'
                                'erss.cgi?rss_guid=1F3_IGFYOIa3jmjM-4W8qYch'
                                'jpJ613StRRzY4QE3ij-y6rvQ_H')
-    # NOTE: below used to work; not sure why they stopped
+    # NOTE: all below used to work; not sure why they broke
     # xml_file = urllib2.urlopen('http://www.ncbi.nlm.nih.gov/entrez/eutils/'
     #                           'erss.cgi?rss_guid=12Wu35auLMyC-bw6heubsB4Aa'
     #                           '1vq6MH4xOLj1ILBD4Wimwikba')
-    # xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/"
-    #   "erss.cgi?rss_guid=18qVEVbjJjoq2mO-bQKE6E_-D4pje3l2O5Jd1cFE70SdwIYw_1")
-    # xml_file = urllib2.urlopen("http://www.ncbi.nlm.nih.gov/entrez/eutils/"
-    #   "erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTatLAIvtPsS641znyxpiAdx0xgXy")
+    # xml_file = urllib2.urlopen('http://www.ncbi.nlm.nih.gov/entrez/eutils/'
+    #                            'erss.cgi?rss_guid=18qVEVbjJjoq2mO-bQKE6E_-'
+    #                            'D4pje3l2O5Jd1cFE70SdwIYw_1')
+    # xml_file = urllib2.urlopen('http://www.ncbi.nlm.nih.gov/entrez/eutils/'
+    #                            'erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTa'
+    #                            'tLAIvtPsS641znyxpiAdx0xgXy')
 
     def italicize_all_species(text):
         # Add here if new publications mention new species

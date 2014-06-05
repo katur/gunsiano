@@ -115,6 +115,7 @@ def publications(request):
             re_terms.append(get_species_re(*s))
 
         # Add any other terms to italicize (e.g. genus only cases)
+        re_terms.append(r'Caenorhabditis')
         re_terms.append(r'Protorhabditis')
         re_terms.append(r'Drosophila')
 

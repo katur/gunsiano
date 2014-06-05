@@ -26,6 +26,10 @@ class Command(BaseCommand):
         xml_filepath = args[0]
         tree = ET.parse(xml_filepath)
         root = tree.getroot()
+        recorded_publications = Publication.objects.all()
+        recorded_pubmed_ids = set()
+        for publication in recorded_publications:
+            recorded_pubmed_ids.add(publication.pubmed_id)
 
         for publication in root.iter('item'):
             title = publication.find('title').text
@@ -53,11 +57,16 @@ class Command(BaseCommand):
 
             abstract = description.split('<p>Abstract<br/>')
             if len(abstract) > 1:
-                abstract = abstract[1].split('<br/>')[0].strip()
+                abstract = abstract[1]
+                abstract = abstract.split('</p>')[0].strip()
+                abstract = abstract.rpartition('<br/>')[0].strip()
             else:
                 abstract = ''
 
-            entry = Publication(pubmed_id=pubmed_id, title=title, authors=authors,
-                                abstract=abstract, journal=journal, date=date,
+            entry = Publication(pubmed_id=pubmed_id, title=title,
+                                authors=authors, abstract=abstract,
+                                journal=journal, date=date,
                                 detail=journal_detail)
-            entry.save()
+
+            if pubmed_id not in recorded_pubmed_ids:
+                entry.save()

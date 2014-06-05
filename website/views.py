@@ -3,15 +3,13 @@ from __future__ import division
 from itertools import chain
 import math
 import re
-import urllib2
-import xml.etree.ElementTree as ET
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from website.models import (JoinLabSection, ResearchArea, Resource, User,
-                            UserProfile)
+from website.models import (JoinLabSection, ResearchArea, Resource,
+                            Publication, User, UserProfile)
 
 
 def home(request):
@@ -100,27 +98,11 @@ def resources(request):
 
 def publications(request):
     """
-    Page for publications, fetched dynamically from PubMed.
-    PubMed search term:
-    (Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author]) OR
-      (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author])
+    Publications page
     """
-    xml_file = urllib2.urlopen('http://www.ncbi.nlm.nih.gov/entrez/eutils/'
-                               'erss.cgi?rss_guid=1F3_IGFYOIa3jmjM-4W8qYch'
-                               'jpJ613StRRzY4QE3ij-y6rvQ_H')
-    # NOTE: all below used to work; not sure why they broke
-    # xml_file = urllib2.urlopen('http://www.ncbi.nlm.nih.gov/entrez/eutils/'
-    #                           'erss.cgi?rss_guid=12Wu35auLMyC-bw6heubsB4Aa'
-    #                           '1vq6MH4xOLj1ILBD4Wimwikba')
-    # xml_file = urllib2.urlopen('http://www.ncbi.nlm.nih.gov/entrez/eutils/'
-    #                            'erss.cgi?rss_guid=18qVEVbjJjoq2mO-bQKE6E_-'
-    #                            'D4pje3l2O5Jd1cFE70SdwIYw_1')
-    # xml_file = urllib2.urlopen('http://www.ncbi.nlm.nih.gov/entrez/eutils/'
-    #                            'erss.cgi?rss_guid=1v9I1sARILc4F30I7IyGwVTa'
-    #                            'tLAIvtPsS641znyxpiAdx0xgXy')
+    publications = Publication.objects.all()
 
     def italicize_all_species(text):
-        # Add here if new publications mention new species
         species = (
             ('C', 'elegans'),
             ('C', 'briggsae'),
@@ -143,30 +125,17 @@ def publications(request):
             text = italicize(s, text)
         return text
 
-    pub_kris = []
-    pub_fabio = []
-    pub_both = []
-
-    tree = ET.parse(xml_file)
-    root = tree.getroot()
-    for publication in root.iter('item'):
-        text = publication.find('description').text
-        text = italicize_all_species(text)
-        if 'Piano F' in text:
-            text = embolden('Piano F', text)
-            pub_fabio.append(publication)
-        if 'Gunsalus K' in text:
-            text = embolden('Gunsalus K', text)
-            text = embolden('Gunsalus KC', text)
-            pub_kris.append(publication)
-
-        publication.description = text
-        pub_both.append(publication)
+    for publication in publications:
+        publication.title = italicize_all_species(publication.title)
+        publication.abstract = italicize_all_species(publication.abstract)
+        if 'Piano F' in publication.authors:
+            publication.authors = embolden('Piano F', publication.authors)
+        if 'Gunsalus K' in publication.authors:
+            publication.authors = embolden('Gunsalus KC', publication.authors)
+            publication.authors = embolden('Gunsalus K', publication.authors)
 
     template_dictionary = {
-        'pub_kris': pub_kris,
-        'pub_fabio': pub_fabio,
-        'pub_both': pub_both,
+        'publications': publications,
     }
     return render_to_response('publications.html', template_dictionary,
                               context_instance=RequestContext(request))

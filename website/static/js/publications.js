@@ -1,6 +1,6 @@
 $(document).ready(function() {
   if (("body#publications").length) {
-    togglePublications();
+    // togglePublications();
   }
 })
 

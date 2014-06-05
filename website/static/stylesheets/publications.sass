@@ -1,25 +1,37 @@
 #publications
-  #pub-menu
-    margin-bottom: 15px
-
+  #submenu
     a
       margin-right: 50px
 
-  #pub-line
-    width: 100%
-    background: $gray-medium-dark
-    margin-left: 0
+    hr
+      width: 100%
+      background: $gray-medium-dark
+      margin-top: 15px
+      margin-left: 0
 
-  #pub-count
+  #count
     float: left
     margin: 20px 0 0 0
 
-  .pub-list
+  .publications
     float: left
-    font-size: 15px
     hr:last-child
       display: none
 
-  .publication
-    float: left
-    margin: 40px 0
+    .publication
+      float: left
+      margin: 40px 0
+
+      span
+        float: left
+        clear: both
+        margin-bottom: 10px
+
+        &.title
+          font-weight: bold
+
+        &.abstract
+          font-size: 15px
+
+        &:last-child
+          margin-bottom: 0

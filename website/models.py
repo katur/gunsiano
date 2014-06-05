@@ -86,10 +86,24 @@ class Publication(models.Model):
     detail = models.CharField(max_length=60, blank=True)
 
     class Meta:
-        ordering = ['date']
+        ordering = ['-date']
 
     def __unicode__(self):
         return self.title
+
+    def __str__(self):
+        return str(self.pubmed_id)
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __cmp__(self, other):
+        if self.pubmed_id < other.pubmed_id:
+            return -1
+        elif self.pubmed_id > other.pubmed_id:
+            return 1
+        else:
+            return 0
 
 
 class JoinLabSection(models.Model):

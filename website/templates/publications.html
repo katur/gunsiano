@@ -4,50 +4,31 @@
 {% block page_title %}Publications{% endblock %}
 
 {% block content %}
-<div id="pub-menu">
-  <a id="pub-both" class="active" href="#">Kris or Fabio</a>
-  <a id="pub-kris" href="#">Kris</a>
-  <a id="pub-fabio" href="#">Fabio</a>
-</div>
-
-<hr id="pub-line">
-
-<div id="pub-count">
-  <span class="pub-both count-both">
-    {{ pub_both|length }}
-  </span>
-  <span class="pub-kris invisible">
-    {{ pub_kris|length }}
-  </span>
-  <span class="pub-fabio invisible">
-    {{ pub_fabio|length }}
-  </span>
-  publications (pulled from
-  <a href="http://www.ncbi.nlm.nih.gov/pubmed">PubMed</a>)
-</div>
-
-<div class="pub-list pub-both">
-  {% for item in pub_both %}
-  <div class="publication">
-    {{ item.description|safe }}
-  </div>
+<div id="submenu">
+  <a>Kris or Fabio</a>
   <hr>
-  {% endfor %}
 </div>
 
-<div class="pub-list pub-kris invisible">
-  {% for item in pub_kris %}
-  <div class="publication">
-    {{ item.description|safe }}
-  </div>
-  <hr>
-  {% endfor %}
+<div id="count">
+  {{ publications|length }} publications
 </div>
 
-<div class="pub-list pub-fabio invisible">
-  {% for item in pub_fabio %}
+<div class="publications">
+  {% for publication in publications %}
   <div class="publication">
-    {{ item.description|safe }}
+    <span class="title">{{ publication.title|safe }}</span>
+    <span class="authors">{{ publication.authors|safe }}</span>
+    <span class="journal">
+      {{ publication.journal|safe }}.
+      {{ publication.date|safe }};
+      {{ publication.detail|safe }}.
+    </span>
+    <span class="abstract">{{ publication.abstract|safe }}</span>
+    <span class="pubmed">PubMed:
+      <a href="http://www.ncbi.nlm.nih.gov/pubmed/{{ publication.pubmed_id }}">
+        {{ publication.pubmed_id }}
+      </a>
+    </span>
   </div>
   <hr>
   {% endfor %}

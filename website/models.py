@@ -84,6 +84,7 @@ class Publication(models.Model):
     journal = models.CharField(max_length=100, blank=True)
     date = models.CharField(max_length=30, blank=True)
     detail = models.CharField(max_length=60, blank=True)
+    hidden = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-date']

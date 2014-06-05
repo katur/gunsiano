@@ -14,11 +14,9 @@ class Command(BaseCommand):
     instead hardcode our publications in a database.
 
     Search term used in PubMed:
-    (Piano F[Author]
-    NOT De Piano F[Author] NOT Del Piano F[Author])
+    (Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author])
     OR
-    (Gunsalus K[Author] OR Gunsalus KC[Author]
-    NOT GunsalusKT[Author]).
+    (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author]).
 
     Required some filtering afterward of additional Pianos and Gunsaluses
     """

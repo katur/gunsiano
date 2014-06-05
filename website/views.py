@@ -100,7 +100,7 @@ def publications(request):
     """
     Publications page
     """
-    publications = Publication.objects.all()
+    publications = Publication.objects.filter(hidden=False)
 
     def italicize_all_species(text):
         species = (

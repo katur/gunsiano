@@ -33,6 +33,7 @@ class UserProfile(models.Model):
     blurb = models.TextField('Blurb', help_text=MARKDOWN_PROMPT, blank=True)
 
     class Meta:
+        verbose_name = 'Profile'
         ordering = ['user__first_name', 'user__last_name']
 
     def __unicode__(self):

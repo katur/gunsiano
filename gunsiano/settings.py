@@ -13,7 +13,6 @@ except Exception as e:
     DATABASES = {}
     DATABASES['default'] = dj_database_url.config()
 
-
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

@@ -2,7 +2,6 @@
 from __future__ import division
 from itertools import chain
 import math
-import re
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
@@ -43,7 +42,7 @@ def lab_members(request):
     """
     Page listing all lab members
     """
-    # Order current lab members by position (for "group by" in template)
+    # Order current lab members by position (for 'group by' in template)
     current = (UserProfile.objects.all()
                .filter(user__is_active=True, is_current=True)
                .order_by('position__display_order', 'user__last_name',
@@ -101,39 +100,10 @@ def publications(request):
     Publications page
     """
     publications = Publication.objects.filter(hidden=False)
-
-    def italicize_all_species(text):
-        species = (
-            ('C', 'elegans'),
-            ('C', 'briggsae'),
-            ('S', 'cerevisiae'),
-            ('D', 'melanogaster'),
-            ('D', 'grimshawi'),
-        )
-        re_terms = []
-        for s in species:
-            re_terms.append(get_species_re(*s))
-
-        # Add any other terms to italicize (e.g. genus only cases)
-        re_terms.append(r'Caenorhabditis')
-        re_terms.append(r'Protorhabditis')
-        re_terms.append(r'Drosophila')
-
-        re_pattern = '|'.join(['{}' for t in re_terms])
-        re_net = re_pattern.format(*(tuple(re_terms)))
-        species_found = re.findall(re_net, text)
-        for s in species_found:
-            text = italicize(s, text)
-        return text
-
     for publication in publications:
-        publication.title = italicize_all_species(publication.title)
-        publication.abstract = italicize_all_species(publication.abstract)
-        if 'Piano F' in publication.authors:
-            publication.authors = embolden('Piano F', publication.authors)
-        if 'Gunsalus K' in publication.authors:
-            publication.authors = embolden('Gunsalus KC', publication.authors)
-            publication.authors = embolden('Gunsalus K', publication.authors)
+        publication.translate_html_br_to_markdown()
+        publication.embolden_PI_names()
+        publication.italicize_species_names()
 
     template_dictionary = {
         'publications': publications,
@@ -181,34 +151,3 @@ def lab_tools(request):
     """
     return render_to_response('lab_tools.html',
                               context_instance=RequestContext(request))
-
-
-def embolden(term, s):
-    """
-    Make bold for HTML all occurrences of 'term' in string 's'
-    """
-    return s.replace(term, '<b>{0}</b>'.format(term))
-
-
-def italicize(term, s):
-    """
-    Italicize for HTML all occurrences of 'term' in string 's'
-    """
-    return s.replace(term, '<i>{0}</i>'.format(term))
-
-
-def get_species_re(first_letter_genus, species):
-    """
-    Get a regular expression for a particular species from
-    the first letter of its genus and its exact species name.
-
-    For example, with arguments 'C' and 'elegans',
-    the resulting regex will match the common cases 'C. elegans'
-    and 'Caenorhabditis elegans'.
-    In addition, it will accommodate 'C elegans' (no period),
-    any number of lowercase letters directly following the 'C'
-    (e.g. misspelled 'Ceanorhabditis elegans'),
-    and repeated spaces directly preceding 'elegans'
-    (e.g. C.    elegans).
-    """
-    return r'{0}[\.a-z]*[ ]*{1}'.format(first_letter_genus, species)

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load extra_tags %}
 
 {% block body_id %}publications{% endblock %}
 {% block page_title %}Publications{% endblock %}
@@ -17,14 +18,14 @@
 <div class="publications">
   {% for publication in publications %}
   <div class="publication">
-    <span class="title">{{ publication.title|safe }}</span>
-    <span class="authors">{{ publication.authors|safe }}</span>
+    <span class="title">{{ publication.title|enhanced_markdown }}</span>
+    <span class="authors">{{ publication.authors|enhanced_markdown }}</span>
     <span class="journal">
-      {{ publication.journal|safe }}.
-      {{ publication.date|safe }};
-      {{ publication.detail|safe }}.
+      {{ publication.journal }}.
+      {{ publication.date }};
+      {{ publication.detail }}.
     </span>
-    <span class="abstract">{{ publication.abstract|safe }}</span>
+    <span class="abstract">{{ publication.abstract|enhanced_markdown }}</span>
     <span class="pubmed">PubMed:
       <a href="http://www.ncbi.nlm.nih.gov/pubmed/{{ publication.pubmed_id }}">
         {{ publication.pubmed_id }}

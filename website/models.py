@@ -1,3 +1,5 @@
+import re
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -22,7 +24,7 @@ class UserProfile(models.Model):
     # True for Abu Dhabi, False for NYC, null for both
     in_abu_dhabi = models.NullBooleanField()
 
-    # Whether to show as current on Lab Members page
+    # Whether to show as 'current' on Lab Members page
     is_current = models.BooleanField(default=True)
 
     net_id = models.CharField(max_length=25, blank=True)
@@ -85,6 +87,43 @@ class Publication(models.Model):
     date = models.CharField(max_length=30, blank=True)
     detail = models.CharField(max_length=60, blank=True)
     hidden = models.BooleanField(default=False)
+
+    def translate_html_br_to_markdown(self):
+        html_line_break_tags = ('<br>', '<br/>')
+        for tag in html_line_break_tags:
+            self.abstract = self.abstract.replace(tag, '  ')
+
+    def embolden_PI_names(self):
+        def embolden(term, s):
+            return s.replace(term, '**{0}**'.format(term))
+
+        if 'Piano F' in self.authors:
+            self.authors = embolden('Piano F', self.authors)
+
+        if 'Gunsalus KC' in self.authors:
+            self.authors = embolden('Gunsalus KC', self.authors)
+        elif 'Gunsalus K' in self.authors:
+            self.authors = embolden('Gunsalus K', self.authors)
+
+    def italicize_species_names(self):
+        terms = (
+            'Caenorhabditis elegans',
+            'Caenorhabditis briggsae',
+            'Caenorhabditis',
+            'C. elegans',
+            'C. briggsae',
+            'Protorhabditis',
+            'S. cerevisiae',
+            'Drosophila melanogaster',
+            'Drosophila grimshawi',
+            'Drosophila',
+            'D. melanogaster',
+            'D. grimshawi',
+        )
+        skeleton = '|'.join(['{}' for term in terms])
+        pattern = skeleton.format(*terms)
+        self.abstract = re.sub(pattern, '*\g<0>*', self.abstract)
+        self.title = re.sub(pattern, '*\g<0>*', self.title)
 
     class Meta:
         ordering = ['-date']

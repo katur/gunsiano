@@ -12,6 +12,7 @@ class Position(models.Model):
 
     class Meta:
         ordering = ['display_order', 'position']
+        verbose_name_plural = 'lab member positions'
 
     def __unicode__(self):
         return self.position
@@ -33,11 +34,16 @@ class UserProfile(models.Model):
     blurb = models.TextField('Blurb', help_text=MARKDOWN_PROMPT, blank=True)
 
     class Meta:
-        verbose_name = 'Profile'
         ordering = ['user__first_name', 'user__last_name']
 
     def __unicode__(self):
         return self.user.get_full_name()
+
+    def __str__(self):
+        return self.__unicode__()
+
+    def __repr__(self):
+        return self.__str__()
 
     def get_first_name(self):
         return self.user.first_name
@@ -60,6 +66,7 @@ class ResearchArea(models.Model):
 
     class Meta:
         ordering = ['name']
+        verbose_name_plural = 'research area blurbs'
 
     def __unicode__(self):
         return self.name

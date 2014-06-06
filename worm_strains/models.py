@@ -13,6 +13,7 @@ class WormSpecies(models.Model):
 
     class Meta:
         ordering = ['name']
+        verbose_name_plural = 'worm species'
 
     def __unicode__(self):
         return self.name

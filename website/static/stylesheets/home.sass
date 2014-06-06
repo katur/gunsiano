@@ -22,9 +22,7 @@ body#home
     background-image: url("../images/world.jpg")
 
     canvas
-      -webkit-transform: rotate(10deg)
-      -moz-transform: rotate(10deg)
-      -ms-transform: rotate(10deg)
+      @include transform(rotate(10deg))
       position: absolute
       top: 0
       left: 0

@@ -8,7 +8,7 @@ from gunsiano.settings import MARKDOWN_PROMPT
 
 class Position(models.Model):
     position = models.CharField(max_length=50)
-    display_order = models.PositiveSmallIntegerField(unique=True)
+    display_order = models.PositiveSmallIntegerField()
 
     class Meta:
         ordering = ['display_order']
@@ -66,7 +66,7 @@ class ResearchArea(models.Model):
 
 class Resource(models.Model):
     name = models.CharField(max_length=40, unique=True)
-    display_order = models.PositiveSmallIntegerField(unique=True)
+    display_order = models.PositiveSmallIntegerField()
     logo_filename = models.CharField(max_length=50, blank=True)
     url = models.CharField(max_length=100, blank=True)
     description = models.TextField('Description', help_text=MARKDOWN_PROMPT)
@@ -149,7 +149,7 @@ class Publication(models.Model):
 class JoinLabSection(models.Model):
     title = models.CharField(max_length=100, unique=True)
     description = models.TextField('Description', help_text=MARKDOWN_PROMPT)
-    display_order = models.PositiveSmallIntegerField(unique=True)
+    display_order = models.PositiveSmallIntegerField()
 
     class Meta:
         ordering = ['display_order']

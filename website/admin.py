@@ -15,6 +15,11 @@ class UserProfileAdmin(admin.ModelAdmin):
         'in_abu_dhabi',
     )
 
+    list_editable = (
+        'is_current',
+        'in_abu_dhabi',
+    )
+
     list_filter = (
         'is_current',
         'in_abu_dhabi',
@@ -56,6 +61,10 @@ class PositionAdmin(admin.ModelAdmin):
         'display_order',
     )
 
+    list_editable = (
+        'display_order',
+    )
+
 
 class ResearchAreaAdmin(admin.ModelAdmin):
     list_display = (
@@ -67,6 +76,10 @@ class ResourceAdmin(admin.ModelAdmin):
     list_display = (
         '__unicode__',
         'url',
+        'display_order',
+    )
+
+    list_editable = (
         'display_order',
     )
 
@@ -82,6 +95,10 @@ class PublicationAdmin(admin.ModelAdmin):
 class JoinLabSectionAdmin(admin.ModelAdmin):
     list_display = (
         '__unicode__',
+        'display_order',
+    )
+
+    list_editable = (
         'display_order',
     )
 

@@ -45,7 +45,7 @@ def lab_members(request):
     # Order current lab members by position (for 'group by' in template)
     current = (UserProfile.objects.all()
                .filter(user__is_active=True, is_current=True)
-               .order_by('position__display_order', 'user__last_name',
+               .order_by('position', 'user__last_name',
                          'user__first_name'))
     former = (UserProfile.objects.all()
               .filter(user__is_active=True, is_current=False)

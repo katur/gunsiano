@@ -11,7 +11,7 @@ class Position(models.Model):
     display_order = models.PositiveSmallIntegerField()
 
     class Meta:
-        ordering = ['display_order']
+        ordering = ['display_order', 'position']
 
     def __unicode__(self):
         return self.position

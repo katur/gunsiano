@@ -9,13 +9,14 @@ class UserProfileAdmin(admin.ModelAdmin):
         '__unicode__',
         'user',
         'net_id',
-        'url',
+        'position',
         'image_filename',
         'is_current',
         'in_abu_dhabi',
     )
 
     list_editable = (
+        'position',
         'is_current',
         'in_abu_dhabi',
     )

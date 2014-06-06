@@ -15,12 +15,6 @@ class UserProfileAdmin(admin.ModelAdmin):
         'in_abu_dhabi',
     )
 
-    list_editable = (
-        'position',
-        'is_current',
-        'in_abu_dhabi',
-    )
-
     list_filter = (
         'is_current',
         'in_abu_dhabi',

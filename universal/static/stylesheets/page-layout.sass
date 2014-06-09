@@ -1,3 +1,4 @@
+$vertical-window-padding: 12px
 html, body
   min-width: 100%
   margin: 0
@@ -6,11 +7,32 @@ html, body
   width: 100%
   clear: both
   float: left
-  min-width: 1000px
 
 #wrap-content
-  padding: $content-top-padding 0 $content-bottom-padding 0
+  padding: 60px 0 $content-bottom-padding 0
 
-#header, #content, #footer
-  width: $site-width
+#wrap-footer
+  padding: 0 0 $vertical-window-padding 0
+
+#wrap-header
+  padding: $vertical-window-padding 0 $vertical-window-padding 0
+
+#header, #footer
+  width: 100% - $window-margin * 2
+  margin-left: $window-margin
+  margin-right: $window-margin
+
+#content
   margin: 0 auto
+  width: $content-width-static
+  @media (max-width: $content-width-static)
+    width: $content-width-dynamic
+
+body#home
+  #content
+    width: 100%
+    @media (max-width: $content-width-static)
+      width: 100%
+
+  #wrap-content
+    padding-bottom: 0

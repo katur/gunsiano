@@ -1,3 +1,6 @@
+$logo-width: 160px
+$resource-description-width: 700px
+
 #resources
   #resource-list
     a
@@ -5,8 +8,8 @@
 
     .resource
       float: left
-      width: 90%
-      padding: 5%
+      width: 92%
+      padding: 4%
       margin-bottom: -1px
       margin-top: -1px
       border: 1px solid transparent
@@ -23,11 +26,19 @@
       img
         float: left
         padding: 0
-        width: 160px
+        width: $logo-width
+        @media (max-width: $content-width-static)
+          position: relative
+          left: 50%
+          margin-left: $logo-width / -2
 
       span
         float: right
-        width: 692px
+        width: $resource-description-width
+        @media (max-width: $content-width-static)
+          float: left
+          width: 100%
+          padding-top: $vertical-subsection-whitespace
 
   hr:last-child
     display: none

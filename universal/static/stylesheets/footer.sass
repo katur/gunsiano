@@ -1,22 +1,30 @@
+$vertical-footer-padding: 15px
 #wrap-footer
-  padding: 15px 0 12px 0
   background: $gray-light
-  font-size: 14px
-  color: $gray-dark
-  line-height: 1.3
   border-top: 1px solid $gray-medium-light
 
-  #copyright
-    float: left
+  #footer
+    font-size: $small-font
+    color: $gray-dark
+    line-height: 1.3
 
-    span
+    #copyright
       float: left
-      clear: both
-      padding: 10px 0
+      padding-top: $vertical-footer-padding
+      span
+        padding-top: $vertical-footer-padding
+        float: left
+        clear: both
+      @media (max-width: $small-window-width)
+        padding-top: 0
 
-  #logos
-    float: right
-
-    img
-      float: left
-      margin-left: 40px
+    #logos
+      float: right
+      a
+        padding-top: $vertical-footer-padding
+        float: left
+        margin-right: 40px
+        &:last-child
+          margin-right: 0
+      @media (max-width: $small-window-width)
+        float: left

@@ -4,46 +4,7 @@
 
   <body id="{% block body_id %}{% endblock %}">
     <div id="wrap-header">
-      <div id="header" class="clearfix">
-
-        <!-- Site Title -->
-        <h1>
-          <a href="{% url 'home_url' %}">Gunsalus and Piano Labs</a>
-        </h1>
-
-        <!-- Login/Internal Links -->
-        <div id="login">
-          {% url 'lab_tools_url' as lab_tools_url %}
-          {% if user.is_authenticated %}
-          <a href="{% url 'logout_url' %}">Logout</a>
-          <a href="{{ lab_tools_url }}"
-              {% ifequal request.path lab_tools_url %}
-              class="active"
-              {% endifequal %}>
-            Lab Tools
-          </a>
-          <a href="{% url 'admin:index' %}">Admin</a>
-
-          {% else %}
-          {% url 'login_url' as login_url %}
-          <a href="{{ login_url }}"
-              {% ifequal request.path login_url %}
-              class="active"
-              {% endifequal %}>
-            Login
-          </a>
-
-          {% endif %}
-        </div>
-
-        <!-- Subtitle -->
-        <span class="subtitle">
-          at New York University's Center for Genomics and Systems Biology
-        </span>
-
-        <!-- Menu -->
-        {% include "menu.html" %}
-      </div>
+      {% include "header.html" %}
     </div>
 
     <div id="wrap-content">

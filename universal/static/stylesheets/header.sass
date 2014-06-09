@@ -5,35 +5,30 @@
   background: black
 
 #header
-  padding-top: 20px
-
-  h1
+  #site-title
     float: left
     clear: none
-    line-height: 1.2
-    font-size: 36px
-
+    height: 100%
     a, a:hover
       color: white
-    text-decoration: none
 
-  &:hover
-    color: $green
-
-  #login
+  #site-menu
     float: right
-    clear: none
-    font-size: 13px
-
+    margin-top: 5px
     a
       float: left
-      clear: both
+      margin-right: 30px
+      margin-top: 5px
 
-  #menu
-    float: left
-    font-size: 18px
-    padding: 20px 0
-
-    a
-      margin-right: 36px
+    #login
+      background: $purple
+      font-size: $small-font
+      padding: 5px
       float: left
+      a
+        margin-right: 15px
+        margin-top: 0
+        &:last-child
+          margin-right: 0px
+        &:hover, &.active
+          color: $gray-very-light

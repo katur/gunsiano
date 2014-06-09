@@ -1,15 +1,4 @@
 #publications
-  #submenu
-    a
-      margin-right: 50px
-
-    hr
-      width: 100%
-      background: $gray-medium-dark
-      margin-top: 15px
-      margin-left: 0
-      margin-bottom: 20px
-
   #count
     float: left
 
@@ -20,7 +9,7 @@
 
     .publication
       float: left
-      margin: 40px 0
+      margin: $vertical-section-whitespace 0
 
       span
         float: left
@@ -31,7 +20,9 @@
           font-weight: bold
 
         &.abstract
-          font-size: 15px
+          font-size: 16px
+          @media (max-width: $tiny-window-width)
+            font-size: 15px
 
         &:last-child
           margin-bottom: 0

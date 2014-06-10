@@ -19,6 +19,14 @@ body
     font-size: 18px
   @media (max-width: $tiny-window-width)
     font-size: 17px
+  h3
+    font-size: 19px
+    @media (max-width: $medium-window-width)
+      font-size: 18px
+    @media (max-width: $small-window-width)
+      font-size: 17px
+    @media (max-width: $tiny-window-width)
+      font-size: 16px
 
 i, em
   font-style: italic
@@ -51,9 +59,15 @@ h2
       float: left
 
 h3
+  font-size: 16px
+  @media (max-width: $medium-window-width)
+    font-size: 17px
+  @media (max-width: $small-window-width)
+    font-size: 15px
+  @media (max-width: $tiny-window-width)
+    font-size: 13px
   text-transform: uppercase
   letter-spacing: 1px
-  font-size: 15px
   margin-bottom: $vertical-subsection-whitespace
 
 h4

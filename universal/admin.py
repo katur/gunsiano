@@ -45,10 +45,6 @@ class MyUserAdmin(UserAdmin):
         'last_name',
         'username',
         'email',
-        'is_active',
-        'is_staff',
-        'has_personnel_admin_privileges',
-        'is_superuser',
     )
 
     ordering = (

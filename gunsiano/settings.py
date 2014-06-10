@@ -130,7 +130,7 @@ LOGGING = {
 }
 
 MARKDOWN_PROMPT = (
-    'Use Markdown syntax. See '
+    'Use Markdown syntax in order to add italics, bullets, etc. See '
     '<a href="http://www.darkcoding.net/software/markdown-quick-reference">'
     'a quick reference</a>, '
     '<a href="http://www.markdowntutorial.com/">a tutorial</a>, '

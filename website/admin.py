@@ -35,9 +35,10 @@ class ResourceAdmin(admin.ModelAdmin):
 
 class PublicationAdmin(admin.ModelAdmin):
     list_display = (
-        '__unicode__',
         'pubmed_id',
+        'title',
         'date',
+        'hidden',
     )
 
 

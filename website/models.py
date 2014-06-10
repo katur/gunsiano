@@ -28,10 +28,14 @@ class UserProfile(models.Model):
     # Whether to show as 'current' on Lab Members page
     is_current = models.BooleanField(default=True)
 
-    net_id = models.CharField(max_length=25, blank=True)
-    url = models.URLField(blank=True)
+    net_id = models.CharField('NYU NetID', max_length=25, blank=True)
+    url = models.URLField('Personal website URL', help_text='Your public'
+                          ' profile will redirect to this URL if your blurb'
+                          ' is empty.',
+                          blank=True)
     image_filename = models.CharField(max_length=100, blank=True)
-    blurb = models.TextField('Blurb', help_text=MARKDOWN_PROMPT, blank=True)
+    blurb = models.TextField('Blurb about yourself',
+                             help_text=MARKDOWN_PROMPT, blank=True)
 
     class Meta:
         ordering = ['user__first_name', 'user__last_name']
@@ -94,7 +98,7 @@ class Publication(models.Model):
     journal = models.CharField(max_length=100, blank=True)
     date = models.CharField(max_length=30, blank=True)
     detail = models.CharField(max_length=60, blank=True)
-    hidden = models.BooleanField(default=False)
+    hidden = models.BooleanField('Hide?', default=False)
 
     def translate_html_br_to_markdown(self):
         html_line_break_tags = ('<br>', '<br/>')

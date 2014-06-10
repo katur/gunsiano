@@ -18,5 +18,15 @@
   <img src="{{ STATIC_URL }}images/lab_members/{{ member.userprofile.image_filename }}"
       alt="profile pic for this lab member"/>
   {% endif %}
+
+  <!--
+  {% if member.userprofile.url %}
+  <span>
+    <a class="external-link" href={{ member.userprofile.url }}>
+      Personal Website
+    </a>
+  </span>
+  {% endif %}
+  -->
 </div>
 {% endblock content %}

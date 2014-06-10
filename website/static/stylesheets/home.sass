@@ -2,40 +2,58 @@ body#home
   #welcome-sentence
     float: left
     width: 100%
+    text-align: center
+
     @media (max-width: $content-width-static)
       width: $content-width-dynamic
       margin-left: $window-margin
-    text-align: center
 
   #world
     $world-width: 562px
-    $world-height: 536px
     float: left
     position: relative
-    width: $world-width
-    height: $world-height
     left: 50%
+    width: $world-width
     margin-left: $world-width / -2
     margin-top: $vertical-section-whitespace
     background-image: url("../images/world.jpg")
+    background-size: 100% 100%
+
+    &:after
+      content: ''
+      display: block
+      position: relative
+      width: 100%
+      // Set aspect ratio according to parent's width
+      padding-top: 95.4%
+
+    @media (max-width: $content-width-static)
+      $world-width: 57%
+      width: $world-width
+      margin-left: $world-width / -2
 
     canvas
       @include transform(rotate(10deg))
       position: absolute
       top: 0
       left: 0
+      width: 100%
+      height: 100%
+
     .dot
       position: absolute
       border-radius: 50%
-      width: 10px
-      height: 10px
+      width: 2%
+      height: 2%
       background: $nyu-purple
+
       &#nyc
-        left: 122px
-        top: 242px
+        left: 21.7%
+        top: 45.1%
+
       &#abu-dhabi
-        left: 400px
-        top: 295px
+        left: 71.2%
+        top: 55.0%
 
   #research-intro
     $intro-width-static: 800px
@@ -48,6 +66,7 @@ body#home
     left: 50%
     margin-left: ($intro-width-static / -2) - $intro-padding-static
     padding: $intro-padding-static
+
     @media (max-width: $content-width-static)
       width: $content-width-dynamic - 2 * ($intro-padding-dynamic)
       left: 0%
@@ -59,6 +78,7 @@ body#home
     background: $green
     text-align: center
     color: black
+
     a
       color: white
 
@@ -87,6 +107,7 @@ body#home
 
     .blurb, .bling
       width: 50%
+
       @media (max-width: $small-window-width)
         width: 100%
 
@@ -95,6 +116,7 @@ body#home
         margin: 0
         line-height: 175%
         width: 90%
+
         @media (max-width: $small-window-width)
           width: 80%
           font-size: 16px
@@ -102,17 +124,21 @@ body#home
     &.left
       .blurb, .bling
         float: left
+
       .blurb
         .text
           margin-left: 10%
+
           @media (max-width: $small-window-width)
             margin-right: 10%
     &.right
       .blurb, .bling
         float: right
+
       .blurb
         .text
           margin-right: 10%
+
           @media (max-width: $small-window-width)
             margin-left: 10%
 
@@ -133,21 +159,11 @@ body#home
           width: 100%
           // Set aspect ratio according to video's width
           padding-top: 76.8%
-
-          background: -moz-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 21%, rgba(0, 0, 0, 1) 100%)
-          // FF3.6+
-          background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(21%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 1)))
-          // Chrome,Safari4+
-          background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 21%, rgba(0, 0, 0, 1) 100%)
-          // Chrome10+,Safari5.1+
-          background: -o-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 21%, rgba(0, 0, 0, 1) 100%)
-          // Opera 12+
-          background: -ms-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 21%, rgba(0, 0, 0, 1) 100%)
-          // IE10+
-          background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 21%, rgba(0, 0, 0, 1) 100%)
-          // W3C
-          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#000000',GradientType=1 )
-          // IE6-9 fallback on horizontal gradient
+          $g1: rgba(0, 0, 0, 0) 0%
+          $g2: rgba(0, 0, 0, 0) 21%
+          $g3: rgba(0, 0, 0, 0.95) 80%
+          $g4: rgba(0, 0, 0, 1) 100%
+          @include radial-gradient(center center, ellipse cover, $g1, $g2, $g3, $g4)
 
         video
           position: absolute

@@ -13,8 +13,11 @@
       color: white
 
   #site-menu
-    float: right
     margin-top: 5px
+    float: right
+    @media (max-width: $medium-window-width)
+      float: left
+      clear: both
     a
       float: left
       margin-right: 30px
@@ -23,12 +26,14 @@
     #login
       background: $purple
       font-size: $small-font
-      padding: 5px
+      padding: 3px 6px
       float: left
+      margin-top: 2px
       a
-        margin-right: 15px
         margin-top: 0
+        margin-right: 15px
         &:last-child
           margin-right: 0px
+        color: $light-green
         &:hover, &.active
           color: $gray-very-light

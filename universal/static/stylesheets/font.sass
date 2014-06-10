@@ -1,52 +1,38 @@
+$base-font-size: 18px
+$bigger-font-size: $base-font-size + 2
+$h1-base-font-size: 32px
+$h2-base-font-size: 24px
+$h3-base-font-size: $base-font-size - 2
+$h4-base-font-size: 20px
+
 body
   font-family: "Computer Modern Bright", Helvetica, sans-serif
   background: $gray-very-light
   color: $gray-dark
   line-height: 130%
-  font-size: 18px
+  font-size: $base-font-size
+
   @media (max-width: $medium-window-width)
-    font-size: 17px
+    font-size: $base-font-size - 1
+
   @media (max-width: $small-window-width)
-    font-size: 16px
+    font-size: $base-font-size - 2
+
   @media (max-width: $tiny-window-width)
-    font-size: 15px
-
-.bigger-text
-  font-size: 20px
-  @media (max-width: $medium-window-width)
-    font-size: 19px
-  @media (max-width: $small-window-width)
-    font-size: 18px
-  @media (max-width: $tiny-window-width)
-    font-size: 17px
-  h3
-    font-size: 19px
-    @media (max-width: $medium-window-width)
-      font-size: 18px
-    @media (max-width: $small-window-width)
-      font-size: 17px
-    @media (max-width: $tiny-window-width)
-      font-size: 16px
-
-i, em
-  font-style: italic
-
-b, strong
-  font-weight: bold
-
-h1, h2, h3, h4
-  font-weight: normal
+    font-size: $base-font-size - 3
 
 h1
-  font-size: 32px
   line-height: 1.2
+  font-size: $h1-base-font-size
+
   @media (max-width: $small-window-width)
-    font-size: 28px
+    font-size: $h1-base-font-size - 4
+
   @media (max-width: $tiny-window-width)
-    font-size: 24px
+    font-size: $h1-base-font-size - 8
 
 h2
-  font-size: 24px
+  font-size: $h2-base-font-size
 
   &#page-title
     margin-bottom: $vertical-section-whitespace
@@ -59,22 +45,59 @@ h2
       float: left
 
 h3
-  font-size: 16px
-  @media (max-width: $medium-window-width)
-    font-size: 17px
-  @media (max-width: $small-window-width)
-    font-size: 15px
-  @media (max-width: $tiny-window-width)
-    font-size: 13px
+  margin-bottom: $vertical-subsection-whitespace
   text-transform: uppercase
   letter-spacing: 1px
-  margin-bottom: $vertical-subsection-whitespace
+  font-size: $h3-base-font-size
+
+  @media (max-width: $medium-window-width)
+    font-size: $h3-base-font-size - 1
+
+  @media (max-width: $small-window-width)
+    font-size: $h3-base-font-size - 2
+
+  @media (max-width: $tiny-window-width)
+    font-size: $h3-base-font-size - 3
 
 h4
-  font-size: 20px
+  margin-bottom: $vertical-subsection-whitespace
   font-weight: bold
   color: $gray-medium
-  margin-bottom: $vertical-subsection-whitespace
+  font-size: $h4-base-font-size
+
+.bigger-text
+  font-size: $bigger-font-size
+
+  @media (max-width: $medium-window-width)
+    font-size: $bigger-font-size - 1
+
+  @media (max-width: $small-window-width)
+    font-size: $bigger-font-size - 2
+
+  @media (max-width: $tiny-window-width)
+    font-size: $bigger-font-size - 3
+
+  // Slightly smaller than rest of font
+  h3
+    font-size: $bigger-font-size - 1
+
+    @media (max-width: $medium-window-width)
+      font-size: $bigger-font-size - 2
+
+    @media (max-width: $small-window-width)
+      font-size: $bigger-font-size - 3
+
+    @media (max-width: $tiny-window-width)
+      font-size: $bigger-font-size - 4
+
+i, em
+  font-style: italic
+
+b, strong
+  font-weight: bold
+
+h1, h2, h3, h4
+  font-weight: normal
 
 .subtitle
   font-size: $small-font

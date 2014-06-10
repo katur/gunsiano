@@ -4,14 +4,17 @@
 
 {% block content %}
 <div id="lockdown">
-  <p>This is not yet available to the public. Please log in.</p>
-
+  <p>
+    This site is not yet available to the public. Please enter the site
+    password.
+  </p>
+  <br>
   {% if form %}
   <form action="" method="post">
     <div>
       {% for field in form %}
         {{ field.errors }}
-        {{ field.label_tag }} {{ field }}
+        Site Password: {{ field }}
       {% endfor %}
     </div>
     <input type="submit" value="Preview">

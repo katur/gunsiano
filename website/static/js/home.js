@@ -164,7 +164,7 @@ function startHomepageScrollEffects() {
   function initializePhylogenyMask() {
     var mask = $("#evolution #mask");
     mask.attr("data-center-top", "height: 100%");
-    mask.attr("data-top-center", "height: 0%");
+    mask.attr("data-center-center", "height: 0%");
   }
 
   function initializeMouse() {

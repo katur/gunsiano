@@ -182,8 +182,8 @@ function startHomepageScrollEffects() {
     var startScroll = footerHeight + mouseDivHeight - mouseHeight;
     var endScroll = footerHeight;
 
-    mouseWrapper.attr("data-start", "left: -100%");
-    mouseWrapper.attr("data-" + (startScroll+1) + "-end", "left: -100%");
+    mouseWrapper.attr("data-start", "left: -500%");
+    mouseWrapper.attr("data-" + (startScroll+1) + "-end", "left: -500%");
 
     mouseWrapper.attr("data-" + startScroll + "-end", "left: -50%");
     mouseWrapper.attr("data-" + endScroll + "-end", "left: 100%");

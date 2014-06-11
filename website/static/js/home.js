@@ -164,6 +164,7 @@ function startHomepageScrollEffects() {
     });
   } else {
     $("#evolution #mask").hide();
+    $("#mouse #drawing").hide();
     $("#network canvas").css("top", "-50%");
   }
 

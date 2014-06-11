@@ -156,10 +156,16 @@ function startHomepageScrollEffects() {
   createNetworkLayers();
   initializeMouse();
 
-  skrollr.init({
-    smoothScrolling: false,
-    forceHeight: false
-  });
+  var width = $(window).width();
+  if (width > 500) {
+    skrollr.init({
+      smoothScrolling: false,
+      forceHeight: false
+    });
+  } else {
+    $("#evolution #mask").hide();
+    $("#network canvas").css("top", "-50%");
+  }
 
   function initializePhylogenyMask() {
     var mask = $("#evolution #mask");

@@ -20,11 +20,19 @@ $vertical-footer-padding: 15px
 
     #logos
       float: right
+      width: 397px
       a
         padding-top: $vertical-footer-padding
         float: left
         margin-right: 40px
         &:last-child
           margin-right: 0
+
       @media (max-width: $small-window-width)
         float: left
+        clear: both
+        @include transform(scale(.75, .75))
+        @include transform-origin(0%)
+
+      @media (max-width: 400px)
+        @include transform(scale(.5, .5))

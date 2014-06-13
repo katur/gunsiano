@@ -38,14 +38,7 @@ class Stock(models.Model):
         ordering = ['stockable']
 
     def __unicode__(self):
-        result = str(self.stockable)
-        date = str(self.date_prepared)
-        preparer = self.prepared_by
-        if date:
-            result = ', '.join((result, date))
-        if preparer:
-            result = ', '.join((result, preparer.get_full_name()))
-        return result
+        return str(self.stockable)
 
 
 class ContainerSupertype(models.Model):

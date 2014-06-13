@@ -103,8 +103,6 @@ class Container(models.Model):
             detail = self.name
         elif self.stock:
             detail = str(self.stock)
-        elif self.owner:
-            detail = self.owner.get_full_name()
         else:
             detail = 'Unnamed'
         return '{0}: {1}'.format(supertype, detail)

@@ -18,7 +18,14 @@
         {% endif %}
 
           <span
-            {% if child.notes %}data-hover-tag="{{ child.notes }}"{% endif %}
+            {% if child.notes or child.owner %}
+              data-hover-tag="
+                {% if child.owner %}{{ child.owner.get_full_name }}{% endif %}
+                {% if child.owner and child.notes %}({% endif %}
+                {% if child.notes %}{{ child.notes }}{% endif %}
+                {% if child.owner and child.notes %}){% endif %}
+              "
+            {% endif %}
           >
             {{ child }}
           </span>

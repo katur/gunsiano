@@ -10,7 +10,11 @@
     <a href={% url 'storage_detail_url' container_id=container.id %}>
       <img src="{{ STATIC_URL }}images/{{ container.type.image_filename }}"
            alt="photo of this storage container"/>
-      <span>{{ container }}</span>
+      <span
+        {% if container.notes %}data-hover-tag="{{ container.notes }}"{% endif %}
+      >
+        {{ container }}
+      </span>
     </a>
   </div>
   {% endfor %}

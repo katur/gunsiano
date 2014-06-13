@@ -17,9 +17,13 @@
         <a href={% url 'strain_url' name=child.worm %}>
         {% endif %}
 
-        <span>{{ child }}</span>
+          <span
+            {% if child.notes %}data-hover-tag="{{ child.notes }}"{% endif %}
+          >
+            {{ child }}
+          </span>
 
-        {% if container.has_children or container.worm %}
+        {% if child.has_children or child.worm %}
         </a>
         {% endif %}
       <br>

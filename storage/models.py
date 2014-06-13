@@ -105,17 +105,19 @@ class Container(models.Model):
             detail = str(self.stock)
         elif self.owner:
             detail = self.owner.get_full_name()
-        elif self.notes:
-            detail = self.notes
         else:
-            detail = 'Unnamed Container'
+            detail = 'Unnamed'
         return '{0}: {1}'.format(supertype, detail)
 
     def get_supertype(self):
         return self.type.supertype
 
     def has_children(self):
-        return self.type.has_children()
+        children = Container.objects.all().filter(parent_id=self.id)
+        if children:
+            return True
+        else:
+            return False
 
     def get_position_in_box(self):
         if self.vertical_position and self.horizontal_position:

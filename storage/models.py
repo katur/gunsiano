@@ -109,13 +109,9 @@ class Container(models.Model):
     def get_supertype(self):
         return self.type.supertype
 
-    def get_title(self):
-        return '{0}: {1}'.format(str(self.get_supertype()), str(self))
-
     def get_ancestors(self):
-        """ Return a list of this tube's ancestors,
-        starting with oldest.
-        Returns an empty list if no parent.
+        """Get a list of this tube's ancestors, starting with the oldest.
+        Returns an empty list if this container has no parent.
         """
         ancestors = []
         current = self.parent
@@ -124,35 +120,50 @@ class Container(models.Model):
             current = current.parent
         return list(reversed(ancestors))
 
-    def get_position_in_box(self):
+    def get_title(self):
+        """Get a simple title for this container including its supertype"""
+        return '{0}: {1}'.format(str(self.get_supertype()), str(self))
+
+    def get_ancestor_title(self):
+        """Get a title for this container that includes both
+        supertype and ancestors
+        """
+        ancestors = self.get_ancestors()
+        ancestors.append(self)
+        strings = [ancestor.get_title() for ancestor in ancestors]
+        return u' \u2192 '.join(strings)
+
+    def get_position_in_parent(self):
+        """Get this container's position within its parent container
+        in format 'B6', where 'B' represents the second vertical position
+        and '6' represents the sixth horizontal position
+        """
         if self.vertical_position and self.horizontal_position:
             return '{0}{1}'.format(chr(self.vertical_position + 64),
                                    self.horizontal_position)
         else:
             return None
 
-    def get_ancestor_title(self):
-        ancestors = self.get_ancestors()
-        ancestors.append(self)
-        strings = [ancestor.get_title() for ancestor in ancestors]
-        return u' \u2192 '.join(strings)
-
     def get_overall_position(self):
-        """ Return a string of the tube's overall position,
-        including any ancestors and the box position
+        """Get a string of this container's overall position,
+        including both ancestors and this container's position.
+        This differs from get_ancestor_title() because it includes this
+        container's position rather than this container's title.
         """
         ancestors = self.get_ancestors()
         strings = [ancestor.get_title() for ancestor in ancestors]
-        box_position = self.get_position_in_box()
+        box_position = self.get_position_in_parent()
         if box_position:
             strings.append('Position: ' + box_position)
         return u' \u2192 '.join(strings)
 
     def has_hover_detail(self):
+        """Determine whether there is hover information for this container"""
         return self.owner or self.notes or (self.stock and
                                             self.stock.has_freeze_detail())
 
     def get_hover_detail(self):
+        """Get information to display when hovering over this container"""
         result = ''
         if self.stock and self.stock.has_freeze_detail():
             result = self.stock.get_freeze_detail()

@@ -115,7 +115,8 @@ Lines of this strain that the lab has created or received:
       {% endif %}
 
       {% for stock in line.stocks %}
-      <li>Frozen
+      <li>{{ stock.get_freeze_detail }}
+      Frozen
         {% if stock.prepared_by %}
          by {{ stock.prepared_by.get_full_name }}
         {% endif %}

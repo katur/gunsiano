@@ -41,25 +41,14 @@ def storage_detail(request, container_id):
         y = child.vertical_position - 1
         (grid[y][x]).append(child)
 
-        if child.has_children():
-            child.has_children = True
-        elif child.stock:
+        if child.stock:
             s = child.stock.stockable
             if s.type.name == 'worm strain':
                 line = get_object_or_404(WormStrainLine, stockable=s)
                 child.worm = line.strain
 
-    # Create title for this page
-    title = str(container)
-    temp = container
-    while temp.parent:
-        temp = temp.parent
-        # Unicode rightarrow
-        title = u"{0} \u2192 {1}".format(str(temp), title)
-
     template_dictionary = {
         'container': container,
-        'container_title': title,
         'grid': grid,
     }
     return render_to_response('storage_detail.html', template_dictionary,

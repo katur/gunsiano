@@ -2,7 +2,9 @@
 {% load extra_tags %}
 
 {% block body_id %}storage-detail{% endblock %}
-{% block page_title %}Contents of {{ container_title }}{% endblock %}
+{% block page_title %}
+  Contents of {{ container.get_ancestor_title }}
+{% endblock %}
 
 {% block content %}
 <table>
@@ -10,54 +12,27 @@
   <tr>
     {% for compartment in row %}
     <td>
-      {% for child in compartment %}
-        {% if child.has_children %}
-        <a href={% url 'storage_detail_url' container_id=child.id %}>
-        {% elif child.worm %}
-        <a href={% url 'strain_url' name=child.worm %}>
+      {% for container in compartment %}
+        {% if container.has_children %}
+        <a href={% url 'storage_detail_url' container_id=container.id %}>
+        {% elif container.worm %}
+        <a href={% url 'strain_url' name=container.worm %}>
         {% endif %}
 
           <span
-            {% if child.notes or child.owner or child.stock %}
-              data-hover-tag="
-                {% if child.owner %}
-                  {{ child.owner.get_full_name }}
-                  {% if child.notes or child.stock %}({% endif %}
-                {% endif %}
-
-                {% if child.notes %}
-                  {{ child.notes }}
-                {% endif %}
-
-                {% if child.notes and child.stock %}
-                  ;
-                {% endif %}
-
-                {% if child.stock %}
-                  Prepared
-                  {% if child.stock.prepared_by %}
-                    by {{ child.stock.prepared_by.get_full_name }}
-                  {% endif %}
-                  {% if child.stock.date_prepared %}
-                    on {{ child.stock.date_prepared }}
-                  {% endif %}
-                {% endif %}
-
-                {% if child.owner %}
-                  {% if child.notes or child.stock %}){% endif %}
-                {% endif %}
-              "
+            {% if container.has_hover_detail %}
+            data-hover-tag="{{ container.get_hover_detail }}"
             {% endif %}
           >
-            {{ child }}
+            <strong>{{ container.get_supertype }}:</strong> {{ container }}
           </span>
 
-        {% if child.has_children or child.worm %}
+        {% if container.has_children or container.worm %}
         </a>
         {% endif %}
       <br>
       {% empty %}
-      No record
+      <span class='no-record'>No record</span>
       {% endfor %}
     </td>
     {% endfor %}

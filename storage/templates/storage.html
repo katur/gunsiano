@@ -11,9 +11,11 @@
       <img src="{{ STATIC_URL }}images/{{ container.type.image_filename }}"
            alt="photo of this storage container"/>
       <span
-        {% if container.notes %}data-hover-tag="{{ container.notes }}"{% endif %}
+        {% if container.has_hover_detail %}
+        data-hover-tag="{{ container.get_hover_detail }}"
+        {% endif %}
       >
-        {{ container }}
+        <strong>{{ container.get_supertype }}:</strong> {{ container }}
       </span>
     </a>
   </div>

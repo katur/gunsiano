@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.shortcuts import get_object_or_404
+from django.utils import formats
 
 from gunsiano.settings import MARKDOWN_PROMPT
 
@@ -34,6 +35,17 @@ class Stock(models.Model):
     date_prepared = models.DateField(null=True, blank=True)
     notes = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
 
+    def has_freeze_detail(self):
+        return self.prepared_by or self.date_prepared
+
+    def get_freeze_detail(self):
+        result = 'Frozen'
+        if self.prepared_by:
+            result += (' by ' + self.prepared_by.get_full_name())
+        if self.date_prepared:
+            result += (' on ' + formats.date_format(self.date_prepared))
+        return result
+
     class Meta:
         ordering = ['stockable']
 
@@ -61,14 +73,14 @@ class ContainerType(models.Model):
                                   related_name='container_slot_type')
     image_filename = models.CharField(max_length=30, blank=True)
 
+    def has_children(self):
+        return self.supertype.has_children
+
     class Meta:
         ordering = ['supertype', 'name']
 
     def __unicode__(self):
         return self.name
-
-    def has_children(self):
-        return self.supertype.has_children
 
 
 class Container(models.Model):
@@ -87,28 +99,30 @@ class Container(models.Model):
     thaw_results = models.CharField(max_length=100, blank=True)
     notes = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
 
-    class Meta:
-        ordering = ['type', 'name']
-
-    def __unicode__(self):
-        supertype = str(self.get_supertype())
-        if self.name:
-            detail = self.name
-        elif self.stock:
-            detail = str(self.stock)
-        else:
-            detail = 'Unnamed'
-        return '{0}: {1}'.format(supertype, detail)
-
-    def get_supertype(self):
-        return self.type.supertype
-
     def has_children(self):
         children = Container.objects.all().filter(parent_id=self.id)
         if children:
             return True
         else:
             return False
+
+    def get_supertype(self):
+        return self.type.supertype
+
+    def get_title(self):
+        return '{0}: {1}'.format(str(self.get_supertype()), str(self))
+
+    def get_ancestors(self):
+        """ Return a list of this tube's ancestors,
+        starting with oldest.
+        Returns an empty list if no parent.
+        """
+        ancestors = []
+        current = self.parent
+        while current:
+            ancestors.append(current)
+            current = current.parent
+        return list(reversed(ancestors))
 
     def get_position_in_box(self):
         if self.vertical_position and self.horizontal_position:
@@ -117,30 +131,50 @@ class Container(models.Model):
         else:
             return None
 
-    def get_ancestors(self):
-        """ Return a list of this tubes ancestors.
-        List starts with parent, then grandparent, etc.
-        Returns an empty list if no parent.
-        """
-        ancestors = []
-        temp = self.parent
-        while temp:
-            ancestors.append(temp)
-            temp = temp.parent
-        return ancestors
+    def get_ancestor_title(self):
+        ancestors = self.get_ancestors()
+        ancestors.append(self)
+        strings = [ancestor.get_title() for ancestor in ancestors]
+        return u' \u2192 '.join(strings)
 
     def get_overall_position(self):
-        """ Return a string of the tubes overall position,
-        including any ancestors, and including the box position
+        """ Return a string of the tube's overall position,
+        including any ancestors and the box position
         """
         ancestors = self.get_ancestors()
-        ancestors.reverse()
-        ancestors_as_string = []
-        for ancestor in ancestors:
-            ancestors_as_string.append(str(ancestor))
-        position = ', '.join(ancestors_as_string)
-
+        strings = [ancestor.get_title() for ancestor in ancestors]
         box_position = self.get_position_in_box()
         if box_position:
-            position = '{0}, Position: {1}'.format(position, box_position)
-        return position
+            strings.append('Position: ' + box_position)
+        return u' \u2192 '.join(strings)
+
+    def has_hover_detail(self):
+        return self.owner or self.notes or (self.stock and
+                                            self.stock.has_freeze_detail())
+
+    def get_hover_detail(self):
+        result = ''
+        if self.stock and self.stock.has_freeze_detail():
+            result = self.stock.get_freeze_detail()
+        else:
+            if self.owner:
+                result += self.owner.get_full_name()
+            if self.owner and self.notes:
+                result += ' ('
+            if self.notes:
+                result += self.notes
+            if self.owner and self.notes:
+                result += ')'
+        return result
+
+    class Meta:
+        ordering = ['type', 'name']
+
+    def __unicode__(self):
+        if self.name:
+            result = self.name
+        elif self.stock:
+            result = str(self.stock)
+        else:
+            result = 'unnamed'
+        return result

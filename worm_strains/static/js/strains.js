@@ -12,6 +12,9 @@ fixStrainsTopRow = function() {
   $(window).bind("scroll", function() {
     var scrollDistance = $(this).scrollTop();
     if (scrollDistance >= tableOffset && fixedHeader.is(":hidden")) {
+      var tableWidth = $("#strain-table").outerWidth();
+      fixedHeader.width(tableWidth);
+      console.log(tableWidth);
       fixedHeader.show();
     } else if ((scrollDistance < tableOffset) && fixedHeader.is(":visible")) {
       fixedHeader.hide();

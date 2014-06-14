@@ -59,7 +59,6 @@ window.hoverTags = function() {
         background: 'rgba(0,0,0,0.8)',
         color: 'white',
         fontSize: '13px',
-        textTransform: 'lowercase',
         zIndex: 800,
         textShadow: 'none'
       };

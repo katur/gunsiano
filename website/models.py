@@ -43,11 +43,8 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.user.get_full_name()
 
-    def __str__(self):
-        return self.__unicode__()
-
     def __repr__(self):
-        return self.__str__()
+        return self.__unicode__()
 
     def get_first_name(self):
         return self.user.first_name
@@ -143,11 +140,8 @@ class Publication(models.Model):
     def __unicode__(self):
         return self.title
 
-    def __str__(self):
-        return str(self.pubmed_id)
-
     def __repr__(self):
-        return self.__str__()
+        return self.__unicode__()
 
     def __cmp__(self, other):
         if self.pubmed_id < other.pubmed_id:

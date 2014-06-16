@@ -162,6 +162,8 @@ function startHomepageScrollEffects() {
       smoothScrolling: false,
       forceHeight: false
     });
+
+  // On small windows, deactivate skrollr effects for now
   } else {
     $("#evolution #mask").hide();
     $("#mouse #drawing").hide();
@@ -315,7 +317,7 @@ Network = (function() {
   }
 
   Network.prototype.createAndDrawEdges = function() {
-    var hubOutgoingEdges = 10;
+    var hubOutgoingEdges = 6;
     for (i = 0; i < this.numberOfNodes; i++) {
       var node = this.nodes[i];
       if (node.isHub) {
@@ -323,7 +325,7 @@ Network = (function() {
           this.drawEdgeToAnotherNode(node);
         }
       } else {
-        // this.drawEdgeToAnotherNode(node);
+        this.drawEdgeToAnotherNode(node);
       }
     }
   }

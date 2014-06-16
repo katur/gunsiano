@@ -74,7 +74,7 @@ body#home
       padding: $intro-padding-dynamic
 
     margin-top: 80px
-    margin-bottom: 80px
+    margin-bottom: 160px
     background: $green
     text-align: center
     color: black
@@ -147,36 +147,10 @@ body#home
           @media (max-width: $small-window-width)
             margin-left: 10%
 
-    &#cell-bio
-      background: black
-      color: white
-
-      #video-wrapper
-        // Relative for gradient overlay to work
-        position: relative
-        width: 90%
-        margin: 0 5%
-
-        &:after
-          content: ''
-          display: block
-          position: relative
-          width: 100%
-          // Set aspect ratio according to video's width
-          padding-top: 76.8%
-          $g1: rgba(0, 0, 0, 0) 0%
-          $g2: rgba(0, 0, 0, 0) 21%
-          $g3: rgba(0, 0, 0, 0.95) 80%
-          $g4: rgba(0, 0, 0, 1) 100%
-          @include radial-gradient(center center, ellipse cover, $g1, $g2, $g3, $g4)
-
-        video
-          position: absolute
-          top: 0
-          left: 0
-          width: 100%
 
     &#gi
+      border-top: 1px solid $gray-medium-dark
+
       // Make text easier to read over background
       .blurb
         .text
@@ -203,25 +177,25 @@ body#home
           background-image: url("../images/research/gi_screens/worms-layer-3.png")
           opacity: 0.15
 
-    &#evolution
-      background: $brown
+
+    &#network
+      background: $purple
       color: white
 
-      .bling
-        position: relative
-
-        img
-          width: 60%
-          margin: 0 20%
-
-        #mask
-          position: absolute
+      // Make text easier to read over background
+      .blurb
+        .text
+          position: relative
+          z-index: 2
           display: block
-          width: 100%
-          height: 100%
-          right: 0
-          bottom: 0
-          background: $brown
+          background: transparentize($purple, 0.6)
+
+      canvas
+        position: absolute
+        z-index: 1
+        width: 140%
+        left: -20%
+
 
     &#rna
       background: $cream
@@ -252,23 +226,57 @@ body#home
         @media (max-width: $tiny-window-width)
           @include transform(scale(.6, .6))
 
-    &#network
-      background: $purple
+
+    &#cell-bio
+      background: black
       color: white
 
-      // Make text easier to read over background
-      .blurb
-        .text
-          position: relative
-          z-index: 2
-          display: block
-          background: transparentize($purple, 0.6)
+      #video-wrapper
+        // Relative for gradient overlay to work
+        position: relative
+        width: 90%
+        margin: 0 5%
 
-      canvas
-        position: absolute
-        z-index: 1
-        width: 140%
-        left: -20%
+        &:after
+          content: ''
+          display: block
+          position: relative
+          width: 100%
+          // Set aspect ratio according to video's width
+          padding-top: 76.8%
+          $g1: rgba(0, 0, 0, 0) 0%
+          $g2: rgba(0, 0, 0, 0) 21%
+          $g3: rgba(0, 0, 0, 0.95) 80%
+          $g4: rgba(0, 0, 0, 1) 100%
+          @include radial-gradient(center center, ellipse cover, $g1, $g2, $g3, $g4)
+
+        video
+          position: absolute
+          top: 0
+          left: 0
+          width: 100%
+
+
+    &#evolution
+      background: $brown
+      color: white
+
+      .bling
+        position: relative
+
+        img
+          width: 60%
+          margin: 0 20%
+
+        #mask
+          position: absolute
+          display: block
+          width: 100%
+          height: 100%
+          right: 0
+          bottom: 0
+          background: $brown
+
 
     &#mouse
       background: $light-green

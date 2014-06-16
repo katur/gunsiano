@@ -27,28 +27,6 @@
 </div>
 
 <div id="research-areas" class="bigger-text">
-  <div id="tester"></div>
-
-  <div id="cell-bio" class="research-area left">
-    <div class="blurb">
-      <div class="text">
-        <h3>{{ cell.name }}</h3>
-        {{ cell.description|enhanced_markdown }}
-      </div>
-    </div>
-
-    <div class="bling">
-      <div id="video-wrapper">
-        <video loop autoplay title="GFP::Moesin in early embryogenesis">
-          <source src="{{ STATIC_URL }}videos/nathalie.mp4" type="video/mp4"/>
-          <source src="{{ STATIC_URL }}videos/nathalie.ogv" type="video/ogg"/>
-          Your browser does not support HTML5 video
-        </video>
-        <div id="video-overlay"></div>
-      </div>
-    </div>
-  </div>
-
   <div id="gi" class="research-area right">
     <div class="blurb">
       <div class="text">
@@ -60,34 +38,6 @@
     <div class="worm-background layer-1"></div>
     <div class="worm-background layer-2"></div>
     <div class="worm-background layer-3"></div>
-  </div>
-
-  <div id="evolution" class="research-area left">
-    <div class="blurb">
-      <div class="text">
-        <h3>{{ evolution.name }}</h3>
-        {{ evolution.description|enhanced_markdown }}
-      </div>
-    </div>
-
-    <div class="bling">
-      <img alt="nematode phylogeny tree"
-          src="{{ STATIC_URL }}images/research/evolution/tree.png" />
-      <div id="mask"></div>
-    </div>
-  </div>
-
-  <div id="rna" class="research-area right">
-    <div class="blurb">
-      <div class="text">
-        <h3>{{ rna.name }}</h3>
-        {{ rna.description|enhanced_markdown }}
-      </div>
-    </div>
-
-    <div class="bling">
-      <div id="molecule"></div>
-    </div>
   </div>
 
   <div id="network" class="research-area left">
@@ -102,6 +52,51 @@
     <canvas class="layer-1"></canvas>
   </div>
 
+  <div id="rna" class="research-area right">
+    <div class="blurb">
+      <div class="text">
+        <h3>{{ rna.name }}</h3>
+        {{ rna.description|enhanced_markdown }}
+      </div>
+    </div>
+    <div class="bling">
+      <div id="molecule"></div>
+    </div>
+  </div>
+
+  <div id="cell-bio" class="research-area left">
+    <div class="blurb">
+      <div class="text">
+        <h3>{{ cell.name }}</h3>
+        {{ cell.description|enhanced_markdown }}
+      </div>
+    </div>
+    <div class="bling">
+      <div id="video-wrapper">
+        <video loop autoplay title="GFP::Moesin in early embryogenesis">
+          <source src="{{ STATIC_URL }}videos/nathalie.mp4" type="video/mp4"/>
+          <source src="{{ STATIC_URL }}videos/nathalie.ogv" type="video/ogg"/>
+          Your browser does not support HTML5 video
+        </video>
+        <div id="video-overlay"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="evolution" class="research-area left">
+    <div class="blurb">
+      <div class="text">
+        <h3>{{ evolution.name }}</h3>
+        {{ evolution.description|enhanced_markdown }}
+      </div>
+    </div>
+    <div class="bling">
+      <img alt="nematode phylogeny tree"
+          src="{{ STATIC_URL }}images/research/evolution/tree.png" />
+      <div id="mask"></div>
+    </div>
+  </div>
+
   <div id="mouse" class="research-area right">
     <div class="blurb">
       <div class="text">
@@ -109,7 +104,6 @@
         {{ mouse.description|enhanced_markdown }}
       </div>
     </div>
-
     <div id="drawing-wrapper">
       <div id="drawing"></div>
     </div>

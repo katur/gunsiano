@@ -149,7 +149,7 @@ body#home
 
 
     &#gi
-      border-top: 1px solid $gray-medium-dark
+      $color: $gray-medium-light
 
       // Make text easier to read over background
       .blurb
@@ -157,9 +157,10 @@ body#home
           position: relative
           z-index: 2
           display: block
-          background: transparentize(white, 0.3)
+          background: transparentize($color, 0.2)
 
       .worm-background
+        background: $color
         position: absolute
         z-index: 1
         top: 0
@@ -169,13 +170,13 @@ body#home
         background-repeat: repeat
         &.layer-1
           background-image: url("../images/research/gi_screens/worms-layer-1.png")
-          opacity: 0.4
+          opacity: 0.8
         &.layer-2
           background-image: url("../images/research/gi_screens/worms-layer-2.png")
-          opacity: 0.25
+          opacity: 0.4
         &.layer-3
           background-image: url("../images/research/gi_screens/worms-layer-3.png")
-          opacity: 0.15
+          opacity: 0.2
 
 
     &#network
@@ -258,8 +259,13 @@ body#home
 
 
     &#evolution
-      background: $brown
-      color: white
+      background: $light-green
+
+      a
+        color: $dark-green
+
+        &:hover, &.active
+          color: $purple
 
       .bling
         position: relative
@@ -275,17 +281,18 @@ body#home
           height: 100%
           right: 0
           bottom: 0
-          background: $brown
+          background: $light-green
 
 
     &#mouse
-      background: $light-green
+      background: $brown
+      color: $cream
       padding-bottom: $research-area-padding + $content-bottom-padding
 
       #drawing-wrapper
         position: fixed
         bottom: -5px
-        left: -500%
+        right: -500%
         width: 380px
         height: 130px
 
@@ -296,6 +303,7 @@ body#home
           width: 100%
           height: 100%
           background-image: url("../images/research/mouse/mouse_sprite.png")
+          @include transform(scaleX(-1))
 
           &.scrollingDown
-            @include transform(scaleX(-1))
+            @include transform(scaleX(1))

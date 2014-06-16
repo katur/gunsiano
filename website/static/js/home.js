@@ -182,11 +182,11 @@ function startHomepageScrollEffects() {
     var startScroll = footerHeight + mouseDivHeight - mouseHeight;
     var endScroll = footerHeight;
 
-    mouseWrapper.attr("data-start", "left: -500%");
-    mouseWrapper.attr("data-" + (startScroll+1) + "-end", "left: -500%");
+    mouseWrapper.attr("data-start", "right: -500%");
+    mouseWrapper.attr("data-" + (startScroll+1) + "-end", "right: -500%");
 
-    mouseWrapper.attr("data-" + startScroll + "-end", "left: -50%");
-    mouseWrapper.attr("data-" + endScroll + "-end", "left: 100%");
+    mouseWrapper.attr("data-" + startScroll + "-end", "right: -50%");
+    mouseWrapper.attr("data-" + endScroll + "-end", "right: 100%");
     var mouse = $("#mouse #drawing");
     var numberOfSteps = 40;
     var stepSize = (startScroll - endScroll) / numberOfSteps;
@@ -245,9 +245,9 @@ function startHomepageScrollEffects() {
   }
 
   function createNetworkLayers() {
-    new Network($("#network .layer-1"), 2.5, 60000, 8, 2);
-    new Network($("#network .layer-2"), 1.0, 30000, 6, 1);
-    new Network($("#network .layer-3"), .5, 15000, 4, 1);
+    new Network($("#network .layer-1"), 2.5, 80000, 8, 2);
+    new Network($("#network .layer-2"), 1.0, 40000, 6, 1);
+    new Network($("#network .layer-3"), .5, 20000, 4, 1);
   }
 }
 
@@ -315,7 +315,7 @@ Network = (function() {
   }
 
   Network.prototype.createAndDrawEdges = function() {
-    var hubOutgoingEdges = 12;
+    var hubOutgoingEdges = 10;
     for (i = 0; i < this.numberOfNodes; i++) {
       var node = this.nodes[i];
       if (node.isHub) {

@@ -89,15 +89,15 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 
+    'south',
+    'lockdown',
+
     'universal',
     'website',
     'worm_strains',
     'vectors',
     'storage',
     'protocols',
-
-    'south',
-    'lockdown',
 )
 
 # A sample logging configuration. The only tangible logging

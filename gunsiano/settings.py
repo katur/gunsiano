@@ -91,6 +91,7 @@ INSTALLED_APPS = (
 
     'south',
     'lockdown',
+    'haystack',
 
     'universal',
     'website',
@@ -99,6 +100,13 @@ INSTALLED_APPS = (
     'storage',
     'protocols',
 )
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

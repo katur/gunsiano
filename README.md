@@ -8,8 +8,8 @@ Logging in provides access to interfaces for various internal lab databases.
 
 Logging in also provides access to the Django admin interface,
 where every user is granted limited update privileges for their own user.
-Other access levels grant privileges to edit the public website text,
-lab personnel information, and/or various internal databases.
+Other access levels grant privileges to edit other users' information,
+the public website text, and various internal databases.
 
 ## Dependencies
 

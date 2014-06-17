@@ -1,30 +1,29 @@
-Gunsiano Lab Website
-====================
+# Gunsiano Lab Website
 
 Django-based website for a _Caenorhabditis elegans_ genomics lab.
 
-Click
-[here](https://www.lucidchart.com/documents/view/492c-0ebc-51d33178-9110-78400a001d4e)
-for database schema on Lucidchart.
-
-See dependencies in `requirements.txt`. Some notes about these:
-* `wsgiref` is part of the Python standard library, but appears in pip by
-accident/default (this bug fixed in Python3.3)
-* `Django` and `MySQL-Python`: straightforward
-* `South` is for database migrations. Migrations will be built into Django 1.7.
-* `mdx-smartypants` is a Python Markdown extension for nicer curly quotes
-and proper em/en dashes. It requires `Markdown`, `namedentities`
-and `guess-language-spirit`
-* `python-slugify` is used to convert text to be url-safe (removing whitespace,
-certain symbols, etc.). Used to turn protocol titles into urls. Requires
-`Unidecode`
-
-Public interface includes basic information about the lab and its research.
+The public interface inclues basic information about the lab and its research.
 
 Logging in provides access to interfaces for various internal lab databases.
 
 Logging in also provides access to the Django admin interface,
-where every user is minimally granted update privileges for limited
-information about their own user and user profile.
+where every user is granted limited update privileges for their own user.
 Other access levels grant privileges to edit the public website text,
 lab personnel information, and/or various internal databases.
+
+## Dependencies
+
+Python version is listed in `runtime.txt`.
+
+Package dependencies are listed in `requirements.txt`.
+
+## Database
+
+[Here](https://www.lucidchart.com/documents/view/492c-0ebc-51d33178-9110-78400a001d4e)
+is the database schema on Lucidchart.
+
+## Code
+
+CSS is in SASS. Run
+`sass -wc --style compressed universal/static/stylesheets/styles.sass`
+to compile.

@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.db.models import Q
 
 from worm_strains.models import WormLab, WormStrain, WormStrainLine
 from storage.models import Stock, Container
@@ -11,8 +12,21 @@ def strains(request):
     """
     Page listing worms strains, with possible filtering
     """
-    strains = WormStrain.objects.all()
+    if 'query' in request.GET:
+        query = request.GET['query']
+        strains = WormStrain.objects.filter(
+            Q(name__icontains=query) |
+            Q(genotype__icontains=query) |
+            Q(remarks__icontains=query) |
+            Q(created_by__first_name__icontains=query) |
+            Q(created_by__last_name__icontains=query) |
+            Q(species__name__icontains=query)
+        )
+    else:
+        strains = WormStrain.objects.all()
+
     strains = sorted(strains)
+
     template_dictionary = {
         'strains': strains,
     }

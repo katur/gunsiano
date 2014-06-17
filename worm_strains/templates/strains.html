@@ -4,6 +4,13 @@
 {% block page_title %}Worm Strains{% endblock %}
 
 {% block content %}
+<form action={% url 'strains_url' %} method="get">
+  <input type="text" name="query">
+  <input type="submit" value="Search">
+</form>
+
+<span>{{ strains|length }} strains</span>
+
 <table id="strain-table">
   <thead>
     <tr>

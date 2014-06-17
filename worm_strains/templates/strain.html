@@ -5,215 +5,217 @@
 {% block page_title %}{{ strain }}{% endblock %}
 
 {% block content %}
-<!-- Identification -->
-{% if strain.species or strain.on_wormbase or strain.genotype %}
-<div class="section">
-  {% if strain.species %}
-  <span>
-    <b>Species:</b> <i>{{ strain.species }}</i>
-  </span>
-  {% endif %}
-
-  {% if strain.on_wormbase %}
-  <span>
-    <a class="external-link"
-        href="http://www.wormbase.org/species/c_elegans/strain/{{ strain }}">
-      See strain on wormbase
-    </a>
-  </span>
-  {% endif %}
-
-  {% if strain.genotype%}
-  <span>
-    <b>Genotype:</b> {{ strain.genotype }}
-  </span>
-  {% endif %}
-</div>
-{% endif %}
-
-<!-- Origin -->
-{% if strain.created_by or strain.lab or strain.date_created or strain.mutagen %}
-<hr>
-<h4>Origin</h4>
-
-<div class="section">
-  {% if strain.created_by %}
-  <span>
-    <b>Made by:</b> {{ strain.created_by.get_full_name }}
-  </span>
-  {% endif %}
-
-  {% if strain.lab %}
-  <span>
-    <b>Lab:</b> {{ strain.lab }}
-  </span>
-  {% endif %}
-
-  {% if strain.date_created %}
-  <span>
-    <b>Made on:</b> {{ strain.date_created }}
-  </span>
-  {% endif %}
-
-  {% if strain.mutagen %}
-  <span>
-    <b>Mutagen or Method Used:</b> {{ strain.mutagen }}
-  </span>
-  {% endif %}
-</div>
-{% endif %}
-
-<!-- Other information -->
-{% if strain.remarks %}
-<hr>
-<h4>Remarks</h4>
-
-<div class="section">
-  <span>
-    {{ strain.remarks|enhanced_markdown }}
-  </span>
-</div>
-{% endif %}
-
-<!-- stock -->
-{% if lines %}
-<hr>
-<h4>Stock</h4>
-
-Lines of this strain that the lab has created or received:
-<ul> <!-- all worm lines -->
-  {% for line in lines %}
-  <li>
-    {% if line.created_internally %}
-    Internal line
-
-    {% elif line.received_from or line.received_by or line.date_received %}
-    Received
-      {% if line.received_by %}
-      by {{ line.received_by.get_full_name }}
-      {% endif %}
-
-      {% if line.received_from %}
-      from {{ line.received_from }}
-      {% endif %}
-
-      {% if line.date_received %}
-      on {{ line.date_received }}
-      {% endif %}
-
-    {% else %}
-    Line with no recorded information about receipt
+<div id="sections">
+  <!-- Identification -->
+  {% if strain.species or strain.on_wormbase or strain.genotype %}
+  <div class="section">
+    {% if strain.species %}
+    <span>
+      <b>Species:</b> <i>{{ strain.species }}</i>
+    </span>
     {% endif %}
 
-    <ul> <!-- per worm line -->
-      {% if line.remarks %}
-      <li>{{ line.remarks|enhanced_markdown }}</li>
-      {% endif %}
+    {% if strain.on_wormbase %}
+    <span>
+      <a class="external-link"
+          href="http://www.wormbase.org/species/c_elegans/strain/{{ strain }}">
+        See strain on wormbase
+      </a>
+    </span>
+    {% endif %}
 
-      {% if line.times_outcrossed %}
-      <li>Outcrossed {{ line.times_outcrossed }}x</li>
-      {% endif %}
+    {% if strain.genotype%}
+    <span>
+      <b>Genotype:</b> {{ strain.genotype }}
+    </span>
+    {% endif %}
+  </div>
+  {% endif %}
 
-      {% for stock in line.stocks %}
-      <li>{{ stock.get_freeze_detail }}
-      Frozen
-        {% if stock.prepared_by %}
-         by {{ stock.prepared_by.get_full_name }}
+  <!-- Origin -->
+  {% if strain.created_by or strain.lab or strain.date_created or strain.mutagen %}
+  <hr>
+  <h4>Origin</h4>
+
+  <div class="section">
+    {% if strain.created_by %}
+    <span>
+      <b>Made by:</b> {{ strain.created_by.get_full_name }}
+    </span>
+    {% endif %}
+
+    {% if strain.lab %}
+    <span>
+      <b>Lab:</b> {{ strain.lab }}
+    </span>
+    {% endif %}
+
+    {% if strain.date_created %}
+    <span>
+      <b>Made on:</b> {{ strain.date_created }}
+    </span>
+    {% endif %}
+
+    {% if strain.mutagen %}
+    <span>
+      <b>Mutagen or Method Used:</b> {{ strain.mutagen }}
+    </span>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <!-- Other information -->
+  {% if strain.remarks %}
+  <hr>
+  <h4>Remarks</h4>
+
+  <div class="section">
+    <span>
+      {{ strain.remarks|enhanced_markdown }}
+    </span>
+  </div>
+  {% endif %}
+
+  <!-- stock -->
+  {% if lines %}
+  <hr>
+  <h4>Stock</h4>
+
+  Lines of this strain that the lab has created or received:
+  <ul> <!-- all worm lines -->
+    {% for line in lines %}
+    <li>
+      {% if line.created_internally %}
+      Internal line
+
+      {% elif line.received_from or line.received_by or line.date_received %}
+      Received
+        {% if line.received_by %}
+        by {{ line.received_by.get_full_name }}
         {% endif %}
 
-        {% if stock.date_prepared %}
-        on {{ stock.date_prepared }}
+        {% if line.received_from %}
+        from {{ line.received_from }}
         {% endif %}
 
-        <ul> <!-- per stock of this line -->
-          {% if stock.notes %}
-          <li>{{ stock.notes }}</li>
+        {% if line.date_received %}
+        on {{ line.date_received }}
+        {% endif %}
+
+      {% else %}
+      Line with no recorded information about receipt
+      {% endif %}
+
+      <ul> <!-- per worm line -->
+        {% if line.remarks %}
+        <li>{{ line.remarks|enhanced_markdown }}</li>
+        {% endif %}
+
+        {% if line.times_outcrossed %}
+        <li>Outcrossed {{ line.times_outcrossed }}x</li>
+        {% endif %}
+
+        {% for stock in line.stocks %}
+        <li>{{ stock.get_freeze_detail }}
+        Frozen
+          {% if stock.prepared_by %}
+           by {{ stock.prepared_by.get_full_name }}
           {% endif %}
 
-          <li>Thawed tubes:
-            <table>
-              <tr><td>-80C test thaw
-                {% if stock.thaw_80 %}
-                  {% if stock.thaw_80.is_thawed %}
-                    {% if stock.thaw_80.thawed_by %}
-                    by {{ stock.thaw_80.thawed_by.get_full_name }}
-                    {% endif %}
+          {% if stock.date_prepared %}
+          on {{ stock.date_prepared }}
+          {% endif %}
 
-                    {% if stock.thaw_80.date_thawed %}
-                    on {{ stock.thaw_80.date_thawed }}
-                    {% endif %}
-
-                    {% if stock.thaw_80.thaw_results %}
-                    was {{ stock.thaw_80.thaw_results }}
-                    {% endif %}
-                  {% else %}not thawed yet{% endif %}
-                {% else %}not available{% endif %}
-              </td></tr>
-
-              <tr><td>Liquid Nitrogen test thaw
-                {% if stock.thaw_N %}
-                  {% if stock.thaw_N.is_thawed %}
-                    {% if stock.thaw_N.thawed_by %}
-                    by {{ stock.thaw_N.thawed_by.get_full_name }}
-                    {% endif %}
-
-                    {% if stock.thaw_N.date_thawed %}
-                    on {{ stock.thaw_N.date_thawed }}
-                    {% endif %}
-
-                    {% if stock.thaw_N.thaw_results %}
-                    was {{ stock.thaw_N.thaw_results }}
-                    {% endif %}
-                  {% else %}not thawed yet{% endif %}
-                {% else %}not available{% endif %}
-              </td></tr>
-
-              {% for tube in stock.thawed_tubes %}
-              <tr><td>{{ tube.position }} thaw
-                {% if tube.thawed_by %}
-                by {{ tube.thawed_by.get_full_name }}
-                {% endif %}
-
-                {% if tube.date_thawed %}
-                on {{ tube.date_thawed }}
-                {% endif %}
-
-                {% if tube.thaw_results %}
-                was {{ tube.thaw_results }}
-                {% endif %}
-              </td></tr>
-              {% endfor %}
-            </table>
-          </li>
-
-          <li class="tubes">
-            {% if stock.unthawed_tubes %}
-            Available tubes:
-            <table>
-              {% for tube in stock.unthawed_tubes %}
-              <tr><td>
-                {{ tube.position }}{% if tube.notes %}.
-                Note: {{ tube.notes }}
-                {% endif %}
-              </td></tr>
-              {% endfor %}
-            </table>
-
-            {% else %}
-            No available tubes recorded
+          <ul> <!-- per stock of this line -->
+            {% if stock.notes %}
+            <li>{{ stock.notes }}</li>
             {% endif %}
-          </li>
-        </ul>
-      </li>
 
-      {% empty %}
-      <li>No stocks recorded</li>
-      {% endfor %}
+            <li>Thawed tubes:
+              <table>
+                <tr><td>-80C test thaw
+                  {% if stock.thaw_80 %}
+                    {% if stock.thaw_80.is_thawed %}
+                      {% if stock.thaw_80.thawed_by %}
+                      by {{ stock.thaw_80.thawed_by.get_full_name }}
+                      {% endif %}
 
-    </ul>
+                      {% if stock.thaw_80.date_thawed %}
+                      on {{ stock.thaw_80.date_thawed }}
+                      {% endif %}
 
-  </li> <!-- this worm line -->
-  {% endfor %}
-</ul> <!-- all worm lines -->
-{% endif %}
+                      {% if stock.thaw_80.thaw_results %}
+                      was {{ stock.thaw_80.thaw_results }}
+                      {% endif %}
+                    {% else %}not thawed yet{% endif %}
+                  {% else %}not available{% endif %}
+                </td></tr>
+
+                <tr><td>Liquid Nitrogen test thaw
+                  {% if stock.thaw_N %}
+                    {% if stock.thaw_N.is_thawed %}
+                      {% if stock.thaw_N.thawed_by %}
+                      by {{ stock.thaw_N.thawed_by.get_full_name }}
+                      {% endif %}
+
+                      {% if stock.thaw_N.date_thawed %}
+                      on {{ stock.thaw_N.date_thawed }}
+                      {% endif %}
+
+                      {% if stock.thaw_N.thaw_results %}
+                      was {{ stock.thaw_N.thaw_results }}
+                      {% endif %}
+                    {% else %}not thawed yet{% endif %}
+                  {% else %}not available{% endif %}
+                </td></tr>
+
+                {% for tube in stock.thawed_tubes %}
+                <tr><td>{{ tube.position }} thaw
+                  {% if tube.thawed_by %}
+                  by {{ tube.thawed_by.get_full_name }}
+                  {% endif %}
+
+                  {% if tube.date_thawed %}
+                  on {{ tube.date_thawed }}
+                  {% endif %}
+
+                  {% if tube.thaw_results %}
+                  was {{ tube.thaw_results }}
+                  {% endif %}
+                </td></tr>
+                {% endfor %}
+              </table>
+            </li>
+
+            <li class="tubes">
+              {% if stock.unthawed_tubes %}
+              Available tubes:
+              <table>
+                {% for tube in stock.unthawed_tubes %}
+                <tr><td>
+                  {{ tube.position }}{% if tube.notes %}.
+                  Note: {{ tube.notes }}
+                  {% endif %}
+                </td></tr>
+                {% endfor %}
+              </table>
+
+              {% else %}
+              No available tubes recorded
+              {% endif %}
+            </li>
+          </ul>
+        </li>
+
+        {% empty %}
+        <li>No stocks recorded</li>
+        {% endfor %}
+
+      </ul>
+
+    </li> <!-- this worm line -->
+    {% endfor %}
+  </ul> <!-- all worm lines -->
+  {% endif %}
+</div>
 {% endblock %}

@@ -24,7 +24,12 @@
             data-hover-tag="{{ container.get_hover_detail }}"
             {% endif %}
           >
-            <strong>{{ container.get_supertype }}:</strong> {{ container }}
+            <strong>{{ container.get_supertype }}:</strong>
+            {% if container.worm %}
+              {{ container.worm }}
+            {% else %}
+              {{ container }}
+            {% endif %}
           </span>
 
         {% if container.has_children or container.worm %}

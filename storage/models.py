@@ -20,12 +20,7 @@ class Stockable(models.Model):
     type = models.ForeignKey(StockableType)
 
     def __unicode__(self):
-        result = str(self.type)
-        if result == 'worm strain':
-            from worm_strains.models import WormStrainLine
-            line = get_object_or_404(WormStrainLine, stockable=self)
-            result = str(line)
-        return result
+        return str(self.id)
 
 
 class Stock(models.Model):

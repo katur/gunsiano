@@ -117,15 +117,6 @@
 
         {% for stock in line.stocks %}
         <li>{{ stock.get_freeze_detail }}
-        Frozen
-          {% if stock.prepared_by %}
-           by {{ stock.prepared_by.get_full_name }}
-          {% endif %}
-
-          {% if stock.date_prepared %}
-          on {{ stock.date_prepared }}
-          {% endif %}
-
           <ul> <!-- per stock of this line -->
             {% if stock.notes %}
             <li>{{ stock.notes }}</li>

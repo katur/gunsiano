@@ -25,6 +25,9 @@ class UserProfile(models.Model):
     # True for Abu Dhabi, False for NYC, null for both
     in_abu_dhabi = models.NullBooleanField()
 
+    # Whether to show on Lab Members page
+    display_on_website = models.BooleanField(default=True)
+
     # Whether to show as 'current' on Lab Members page
     is_current = models.BooleanField(default=True)
 

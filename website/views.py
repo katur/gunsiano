@@ -44,11 +44,13 @@ def lab_members(request):
     """
     # Order current lab members by position (for 'group by' in template)
     current = (UserProfile.objects.all()
-               .filter(user__is_active=True, is_current=True)
+               .filter(display_on_website=True,
+                       is_current=True)
                .order_by('position', 'user__last_name',
                          'user__first_name'))
     former = (UserProfile.objects.all()
-              .filter(user__is_active=True, is_current=False)
+              .filter(display_on_website=True,
+                      is_current=False)
               .order_by('user__last_name', 'user__first_name'))
 
     all_members = list(chain(current, former))

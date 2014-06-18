@@ -13,17 +13,22 @@ def strains(request):
     Page listing worms strains, with possible filtering
     """
     if 'query' in request.GET:
-        query = request.GET['query']
-        strains = WormStrain.objects.filter(
-            Q(name__icontains=query) |
-            Q(genotype__icontains=query) |
-            Q(remarks__icontains=query) |
-            Q(created_by__first_name__icontains=query) |
-            Q(created_by__last_name__icontains=query) |
-            Q(species__name__icontains=query)
-        )
+        # Whitespace-separated terms need be present, not necessarily adjacent
+        terms = request.GET['query'].split()
     else:
-        strains = WormStrain.objects.all()
+        terms = None
+
+    # Initialize strains to empty queryset (for | operator)
+    strains = WormStrain.objects.all()
+    for term in terms:
+        strains = strains.filter(
+            Q(name__icontains=term) |
+            Q(genotype__icontains=term) |
+            Q(remarks__icontains=term) |
+            Q(created_by__first_name__icontains=term) |
+            Q(created_by__last_name__icontains=term) |
+            Q(species__name__icontains=term)
+        )
 
     strains = sorted(strains)
 

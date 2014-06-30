@@ -1,5 +1,6 @@
 $(document).ready(function() {
   setResizeHandler();
+  createHeaderDropdown();
   positionFooter();
   hoverTags();
 })
@@ -12,6 +13,22 @@ function setResizeHandler() {
   $(window).resize(function() {
     positionFooter();
   })
+}
+
+function createHeaderDropdown() {
+  $("#logged-in-welcome").click(function() {
+    welcomeMessage = $("#logged-in-welcome");
+    submenu = $("#logged-in-submenu");
+    if (submenu.hasClass("visible")) {
+      welcomeMessage.removeClass("active");
+      submenu.removeClass("visible");
+      submenu.fadeOut();
+    } else {
+      welcomeMessage.addClass("active");
+      submenu.addClass("visible");
+      submenu.fadeIn();
+    }
+  });
 }
 
 function positionFooter() {

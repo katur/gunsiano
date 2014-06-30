@@ -58,26 +58,36 @@
       Contact
     </a>
 
-    <div id="login" class="bubble">
-      {% url 'lab_tools_url' as lab_tools_url %}
+    <div id="login-wrapper">
+      <div id="login" class="bubble">
+        {% url 'lab_tools_url' as lab_tools_url %}
+        {% if user.is_authenticated %}
+        <a id="logged-in-welcome" href="#">
+          Welcome, {{ user.first_name }}!
+        </a>
+
+        {% else %}
+        {% url 'login_url' as login_url %}
+        <a href="{{ login_url }}"
+            {% ifequal request.path login_url %}
+            class="active"
+            {% endifequal %}>
+          Login
+        </a>
+        {% endif %}
+      </div>
+
       {% if user.is_authenticated %}
-      <a href="{{ lab_tools_url }}"
+      <div id="logged-in-submenu">
+        <a href="{{ lab_tools_url }}"
           {% ifequal request.path lab_tools_url %}
           class="active"
           {% endifequal %}>
         Tools
-      </a>
-      <a href="{% url 'admin:index' %}">Admin</a>
-      <a href="{% url 'logout_url' %}">Logout</a>
-
-      {% else %}
-      {% url 'login_url' as login_url %}
-      <a href="{{ login_url }}"
-          {% ifequal request.path login_url %}
-          class="active"
-          {% endifequal %}>
-        Login
-      </a>
+        </a>
+        <a href="{% url 'admin:index' %}">Admin</a>
+        <a href="{% url 'logout_url' %}">Logout</a>
+      </div>
       {% endif %}
     </div>
   </div>

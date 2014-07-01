@@ -14,7 +14,7 @@
 
   #site-menu
     float: right
-    margin-top: 5px
+    padding-top: 3px
 
     @media (max-width: 1200px)
       float: left
@@ -22,33 +22,32 @@
 
     a
       float: left
-      margin-top: 5px
+      margin-top: 7px
       margin-right: 30px
 
     #login-wrapper
       float: left
       position: relative
+      font-size: $small-font
 
-      #login-bubble
-        float: left
+      a
+        color: $light-green
+
+        &:hover, &.active
+          color: $gray-very-light
+
+      .bubble
         position: relative
         z-index: 2
         top: 0
         left: 0
-        margin-top: 2px
+        margin-right: 0
+        margin-top: 4px
         padding: 3px 6px
         background: $purple
-        font-size: $small-font
 
-        a
-          clear: both
-          margin: 0
-          padding: 0
-          color: $light-green
-
-          &:hover, &.active
-            color: $gray-very-light
-            cursor: pointer
+        &:hover, &.active
+          cursor: pointer
 
       #dropdown
         display: none
@@ -56,14 +55,12 @@
         z-index: 1
         top: 50%
         left: 0
-        background: $dropdown-color
-        padding-top: 30px
+        padding-top: 20px
         padding-bottom: 10px
+        border-bottom-right-radius: $base-border-radius
+        border-bottom-left-radius: $base-border-radius
+        background: $dark-purple
+        text-align: center
 
         a
           width: 100%
-          text-align: center
-          font-size: $small-font
-
-          &:hover, &.active
-            color: white

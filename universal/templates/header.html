@@ -59,25 +59,18 @@
     </a>
 
     <div id="login-wrapper">
-      <div id="login-bubble" class="bubble">
-        {% url 'lab_tools_url' as lab_tools_url %}
-        {% if user.is_authenticated %}
-        <a id="welcome-message" href="#">
-          Welcome, {{ user.first_name }}!
-        </a>
-
-        {% else %}
+      <a class="bubble"
+      {% if user.is_authenticated %}
+        id="welcome-message"
+        href="#">Welcome, {{ user.first_name }}!</a>
+      {% else %}
         {% url 'login_url' as login_url %}
-        <a href="{{ login_url }}"
-            {% ifequal request.path login_url %}
-            class="active"
-            {% endifequal %}>
-          Login
-        </a>
-        {% endif %}
-      </div>
+        {% ifequal request.path login_url %}class="active"{% endifequal %}
+        href="{{ login_url }}">Login</a>
+      {% endif %}
 
       {% if user.is_authenticated %}
+      {% url 'lab_tools_url' as lab_tools_url %}
       <div id="dropdown">
         <a href="{{ lab_tools_url }}"
           {% ifequal request.path lab_tools_url %}

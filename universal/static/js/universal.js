@@ -31,8 +31,8 @@ function createDropdown() {
     dropdown.fadeOut();
   }
 
-  welcomeMessage.click(function() {
-    if (!dropdown.hasClass("visible")) {
+  welcomeMessage.on("click", function() {
+    if (dropdown.hasClass("visible")) {
       deactivateDropdown();
     } else {
       activateDropdown();
@@ -43,6 +43,11 @@ function createDropdown() {
     if ($(e.target).is(welcomeMessage)) {
       return;
     }
+
+    if ($(e.target).closest("#dropdown").length) {
+      return;
+    }
+
     deactivateDropdown();
   });
 }

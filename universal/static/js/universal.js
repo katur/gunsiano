@@ -1,6 +1,6 @@
 $(document).ready(function() {
   setResizeHandler();
-  createHeaderDropdown();
+  createDropdown();
   positionFooter();
   hoverTags();
 })
@@ -15,19 +15,35 @@ function setResizeHandler() {
   })
 }
 
-function createHeaderDropdown() {
-  $("#logged-in-welcome").click(function() {
-    welcomeMessage = $("#logged-in-welcome");
-    submenu = $("#logged-in-submenu");
-    if (submenu.hasClass("visible")) {
-      welcomeMessage.removeClass("active");
-      submenu.removeClass("visible");
-      submenu.fadeOut();
+function createDropdown() {
+  welcomeMessage = $("#welcome-message");
+  dropdown = $("#dropdown");
+
+  function activateDropdown() {
+    welcomeMessage.addClass("active");
+    dropdown.addClass("visible");
+    dropdown.fadeIn();
+  }
+
+  function deactivateDropdown() {
+    welcomeMessage.removeClass("active");
+    dropdown.removeClass("visible");
+    dropdown.fadeOut();
+  }
+
+  welcomeMessage.click(function() {
+    if (!dropdown.hasClass("visible")) {
+      deactivateDropdown();
     } else {
-      welcomeMessage.addClass("active");
-      submenu.addClass("visible");
-      submenu.fadeIn();
+      activateDropdown();
     }
+  });
+
+  $("body").on("click", function(e) {
+    if ($(e.target).is(welcomeMessage)) {
+      return;
+    }
+    deactivateDropdown();
   });
 }
 

@@ -59,10 +59,10 @@
     </a>
 
     <div id="login-wrapper">
-      <div id="login" class="bubble">
+      <div id="login-bubble" class="bubble">
         {% url 'lab_tools_url' as lab_tools_url %}
         {% if user.is_authenticated %}
-        <a id="logged-in-welcome" href="#">
+        <a id="welcome-message" href="#">
           Welcome, {{ user.first_name }}!
         </a>
 
@@ -78,7 +78,7 @@
       </div>
 
       {% if user.is_authenticated %}
-      <div id="logged-in-submenu">
+      <div id="dropdown">
         <a href="{{ lab_tools_url }}"
           {% ifequal request.path lab_tools_url %}
           class="active"

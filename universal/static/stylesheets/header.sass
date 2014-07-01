@@ -29,7 +29,7 @@
       float: left
       position: relative
 
-      #login
+      #login-bubble
         float: left
         position: relative
         z-index: 2
@@ -50,17 +50,20 @@
             color: $gray-very-light
             cursor: pointer
 
-      #logged-in-submenu
+      #dropdown
         display: none
         position: absolute
         z-index: 1
         top: 50%
         left: 0
-        background: transparentize($purple, 0.5)
+        background: $dropdown-color
         padding-top: 30px
+        padding-bottom: 10px
 
         a
           width: 100%
           text-align: center
           font-size: $small-font
-          color: $gray-dark
+
+          &:hover, &.active
+            color: white

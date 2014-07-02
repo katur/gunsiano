@@ -24,7 +24,7 @@
     </span>
     {% endif %}
 
-    {% if strain.genotype%}
+    {% if strain.genotype %}
     <span>
       <b>Genotype:</b> {{ strain.genotype }}
     </span>
@@ -59,6 +59,12 @@
     {% if strain.mutagen %}
     <span>
       <b>Mutagen or Method Used:</b> {{ strain.mutagen }}
+    </span>
+    {% endif %}
+
+    {% if strain.parent_strain %}
+    <span>
+      <b>Parent Strain:</b> {{ strain.parent_strain }}
     </span>
     {% endif %}
   </div>

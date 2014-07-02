@@ -22,13 +22,13 @@ function createDropdown() {
   function activateDropdown() {
     welcomeMessage.addClass("active");
     dropdown.addClass("visible");
-    dropdown.fadeIn();
+    dropdown.fadeIn(200);
   }
 
   function deactivateDropdown() {
     welcomeMessage.removeClass("active");
     dropdown.removeClass("visible");
-    dropdown.fadeOut();
+    dropdown.fadeOut(200);
   }
 
   welcomeMessage.on("click", function() {

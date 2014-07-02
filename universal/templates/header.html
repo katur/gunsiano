@@ -73,11 +73,8 @@
       {% url 'lab_tools_url' as lab_tools_url %}
       <div id="dropdown">
         <a href="{{ lab_tools_url }}"
-          {% ifequal request.path lab_tools_url %}
-          class="active"
-          {% endifequal %}>
-        Tools
-        </a>
+        {% ifequal request.path lab_tools_url %}class="active"{% endifequal %}
+        >Lab Tools</a>
         <a href="{% url 'admin:index' %}">Admin</a>
         <a href="{% url 'logout_url' %}">Logout</a>
       </div>

@@ -1,5 +1,4 @@
 $vertical-window-padding: 12px
-$break-point-padding: 1.06
 
 html, body
   min-width: 100%
@@ -27,7 +26,7 @@ html, body
 #content
   margin: 0 auto
   width: $content-width-static
-  @media (max-width: $content-width-static * $break-point-padding)
+  @media (max-width: $content-width-static * $dynamic-break-point)
     width: $content-width-dynamic
 
 body#home

@@ -34,7 +34,14 @@ hr
   display: none
   position: fixed
   top: 10px
-  right: 10px
+  left: 50%
+  margin-left: $content-width-static / 2 + 40px
+
+  @media (max-width: $content-width-static + 300px)
+    left: initial
+    right: (100% - $content-width-dynamic) / 2
+    margin-left: 0
+
   padding: 3px 6px
   background: $gray-medium-light
   font-size: $small-font

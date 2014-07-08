@@ -4,7 +4,7 @@ $(document).ready(function() {
   positionFooter();
   hoverTags();
 
-  if ($('body#publications').length || $('body#strains').length) {
+  if ($("body#publications").length || $("body#strains").length) {
     createBackToTopButton();
   }
 })
@@ -81,16 +81,23 @@ function positionFooter() {
 }
 
 function createBackToTopButton() {
-  $('#content').append(
-    '<a href="#" id="back-to-top" class="bubble">Back to top</a>'
+  $("#content").append(
+    "<a href='#' id='back-to-top' class='bubble'>Back to top</a>"
   );
+  button = $("#back-to-top");
   screenHeight = $(window).height();
+
+  button.click(function(e) {
+    e.preventDefault();
+    $("body, html").animate({scrollTop: 0}, 200);
+  });
+
   $(window).scroll(function() {
-    var distanceScrolled = parseInt($('body').scrollTop());
+    var distanceScrolled = parseInt($("body").scrollTop());
     if (distanceScrolled > windowHeight) {
-      $('#back-to-top').fadeIn();
+      button.fadeIn();
     } else {
-      $('#back-to-top').fadeOut();
+      button.fadeOut();
     }
   });
 }

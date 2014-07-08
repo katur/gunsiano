@@ -3,6 +3,10 @@ $(document).ready(function() {
   createDropdown();
   positionFooter();
   hoverTags();
+
+  if ($('body#publications').length || $('body#strains').length) {
+    createBackToTopButton();
+  }
 })
 
 $(window).load(function() {
@@ -74,6 +78,21 @@ function positionFooter() {
       position: "static"
     }
   )
+}
+
+function createBackToTopButton() {
+  $('#content').append(
+    '<a href="#" id="back-to-top" class="bubble">Back to top</a>'
+  );
+  screenHeight = $(window).height();
+  $(window).scroll(function() {
+    var distanceScrolled = parseInt($('body').scrollTop());
+    if (distanceScrolled > windowHeight) {
+      $('#back-to-top').show();
+    } else {
+      $('#back-to-top').hide();
+    }
+  });
 }
 
 window.hoverTags = function() {

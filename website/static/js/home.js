@@ -1,6 +1,5 @@
 $(document).ready(function() {
   if ($("body#home").length) {
-    // expandResearchAreaHeight();
     startWormAnimation();
     setScrollHandler();
   }
@@ -24,19 +23,6 @@ function setScrollHandler() {
       mouse.removeClass("scrollingDown");
     }
     previousScrollTop = currentScrollTop;
-  });
-}
-
-function expandResearchAreaHeight() {
-  var width = $(document).width();
-  var minHeight = width / 4;
-
-  var researchAreas = $(".research-area");
-  researchAreas.each(function() {
-    var currentArea = $(this);
-    if (currentArea.height() < minHeight) {
-      currentArea.height(minHeight);
-    }
   });
 }
 
@@ -264,7 +250,6 @@ Network = (function() {
     this.viewportHeight = $(window).height();
     this.viewportWidth = $(window).width();
     this.verticalPadding = this.viewportWidth * 0.2;
-    // this.elementHeight = $("#network").height();
     this.setDimensions();
 
     this.context = this.canvasElement.get(0).getContext("2d");

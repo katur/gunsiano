@@ -88,9 +88,9 @@ function createBackToTopButton() {
   $(window).scroll(function() {
     var distanceScrolled = parseInt($('body').scrollTop());
     if (distanceScrolled > windowHeight) {
-      $('#back-to-top').show();
+      $('#back-to-top').fadeIn();
     } else {
-      $('#back-to-top').hide();
+      $('#back-to-top').fadeOut();
     }
   });
 }

@@ -2,6 +2,7 @@ import re
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import formats
 
 from gunsiano.settings import MARKDOWN_PROMPT
 from storage.models import Stockable, Stock, Container
@@ -182,3 +183,15 @@ class WormStrainLine(models.Model):
     def __unicode__(self):
         return str(self.strain)
 
+    def has_receipt_detail(self):
+        return self.received_by or self.received_from or self.date_received
+
+    def get_receipt_detail(self):
+        result = 'Received'
+        if self.received_by:
+            result += (' by ' + self.received_by.get_full_name())
+        if self.received_from:
+            result += (' from ' + self.received_from)
+        if self.date_received:
+            result += (' on ' + formats.date_format(self.date_received))
+        return result

@@ -91,24 +91,11 @@
     {% for line in lines %}
     <li>
       {% if line.created_internally %}
-      Internal line
-
-      {% elif line.received_from or line.received_by or line.date_received %}
-      Received
-        {% if line.received_by %}
-        by {{ line.received_by.get_full_name }}
-        {% endif %}
-
-        {% if line.received_from %}
-        from {{ line.received_from }}
-        {% endif %}
-
-        {% if line.date_received %}
-        on {{ line.date_received }}
-        {% endif %}
-
+        Internal line
+      {% elif line.has_receipt_detail %}
+        {{ line.get_receipt_detail }}
       {% else %}
-      Line with no recorded information about receipt
+        Line with no recorded information about receipt
       {% endif %}
 
       <ul> <!-- per worm line -->
@@ -129,55 +116,29 @@
 
             <li>Thawed tubes:
               <table>
-                <tr><td>-80C test thaw
+                <tr><td>-80C tester:
                   {% if stock.thaw_80 %}
                     {% if stock.thaw_80.is_thawed %}
-                      {% if stock.thaw_80.thawed_by %}
-                      by {{ stock.thaw_80.thawed_by.get_full_name }}
-                      {% endif %}
-
-                      {% if stock.thaw_80.date_thawed %}
-                      on {{ stock.thaw_80.date_thawed }}
-                      {% endif %}
-
-                      {% if stock.thaw_80.thaw_results %}
-                      was {{ stock.thaw_80.thaw_results }}
-                      {% endif %}
-                    {% else %}not thawed yet{% endif %}
+                      {{ stock.thaw_80.get_thaw_detail }}
+                    {% else %}
+                      not thawed yet
+                    {% endif %}
                   {% else %}not available{% endif %}
                 </td></tr>
 
-                <tr><td>Liquid Nitrogen test thaw
+                <tr><td>Liquid Nitrogen tester:
                   {% if stock.thaw_N %}
                     {% if stock.thaw_N.is_thawed %}
-                      {% if stock.thaw_N.thawed_by %}
-                      by {{ stock.thaw_N.thawed_by.get_full_name }}
-                      {% endif %}
-
-                      {% if stock.thaw_N.date_thawed %}
-                      on {{ stock.thaw_N.date_thawed }}
-                      {% endif %}
-
-                      {% if stock.thaw_N.thaw_results %}
-                      was {{ stock.thaw_N.thaw_results }}
-                      {% endif %}
-                    {% else %}not thawed yet{% endif %}
+                      {{ stock.thaw_N.get_thaw_detail }}
+                    {% else %}
+                      not thawed yet
+                    {% endif %}
                   {% else %}not available{% endif %}
                 </td></tr>
 
                 {% for tube in stock.thawed_tubes %}
-                <tr><td>{{ tube.position }} thaw
-                  {% if tube.thawed_by %}
-                  by {{ tube.thawed_by.get_full_name }}
-                  {% endif %}
-
-                  {% if tube.date_thawed %}
-                  on {{ tube.date_thawed }}
-                  {% endif %}
-
-                  {% if tube.thaw_results %}
-                  was {{ tube.thaw_results }}
-                  {% endif %}
+                <tr><td>
+                  {{ tube.position }}: {{ tube.get_thaw_detail }}
                 </td></tr>
                 {% endfor %}
               </table>

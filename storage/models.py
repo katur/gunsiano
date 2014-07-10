@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.shortcuts import get_object_or_404
 from django.utils import formats
 
 from gunsiano.settings import MARKDOWN_PROMPT
@@ -171,6 +170,16 @@ class Container(models.Model):
                 result += self.notes
             if self.owner and self.notes:
                 result += ')'
+        return result
+
+    def get_thaw_detail(self):
+        result = 'Thaw'
+        if self.thawed_by:
+            result += (' by ' + self.thawed_by.get_full_name())
+        if self.date_thawed:
+            result += (' on ' + formats.date_format(self.date_thawed))
+        if self.thaw_results:
+            result += (' was ' + self.thaw_results)
         return result
 
     class Meta:

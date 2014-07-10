@@ -111,13 +111,13 @@ class WormStrain(models.Model):
         return re.search('^[A-Z]+\d+$', self.name)
 
     def get_lab_code(self):
-        if self.is_conventionally_named:
+        if self.is_conventionally_named():
             return re.search('^[A-Z]+', self.name).group(0)
         else:
             return None
 
     def get_number(self):
-        if self.is_conventionally_named:
+        if self.is_conventionally_named():
             return int(re.search('\d+$', self.name).group(0))
         else:
             return None

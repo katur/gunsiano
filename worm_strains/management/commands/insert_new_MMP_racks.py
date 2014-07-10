@@ -10,10 +10,10 @@ import re
 
 class Command(BaseCommand):
     """
-    Run with: ./manage.py insert_MMP_racks_into_database
+    Run with: ./manage.py insert_new_MMP_racks filename.csv
     """
     help = ('Update WormStrain, WormStrainLine, Stockable, Stock, and '
-            'Container tables to reflect MMP strains and positions')
+            'Container tables to reflect newly received MMP strains')
 
     def handle(self, *args, **options):
         worm_stockable_type = StockableType.objects.get(name='worm strain')

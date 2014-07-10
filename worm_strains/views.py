@@ -17,15 +17,18 @@ def strains(request):
     if 'query' in request.GET:
         # Whitespace-separated terms need be present, not necessarily adjacent
         terms = request.GET['query'].split()
-        for term in terms:
-            strains = strains.filter(
-                Q(name__icontains=term) |
-                Q(genotype__icontains=term) |
-                Q(remarks__icontains=term) |
-                Q(created_by__first_name__icontains=term) |
-                Q(created_by__last_name__icontains=term) |
-                Q(species__name__icontains=term)
-            )
+        if 'not_frozen' in terms:
+            strains = [strain for strain in strains if not strain.is_frozen()]
+        else:
+            for term in terms:
+                strains = strains.filter(
+                    Q(name__icontains=term) |
+                    Q(genotype__icontains=term) |
+                    Q(remarks__icontains=term) |
+                    Q(created_by__first_name__icontains=term) |
+                    Q(created_by__last_name__icontains=term) |
+                    Q(species__name__icontains=term)
+                )
 
     strains = sorted(strains)
 

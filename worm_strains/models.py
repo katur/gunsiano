@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from gunsiano.settings import MARKDOWN_PROMPT
-from storage.models import Stockable
+from storage.models import Stockable, Stock, Container
 from vectors.models import Vector
 
 
@@ -17,6 +17,12 @@ class WormSpecies(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_short_name(self):
+        parts = self.name.partition(' ')
+        genus = parts[0][0]
+        species = parts[2]
+        return genus + '. ' + species
 
 
 class Mutagen(models.Model):
@@ -148,6 +154,17 @@ class WormStrain(models.Model):
         else:
             return None
 
+    def is_frozen(self):
+        lines = WormStrainLine.objects.filter(strain=self.name)
+        for line in lines:
+            stocks = Stock.objects.filter(stockable=line.stockable)
+            for stock in stocks:
+                containers = Container.objects.filter(stock=stock)
+                if containers:
+                    return True
+
+        return False
+
 
 class WormStrainLine(models.Model):
     strain = models.ForeignKey(WormStrain)
@@ -164,3 +181,4 @@ class WormStrainLine(models.Model):
 
     def __unicode__(self):
         return str(self.strain)
+

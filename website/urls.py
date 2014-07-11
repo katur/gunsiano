@@ -4,8 +4,8 @@ from django.conf.urls import patterns, url
 urlpatterns = patterns(
     'website.views',
     url(r'^$', 'home', name='home_url'),
-    url(r'^lab_members$', 'lab_members', name='lab_members_url'),
-    url(r'^lab_member/(?P<username>.+)$', 'lab_member', name='lab_member_url'),
+    url(r'^people$', 'people', name='people_url'),
+    url(r'^person/(?P<username>.+)$', 'person', name='person_url'),
     url(r'^publications$', 'publications', name='publications_url'),
     url(r'^resources$', 'resources', name='resources_url'),
     url(r'^join$', 'join', name='join_url'),

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block body_id %}lab-members{% endblock %}
+{% block body_id %}people{% endblock %}
 {% block page_title %}People{% endblock %}
 
 {% block content %}
@@ -29,7 +29,7 @@
       {% for profile in position.list %}
       <li>
         {% if profile.blurb %}
-        <a href="{% url 'lab_member_url' username=profile.user.get_username %}">
+        <a href="{% url 'person_url' username=profile.user.get_username %}">
         {% elif profile.url %}
         <a class="external-link" href="{{ profile.url }}">
         {% endif %}
@@ -67,7 +67,7 @@
 
         <li>
           {% if profile.blurb %}
-          <a href="{% url 'lab_member_url' username=profile.user.get_username %}">
+          <a href="{% url 'person_url' username=profile.user.get_username %}">
           {% elif profile.url %}
           <a class="external-link" href="{{ profile.url }}">
           {% endif %}

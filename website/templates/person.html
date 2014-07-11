@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load extra_tags %}
+
+{% block body_id %}person{% endblock %}
+{% block page_title %}
+  {{ person.get_full_name }}
+{% endblock %}
+
+{% block content %}
+<div id="profile">
+  {% if person.userprofile.blurb %}
+  <span>
+    {{ person.userprofile.blurb|enhanced_markdown }}
+  </span>
+  {% endif %}
+
+  {% if person.userprofile.image_filename %}
+  <img src="{{ STATIC_URL }}images/people/{{ person.userprofile.image_filename }}"
+      alt="profile pic for this person"/>
+  {% endif %}
+
+  <!--
+  {% if person.userprofile.url %}
+  <span>
+    <a class="external-link" href={{ person.userprofile.url }}>
+      Personal Website
+    </a>
+  </span>
+  {% endif %}
+  -->
+</div>
+{% endblock content %}

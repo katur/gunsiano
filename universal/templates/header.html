@@ -10,7 +10,7 @@
 
   <div id="site-menu">
     {% url 'home_url' as home_url %}
-    {% url 'lab_members_url' as lab_members_url %}
+    {% url 'people_url' as people_url %}
     {% url 'publications_url' as publications_url %}
     {% url 'resources_url' as resources_url %}
     {% url 'join_url' as join_url %}
@@ -23,8 +23,8 @@
       Home
     </a>
 
-    <a href="{{ lab_members_url }}"
-        {% ifequal request.path lab_members_url %}
+    <a href="{{ people_url }}"
+        {% ifequal request.path people_url %}
         class="active"
         {% endifequal %}>
       People

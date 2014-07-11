@@ -38,28 +38,30 @@ def home(request):
                               context_instance=RequestContext(request))
 
 
-def lab_members(request):
+def people(request):
     """
-    Page listing all lab members
+    Page listing all people in the lab
     """
-    # Order current lab members by position (for 'group by' in template)
+    # Order current people by position (for 'group by' in template)
     current = (UserProfile.objects.all()
                .filter(display_on_website=True,
                        is_current=True)
                .order_by('position', 'user__last_name',
                          'user__first_name'))
+
+    # Order former lab members alphabetically
     former = (UserProfile.objects.all()
               .filter(display_on_website=True,
                       is_current=False)
               .order_by('user__last_name', 'user__first_name'))
 
-    all_members = list(chain(current, former))
-    for member in all_members:
-        member.location = member.get_location()
+    all_people = list(chain(current, former))
+    for person in all_people:
+        person.location = person.get_location()
 
     current_positions = set()
-    for member in current:
-        current_positions.add(member.position)
+    for person in current:
+        current_positions.add(person.position)
 
     num_columns = 3
     former_column_length = math.ceil(len(former) / num_columns)
@@ -71,22 +73,22 @@ def lab_members(request):
         'former_column_length': former_column_length,
         'current_column_length': current_column_length,
     }
-    return render_to_response('lab_members.html', template_dictionary,
+    return render_to_response('people.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 
-def lab_member(request, username):
+def person(request, username):
     """
     Page for each lab member.
     Note: avoid 'user' as variable name to avoid conflict with the global
     variable (which is referenced for authentication purposes)
     """
-    member = get_object_or_404(User, username=username)
+    person = get_object_or_404(User, username=username)
 
     template_dictionary = {
-        'member': member,
+        'person': person,
     }
-    return render_to_response('lab_member.html', template_dictionary,
+    return render_to_response('person.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 

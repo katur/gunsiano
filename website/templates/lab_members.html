@@ -16,7 +16,7 @@
   {% regroup current by position.position as position_list %}
   <div class="column">
     {% for position in position_list %}
-    {% if forloop.counter0|divisibleby:"3" and not forloop.first %}
+    {% if forloop.counter0|divisibleby:current_column_length and not forloop.first %}
     </div>
     <div class="column">
     {% endif %}

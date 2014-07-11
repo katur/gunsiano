@@ -57,13 +57,19 @@ def lab_members(request):
     for member in all_members:
         member.location = member.get_location()
 
-    num_former_columns = 3
-    former_column_length = math.ceil(len(former) / num_former_columns)
+    current_positions = set()
+    for member in current:
+        current_positions.add(member.position)
+
+    num_columns = 3
+    former_column_length = math.ceil(len(former) / num_columns)
+    current_column_length = math.ceil(len(current_positions) / num_columns)
 
     template_dictionary = {
         'current': current,
         'former': former,
         'former_column_length': former_column_length,
+        'current_column_length': current_column_length,
     }
     return render_to_response('lab_members.html', template_dictionary,
                               context_instance=RequestContext(request))

@@ -11,6 +11,10 @@ is granted limited update privileges for their own user.
 Other access levels grant privileges to edit other users' information,
 the public website text, and various internal databases.
 
+While simple database updates can be accomplished via the admin interface,
+there are scripts to do more complicated updates.
+These scripts live in `app\_name/management/commands/script\_name.py`.
+
 ## Dependencies
 
 Python version is listed in `runtime.txt`.
@@ -27,3 +31,5 @@ is the database schema on Lucidchart.
 CSS is in SASS. Run
 `sass -wc --style compressed universal/static/stylesheets/styles.sass`
 to compile.
+
+Javascript in [jQuery](http://jquery.com/).

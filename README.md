@@ -13,7 +13,7 @@ the public website text, and various internal databases.
 
 While simple database updates can be accomplished via the admin interface,
 there are scripts to do more complicated updates.
-These scripts live in `app\_name/management/commands/script\_name.py`.
+These scripts live in `app_name/management/commands/script_name.py`.
 
 ## Dependencies
 

@@ -12,7 +12,7 @@ Other access levels grant privileges to edit other users' information,
 the public website text, and various internal databases.
 
 While simple database updates can be accomplished via the admin interface,
-there are scripts to do more complicated updates.
+there are scripts to accomplish more complicated, routine updates.
 These scripts live in `app_name/management/commands/script_name.py`.
 
 ## Dependencies
@@ -25,6 +25,8 @@ Package dependencies are listed in `requirements.txt`.
 
 [Here](https://www.lucidchart.com/documents/view/492c-0ebc-51d33178-9110-78400a001d4e)
 is the database schema on Lucidchart.
+
+[South](http://south.readthedocs.org/en/latest/) is used for database migrations.
 
 ## Code
 

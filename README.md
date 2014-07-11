@@ -28,7 +28,7 @@ is the database schema on Lucidchart.
 
 ## Code
 
-CSS is in SASS. Run
+CSS is in [SASS](http://sass-lang.com/). Run
 `sass -wc --style compressed universal/static/stylesheets/styles.sass`
 to compile.
 

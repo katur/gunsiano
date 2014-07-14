@@ -12,8 +12,8 @@
     <span class="authors">{{ publication.authors|enhanced_markdown }}</span>
     <span class="journal">
       {{ publication.journal }}.
-      {{ publication.date }};
-      {{ publication.detail }}.
+      {{ publication.date }}{% if publication.detail %};
+      {{ publication.detail }}{% endif %}.
     </span>
     <span class="abstract">{{ publication.abstract|enhanced_markdown }}</span>
     <span class="pubmed">PubMed:

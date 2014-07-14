@@ -1,4 +1,4 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 from worm_strains.models import WormStrain, WormStrainLine
 from storage.models import (StockableType, Stockable, Stock,
@@ -10,7 +10,7 @@ import re
 
 class Command(BaseCommand):
     """
-    Run with: ./manage.py insert_new_MMP_racks filename.csv
+    Run as: ./manage.py insert_new_MMP_racks filename.csv
     """
     help = ('Update WormStrain, WormStrainLine, Stockable, Stock, and '
             'Container tables to reflect newly received MMP strains')

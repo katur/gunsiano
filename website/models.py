@@ -137,9 +137,6 @@ class Publication(models.Model):
         self.abstract = re.sub(pattern, '*\g<0>*', self.abstract)
         self.title = re.sub(pattern, '*\g<0>*', self.title)
 
-    class Meta:
-        ordering = ['-date']
-
     def __unicode__(self):
         return self.title
 
@@ -147,12 +144,37 @@ class Publication(models.Model):
         return self.__unicode__()
 
     def __cmp__(self, other):
-        if self.pubmed_id < other.pubmed_id:
-            return -1
-        elif self.pubmed_id > other.pubmed_id:
-            return 1
+        self_year, self_month, self_day = split_pubmed_date(self.date)
+        other_year, other_month, other_day = split_pubmed_date(other.date)
+
+        if self_year != other_year:
+            return cmp(self_year, other_year)
+        elif self_month != other_month:
+            return cmp(self_month, other_month)
         else:
-            return 0
+            return cmp(self_day, other_day)
+
+
+def split_pubmed_date(string):
+    parts = string.split()
+    months = ('jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug',
+              'sep', 'oct', 'nov', 'dec')
+    try:
+        year = int(parts[0])
+    except:
+        year = 0
+
+    try:
+        month = months.index(parts[1].lower())
+    except:
+        month = 0
+
+    try:
+        day = int(parts[2])
+    except:
+        day = 0
+
+    return (year, month, day)
 
 
 class JoinLabSection(models.Model):

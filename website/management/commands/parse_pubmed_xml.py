@@ -1,28 +1,27 @@
 import xml.etree.ElementTree as ET
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from website.models import Publication
 
 
 class Command(BaseCommand):
     """
+    Run as: ./manage.py parse_pubmed_xml filename.xml
+
     Parse the publications from the XML output for a PubMed search,
     adding these publications to the database.
-
-    This used to be done dynamically, but the RSS feed would eventually
-    break and show only a portion of the publications, so we decided to
-    instead hardcode our publications in a database.
 
     Search term used in PubMed:
     (Piano F[Author] NOT De Piano F[Author] NOT Del Piano F[Author])
     OR
-    (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author]).
+    (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author])
 
-    Required some filtering afterward of additional Pianos and Gunsaluses
+    Even with these exceptions, some other Pianos and Gunsaluses show
+    up in the results, which should be flagged to not display in the database.
     """
     def handle(self, *args, **options):
-        xml_filepath = args[0]
-        tree = ET.parse(xml_filepath)
+        filename = args[0]
+        tree = ET.parse(filename)
         root = tree.getroot()
         recorded_publications = Publication.objects.all()
         recorded_pubmed_ids = set()

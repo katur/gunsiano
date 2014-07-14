@@ -109,7 +109,8 @@ def publications(request):
     """
     Publications page
     """
-    publications = Publication.objects.filter(hidden=False)
+    publications = sorted(Publication.objects.filter(hidden=False),
+                          reverse=True)
     for publication in publications:
         publication.translate_html_br_to_markdown()
         publication.embolden_PI_names()

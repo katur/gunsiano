@@ -119,18 +119,20 @@ class Publication(models.Model):
 
     def italicize_species_names(self):
         terms = (
-            'Caenorhabditis elegans',
             'Caenorhabditis briggsae',
+            'Caenorhabditis elegans',
             'Caenorhabditis',
-            'C. elegans',
             'C. briggsae',
+            'C. elegans',
             'Protorhabditis',
             'S. cerevisiae',
-            'Drosophila melanogaster',
             'Drosophila grimshawi',
+            'Drosophila melanogaster',
+            'Drosophila pseudoobscura',
             'Drosophila',
-            'D. melanogaster',
             'D. grimshawi',
+            'D. melanogaster',
+            'D. pseudoobscura',
         )
         skeleton = '|'.join(['{}' for term in terms])
         pattern = skeleton.format(*terms)

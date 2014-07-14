@@ -29,14 +29,14 @@ class Command(BaseCommand):
             recorded_pubmed_ids.add(publication.pubmed_id)
 
         for publication in root.iter('item'):
-            title = publication.find('title').text
-            authors = publication.find('author').text
-            journal = publication.find('category').text
+            title = publication.find('title').text.strip()
+            authors = publication.find('author').text.strip()
+            journal = publication.find('category').text.strip()
 
-            pubmed_string = publication.find('guid').text
+            pubmed_string = publication.find('guid').text.strip()
             pubmed_id = int(pubmed_string.split(':')[1])
 
-            description = publication.find('description').text
+            description = publication.find('description').text.strip()
             description_title = (description.split('<p><b>')[1]
                                  .split('</b></p>')[0])
             assert title == description_title

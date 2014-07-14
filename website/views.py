@@ -15,22 +15,37 @@ def home(request):
     """
     Homepage
     """
-    n = get_object_or_404(ResearchArea, id=1)
-    c = get_object_or_404(ResearchArea, id=2)
-    e = get_object_or_404(ResearchArea, id=3)
-    g = get_object_or_404(ResearchArea, id=4)
-    r = get_object_or_404(ResearchArea, id=5)
-    m = get_object_or_404(ResearchArea, id=6)
+    html_names = {
+        1: 'network',
+        2: 'cell',
+        3: 'evolution',
+        4: 'gi',
+        5: 'rna',
+        6: 'mouse',
+    }
+
+    display_order = {
+        'network': 2,
+        'cell': 4,
+        'evolution': 5,
+        'gi': 1,
+        'rna': 3,
+        'mouse': 6,
+    }
+
+    research_areas = ResearchArea.objects.all()
+    for area in research_areas:
+        area.html_name = html_names[area.id]
+        area.display_order = display_order[area.html_name]
+
+    research_areas = sorted(research_areas,
+                            key=lambda x: display_order[x.html_name])
+
     kris = get_object_or_404(User, username='kris')
     fabio = get_object_or_404(User, username='fabio')
 
     template_dictionary = {
-        'network': n,
-        'cell': c,
-        'evolution': e,
-        'gi': g,
-        'rna': r,
-        'mouse': m,
+        'research_areas': research_areas,
         'fabio': fabio,
         'kris': kris,
     }

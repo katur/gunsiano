@@ -26,6 +26,18 @@
   underlying early embryonic development.
 </div>
 
+<table id="research-area-menu" class="bigger-text">
+  <tr>
+  {% for area in research_areas %}
+    <td id={{ area.html_name}}-td>
+      <a id={{ area.html_name }}-link>
+        {{ area.name }}
+      </a>
+    </td>
+  {% endfor %}
+  <tr>
+</table>
+
 <div id="research-areas" class="bigger-text">
   {% for area in research_areas %}
     <div id={{ area.html_name }} class="research-area

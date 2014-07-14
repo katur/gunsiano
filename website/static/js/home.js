@@ -8,8 +8,23 @@ $(document).ready(function() {
 $(window).load(function() {
   if ($("body#home").length) {
     startHomepageScrollEffects();
+    activateResearchMenuLinks();
   }
 })
+
+
+function activateResearchMenuLinks() {
+  $("#research-area-menu a").on("click", function() {
+    var target_id = $(this).attr("id").split("-")[0];
+    var target = $("#" + target_id);
+    var scrollTo = target.offset().top
+    var time = scrollTo / 2.0;
+
+    $("body, html").animate({
+      scrollTop: scrollTo
+    }, time);
+  });
+}
 
 function setScrollHandler() {
   var previousScrollTop = 0;

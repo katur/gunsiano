@@ -96,6 +96,33 @@ body#home
       border-top: 10px solid $green
       margin-left: -10px
 
+  table#research-area-menu
+    table-layout: fixed
+    width: 100%
+    float: left
+    font-size: $small-font-size
+    background: $gray-dark-medium
+
+    td
+      text-align: center
+      vertical-align: middle
+      overflow: hidden
+      text-overflow: ellipsis
+      padding: 5px 8px
+
+      &#mouse-td, &#network-td, &#rna-td
+        width: 14%
+      &#gi-td, &#cell-td
+        width: 18%
+      &#evolution-td
+        width: 22%
+
+      a
+        color: $light-green
+        &:hover
+          color: $light-purple
+          cursor: pointer
+
   // Research Areas //
   .research-area
     $research-area-padding: $vertical-section-whitespace * 3

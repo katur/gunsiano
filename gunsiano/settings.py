@@ -4,11 +4,10 @@ Django settings for Gunsiano lab website.
 import os
 
 try:
-    from local_settings import DEBUG, SECRET_KEY, LOCKDOWN_PASSWORDS, DATABASES
+    from local_settings import DEBUG, SECRET_KEY, DATABASES
 except Exception as e:
     DEBUG = False
     SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
-    LOCKDOWN_PASSWORDS = (os.environ['LOCKDOWN_PASSWORD'])
     import dj_database_url
     DATABASES = {}
     DATABASES['default'] = dj_database_url.config()
@@ -67,7 +66,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'lockdown.middleware.LockdownMiddleware',
 )
 
 ROOT_URLCONF = 'gunsiano.urls'
@@ -90,7 +88,6 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'south',
-    'lockdown',
 
     'universal',
     'website',

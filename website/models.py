@@ -118,26 +118,56 @@ class Publication(models.Model):
             self.authors = embolden('Gunsalus K', self.authors)
 
     def italicize_species_names(self):
-        terms = (
-            'Caenorhabditis briggsae',
-            'Caenorhabditis elegans',
-            'Caenorhabditis',
-            'C. briggsae',
-            'C. elegans',
-            'Protorhabditis',
-            'S. cerevisiae',
-            'Drosophila grimshawi',
-            'Drosophila melanogaster',
-            'Drosophila pseudoobscura',
-            'Drosophila',
-            'D. grimshawi',
-            'D. melanogaster',
-            'D. pseudoobscura',
-        )
-        skeleton = '|'.join(['{}' for term in terms])
-        pattern = skeleton.format(*terms)
+        species_dictionary = {
+            'Caenorhabditis': (
+                'elegans',
+                'briggsae',
+            ),
+            'Protorhabditis': (
+                '',
+            ),
+            'Saccharomyces': (
+                'cerevisiae',
+            ),
+            'Drosophila': (
+                'grimshawi',
+                'melanogaster',
+                'pseudoobscura',
+            )
+        }
+
+        terms = []
+        for genus, species_list in species_dictionary.iteritems():
+            for species in species_list:
+                if species:
+                    terms.append(genus + ' ' + species)
+                    terms.append(genus[0] + '. ' + species)
+            terms.append(genus)
+
+        pattern = '|'.join(terms)
         self.abstract = re.sub(pattern, '*\g<0>*', self.abstract)
         self.title = re.sub(pattern, '*\g<0>*', self.title)
+
+    def split_pubmed_date(self):
+        parts = self.date.split()
+        months = ('jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug',
+                  'sep', 'oct', 'nov', 'dec')
+        try:
+            year = int(parts[0])
+        except:
+            year = 0
+
+        try:
+            month = months.index(parts[1].lower())
+        except:
+            month = 0
+
+        try:
+            day = int(parts[2])
+        except:
+            day = 0
+
+        return (year, month, day)
 
     def __unicode__(self):
         return self.title
@@ -146,8 +176,8 @@ class Publication(models.Model):
         return self.__unicode__()
 
     def __cmp__(self, other):
-        self_year, self_month, self_day = split_pubmed_date(self.date)
-        other_year, other_month, other_day = split_pubmed_date(other.date)
+        self_year, self_month, self_day = self.split_pubmed_date()
+        other_year, other_month, other_day = other.split_pubmed_date()
 
         if self_year != other_year:
             return cmp(self_year, other_year)
@@ -155,28 +185,6 @@ class Publication(models.Model):
             return cmp(self_month, other_month)
         else:
             return cmp(self_day, other_day)
-
-
-def split_pubmed_date(string):
-    parts = string.split()
-    months = ('jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug',
-              'sep', 'oct', 'nov', 'dec')
-    try:
-        year = int(parts[0])
-    except:
-        year = 0
-
-    try:
-        month = months.index(parts[1].lower())
-    except:
-        month = 0
-
-    try:
-        day = int(parts[2])
-    except:
-        day = 0
-
-    return (year, month, day)
 
 
 class JoinLabSection(models.Model):

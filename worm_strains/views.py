@@ -78,9 +78,9 @@ def strain(request, name):
                 else:
                     unthawed_tubes.append(tube)
 
-            stock.thawed_tubes = sorted(
-                thawed_tubes, key=lambda x: x.date_thawed if x.date_thawed else
-                x.position)
+            stock.thawed_tubes = sorted(thawed_tubes,
+                                        reverse=True,
+                                        key=lambda x: x.position)
             stock.unthawed_tubes = sorted(unthawed_tubes,
                                           key=lambda x: x.position)
 

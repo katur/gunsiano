@@ -10,7 +10,7 @@ class Protocol(models.Model):
     title_url = models.CharField(max_length=250, unique=True)
     author = models.ForeignKey(
         User, null=True, blank=True,
-        help_text='Defaults to logged in user if left blank.')
+        help_text='If none selected, will default to logged in user.')
     pub_date = models.DateField('Publication Date', auto_now=True)
     body_markdown = models.TextField('Body', help_text=MARKDOWN_PROMPT)
 

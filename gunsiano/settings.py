@@ -127,11 +127,13 @@ LOGGING = {
 }
 
 MARKDOWN_PROMPT = (
-    'Use Markdown syntax in order to add italics, bullets, etc. See '
+    'Use Markdown syntax for italics, bullets, etc. See '
     '<a href="http://www.darkcoding.net/software/markdown-quick-reference">'
     'a quick reference</a>, '
     '<a href="http://www.markdowntutorial.com/">a tutorial</a>, '
-    'or practice <a href="http://dillinger.io/">here</a>.'
+    'or practice <a href="http://dillinger.io/">here</a>. '
+    'For subscripts: H~2~0. '
+    'For superscripts: 6.02 x 10^23^.'
 )
 
 # For request object in templates

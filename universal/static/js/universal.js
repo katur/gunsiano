@@ -93,7 +93,7 @@ function createBackToTopButton() {
   });
 
   $(window).scroll(function() {
-    var distanceScrolled = parseInt($("body").scrollTop());
+    var distanceScrolled = parseInt($(document).scrollTop());
     if (distanceScrolled > windowHeight) {
       button.fadeIn();
     } else {

@@ -8,7 +8,9 @@ class Protocol(models.Model):
     title_markdown = models.CharField('Title', help_text=MARKDOWN_PROMPT,
                                       max_length=250, unique=True)
     title_url = models.CharField(max_length=250, unique=True)
-    author = models.ForeignKey(User, null=True, blank=True)
+    author = models.ForeignKey(
+        User, null=True, blank=True,
+        help_text='Defaults to logged in user if left blank.')
     pub_date = models.DateField('Publication Date', auto_now=True)
     body_markdown = models.TextField('Body', help_text=MARKDOWN_PROMPT)
 

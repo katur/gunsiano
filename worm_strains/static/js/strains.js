@@ -24,6 +24,6 @@ fixStrainsTopRow = function() {
 
   function setFixedHeaderSize() {
     var tableWidth = $("#strain-table").outerWidth();
-    fixedHeader.outerWidth(tableWidth);
+    fixedHeader.width(tableWidth);
   }
 }

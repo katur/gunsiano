@@ -59,13 +59,14 @@
     </a>
 
     <div id="login-wrapper">
-      <a class="bubble"
+      <a class="bubble
       {% if user.is_authenticated %}
+        logged-in"
         id="welcome-message"
         href="#">Welcome, {{ user.first_name }}!</a>
       {% else %}
         {% url 'login_url' as login_url %}
-        {% ifequal request.path login_url %}class="active"{% endifequal %}
+        {% ifequal request.path login_url %}active{% endifequal %}"
         href="{{ login_url }}">Login</a>
       {% endif %}
 

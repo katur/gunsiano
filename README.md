@@ -1,6 +1,6 @@
 # Gunsiano Lab Website
 
-Django-based website for a _Caenorhabditis elegans_ genomics lab.
+Website for a _Caenorhabditis elegans_ genomics lab.
 
 The public interface gives basic information about the lab and its research.
 
@@ -29,6 +29,8 @@ is the database schema on Lucidchart.
 [South](http://south.readthedocs.org/en/latest/) is used for database migrations.
 
 ## Code
+
+Django/Python. Scripts live in the standard location (an app's management/commands).
 
 CSS is in [SASS](http://sass-lang.com/). Run
 `sass -wc --style compressed universal/static/stylesheets/styles.sass`

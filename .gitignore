@@ -1,7 +1,7 @@
 # Collected static files (can be recollected with collectstatic)
 staticfiles/
-website/static/videos/nathalie_sizes
-backups
+backups/
+materials/
 
 # Database connection and other secret settings
 *local_settings.py

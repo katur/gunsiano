@@ -1,5 +1,5 @@
-Deploying gunsiano Project
-======================
+Installing gunsiano Project
+===========================
 Here is a walkthrough of an Ubuntu deploy, using Apache
 and modwsgi. WORK IN PROGRESS.
 

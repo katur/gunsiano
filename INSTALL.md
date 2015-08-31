@@ -32,6 +32,14 @@ source gunsianovirtualenv/bin/activate
 pip install -r gunsiano/requirements.txt
 ```
 
+Static Files
+------------
+```
+source /opt/local/gunsiano/gunsianovirtualenv/bin/activate
+cd /opt/local/gunsiano/gunsiano
+./manage.py collectstatic
+```
+
 Running Django Built-in Development Server
 ------------------------------------------
 ```

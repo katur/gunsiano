@@ -1,12 +1,12 @@
+# Database connection and other secret settings
+*local_settings.py
+
 # Backups and offline materials
 backups/
 materials/
 
 # Collected static files (can be recollected with collectstatic)
 staticfiles/
-
-# Database connection and other secret settings
-*local_settings.py
 
 # Compiled source
 *.com

@@ -5,7 +5,7 @@
 backups/
 materials/
 
-# Collected static files (can be recollected with collectstatic)
+# Collected static files (can be re-collected with ./manage.py collectstatic)
 staticfiles/
 
 # Compiled source
@@ -17,12 +17,12 @@ staticfiles/
 *.so
 *.pyc
 
-# Temporary files #
+# Temporary files
 *.sassc
 *.scssc
 *.swp
 
-# OS generated files #
+# OS generated files
 .DS_Store
 .DS_Store?
 ._*
@@ -43,7 +43,7 @@ Thumbs.db
 *.tar
 *.zip
 
-# Logs and databases #
+# Logs and databases
 *.log
 *.sql
 *.sqlite

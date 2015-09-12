@@ -10,12 +10,12 @@ class UserProfileInline(admin.StackedInline):
     can_delete = False
     verbose_name_plural = 'profile'
 
-    def queryset(self, request):
+    def get_queryset(self, request):
         """
         Override queryset, so that non-privileged users
         can only edit their own (logged-in) user
         """
-        qs = super(self.__class__, self).queryset(request)
+        qs = super(self.__class__, self).get_queryset(request)
 
         if request.user.has_personnel_admin_privileges():
             return qs
@@ -52,12 +52,12 @@ class MyUserAdmin(UserAdmin):
         'last_name',
     )
 
-    def queryset(self, request):
+    def get_queryset(self, request):
         """
         Override queryset, so that non-privileged users
         can only edit their own (logged-in) user
         """
-        qs = super(self.__class__, self).queryset(request)
+        qs = super(self.__class__, self).get_queryset(request)
 
         if request.user.has_personnel_admin_privileges():
             return qs

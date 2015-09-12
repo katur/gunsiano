@@ -66,7 +66,7 @@ WSGI_APPLICATION = 'gunsiano.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Needed so overridden admin templates take precedence
-    PROJECT_DIR + '/universal/templates/'
+    PROJECT_DIR + '/universal/templates/',
 )
 
 INSTALLED_APPS = (
@@ -78,8 +78,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
-
-    'south',
 
     'universal',
     'website',

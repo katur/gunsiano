@@ -50,6 +50,7 @@ WSGI_APPLICATION = 'gunsiano.wsgi.application'
 
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+# TODO: Not sure if this is necessary. Not included in 1.8 default settings.
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -70,6 +71,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
+# TODO: Clean this up at some point. Not sure if STATICFILES_DIRS and
+#   STATICFILES_FINDERS are needed anymore.
 
 STATIC_URL = '/static/'
 
@@ -82,15 +85,9 @@ STATICFILES_FINDERS = (
 )
 
 
-# Media files (user-uploaded media)
-
-MEDIA_ROOT = ''
-MEDIA_URL = ''
-
-
 # Template loading
-# (clean this up at some point. some of this is necessary for
-# overridden admin template to take precedence)
+# TODO: Clean this up at some point, particularly the url path construction.
+#   some of this is necessary for overridden admin template to take precedence
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -105,6 +102,7 @@ TEMPLATE_DIRS = (
 
 
 # For request object in templates
+# TODO: not sure if contrib.messages line is necessary
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
@@ -113,7 +111,15 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 )
 
 
+# Login
+
+LOGIN_URL = 'login_url'
+LOGIN_REDIRECT_URL = 'home_url'
+
+
 # Administration and Logging
+# TODO: clean up admins/logging. This is a remnant of pre-Django-1.8 defaults
+
 ADMINS = (
     ('Katherine Erickson', 'katherine.erickson@gmail.com'),
 )
@@ -148,12 +154,6 @@ LOGGING = {
         },
     }
 }
-
-
-# Login
-
-LOGIN_URL = 'login_url'
-LOGIN_REDIRECT_URL = 'home_url'
 
 
 # Markdown prompt for Admin

@@ -24,7 +24,6 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
@@ -54,11 +53,6 @@ WSGI_APPLICATION = 'gunsiano.wsgi.application'
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-
-# For Django Sites framework
-
-SITE_ID = 1
 
 
 # Internationalization

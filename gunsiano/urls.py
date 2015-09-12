@@ -11,6 +11,5 @@ urlpatterns = patterns(
     url(r'', include('worm_strains.urls')),
     url(r'', include('storage.urls')),
     url(r'', include('protocols.urls')),
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

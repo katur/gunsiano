@@ -108,6 +108,10 @@ class WormStrain(models.Model):
             else:
                 return 1
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('worm_strains.views.strain', args=[self.name])
+
     def is_conventionally_named(self):
         return re.search('^[A-Z]+\d+$', self.name)
 

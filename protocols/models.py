@@ -16,3 +16,7 @@ class Protocol(models.Model):
 
     def __unicode__(self):
         return self.title_markdown
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('protocols.views.protocol', args=[self.title_url])

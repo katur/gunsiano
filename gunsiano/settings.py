@@ -1,53 +1,40 @@
-"""
-Django settings for Gunsiano lab website.
-"""
-import os
+"""Django settings for Gunsiano lab website.
 
-from local_settings import DEBUG, SECRET_KEY, DATABASES, STATIC_ROOT
+For more information on this file, see
+https://docs.djangoproject.com/en/dev/topics/settings/
+
+For the full list of settings and their values, see
+https://docs.djangoproject.com/en/dev/ref/settings/
+"""
+from local_settings import DATABASES, DEBUG, SECRET_KEY, STATIC_ROOT
+import os
 
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    ('Katherine Erickson', 'katherine.erickson@gmail.com'),
-)
 
-MANAGERS = ADMINS
+# Allow all hosts
 
-LOGIN_URL = 'login_url'
-LOGIN_REDIRECT_URL = 'home_url'
-
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Allow all host headers
 ALLOWED_HOSTS = ['*']
 
-TIME_ZONE = 'America/New_York'
-LANGUAGE_CODE = 'en-us'
-SITE_ID = 1
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
 
-MEDIA_ROOT = ''
-MEDIA_URL = ''
+# Application definition
 
-# Static asset configuration
-SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
-PROJECT_DIR = os.path.join(SETTINGS_DIR, '..')
-STATIC_URL = '/static/'
+INSTALLED_APPS = (
+    'django.contrib.admin',
+    'django.contrib.admindocs',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 
-STATICFILES_DIRS = (
-)
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
-
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
+    'universal',
+    'website',
+    'worm_strains',
+    'vectors',
+    'storage',
+    'protocols',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -64,28 +51,82 @@ ROOT_URLCONF = 'gunsiano.urls'
 
 WSGI_APPLICATION = 'gunsiano.wsgi.application'
 
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+# For Django Sites framework
+
+SITE_ID = 1
+
+
+# Internationalization
+# https://docs.djangoproject.com/en/dev/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'America/New_York'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+
+# Static files (CSS, JavaScript, images)
+# https://docs.djangoproject.com/en/dev/howto/static-files/
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+
+# Media files (user-uploaded media)
+
+MEDIA_ROOT = ''
+MEDIA_URL = ''
+
+
+# Template loading
+# (clean this up at some point. some of this is necessary for
+# overridden admin template to take precedence)
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
+PROJECT_DIR = os.path.join(SETTINGS_DIR, '..')
 TEMPLATE_DIRS = (
-    # Needed so overridden admin templates take precedence
     PROJECT_DIR + '/universal/templates/',
 )
 
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.admin',
-    'django.contrib.admindocs',
 
-    'universal',
-    'website',
-    'worm_strains',
-    'vectors',
-    'storage',
-    'protocols',
+# For request object in templates
+
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
 )
+
+
+# Administration and Logging
+ADMINS = (
+    ('Katherine Erickson', 'katherine.erickson@gmail.com'),
+)
+
+MANAGERS = ADMINS
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -116,6 +157,15 @@ LOGGING = {
     }
 }
 
+
+# Login
+
+LOGIN_URL = 'login_url'
+LOGIN_REDIRECT_URL = 'home_url'
+
+
+# Markdown prompt for Admin
+
 MARKDOWN_PROMPT = (
     'Use Markdown syntax for italics, bullets, etc. See '
     '<a href="http://www.darkcoding.net/software/markdown-quick-reference">'
@@ -124,11 +174,4 @@ MARKDOWN_PROMPT = (
     'or practice <a href="http://dillinger.io/">here</a>. '
     'For subscripts: H~2~0. '
     'For superscripts: 6.02 x 10^23^.'
-)
-
-# For request object in templates
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
-TEMPLATE_CONTEXT_PROCESSORS = TCP + (
-    'django.core.context_processors.request',
-    'django.contrib.messages.context_processors.messages',
 )

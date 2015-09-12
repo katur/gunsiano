@@ -3,15 +3,7 @@ Django settings for Gunsiano lab website.
 """
 import os
 
-try:
-    from local_settings import DEBUG, SECRET_KEY, DATABASES, STATIC_ROOT
-except Exception as e:
-    DEBUG = False
-    SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
-    import dj_database_url
-    DATABASES = {}
-    DATABASES['default'] = dj_database_url.config()
-    STATIC_ROOT = 'staticfiles'
+from local_settings import DEBUG, SECRET_KEY, DATABASES, STATIC_ROOT
 
 TEMPLATE_DEBUG = DEBUG
 

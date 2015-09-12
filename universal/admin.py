@@ -74,7 +74,6 @@ class MyUserAdmin(UserAdmin):
             )
 
             if request.user.has_personnel_admin_privileges():
-                print self.declared_fieldsets
                 return self.declared_fieldsets
             else:
                 return unprivileged_fieldsets

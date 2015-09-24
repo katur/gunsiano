@@ -2,6 +2,9 @@
 
 Website for a _Caenorhabditis elegans_ genomics lab.
 
+
+## Features
+
 The public interface gives basic information about the lab and its research.
 
 Logging in provides interfaces for various internal lab databases.
@@ -45,7 +48,7 @@ The current database implementation is MySQL.
 
 ## Code
 
-Code is mainle in Python, using the Django web framework.
+Code is in Python, using the Django web framework.
 
 CSS is in [SASS](http://sass-lang.com/). Run
 `sass -wc --style compressed universal/static/stylesheets/styles.sass`

@@ -69,8 +69,8 @@ sudo service apache2 start
 sudo service apache2 stop
 ```
 
-Deploying (to be fleshed out and automated)
--------------------------------------------
+Deploying in a Nutshell -- DRAFT
+--------------------------------
 ### As user gunsiano
 
 ```

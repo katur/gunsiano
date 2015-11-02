@@ -46,8 +46,8 @@ are listed in [requirements.txt](requirements.txt).
 
 ## Database
 
-[Here](https://www.lucidchart.com/documents/view/492c-0ebc-51d33178-9110-78400a001d4e)
-is the database schema on Lucidchart.
+[Click here](https://www.lucidchart.com/documents/view/492c-0ebc-51d33178-9110-78400a001d4e)
+to view the database schema on Lucidchart.
 
 The current database implementation is MySQL.
 

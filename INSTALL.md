@@ -76,6 +76,7 @@ mkdir /volume/data1/project/gunsiano/database_backups
 
 mkdir /opt/local/gunsiano/secret
 chmod 700 /opt/local/gunsiano/secret
+
 touch /opt/local/gunsiano/secret/.gunsiano.my.cnf
 chmod 600 /opt/local/gunsiano/secret/.gunsiano.my.cnf
 vi /opt/local/gunsiano/secret/.gunsiano.my.cnf
@@ -85,6 +86,11 @@ vi /opt/local/gunsiano/secret/.gunsiano.my.cnf
 
 mkdir /opt/local/gunsiano/bin
 chmod 775 /opt/local/gunsiano/bin
+
+vi ~/.profile
+> PATH="/opt/local/gunsiano/bin:$PATH"
+source ~/.profile
+
 touch /opt/local/gunsiano/bin/mysqldump_gunsiano
 chmod 774 /opt/local/gunsiano/bin/mysqldump_gunsiano
 vi /opt/local/gunsiano/bin/mysqldump_gunsiano

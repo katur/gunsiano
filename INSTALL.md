@@ -4,8 +4,8 @@ Here is a walkthrough of an Ubuntu deploy, using Apache
 and modwsgi. WORK IN PROGRESS.
 
 
-MySQL Database
---------------
+Import MySQL Database
+---------------------
 ```
 mysql -u gunsiano -p gunsiano < <sql dump filename>
 ```
@@ -68,6 +68,35 @@ sudo service apache2 restart
 sudo service apache2 start
 sudo service apache2 stop
 ```
+
+MySQL dumping
+-------------
+```
+mkdir /volume/data1/project/gunsiano/database_backups
+
+mkdir /opt/local/gunsiano/secret
+chmod 700 /opt/local/gunsiano/secret
+touch /opt/local/gunsiano/secret/.gunsiano.my.cnf
+chmod 600 /opt/local/gunsiano/secret/.gunsiano.my.cnf
+vi /opt/local/gunsiano/secret/.gunsiano.my.cnf
+> [client]
+> user = gunsiano_ro
+> password = <password>
+
+mkdir /opt/local/gunsiano/bin
+chmod 775 /opt/local/gunsiano/bin
+touch /opt/local/gunsiano/bin/mysqldump_gunsiano
+chmod 774 /opt/local/gunsiano/bin/mysqldump_gunsiano
+vi /opt/local/gunsiano/bin/mysqldump_gunsiano
+
+> #!/bin/sh
+> 
+> /usr/bin/mysqldump --defaults-file=/opt/local/gunsiano/secret/.gunsiano.my.cnf --single-transaction gunsiano | pbzip2 -c -p16 > /volume/data1/project/gunsiano/database_backups/gunsiano_`date +%Y-%m-%d_%H-%M-%S`.sql.bz2
+```
+
+
+Create file /opt/local/gunsiano/bin/mysqldump_gunsiano with:
+
 
 Deploying in a Nutshell -- DRAFT
 --------------------------------

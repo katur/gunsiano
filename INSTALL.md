@@ -10,6 +10,7 @@ Import MySQL Database
 mysql -u gunsiano -p gunsiano < <sql dump filename>
 ```
 
+
 Code
 ----
 ```
@@ -19,6 +20,7 @@ cd /opt/local/gunsiano/gunsiano/gunsiano
 # copy local_settings.py from development computer
 # edit local_settings with database connection info, and set DEBUG=False
 ```
+
 
 Virtual Environment and Dependencies
 ------------------------------------
@@ -32,6 +34,7 @@ source gunsianovirtualenv/bin/activate
 pip install -r gunsiano/requirements.txt
 ```
 
+
 Static Files
 ------------
 ```
@@ -40,12 +43,14 @@ cd /opt/local/gunsiano/gunsiano
 ./manage.py collectstatic
 ```
 
+
 Running Django Built-in Development Server
 ------------------------------------------
 ```
 source /opt/local/gunsiano/gunsianovirtualenv/bin/activate
 /opt/local/gunsiano/gunsiano/manage.py runserver <IP address>:8000
 ```
+
 
 Apache Configuration
 --------------------
@@ -61,6 +66,7 @@ sudo vi /etc/apache2/ports.conf
 # add line to Listen 80
 ```
 
+
 Apache Commands
 ---------------
 ```
@@ -68,6 +74,7 @@ sudo service apache2 restart
 sudo service apache2 start
 sudo service apache2 stop
 ```
+
 
 Database Backups
 ----------------

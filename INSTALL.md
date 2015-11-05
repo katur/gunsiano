@@ -69,8 +69,8 @@ sudo service apache2 start
 sudo service apache2 stop
 ```
 
-MySQL dumping
--------------
+Database Backups
+----------------
 ```
 mkdir /volume/data1/project/gunsiano/database_backups
 
@@ -96,12 +96,9 @@ chmod 774 /opt/local/gunsiano/bin/mysqldump_gunsiano
 vi /opt/local/gunsiano/bin/mysqldump_gunsiano
 
 > #!/bin/sh
-> 
+>
 > /usr/bin/mysqldump --defaults-file=/opt/local/gunsiano/secret/.gunsiano.my.cnf --single-transaction gunsiano | pbzip2 -c -p16 > /volume/data1/project/gunsiano/database_backups/gunsiano_`date +%Y-%m-%d_%H-%M-%S`.sql.bz2
 ```
-
-
-Create file /opt/local/gunsiano/bin/mysqldump_gunsiano with:
 
 
 Deploying in a Nutshell -- DRAFT

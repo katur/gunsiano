@@ -84,9 +84,9 @@ mkdir /volume/data1/project/gunsiano/database_backups
 mkdir /opt/local/gunsiano/secret
 chmod 700 /opt/local/gunsiano/secret
 
-touch /opt/local/gunsiano/secret/.gunsiano.my.cnf
-chmod 600 /opt/local/gunsiano/secret/.gunsiano.my.cnf
-vi /opt/local/gunsiano/secret/.gunsiano.my.cnf
+touch /opt/local/gunsiano/secret/gunsiano.my.cnf
+chmod 600 /opt/local/gunsiano/secret/gunsiano.my.cnf
+vi /opt/local/gunsiano/secret/gunsiano.my.cnf
 > [client]
 > user = gunsiano_ro
 > password = <password>
@@ -104,7 +104,7 @@ vi /opt/local/gunsiano/bin/mysqldump_gunsiano
 
 > #!/bin/sh
 >
-> /usr/bin/mysqldump --defaults-file=/opt/local/gunsiano/secret/.gunsiano.my.cnf --single-transaction gunsiano | pbzip2 -c -p16 > /volume/data1/project/gunsiano/database_backups/gunsiano_`date +%Y-%m-%d_%H-%M-%S`.sql.bz2
+> /usr/bin/mysqldump --defaults-file=/opt/local/gunsiano/secret/gunsiano.my.cnf --single-transaction gunsiano | pbzip2 -c -p16 > /volume/data1/project/gunsiano/database_backups/gunsiano_`date +%Y-%m-%d_%H-%M-%S`.sql.bz2
 ```
 
 

@@ -94,9 +94,9 @@ vi /opt/local/gunsiano/secret/gunsiano.my.cnf
 mkdir /opt/local/gunsiano/bin
 chmod 775 /opt/local/gunsiano/bin
 
-vi ~/.profile
-> PATH="/opt/local/gunsiano/bin:$PATH"
-source ~/.profile
+vi ~/.zshenv
+> path=(/opt/local/gunsiano/bin $path)
+source ~/.zshenv
 
 touch /opt/local/gunsiano/bin/mysqldump_gunsiano
 chmod 774 /opt/local/gunsiano/bin/mysqldump_gunsiano

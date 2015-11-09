@@ -15,7 +15,7 @@ vi gunsiano/gunsiano/local_settings.py
 
 ### Set up dev database
 
-Add dev database connection info to `gunsiano/gunsiano/local_settings.py`.
+Add dev database connection info to `gunsiano/local_settings.py`.
 This might be a dev database that already exists on another machine,
 or a new database on your own machine.
 You might import an existing dump, or you might generate an empty database

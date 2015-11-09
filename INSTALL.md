@@ -1,7 +1,10 @@
 # Installing `gunsiano` Project
 
+1. [Development](#development)
+1. [Production](#production)
 
-## Development Installation
+
+## Development
 
 
 #### Code
@@ -66,7 +69,7 @@ sass --compile --style compressed website/static/stylesheets/styles.sass
 
 
 
-## Production Installation
+## Production
 
 Here is a walkthrough of how I deployed this with Apache and modwsgi on Ubuntu.
 

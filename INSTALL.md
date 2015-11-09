@@ -79,7 +79,7 @@ This sysadmin steps includes the following:
 - installing MySQL
 - creating a UNIX user for this project (named gunsiano)
 - creating the project directory at /opt/local/gunsiano, owned by gunsiano
-- creating a directory for project backups at /volume/data1/project/gunsiano, owned by gunsiano
+- creating a directory for data and backups at /volume/data1/project/gunsiano, owned by gunsiano
 - creating a MySQL database (gunsiano)
 - creating a MySQL read-write user (gunsiano) and a MySQL read-only user (gunsiano_ro)
 

@@ -47,6 +47,6 @@ to view the database schema on Lucidchart
 to download a PDF).
 
 
-## Dependencies and Installation
+## Installation
 
 See [INSTALL.md](INSTALL.md).

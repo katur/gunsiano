@@ -4,7 +4,7 @@
 ## Development Installation
 
 
-### Get code
+#### Code
 
 ```
 git clone https://github.com/katur/gunsiano.git
@@ -13,7 +13,7 @@ vi gunsiano/gunsiano/local_settings.py
 ```
 
 
-### Set up dev database
+#### Database
 
 Add dev database connection info to `gunsiano/local_settings.py`.
 This might be a dev database that already exists on another machine,
@@ -22,7 +22,7 @@ You might import an existing dump, or you might generate an empty database
 from scratch with `./manage.py migrate`. Do whatever suits your needs.
 
 
-### Python dependencies
+#### Python Dependencies
 
 Python version is listed in [runtime.txt](runtime.txt).
 
@@ -44,7 +44,7 @@ deactivate
 ```
 
 
-### SASS compilation
+#### SASS Compilation
 
 To compile SASS to CSS:
 ```
@@ -52,14 +52,14 @@ sass --compile --style compressed website/static/stylesheets/styles.sass
 ```
 
 
-### Running Django's built-in dev server
+#### Running Django's Built-In Development Server
 
 ```
 ./manage.py runserver <IP address>:8000
 ```
 
 
-### Some other notes about development
+#### Some Other Notes About Development
 
 - There is no need to collect static files in development.
 (When DEBUG=True, Django finds static files dynamically across the apps.)
@@ -84,14 +84,14 @@ This sysadmin steps includes the following:
 - creating a MySQL read-write user (gunsiano) and a MySQL read-only user (gunsiano_ro)
 
 
-### Import database
+#### Database
 
 ```
 mysql -u gunsiano -p gunsiano < <sql dump filename>
 ```
 
 
-### Automate database backups
+#### Database Backups
 
 ```
 mkdir /volume/data1/project/gunsiano/database_backups
@@ -125,7 +125,7 @@ crontab -e
 ```
 
 
-### Get code
+#### Code
 
 ```
 cd /opt/local/gunsiano
@@ -136,7 +136,7 @@ cd /opt/local/gunsiano/gunsiano/gunsiano
 ```
 
 
-### Virtual environment and dependencies
+#### Dependencies
 
 ```
 cd /opt/local/gunsiano
@@ -150,7 +150,7 @@ pip install -r /opt/local/gunsiano/gunsiano/requirements.txt
 ```
 
 
-### Collecting static files
+#### Static Files
 
 ```
 source /opt/local/gunsiano/gunsianovirtualenv/bin/activate
@@ -159,7 +159,7 @@ cd /opt/local/gunsiano/gunsiano
 ```
 
 
-### Apache configuration
+#### Apache Configuration
 
 ```
 mkdir /opt/local/gunsiano/apache2
@@ -176,7 +176,7 @@ sudo vi /etc/apache2/ports.conf
 ```
 
 
-### Apache commands
+#### Apache Commands
 
 ```
 sudo service apache2 restart
@@ -185,7 +185,7 @@ sudo service apache2 stop
 ```
 
 
-### Deploying changes
+#### Deploying Changes
 
 #### *As project user...*
 ```

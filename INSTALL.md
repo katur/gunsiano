@@ -177,6 +177,7 @@ sudo vi /etc/apache2/ports.conf
 
 
 ### Apache commands
+
 ```
 sudo service apache2 restart
 sudo service apache2 start

@@ -6,7 +6,7 @@ https://docs.djangoproject.com/en/dev/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
-from local_settings import DATABASES, DEBUG, SECRET_KEY, STATIC_ROOT
+from local_settings import DEBUG, SECRET_KEY, DATABASES
 import os
 
 TEMPLATE_DEBUG = DEBUG
@@ -75,6 +75,8 @@ USE_TZ = True
 #   STATICFILES_FINDERS are needed anymore.
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = 'staticfiles'
 
 STATICFILES_DIRS = (
 )

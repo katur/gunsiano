@@ -71,30 +71,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
-# TODO: Clean this up at some point. Not sure if STATICFILES_DIRS and
-#   STATICFILES_FINDERS are needed anymore.
 
 STATIC_URL = '/static/'
 
 STATIC_ROOT = 'staticfiles'
 
-STATICFILES_DIRS = (
-)
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
-
 
 # Template loading
 # TODO: Clean this up at some point, particularly the url path construction.
 #   some of this is necessary for overridden admin template to take precedence
-
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
 
 SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
 PROJECT_DIR = os.path.join(SETTINGS_DIR, '..')

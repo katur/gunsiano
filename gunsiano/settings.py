@@ -1,4 +1,4 @@
-"""Django settings for Gunsiano lab website.
+"""Django settings for the Gunsiano lab website.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/dev/topics/settings/
@@ -79,7 +79,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 
 
-# Template loading
+# Templates
 # TODO: Clean this up at some point, particularly the url path construction.
 #   some of this is necessary for overridden admin template to take precedence
 
@@ -89,10 +89,8 @@ TEMPLATE_DIRS = (
     PROJECT_DIR + '/universal/templates/',
 )
 
-
 # For request object in templates
 # TODO: not sure if contrib.messages line is necessary
-
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',

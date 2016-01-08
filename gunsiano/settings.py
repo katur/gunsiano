@@ -27,6 +27,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'jquery',
+
     'universal',
     'website',
     'worm_strains',

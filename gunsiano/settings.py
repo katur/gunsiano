@@ -18,8 +18,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 from local_settings import DEBUG, SECRET_KEY, DATABASES
 
-TEMPLATE_DEBUG = DEBUG
-
 
 # Security
 
@@ -87,12 +85,27 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 
 
-# For request object in templates
+# Templates
+# (Customized to provide request object in templates)
 
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
-TEMPLATE_CONTEXT_PROCESSORS = TCP + (
-    'django.core.context_processors.request',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
+            ],
+        },
+    },
+]
 
 
 # Login

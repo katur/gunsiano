@@ -16,7 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Local configuration
 
-from local_settings import DEBUG, SECRET_KEY, DATABASES
+from local_settings import DEBUG, SECRET_KEY, DATABASES, GOOGLE_ANALYTICS_ID
 
 
 # Security
@@ -26,7 +26,7 @@ ALLOWED_HOSTS = ['*']
 
 # Administration
 
-ADMINS = [('Katherine Erickson', 'katherine.erickson@gmail.com'),]
+ADMINS = [('Katherine Erickson', 'katherine.erickson@gmail.com')]
 
 
 # Application definition
@@ -102,6 +102,7 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+                'gunsiano.context_processors.google_analytics',
             ],
         },
     },

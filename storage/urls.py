@@ -1,9 +1,10 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+
+from . import views
 
 
-urlpatterns = patterns(
-    'storage.views',
-    url(r'^storage$', 'storage', name='storage_url'),
-    url(r'^storage/(?P<container_id>.+)$', 'storage_detail',
+urlpatterns = [
+    url(r'^storage/$', views.storage, name='storage_url'),
+    url(r'^storage/(?P<container_id>.+)/$', views.storage_detail,
         name='storage_detail_url'),
-)
+]

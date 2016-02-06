@@ -1,23 +1,15 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+
+from . import views
 
 
-urlpatterns = patterns(
-    'website.views',
-    url(r'^$', 'home', name='home_url'),
-    url(r'^people$', 'people', name='people_url'),
-    url(r'^person/(?P<username>.+)$', 'person', name='person_url'),
-    url(r'^publications$', 'publications', name='publications_url'),
-    url(r'^resources$', 'resources', name='resources_url'),
-    url(r'^join$', 'join', name='join_url'),
-    url(r'^contact$', 'contact', name='contact_url'),
-    url(r'^lab_tools$', 'lab_tools', name='lab_tools_url'),
-)
-
-
-urlpatterns += patterns(
-    '',
-    url(r'^login/$', 'django.contrib.auth.views.login',
-        {'template_name': 'login.html'}, name='login_url'),
-    url(r'^logout/$', 'django.contrib.auth.views.logout',
-        {'next_page': '/'}, name='logout_url'),
-)
+urlpatterns = [
+    url(r'^$', views.home, name='home_url'),
+    url(r'^people/$', views.people, name='people_url'),
+    url(r'^person/(?P<username>.+)/$', views.person, name='person_url'),
+    url(r'^publications/$', views.publications, name='publications_url'),
+    url(r'^resources/$', views.resources, name='resources_url'),
+    url(r'^join/$', views.join, name='join_url'),
+    url(r'^contact/$', views.contact, name='contact_url'),
+    url(r'^lab-tools/$', views.lab_tools, name='lab_tools_url'),
+]

@@ -1,8 +1,9 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+
+from . import views
 
 
-urlpatterns = patterns(
-    'worm_strains.views',
-    url(r'^strains', 'strains', name='strains_url'),
-    url(r'^strain/(?P<name>.+)$', 'strain', name='strain_url'),
-)
+urlpatterns = [
+    url(r'^strains/', views.strains, name='strains_url'),
+    url(r'^strain/(?P<name>.+)/$', views.strain, name='strain_url'),
+]

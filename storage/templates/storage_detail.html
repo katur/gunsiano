@@ -1,10 +1,12 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load extra_tags %}
+
 
 {% block body_id %}storage-detail{% endblock %}
 {% block page_title %}
-  Contents of {{ container.get_ancestor_title }}
+Contents of {{ container.get_ancestor_title }}
 {% endblock %}
+
 
 {% block content %}
 <table>

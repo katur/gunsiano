@@ -112,6 +112,10 @@ class WormStrain(models.Model):
         from django.core.urlresolvers import reverse
         return reverse('worm_strains.views.strain', args=[self.name])
 
+    def get_wormbase_url(self):
+        return ('http://www.wormbase.org/species/c_elegans/'
+                'strain/{}'.format(self.name))
+
     def is_conventionally_named(self):
         return re.search('^[A-Z]+\d+$', self.name)
 

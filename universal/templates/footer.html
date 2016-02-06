@@ -1,16 +1,22 @@
+{% load staticfiles%}
+
+
 <div id="wrap-footer">
   <div id="footer">
     <div id="logos">
       <a href="http://www.nyu.edu/">
-        <img alt="NYU logo" src="{{ STATIC_URL }}images/nyu-logo.png"/>
+        <img alt="NYU logo"
+          src="{% static 'images/nyu-logo.png' %}" />
       </a>
 
       <a href="http://nyuad.nyu.edu/">
-        <img alt="NYU Abu Dhabi logo" src="{{ STATIC_URL }}images/nyuad-logo.png"/>
+        <img alt="NYU Abu Dhabi logo"
+          src="{% static 'images/nyuad-logo.png' %}" />
       </a>
 
       <a href="http://cgsb.as.nyu.edu/">
-        <img alt="NYU CGSB logo" src="{{ STATIC_URL }}images/cgsb-logo.png"/>
+        <img alt="NYU CGSB logo"
+        src="{% static 'images/cgsb-logo.png' %}" />
       </a>
     </div>
 

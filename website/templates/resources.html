@@ -1,8 +1,10 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load extra_tags %}
+
 
 {% block body_id %}resources{% endblock %}
 {% block page_title %}Lab-Generated Community Resources{% endblock %}
+
 
 {% block content %}
 {% for resource in resources %}
@@ -10,8 +12,9 @@
   <a href="{{ resource.url }}">
     <div class="resource">
       <img width="160px"
-          src="{{ STATIC_URL }}images/resource_logos/{{ resource.logo_filename }}"
-          alt="logo for this resource" />
+        src="{{ STATIC_URL }}images/resource_logos/{{ resource.logo_filename }}"
+        alt="logo for this resource" />
+
       <span>
         {{ resource.description|enhanced_markdown }}
       </span>

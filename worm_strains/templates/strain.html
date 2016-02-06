@@ -1,8 +1,10 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load extra_tags %}
+
 
 {% block body_id %}strain{% endblock %}
 {% block page_title %}{{ strain }}{% endblock %}
+
 
 {% block content %}
 <div id="sections">
@@ -17,8 +19,7 @@
 
     {% if strain.on_wormbase %}
     <span>
-      <a class="external-link"
-          href="http://www.wormbase.org/species/c_elegans/strain/{{ strain }}">
+      <a class="external-link" href="{{ strain.get_wormbase_url }}">
         See strain on wormbase
       </a>
     </span>

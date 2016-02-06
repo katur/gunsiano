@@ -1,9 +1,11 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load extra_tags %}
+
 
 {% block body_id %}protocol{% endblock %}
 {% block page_title_style %}class="clear-and-float"{% endblock%}
 {% block page_title %}{{ protocol|enhanced_markdown }}{% endblock %}
+
 
 {% block content %}
 <span id="authorship">

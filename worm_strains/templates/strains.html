@@ -1,7 +1,9 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
 
 {% block body_id %}strains{% endblock %}
 {% block page_title %}Worm Strains{% endblock %}
+
 
 {% block content %}
 <form action={% url 'strains_url' %} method="get">
@@ -23,7 +25,7 @@
   <tr>
     <td>
       <a href={% url 'strain_url' name=strain %}>
-        {{ strain }}
+        {{ strain.name }}
       </a>
     </td>
 

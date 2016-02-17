@@ -17,7 +17,7 @@ HTML is in the
 
 CSS is in [SASS](http://sass-lang.com/).
 
-Javascript in [jQuery](http://jquery.com/).
+Javascript uses [jQuery](http://jquery.com/).
 
 Managerial scripts live in the standard Django location:
 `appname/management/commands/scriptname.py`, to be run with

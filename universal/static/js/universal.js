@@ -4,20 +4,23 @@ $(document).ready(function() {
   positionFooter();
   hoverTags();
 
-  if ($("body#publications").length || $("body#strains").length) {
+  if ($("body#publications").length || $("body#worms").length) {
     createBackToTopButton();
   }
 })
 
+
 $(window).load(function() {
   positionFooter();
 })
+
 
 function setResizeHandler() {
   $(window).resize(function() {
     positionFooter();
   })
 }
+
 
 function createDropdown() {
   welcomeMessage = $("#welcome-message");
@@ -56,6 +59,7 @@ function createDropdown() {
   });
 }
 
+
 function positionFooter() {
   footer = $("#wrap-footer");
   footerHeight = footer.outerHeight();
@@ -80,6 +84,7 @@ function positionFooter() {
   )
 }
 
+
 function createBackToTopButton() {
   $("#content").append(
     "<a href='#' id='back-to-top' class='bubble'>Back to top</a>"
@@ -101,6 +106,7 @@ function createBackToTopButton() {
     }
   });
 }
+
 
 window.hoverTags = function() {
   $('body').on('mouseover', '[data-hover-tag]', function(e) {

@@ -1,14 +1,13 @@
 $(document).ready(function() {
-  if ($("body#strains").length) {
-    fixStrainsTopRow();
+  if ($("body#worms").length) {
+    fixWormsTopRow();
   }
 })
 
-fixStrainsTopRow = function() {
-  var strainTable = $("#strain-table");
-  var tableOffset = $("body#strains table").offset().top;
-  var header = $("body#strains table thead").clone();
-  var fixedHeader = $("body#strains #table-thead-fixed").append(header);
+fixWormsTopRow = function() {
+  var tableOffset = $("body#worms table").offset().top;
+  var header = $("body#worms table thead").clone();
+  var fixedHeader = $("body#worms #table-thead-fixed").append(header);
   setFixedHeaderSize();
 
   $(window).resize(setFixedHeaderSize);
@@ -23,7 +22,7 @@ fixStrainsTopRow = function() {
   });
 
   function setFixedHeaderSize() {
-    var tableWidth = $("#strain-table").outerWidth();
+    var tableWidth = $("#worm-table").outerWidth();
     fixedHeader.width(tableWidth);
   }
 }

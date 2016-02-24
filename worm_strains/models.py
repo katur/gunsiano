@@ -1,6 +1,7 @@
 import re
 
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import formats
 
@@ -109,8 +110,7 @@ class WormStrain(models.Model):
                 return 1
 
     def get_absolute_url(self):
-        from django.core.urlresolvers import reverse
-        return reverse('worm_strains.views.strain', args=[self.name])
+        return reverse('worm_url', args=[self.name])
 
     def get_wormbase_url(self):
         return ('http://www.wormbase.org/species/c_elegans/'

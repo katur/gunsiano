@@ -2,83 +2,83 @@
 {% load extra_tags %}
 
 
-{% block body_id %}strain{% endblock %}
-{% block page_title %}{{ strain }}{% endblock %}
+{% block body_id %}worm{% endblock %}
+{% block page_title %}{{ worm }}{% endblock %}
 
 
 {% block content %}
 <div id="sections">
   <!-- Identification -->
-  {% if strain.species or strain.on_wormbase or strain.genotype %}
+  {% if worm.species or worm.on_wormbase or worm.genotype %}
   <div class="section">
-    {% if strain.species %}
+    {% if worm.species %}
     <span>
-      <b>Species:</b> <i>{{ strain.species }}</i>
+      <b>Species:</b> <i>{{ worm.species }}</i>
     </span>
     {% endif %}
 
-    {% if strain.on_wormbase %}
+    {% if worm.on_wormbase %}
     <span>
-      <a class="external-link" href="{{ strain.get_wormbase_url }}">
-        See strain on wormbase
+      <a class="external-link" href="{{ worm.get_wormbase_url }}">
+        See worm on wormbase
       </a>
     </span>
     {% endif %}
 
-    {% if strain.genotype %}
+    {% if worm.genotype %}
     <span>
-      <b>Genotype:</b> {{ strain.genotype }}
+      <b>Genotype:</b> {{ worm.genotype }}
     </span>
     {% endif %}
   </div>
   {% endif %}
 
   <!-- Origin -->
-  {% if strain.created_by or strain.lab or strain.date_created or strain.mutagen %}
+  {% if worm.created_by or worm.lab or worm.date_created or worm.mutagen %}
   <hr>
   <h4>Origin</h4>
 
   <div class="section">
-    {% if strain.created_by %}
+    {% if worm.created_by %}
     <span>
-      <b>Made by:</b> {{ strain.created_by.get_full_name }}
+      <b>Made by:</b> {{ worm.created_by.get_full_name }}
     </span>
     {% endif %}
 
-    {% if strain.lab %}
+    {% if worm.lab %}
     <span>
-      <b>Lab:</b> {{ strain.lab }}
+      <b>Lab:</b> {{ worm.lab }}
     </span>
     {% endif %}
 
-    {% if strain.date_created %}
+    {% if worm.date_created %}
     <span>
-      <b>Made on:</b> {{ strain.date_created }}
+      <b>Made on:</b> {{ worm.date_created }}
     </span>
     {% endif %}
 
-    {% if strain.mutagen %}
+    {% if worm.mutagen %}
     <span>
-      <b>Mutagen or Method Used:</b> {{ strain.mutagen }}
+      <b>Mutagen or Method Used:</b> {{ worm.mutagen }}
     </span>
     {% endif %}
 
-    {% if strain.parent_strain %}
+    {% if worm.parent_worm %}
     <span>
-      <b>Parent Strain:</b> {{ strain.parent_strain }}
+      <b>Parent worm:</b> {{ worm.parent_worm }}
     </span>
     {% endif %}
   </div>
   {% endif %}
 
   <!-- Other information -->
-  {% if strain.remarks %}
+  {% if worm.remarks %}
   <hr>
   <h4>Remarks</h4>
 
   <div class="section">
     <span>
-      {{ strain.remarks|enhanced_markdown }}
+      {{ worm.remarks|enhanced_markdown }}
     </span>
   </div>
   {% endif %}

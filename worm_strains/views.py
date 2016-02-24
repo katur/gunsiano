@@ -8,20 +8,20 @@ from storage.models import Stock, Container
 
 
 @login_required
-def strains(request):
+def worms(request):
     """
-    Page listing worms strains, with possible filtering
+    Page listing worms strains.
     """
-    strains = WormStrain.objects.all()
+    worms = WormStrain.objects.all()
 
     if 'query' in request.GET:
         # Whitespace-separated terms need be present, not necessarily adjacent
         terms = request.GET['query'].split()
         if 'not_frozen' in terms:
-            strains = [strain for strain in strains if not strain.is_frozen()]
+            worms = [worm for worm in worms if not worm.is_frozen()]
         else:
             for term in terms:
-                strains = strains.filter(
+                worms = worms.filter(
                     Q(name__icontains=term) |
                     Q(genotype__icontains=term) |
                     Q(remarks__icontains=term) |
@@ -30,27 +30,27 @@ def strains(request):
                     Q(species__name__icontains=term)
                 )
 
-    strains = sorted(strains)
+    worms = sorted(worms)
 
     template_dictionary = {
-        'strains': strains,
+        'worms': worms,
     }
-    return render_to_response('strains.html', template_dictionary,
+    return render_to_response('worms.html', template_dictionary,
                               context_instance=RequestContext(request))
 
 
 @login_required
-def strain(request, name):
+def worm(request, name):
     """
     Page showing information on a particular worm strain.
     """
-    strain = get_object_or_404(WormStrain, name=name)
-    lines = (WormStrainLine.objects.filter(strain=strain)
+    worm = get_object_or_404(WormStrain, name=name)
+    lines = (WormStrainLine.objects.filter(strain=worm)
              .order_by('date_received'))
 
-    lab_code = strain.get_lab_code()
+    lab_code = worm.get_lab_code()
     if lab_code:
-        strain.lab = WormLab.objects.filter(strain_code=lab_code).first()
+        worm.lab = WormLab.objects.filter(strain_code=lab_code).first()
 
     for line in lines:
         line.stocks = (Stock.objects
@@ -85,8 +85,8 @@ def strain(request, name):
                                           key=lambda x: x.position)
 
     template_dictionary = {
+        'worm': worm,
         'lines': lines,
-        'strain': strain,
     }
-    return render_to_response('strain.html', template_dictionary,
+    return render_to_response('worm.html', template_dictionary,
                               context_instance=RequestContext(request))

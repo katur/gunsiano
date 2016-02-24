@@ -4,6 +4,6 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^strains/', views.strains, name='strains_url'),
-    url(r'^strain/(?P<name>.+)/$', views.strain, name='strain_url'),
+    url(r'^worms/', views.worms, name='worms_url'),
+    url(r'^worm/(?P<name>.+)/$', views.worm, name='worm_url'),
 ]

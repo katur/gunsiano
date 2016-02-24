@@ -5,6 +5,7 @@ $(document).ready(function() {
   }
 })
 
+
 $(window).load(function() {
   if ($("body#home").length) {
     startHomepageScrollEffects();
@@ -26,6 +27,7 @@ function activateResearchMenuLinks() {
   });
 }
 
+
 function setScrollHandler() {
   var previousScrollTop = 0;
   $(window).scroll(function(event){
@@ -40,6 +42,7 @@ function setScrollHandler() {
     previousScrollTop = currentScrollTop;
   });
 }
+
 
 function startWormAnimation() {
   var xStart = 131;
@@ -150,6 +153,7 @@ function startWormAnimation() {
   }
 }
 
+
 function startHomepageScrollEffects() {
   initializeWormLayers();
   initializePhylogenyMask();
@@ -254,6 +258,7 @@ function startHomepageScrollEffects() {
   }
 }
 
+
 Network = (function() {
   function Network(canvasElement, scrollFactor, pixelsPerNode, nodeRadius, edgeThickness) {
     this.canvasElement = canvasElement;
@@ -346,6 +351,7 @@ Network = (function() {
   return Network;
 })();
 
+
 Node = (function() {
   function Node(context, radius, x, y, isHub) {
     this.context = context;
@@ -365,6 +371,7 @@ Node = (function() {
 
   return Node;
 })();
+
 
 Edge = (function() {
   function Edge(context, thickness, nodeA, nodeB) {

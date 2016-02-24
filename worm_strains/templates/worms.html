@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 
 
-{% block body_id %}strains{% endblock %}
+{% block body_id %}worms{% endblock %}
 {% block page_title %}Worm Strains{% endblock %}
 
 
 {% block content %}
-<form action={% url 'strains_url' %} method="get">
+<form action={% url 'worms_url' %} method="get">
   <input type="text" name="query">
   <input type="submit" value="Search">
 </form>
 
-<span>{{ strains|length }} strains</span>
+<span>{{ worms|length }} worm strains</span>
 
-<table id="strain-table">
+<table id="worm-table">
   <thead>
     <tr>
       <th id="strain-column">Strain Name</th>
@@ -21,15 +21,15 @@
     </tr>
   </thead>
 
-  {% for strain in strains %}
+  {% for worm in worms %}
   <tr>
     <td>
-      <a href={% url 'strain_url' name=strain %}>
-        {{ strain.name }}
+      <a href={{ worm.get_absolute_url }}>
+        {{ worm.name }}
       </a>
     </td>
 
-    <td>{{ strain.genotype }}</td>
+    <td>{{ worm.genotype }}</td>
   </tr>
   {% endfor %}
 </table>

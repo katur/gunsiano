@@ -51,7 +51,7 @@ deactivate
 
 To compile SASS to CSS:
 ```
-sass --compile --style compressed website/static/stylesheets/styles.sass
+sass -wc --style compressed universal/static/stylesheets/styles.sass
 ```
 
 

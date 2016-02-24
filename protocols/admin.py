@@ -11,7 +11,9 @@ class ProtocolAdmin(admin.ModelAdmin):
         'pub_date',
     )
 
-    fields = ('title', 'author', 'text')
+    search_fields = ('title',)
+
+    fields = ('title', 'author', 'text',)
 
     def save_model(self, request, obj, form, change):
         # Set author to whoever is logged in

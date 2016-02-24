@@ -15,9 +15,7 @@ class WormStrainAdmin(admin.ModelAdmin):
         'on_wormbase',
     )
 
-    list_filter = (
-        'created_by',
-    )
+    search_fields = ('name', 'genotype', 'species__name',)
 
 
 class WormStrainLineAdmin(admin.ModelAdmin):
@@ -32,8 +30,9 @@ class WormStrainLineAdmin(admin.ModelAdmin):
 
     list_filter = (
         'created_internally',
-        'received_by',
     )
+
+    search_fields = ('strain__name', 'strain__genotype', 'received_from',)
 
 
 class WormLabAdmin(admin.ModelAdmin):
@@ -43,9 +42,20 @@ class WormLabAdmin(admin.ModelAdmin):
         'allele_code',
     )
 
+    search_fields = ('lab',)
+
+
+class TransgeneAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'vector',
+    )
+
+    search_fields = ('name',)
+
 
 admin.site.register(Mutagen)
-admin.site.register(Transgene)
+admin.site.register(Transgene, TransgeneAdmin)
 admin.site.register(WormLab, WormLabAdmin)
 admin.site.register(WormSpecies)
 admin.site.register(WormStrain, WormStrainAdmin)

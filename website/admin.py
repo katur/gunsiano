@@ -119,8 +119,11 @@ class PublicationAdmin(admin.ModelAdmin):
         'pubmed_id',
         'title',
         'date',
+        'journal',
         'hidden',
     )
+
+    search_fields = ('title', 'authors', 'abstract', 'journal',)
 
 
 class JoinLabSectionAdmin(admin.ModelAdmin):

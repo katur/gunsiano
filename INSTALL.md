@@ -11,14 +11,14 @@
 
 ```
 git clone https://github.com/katur/gunsiano.git
-vi gunsiano/gunsiano/local_settings.py
-# Add local_settings, setting DEBUG=True
+cd gunsiano/gunsiano
+# add localsettings.py; set DEBUG=True
 ```
 
 
 #### Database
 
-Add dev database connection info to `gunsiano/local_settings.py`.
+Add dev database connection info to `gunsiano/localsettings.py`.
 This might be a dev database that already exists on another machine,
 or a new database on your own machine.
 You might import an existing dump, or you might generate an empty database
@@ -135,7 +135,7 @@ cd /opt/local/gunsiano
 git clone https://github.com/katur/gunsiano.git
 
 cd /opt/local/gunsiano/gunsiano/gunsiano
-# create local_settings.py with database connection info, setting DEBUG=False
+# add localsettings.py; make sure to set DEBUG=False
 ```
 
 

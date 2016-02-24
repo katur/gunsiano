@@ -8,16 +8,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
+# Import local configuration
+
+from localsettings import (
+    DEBUG, SECRET_KEY, DATABASES, STATIC_ROOT, MEDIA_ROOT,
+    GOOGLE_ANALYTICS_ID)
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-
-# Local configuration
-
-from local_settings import (
-    DEBUG, SECRET_KEY, DATABASES, GOOGLE_ANALYTICS_ID, MEDIA_ROOT)
 
 
 # Security
@@ -81,8 +82,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT = 'staticfiles'
 
 MEDIA_URL = '/media/'
 

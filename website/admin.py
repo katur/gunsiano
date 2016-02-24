@@ -30,7 +30,7 @@ class UserProfileInline(admin.StackedInline):
 
     def get_fieldsets(self, request, obj=None):
         unprivileged_fieldsets = (
-            ((), {'fields': ('net_id', 'url', 'image', 'blurb',)}),
+            ((), {'fields': ('net_id', 'url', 'blurb',)}),
         )
 
         if has_personnel_admin_privileges(request.user):

@@ -11,7 +11,7 @@
   {% for protocol in protocols %}
   <li>
     <a href={{ protocol.get_absolute_url }}>
-      {{ protocol|enhanced_markdown }}
+      {{ protocol.title|enhanced_markdown }}
     </a>
   </li>
   {% endfor %}

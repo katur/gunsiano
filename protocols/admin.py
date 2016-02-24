@@ -6,12 +6,12 @@ from protocols.models import Protocol
 
 class ProtocolAdmin(admin.ModelAdmin):
     list_display = (
-        'title_markdown',
+        'title',
         'author',
         'pub_date',
     )
 
-    fields = ('title_markdown', 'author', 'body_markdown')
+    fields = ('title', 'author', 'text')
 
     def save_model(self, request, obj, form, change):
         # Set author to whoever is logged in
@@ -20,7 +20,7 @@ class ProtocolAdmin(admin.ModelAdmin):
 
         # If no url already given for this protocol, create it from the title
         if not obj.title_url:
-            obj.title_url = slugify(obj.title_markdown)
+            obj.title_url = slugify(obj.title)
 
         obj.save()
 

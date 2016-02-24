@@ -4,7 +4,7 @@
 
 {% block body_id %}protocol{% endblock %}
 {% block page_title_style %}class="clear-and-float"{% endblock%}
-{% block page_title %}{{ protocol|enhanced_markdown }}{% endblock %}
+{% block page_title %}{{ protocol.title|enhanced_markdown }}{% endblock %}
 
 
 {% block content %}
@@ -14,6 +14,6 @@
 </span>
 
 <div id="instructions">
-  {{ protocol.body_markdown|enhanced_markdown }}
+  {{ protocol.text|enhanced_markdown }}
 </div>
 {% endblock %}

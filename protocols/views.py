@@ -9,7 +9,7 @@ def protocols(request):
     """
     Page listing protocols
     """
-    protocols = Protocol.objects.all().order_by('title_markdown')
+    protocols = Protocol.objects.all().order_by('title')
     return render(request, 'protocols.html', {'protocols': protocols})
 
 

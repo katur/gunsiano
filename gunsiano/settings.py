@@ -83,6 +83,10 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = 'staticfiles'
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = 'mediafiles'
+
 
 # Templates
 # (Customized to provide request object in templates)

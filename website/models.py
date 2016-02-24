@@ -37,6 +37,7 @@ class UserProfile(models.Model):
                           ' is empty.',
                           blank=True)
     image_filename = models.CharField(max_length=100, blank=True)
+    image = models.ImageField(upload_to='people', null=True, blank=True)
     blurb = models.TextField('Blurb about yourself',
                              help_text=MARKDOWN_PROMPT, blank=True)
 

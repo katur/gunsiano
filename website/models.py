@@ -20,7 +20,7 @@ class Position(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, primary_key=True)
-    position = models.ForeignKey(Position)
+    position = models.ForeignKey(Position, models.CASCADE)
 
     # True for Abu Dhabi, False for NYC, null for both
     in_abu_dhabi = models.NullBooleanField()

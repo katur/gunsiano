@@ -39,7 +39,7 @@ class Mutagen(models.Model):
 
 class Transgene(models.Model):
     name = models.CharField(max_length=10, blank=True)
-    vector = models.ForeignKey(Vector, null=True, blank=True)
+    vector = models.ForeignKey(Vector, models.SET_NULL, null=True, blank=True)
 
     class Meta:
         ordering = ['name']
@@ -63,13 +63,17 @@ class WormLab(models.Model):
 class WormStrain(models.Model):
     name = models.CharField(max_length=30, primary_key=True)
     on_wormbase = models.BooleanField(default=False)
-    species = models.ForeignKey(WormSpecies, default=1)
+    species = models.ForeignKey(WormSpecies, models.CASCADE, default=1)
     genotype = models.CharField(max_length=500, blank=True)
-    parent_strain = models.ForeignKey('self', null=True, blank=True)
-    transgene = models.ForeignKey(Transgene, null=True, blank=True)
-    mutagen = models.ForeignKey(Mutagen, null=True, blank=True)
+    parent_strain = models.ForeignKey('self', models.SET_NULL,
+                                      null=True, blank=True)
+    transgene = models.ForeignKey(Transgene, models.SET_NULL,
+                                  null=True, blank=True)
+    mutagen = models.ForeignKey(Mutagen, models.SET_NULL,
+                                null=True, blank=True)
     date_created = models.DateField(null=True, blank=True)
-    created_by = models.ForeignKey(User, null=True, blank=True)
+    created_by = models.ForeignKey(User, models.SET_NULL,
+                                   null=True, blank=True)
     remarks = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
 
     class Meta:
@@ -176,12 +180,13 @@ class WormStrain(models.Model):
 
 
 class WormStrainLine(models.Model):
-    strain = models.ForeignKey(WormStrain)
-    stockable = models.ForeignKey(Stockable, unique=True)
+    strain = models.ForeignKey(WormStrain, models.CASCADE)
+    stockable = models.ForeignKey(Stockable, models.CASCADE, unique=True)
     created_internally = models.BooleanField(default=False)
     times_outcrossed = models.PositiveSmallIntegerField(null=True, blank=True)
     received_from = models.CharField(max_length=100, blank=True)
-    received_by = models.ForeignKey(User, null=True, blank=True)
+    received_by = models.ForeignKey(User, models.SET_NULL,
+                                    null=True, blank=True)
     date_received = models.DateField(null=True, blank=True)
     remarks = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
 

@@ -94,6 +94,11 @@ class PositionAdmin(admin.ModelAdmin):
 class ResearchAreaAdmin(admin.ModelAdmin):
     list_display = (
         '__unicode__',
+        'display_order',
+    )
+
+    list_editable = (
+        'display_order',
     )
 
 

@@ -68,9 +68,12 @@ class UserProfile(models.Model):
 class ResearchArea(models.Model):
     name = models.CharField(max_length=60, unique=True)
     description = models.TextField('Description', help_text=MARKDOWN_PROMPT)
+    display_order = models.PositiveSmallIntegerField(null=True, blank=True)
+    html_id = models.CharField(max_length=20, unique=True, null=True,
+                               blank=True, editable=False)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['display_order', 'name']
         verbose_name_plural = 'research area blurbs'
 
     def __unicode__(self):

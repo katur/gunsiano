@@ -32,8 +32,8 @@
 <table id="research-area-menu" class="bigger-text">
   <tr>
   {% for area in research_areas %}
-    <td id={{ area.html_name}}-td>
-      <a id={{ area.html_name }}-link>
+    <td id={{ area.html_id }}-td>
+      <a id={{ area.html_id }}-link>
         {{ area.name }}
       </a>
     </td>
@@ -43,7 +43,7 @@
 
 <div id="research-areas" class="bigger-text">
   {% for area in research_areas %}
-    <div id={{ area.html_name }} class="research-area
+    <div id={{ area.html_id }} class="research-area
       {% if forloop.counter|divisibleby:2 %}
         left
       {% else %}
@@ -57,22 +57,22 @@
         </div>
       </div>
 
-      {% if area.html_name == 'gi' %}
+      {% if area.html_id == 'gi' %}
         <div class="worm-background layer-1"></div>
         <div class="worm-background layer-2"></div>
         <div class="worm-background layer-3"></div>
 
-      {% elif area.html_name == 'network' %}
+      {% elif area.html_id == 'network' %}
         <canvas class="layer-3"></canvas>
         <canvas class="layer-2"></canvas>
         <canvas class="layer-1"></canvas>
 
-      {% elif area.html_name == 'rna' %}
+      {% elif area.html_id == 'rna' %}
         <div class="bling">
           <div id="molecule"></div>
         </div>
 
-      {% elif area.html_name == 'cell' %}
+      {% elif area.html_id == 'cell' %}
         <div class="bling">
           <div id="video-wrapper">
             <video loop autoplay title="GFP::Moesin in early embryogenesis">
@@ -86,14 +86,14 @@
           </div>
         </div>
 
-      {% elif area.html_name == 'evolution' %}
+      {% elif area.html_id == 'evolution' %}
         <div class="bling">
           <img alt="nematode phylogeny tree"
           src="{% static 'images/research/evolution/tree.png' %}" />
           <div id="mask"></div>
         </div>
 
-      {% elif area.html_name == 'mouse' %}
+      {% elif area.html_id == 'mouse' %}
         <div id="drawing-wrapper">
           <div id="drawing"></div>
         </div>

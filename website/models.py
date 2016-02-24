@@ -68,7 +68,7 @@ class ResearchArea(models.Model):
     name = models.CharField(max_length=60, unique=True)
     description = models.TextField('Description',
                                    help_text=settings.MARKDOWN_PROMPT)
-    display_order = models.PositiveSmallIntegerField(null=True, blank=True)
+    display_order = models.PositiveSmallIntegerField()
     html_id = models.CharField(max_length=20, unique=True, null=True,
                                blank=True, editable=False)
 
@@ -89,7 +89,7 @@ class Resource(models.Model):
                                    help_text=settings.MARKDOWN_PROMPT)
 
     class Meta:
-        ordering = ['display_order']
+        ordering = ['display_order', 'name']
 
     def __unicode__(self):
         return self.name
@@ -199,7 +199,7 @@ class JoinLabSection(models.Model):
     display_order = models.PositiveSmallIntegerField()
 
     class Meta:
-        ordering = ['display_order']
+        ordering = ['display_order', 'title']
 
     def __unicode__(self):
         return self.title

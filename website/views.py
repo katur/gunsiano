@@ -102,7 +102,7 @@ def join(request):
     """
     Join the Lab Page
     """
-    sections = JoinLabSection.objects.all().order_by('display_order')
+    sections = JoinLabSection.objects.all()
     jessica = get_object_or_404(User, username='jessica')
 
     context = {

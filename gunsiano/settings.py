@@ -16,7 +16,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Local configuration
 
-from local_settings import DEBUG, SECRET_KEY, DATABASES, GOOGLE_ANALYTICS_ID
+from local_settings import (
+    DEBUG, SECRET_KEY, DATABASES, GOOGLE_ANALYTICS_ID, MEDIA_ROOT)
 
 
 # Security
@@ -84,8 +85,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 
 MEDIA_URL = '/media/'
-
-MEDIA_ROOT = 'mediafiles'
 
 
 # Templates

@@ -41,7 +41,6 @@ INSTALLED_APPS = (
 
     'jquery',
 
-    'universal',
     'website',
     'worm_strains',
     'vectors',

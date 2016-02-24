@@ -14,10 +14,10 @@
   </span>
   {% endif %}
 
-  {% if person.userprofile.image_filename %}
+  {% if person.userprofile.image %}
   <img
-    src="{{ STATIC_URL }}images/people/{{ person.userprofile.image_filename }}"
-    alt="profile pic for this person" />
+    src="{{ MEDIA_URL }}{{ person.userprofile.image }}"
+    alt="{{ person }} profile picture" />
   {% endif %}
 </div>
 {% endblock content %}

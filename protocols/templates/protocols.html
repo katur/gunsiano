@@ -10,9 +10,9 @@
 <ul id="protocols">
   {% for protocol in protocols %}
   <li>
-  <a href={% url 'protocol_url' title_url=protocol.title_url %}>
-    {{ protocol|enhanced_markdown }}
-  </a>
+    <a href={{ protocol.get_absolute_url }}>
+      {{ protocol|enhanced_markdown }}
+    </a>
   </li>
   {% endfor %}
 </ul>

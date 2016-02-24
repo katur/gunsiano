@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
 
 from gunsiano.settings import MARKDOWN_PROMPT
@@ -18,5 +19,4 @@ class Protocol(models.Model):
         return self.title_markdown
 
     def get_absolute_url(self):
-        from django.core.urlresolvers import reverse
-        return reverse('protocols.views.protocol', args=[self.title_url])
+        return reverse('protocol_url', args=[self.title_url])

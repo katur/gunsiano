@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response, get_object_or_404
-from django.template import RequestContext
+from django.shortcuts import get_object_or_404, render
 
 from storage.models import Container
 from worm_strains.models import WormStrainLine
@@ -12,12 +11,7 @@ def storage(request):
     Page showing all available vats
     """
     containers = Container.objects.all().filter(parent_id__isnull=True)
-
-    template_dictionary = {
-        'containers': containers,
-    }
-    return render_to_response('storage.html', template_dictionary,
-                              context_instance=RequestContext(request))
+    return render(request, 'storage.html', {'containers': containers})
 
 
 @login_required
@@ -47,9 +41,9 @@ def storage_detail(request, container_id):
                 line = get_object_or_404(WormStrainLine, stockable=s)
                 child.worm = line.strain
 
-    template_dictionary = {
+    context = {
         'container': container,
         'grid': grid,
     }
-    return render_to_response('storage_detail.html', template_dictionary,
-                              context_instance=RequestContext(request))
+
+    return render(request, 'storage_detail.html', context)

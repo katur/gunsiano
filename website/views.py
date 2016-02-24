@@ -4,8 +4,7 @@ from itertools import chain
 import math
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response, get_object_or_404
-from django.template import RequestContext
+from django.shortcuts import get_object_or_404, render
 
 from website.models import (JoinLabSection, ResearchArea, Resource,
                             Publication, User, UserProfile)
@@ -44,13 +43,13 @@ def home(request):
     kris = get_object_or_404(User, username='kris')
     fabio = get_object_or_404(User, username='fabio')
 
-    template_dictionary = {
+    context = {
         'research_areas': research_areas,
         'fabio': fabio,
         'kris': kris,
     }
-    return render_to_response('home.html', template_dictionary,
-                              context_instance=RequestContext(request))
+
+    return render(request, 'home.html', context)
 
 
 def people(request):
@@ -82,14 +81,14 @@ def people(request):
     former_column_length = math.ceil(len(former) / num_columns)
     current_column_length = math.ceil(len(current_positions) / num_columns)
 
-    template_dictionary = {
+    context = {
         'current': current,
         'former': former,
         'former_column_length': former_column_length,
         'current_column_length': current_column_length,
     }
-    return render_to_response('people.html', template_dictionary,
-                              context_instance=RequestContext(request))
+
+    return render(request, 'people.html', context)
 
 
 def person(request, username):
@@ -99,43 +98,29 @@ def person(request, username):
     variable (which is referenced for authentication purposes)
     """
     person = get_object_or_404(User, username=username)
-
-    template_dictionary = {
-        'person': person,
-    }
-    return render_to_response('person.html', template_dictionary,
-                              context_instance=RequestContext(request))
+    return render(request, 'person.html', {'person': person})
 
 
 def resources(request):
     """
     Resources Page
     """
-    r = Resource.objects.all()
-
-    template_dictionary = {
-        'resources': r,
-    }
-    return render_to_response('resources.html', template_dictionary,
-                              context_instance=RequestContext(request))
+    resources = Resource.objects.all()
+    return render(request, 'resources.html', {'resources': resources})
 
 
 def publications(request):
     """
     Publications page
     """
-    publications = sorted(Publication.objects.filter(hidden=False),
-                          reverse=True)
-    for publication in publications:
-        publication.translate_html_br_to_markdown()
-        publication.embolden_PI_names()
-        publication.italicize_species_names()
+    pubs = sorted(Publication.objects.filter(hidden=False), reverse=True)
 
-    template_dictionary = {
-        'publications': publications,
-    }
-    return render_to_response('publications.html', template_dictionary,
-                              context_instance=RequestContext(request))
+    for pub in pubs:
+        pub.translate_html_br_to_markdown()
+        pub.embolden_PI_names()
+        pub.italicize_species_names()
+
+    return render(request, 'publications.html', {'publications': pubs})
 
 
 def join(request):
@@ -145,12 +130,12 @@ def join(request):
     sections = JoinLabSection.objects.all().order_by('display_order')
     jessica = get_object_or_404(User, username='jessica')
 
-    template_dictionary = {
+    context = {
         'sections': sections,
         'jessica': jessica,
     }
-    return render_to_response('join.html', template_dictionary,
-                              context_instance=RequestContext(request))
+
+    return render(request, 'join.html', context)
 
 
 def contact(request):
@@ -161,13 +146,13 @@ def contact(request):
     jessica = get_object_or_404(User, username='jessica')
     kris = get_object_or_404(User, username='kris')
 
-    template_dictionary = {
+    context = {
         'kris': kris,
         'fabio': fabio,
         'jessica': jessica,
     }
-    return render_to_response('contact.html', template_dictionary,
-                              context_instance=RequestContext(request))
+
+    return render(request, 'contact.html', context)
 
 
 @login_required
@@ -175,5 +160,4 @@ def lab_tools(request):
     """
     Internal Lab Tools landing page
     """
-    return render_to_response('lab_tools.html',
-                              context_instance=RequestContext(request))
+    return render(request, 'lab_tools.html')

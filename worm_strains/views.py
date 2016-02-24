@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response, get_object_or_404
-from django.template import RequestContext
+from django.shortcuts import get_object_or_404, render
 from django.db.models import Q
 
 from worm_strains.models import WormLab, WormStrain, WormStrainLine
@@ -32,11 +31,7 @@ def worms(request):
 
     worms = sorted(worms)
 
-    template_dictionary = {
-        'worms': worms,
-    }
-    return render_to_response('worms.html', template_dictionary,
-                              context_instance=RequestContext(request))
+    return render(request, 'worms.html', {'worms': worms})
 
 
 @login_required
@@ -84,9 +79,9 @@ def worm(request, name):
             stock.unthawed_tubes = sorted(unthawed_tubes,
                                           key=lambda x: x.position)
 
-    template_dictionary = {
+    context = {
         'worm': worm,
         'lines': lines,
     }
-    return render_to_response('worm.html', template_dictionary,
-                              context_instance=RequestContext(request))
+
+    return render(request, 'worm.html', context)

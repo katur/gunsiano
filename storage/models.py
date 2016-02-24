@@ -1,9 +1,8 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import formats
-
-from gunsiano.settings import MARKDOWN_PROMPT
 
 
 class StockableType(models.Model):
@@ -29,7 +28,7 @@ class Stock(models.Model):
     prepared_by = models.ForeignKey(User, models.SET_NULL,
                                     null=True, blank=True)
     date_prepared = models.DateField(null=True, blank=True)
-    notes = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
+    notes = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
 
     def has_freeze_detail(self):
         return self.prepared_by or self.date_prepared
@@ -96,7 +95,7 @@ class Container(models.Model):
                                   related_name='container_thawed_by')
     date_thawed = models.DateField(null=True, blank=True)
     thaw_results = models.CharField(max_length=100, blank=True)
-    notes = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
+    notes = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
 
     def has_children(self):
         children = Container.objects.all().filter(parent_id=self.id)

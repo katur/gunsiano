@@ -1,11 +1,11 @@
 import re
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import formats
 
-from gunsiano.settings import MARKDOWN_PROMPT
 from storage.models import Stockable, Stock, Container
 from vectors.models import Vector
 
@@ -74,7 +74,7 @@ class WormStrain(models.Model):
     date_created = models.DateField(null=True, blank=True)
     created_by = models.ForeignKey(User, models.SET_NULL,
                                    null=True, blank=True)
-    remarks = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
+    remarks = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
 
     class Meta:
         ordering = ['name']
@@ -188,7 +188,7 @@ class WormStrainLine(models.Model):
     received_by = models.ForeignKey(User, models.SET_NULL,
                                     null=True, blank=True)
     date_received = models.DateField(null=True, blank=True)
-    remarks = models.TextField(blank=True, help_text=MARKDOWN_PROMPT)
+    remarks = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
 
     class Meta:
         ordering = ['strain__name']

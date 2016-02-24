@@ -1,9 +1,8 @@
 import re
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
-
-from gunsiano.settings import MARKDOWN_PROMPT
 
 
 class Position(models.Model):
@@ -38,8 +37,8 @@ class UserProfile(models.Model):
                           blank=True)
     image_filename = models.CharField(max_length=100, blank=True)
     image = models.ImageField(upload_to='people', null=True, blank=True)
-    blurb = models.TextField('Blurb about yourself',
-                             help_text=MARKDOWN_PROMPT, blank=True)
+    blurb = models.TextField('Blurb about yourself', blank=True,
+                             help_text=settings.MARKDOWN_PROMPT)
 
     class Meta:
         ordering = ['user__first_name', 'user__last_name']
@@ -67,7 +66,8 @@ class UserProfile(models.Model):
 
 class ResearchArea(models.Model):
     name = models.CharField(max_length=60, unique=True)
-    description = models.TextField('Description', help_text=MARKDOWN_PROMPT)
+    description = models.TextField('Description',
+                                   help_text=settings.MARKDOWN_PROMPT)
     display_order = models.PositiveSmallIntegerField(null=True, blank=True)
     html_id = models.CharField(max_length=20, unique=True, null=True,
                                blank=True, editable=False)
@@ -85,7 +85,8 @@ class Resource(models.Model):
     display_order = models.PositiveSmallIntegerField()
     logo_filename = models.CharField(max_length=50, blank=True)
     url = models.CharField(max_length=100, blank=True)
-    description = models.TextField('Description', help_text=MARKDOWN_PROMPT)
+    description = models.TextField('Description',
+                                   help_text=settings.MARKDOWN_PROMPT)
 
     class Meta:
         ordering = ['display_order']
@@ -193,7 +194,8 @@ class Publication(models.Model):
 
 class JoinLabSection(models.Model):
     title = models.CharField(max_length=100, unique=True)
-    description = models.TextField('Description', help_text=MARKDOWN_PROMPT)
+    description = models.TextField('Description',
+                                   help_text=settings.MARKDOWN_PROMPT)
     display_order = models.PositiveSmallIntegerField()
 
     class Meta:

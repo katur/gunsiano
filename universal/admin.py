@@ -5,6 +5,11 @@ from django.contrib.auth.admin import UserAdmin
 from website.models import (UserProfile)
 
 
+def has_personnel_admin_privileges(user):
+    return (user.is_superuser or
+            user.groups.filter(name='Personnel').exists())
+
+
 class UserProfileInline(admin.StackedInline):
     model = UserProfile
     can_delete = False
@@ -17,7 +22,7 @@ class UserProfileInline(admin.StackedInline):
         """
         qs = super(self.__class__, self).get_queryset(request)
 
-        if request.user.has_personnel_admin_privileges():
+        if has_personnel_admin_privileges(request.user):
             return qs
         else:
             return qs.filter(user=request.user)
@@ -27,7 +32,7 @@ class UserProfileInline(admin.StackedInline):
             ((), {'fields': ('net_id', 'url', 'blurb',)}),
         )
 
-        if request.user.has_personnel_admin_privileges():
+        if has_personnel_admin_privileges(request.user):
             return super(UserProfileInline, self).get_fieldsets(request, obj)
         else:
             return unprivileged_fieldsets
@@ -59,7 +64,7 @@ class MyUserAdmin(UserAdmin):
         """
         qs = super(self.__class__, self).get_queryset(request)
 
-        if request.user.has_personnel_admin_privileges():
+        if has_personnel_admin_privileges(request.user):
             return qs
         else:
             return qs.filter(username=request.user)
@@ -73,8 +78,8 @@ class MyUserAdmin(UserAdmin):
                 }),
             )
 
-            if request.user.has_personnel_admin_privileges():
-                return self.declared_fieldsets
+            if has_personnel_admin_privileges(request.user):
+                return super(MyUserAdmin, self).get_fieldsets(request, obj)
             else:
                 return unprivileged_fieldsets
 

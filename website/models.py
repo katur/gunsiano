@@ -82,11 +82,11 @@ class ResearchArea(models.Model):
 
 class Resource(models.Model):
     name = models.CharField(max_length=40, unique=True)
+    description = models.TextField('Description',
+                                   help_text=settings.MARKDOWN_PROMPT)
     display_order = models.PositiveSmallIntegerField()
     logo_filename = models.CharField(max_length=50, blank=True)
     url = models.CharField(max_length=100, blank=True)
-    description = models.TextField('Description',
-                                   help_text=settings.MARKDOWN_PROMPT)
 
     class Meta:
         ordering = ['display_order', 'name']

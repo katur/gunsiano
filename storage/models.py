@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import formats
 
@@ -99,6 +100,9 @@ class Container(models.Model):
             return True
         else:
             return False
+
+    def get_absolute_url(self):
+        return reverse('storage_detail_url', args=[self.id])
 
     def get_supertype(self):
         return self.type.supertype

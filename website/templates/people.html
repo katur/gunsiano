@@ -18,7 +18,7 @@
 </div>
 
 <div class="columns">
-  {% regroup current by position.position as position_list %}
+  {% regroup current by position.name as position_list %}
   <div class="column">
     {% for position in position_list %}
       {% if forloop.counter0|divisibleby:current_column_length and not forloop.first %}
@@ -85,7 +85,7 @@
           </a>
           {% endif %}
 
-          <span class="position">{{ profile.position.position }}</span>
+          <span class="position">{{ profile.position.name }}</span>
 
           <span class="nyu-location">{{ profile.location }}</span>
         </li>

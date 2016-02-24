@@ -6,15 +6,15 @@ from django.db import models
 
 
 class Position(models.Model):
-    position = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
     display_order = models.PositiveSmallIntegerField()
 
     class Meta:
-        ordering = ['display_order', 'position']
+        ordering = ['display_order', 'name']
         verbose_name_plural = 'lab member positions'
 
     def __unicode__(self):
-        return self.position
+        return self.name
 
 
 class UserProfile(models.Model):

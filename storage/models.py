@@ -84,6 +84,8 @@ class ContainerType(models.Model):
                                   null=True, blank=True,
                                   related_name='container_slot_type')
     image_filename = models.CharField(max_length=30, blank=True)
+    image = models.ImageField(upload_to='storage_vats',
+                              null=True, blank=True)
 
     def has_children(self):
         return self.supertype.has_children

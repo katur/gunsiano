@@ -10,8 +10,8 @@
   {% for container in containers %}
   <div>
     <a href={{ container.get_absolute_url }}>
-      <img src="{{ STATIC_URL }}images/{{ container.type.image_filename }}"
-           alt="photo of this storage container"/>
+      <img src="{{ MEDIA_URL }}{{ container.type.image }}"
+           alt="photo of a {{ container.type }}"/>
       <span
         {% if container.has_hover_detail %}
         data-hover-tag="{{ container.get_hover_detail }}"

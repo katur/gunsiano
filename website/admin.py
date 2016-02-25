@@ -124,6 +124,10 @@ class PublicationAdmin(admin.ModelAdmin):
         'hidden',
     )
 
+    list_editable = (
+        'pmcid',
+    )
+
     search_fields = ('title', 'authors', 'abstract', 'journal',)
 
 

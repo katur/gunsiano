@@ -96,8 +96,8 @@ class Resource(models.Model):
 
 class Publication(models.Model):
     # Don't make this unique, in case future publications not on PubMed
-    pmid = models.PositiveIntegerField(null=True, blank=True)
-    pmcid = models.PositiveIntegerField(null=True, blank=True)
+    pmid = models.PositiveIntegerField('PMID', null=True, blank=True)
+    pmcid = models.CharField('PMCID', max_length=20, blank=True)
 
     title = models.TextField(blank=True)
     authors = models.TextField(blank=True)
@@ -111,10 +111,33 @@ class Publication(models.Model):
     # Select to not show this publication on the website
     hidden = models.BooleanField('Hide?', default=False)
 
-    def translate_html_br_to_markdown(self):
-        html_line_break_tags = ('<br>', '<br/>')
-        for tag in html_line_break_tags:
-            self.abstract = self.abstract.replace(tag, '  ')
+    def __unicode__(self):
+        return self.title
+
+    def __repr__(self):
+        return self.__unicode__()
+
+    def __cmp__(self, other):
+        self_year, self_month, self_day = self.split_pubmed_date()
+        other_year, other_month, other_day = other.split_pubmed_date()
+
+        if self_year != other_year:
+            return cmp(self_year, other_year)
+        elif self_month != other_month:
+            return cmp(self_month, other_month)
+        else:
+            return cmp(self_day, other_day)
+
+    def get_pubmed_url(self):
+        if not self.pmid:
+            return None
+        return 'http://www.ncbi.nlm.nih.gov/pubmed/{}'.format(self.pmid)
+
+    def get_pmc_url(self):
+        if not self.pmcid:
+            return None
+        return 'http://www.ncbi.nlm.nih.gov/pmc/articles/{}/'.format(
+            self.pmcid)
 
     def embolden_PI_names(self):
         def embolden(term, s):
@@ -159,6 +182,11 @@ class Publication(models.Model):
         self.abstract = re.sub(pattern, '*\g<0>*', self.abstract)
         self.title = re.sub(pattern, '*\g<0>*', self.title)
 
+    def translate_html_br_to_markdown(self):
+        html_line_break_tags = ('<br>', '<br/>')
+        for tag in html_line_break_tags:
+            self.abstract = self.abstract.replace(tag, '  ')
+
     def split_pubmed_date(self):
         parts = self.date.split()
         months = ('jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug',
@@ -179,23 +207,6 @@ class Publication(models.Model):
             day = 0
 
         return (year, month, day)
-
-    def __unicode__(self):
-        return self.title
-
-    def __repr__(self):
-        return self.__unicode__()
-
-    def __cmp__(self, other):
-        self_year, self_month, self_day = self.split_pubmed_date()
-        other_year, other_month, other_day = other.split_pubmed_date()
-
-        if self_year != other_year:
-            return cmp(self_year, other_year)
-        elif self_month != other_month:
-            return cmp(self_month, other_month)
-        else:
-            return cmp(self_day, other_day)
 
 
 class JoinLabSection(models.Model):

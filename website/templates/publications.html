@@ -32,7 +32,7 @@
 
     {% if publication.pmid %}
     <span class="pmid">PMID:
-      <a href="http://www.ncbi.nlm.nih.gov/pubmed/{{ publication.pmid }}">
+      <a href="{{ publication.get_pubmed_url }}">
         {{ publication.pmid }}
       </a>
     </span>
@@ -40,7 +40,9 @@
 
     {% if publication.pmcid %}
     <span class="pmcid">PMCID:
-      {{ publication.pmcid }}
+      <a href="{{ publication.get_pmc_url }}">
+        {{ publication.pmcid }}
+      </a>
     </span>
     {% endif %}
   </div>

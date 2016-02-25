@@ -9,9 +9,7 @@ class WormStrainAdmin(admin.ModelAdmin):
         'name',
         'species',
         'genotype',
-        'mutagen',
         'created_by',
-        'date_created',
         'on_wormbase',
     )
 

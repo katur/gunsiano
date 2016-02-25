@@ -28,13 +28,13 @@ class WormSpecies(models.Model):
 
 
 class Mutagen(models.Model):
-    mutagen = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
 
     class Meta:
-        ordering = ['mutagen']
+        ordering = ['name']
 
     def __unicode__(self):
-        return self.mutagen
+        return self.name
 
 
 class Transgene(models.Model):

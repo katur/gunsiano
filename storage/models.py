@@ -20,7 +20,8 @@ class StockableType(models.Model):
 
 class Stockable(models.Model):
     """
-    An entity that can be made into stocks (worms, bacteria, etc.)
+    An entity that can be made into stocks (a particular worm strain line,
+    a particular chemical, etc.)
     """
     type = models.ForeignKey(StockableType, models.CASCADE)
 
@@ -59,7 +60,7 @@ class Stock(models.Model):
 
 class ContainerSupertype(models.Model):
     """
-    Broad characterization of a container (e.g. "vat", "box", "tube")
+    Broad characterization of a container (e.g. "vat", "box", "rack", "tube")
     """
     name = models.CharField(max_length=20)
     has_children = models.BooleanField(default=False)
@@ -73,7 +74,7 @@ class ContainerSupertype(models.Model):
 
 class ContainerType(models.Model):
     """
-    Specific characterization of a container (e.g. 9x9 box)
+    Specific characterization of a container (e.g. "9x9 box", "1.5mL tube")
     """
     name = models.CharField(max_length=50)
     supertype = models.ForeignKey(ContainerSupertype, models.CASCADE)
@@ -96,10 +97,11 @@ class ContainerType(models.Model):
 
 class Container(models.Model):
     """
-    A container used for storage.
+    A container used for storing stocks in the lab.
 
-    A container can range from dewar or freezer, to rack, to box,
-    to an individual tube.
+    A container could be an outermost/largest container (a dewar or
+    freezer), an innermost/smallest container (a tube or a well), or
+    anything in between (a rack, a box, etc).
     """
     name = models.CharField(max_length=200, blank=True)
     type = models.ForeignKey(ContainerType, models.CASCADE)

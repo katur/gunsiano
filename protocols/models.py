@@ -5,9 +5,9 @@ from django.db import models
 
 
 class Protocol(models.Model):
-    title = models.CharField(max_length=250,
+    title = models.CharField(max_length=200,
                              help_text=settings.MARKDOWN_PROMPT)
-    slug = models.CharField(max_length=250, unique=True)
+    slug = models.SlugField(max_length=120, unique=True)
     author = models.ForeignKey(
         User, models.SET_NULL, null=True, blank=True,
         help_text='If none selected, will default to logged in user.')

@@ -83,9 +83,9 @@ class Resource(models.Model):
     name = models.CharField(max_length=40, unique=True)
     description = models.TextField('Description',
                                    help_text=settings.MARKDOWN_PROMPT)
+    url = models.URLField(blank=True)
     display_order = models.PositiveSmallIntegerField()
     logo_filename = models.CharField(max_length=50, blank=True)
-    url = models.CharField(max_length=100, blank=True)
 
     class Meta:
         ordering = ['display_order', 'name']
@@ -95,13 +95,19 @@ class Resource(models.Model):
 
 
 class Publication(models.Model):
+    # Don't make this unique, in case future publications not on PubMed
     pubmed_id = models.PositiveIntegerField(null=True, blank=True)
+
     title = models.TextField(blank=True)
     authors = models.TextField(blank=True)
     abstract = models.TextField(blank=True)
     journal = models.CharField(max_length=100, blank=True)
-    date = models.CharField(max_length=30, blank=True)
     detail = models.CharField(max_length=60, blank=True)
+
+    # Don't make this a DateField, since not always specific to date
+    date = models.CharField(max_length=30, blank=True)
+
+    # Select to not show this publication on the website
     hidden = models.BooleanField('Hide?', default=False)
 
     def translate_html_br_to_markdown(self):

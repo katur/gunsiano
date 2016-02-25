@@ -6,6 +6,9 @@ from django.utils import formats
 
 
 class StockableType(models.Model):
+    """
+    A stockable type (e.g. "worm", "bacteria", etc)
+    """
     name = models.CharField(max_length=20)
 
     class Meta:
@@ -16,6 +19,9 @@ class StockableType(models.Model):
 
 
 class Stockable(models.Model):
+    """
+    An entity that can be made into stocks (worms, bacteria, etc.)
+    """
     type = models.ForeignKey(StockableType, models.CASCADE)
 
     def __unicode__(self):
@@ -23,6 +29,9 @@ class Stockable(models.Model):
 
 
 class Stock(models.Model):
+    """
+    A stock that was prepared of something Stockable.
+    """
     stockable = models.ForeignKey(Stockable, models.CASCADE)
     concentration = models.CharField(max_length=30, blank=True)
     prepared_by = models.ForeignKey(User, models.SET_NULL,
@@ -49,6 +58,9 @@ class Stock(models.Model):
 
 
 class ContainerSupertype(models.Model):
+    """
+    Broad characterization of a container (e.g. "vat", "box", "tube")
+    """
     name = models.CharField(max_length=20)
     has_children = models.BooleanField(default=False)
 
@@ -60,6 +72,9 @@ class ContainerSupertype(models.Model):
 
 
 class ContainerType(models.Model):
+    """
+    Specific characterization of a container (e.g. 9x9 box)
+    """
     name = models.CharField(max_length=50)
     supertype = models.ForeignKey(ContainerSupertype, models.CASCADE)
     slots_vertical = models.IntegerField(null=True, blank=True)
@@ -80,6 +95,12 @@ class ContainerType(models.Model):
 
 
 class Container(models.Model):
+    """
+    A container used for storage.
+
+    A container can range from dewar or freezer, to rack, to box,
+    to an individual tube.
+    """
     name = models.CharField(max_length=200, blank=True)
     type = models.ForeignKey(ContainerType, models.CASCADE)
     parent = models.ForeignKey('self', models.SET_NULL,

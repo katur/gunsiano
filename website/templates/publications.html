@@ -10,19 +10,39 @@
 <div class="publications">
   {% for publication in publications %}
   <div class="publication">
-    <span class="title">{{ publication.title|enhanced_markdown }}</span>
-    <span class="authors">{{ publication.authors|enhanced_markdown }}</span>
+    <span class="title">
+      {{ publication.title|enhanced_markdown }}
+    </span>
+
+    <span class="authors">
+      {{ publication.authors|enhanced_markdown }}
+    </span>
+
     <span class="journal">
       {{ publication.journal }}.
       {{ publication.date }}{% if publication.detail %};
       {{ publication.detail }}{% endif %}.
     </span>
-    <span class="abstract">{{ publication.abstract|enhanced_markdown }}</span>
-    <span class="pubmed">PubMed:
-      <a href="http://www.ncbi.nlm.nih.gov/pubmed/{{ publication.pubmed_id }}">
-        {{ publication.pubmed_id }}
+
+    {% if publication.abstract %}
+    <span class="abstract">
+      {{ publication.abstract|enhanced_markdown }}
+    </span>
+    {% endif %}
+
+    {% if publication.pmid %}
+    <span class="pmid">PMID:
+      <a href="http://www.ncbi.nlm.nih.gov/pubmed/{{ publication.pmid }}">
+        {{ publication.pmid }}
       </a>
     </span>
+    {% endif %}
+
+    {% if publication.pmcid %}
+    <span class="pmcid">PMCID:
+      {{ publication.pmcid }}
+    </span>
+    {% endif %}
   </div>
   <hr>
   {% endfor %}

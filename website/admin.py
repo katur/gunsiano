@@ -116,7 +116,8 @@ class ResourceAdmin(admin.ModelAdmin):
 
 class PublicationAdmin(admin.ModelAdmin):
     list_display = (
-        'pubmed_id',
+        'pmid',
+        'pmcid',
         'title',
         'date',
         'journal',

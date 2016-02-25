@@ -96,7 +96,8 @@ class Resource(models.Model):
 
 class Publication(models.Model):
     # Don't make this unique, in case future publications not on PubMed
-    pubmed_id = models.PositiveIntegerField(null=True, blank=True)
+    pmid = models.PositiveIntegerField(null=True, blank=True)
+    pmcid = models.PositiveIntegerField(null=True, blank=True)
 
     title = models.TextField(blank=True)
     authors = models.TextField(blank=True)

@@ -14,9 +14,9 @@ def protocols(request):
 
 
 @login_required
-def protocol(request, title_url):
+def protocol(request, slug):
     """
     Page listing protocol
     """
-    protocol = get_object_or_404(Protocol, title_url=title_url)
+    protocol = get_object_or_404(Protocol, slug=slug)
     return render(request, 'protocol.html', {'protocol': protocol})

@@ -5,9 +5,9 @@ from django.db import models
 
 
 class Protocol(models.Model):
-    title = models.CharField(max_length=250, unique=True,
+    title = models.CharField(max_length=250,
                              help_text=settings.MARKDOWN_PROMPT)
-    title_url = models.CharField(max_length=250, unique=True)
+    slug = models.CharField(max_length=250, unique=True)
     author = models.ForeignKey(
         User, models.SET_NULL, null=True, blank=True,
         help_text='If none selected, will default to logged in user.')
@@ -18,4 +18,4 @@ class Protocol(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('protocol_url', args=[self.title_url])
+        return reverse('protocol_url', args=[self.slug])

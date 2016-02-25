@@ -1,9 +1,28 @@
+from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 
 from website.models import (JoinLabSection, Position, ResearchArea,
                             Resource, Publication, UserProfile)
+
+
+class BothBooleanSelect(forms.NullBooleanSelect):
+    """
+    Select widget that is like a NullBooleanSelect but with the
+    text "Both" instead of "Unknown" for the Null option.
+    """
+    def __init__(self, attrs=None):
+        choices = ((u'2', u'Yes'),
+                   (u'3', u'No'),
+                   (u'1', u'Both'))
+        forms.Select.__init__(self, attrs, choices)
+
+
+class UserProfileAdminForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(UserProfileAdminForm, self).__init__(*args, **kwargs)
+        self.fields['in_abu_dhabi'].widget = BothBooleanSelect()
 
 
 def has_personnel_admin_privileges(user):
@@ -15,6 +34,8 @@ class UserProfileInline(admin.StackedInline):
     model = UserProfile
     can_delete = False
     verbose_name_plural = 'profile'
+
+    form = UserProfileAdminForm
 
     def get_queryset(self, request):
         """

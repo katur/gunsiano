@@ -31,11 +31,10 @@ class UserProfile(models.Model):
     is_current = models.BooleanField(default=True)
 
     net_id = models.CharField('NYU NetID', max_length=25, blank=True)
-    url = models.URLField('Personal website URL', help_text='Your public'
-                          ' profile will redirect to this URL if your blurb'
-                          ' is empty.',
-                          blank=True)
-    image_filename = models.CharField(max_length=100, blank=True)
+    url = models.URLField('Personal website URL', blank=True,
+                          help_text='Your public profile will redirect '
+                          'here if your blurb is empty.')
+
     image = models.ImageField(upload_to='people', null=True, blank=True)
     blurb = models.TextField('Blurb about yourself', blank=True,
                              help_text=settings.MARKDOWN_PROMPT)

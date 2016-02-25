@@ -6,6 +6,9 @@ from django.db import models
 
 
 class Position(models.Model):
+    """
+    A lab member position (e.g. Postdoc, Technician).
+    """
     name = models.CharField(max_length=50)
     display_order = models.PositiveSmallIntegerField()
 
@@ -18,6 +21,16 @@ class Position(models.Model):
 
 
 class UserProfile(models.Model):
+    """
+    Supplemental information about Users (lab members) not included in
+    the default Django User model.
+
+    A UserProfile has a OneToOne relationship to the Django User model
+    (i.e., it uses composition instead of inheritance).
+    This is the preferred way of adding supplemental User information
+    (extending the Django built-in model through inheritance tends
+    to be sloppier).
+    """
     user = models.OneToOneField(User, primary_key=True)
     position = models.ForeignKey(Position, models.CASCADE)
 
@@ -64,6 +77,11 @@ class UserProfile(models.Model):
 
 
 class ResearchArea(models.Model):
+    """
+    An area of research for the lab.
+
+    These are the topics that display on the home page.
+    """
     name = models.CharField(max_length=60, unique=True)
     description = models.TextField('Description',
                                    help_text=settings.MARKDOWN_PROMPT)
@@ -80,6 +98,9 @@ class ResearchArea(models.Model):
 
 
 class Resource(models.Model):
+    """
+    A public resource of the lab (e.g. NBrowse, Rhevolution).
+    """
     name = models.CharField(max_length=40, unique=True)
     description = models.TextField('Description',
                                    help_text=settings.MARKDOWN_PROMPT)
@@ -95,8 +116,13 @@ class Resource(models.Model):
 
 
 class Publication(models.Model):
-    # Don't make this unique, in case future publications not on PubMed
+    """
+    A publication in the lab.
+    """
+    # TODO: Probably make this required and unique
     pmid = models.PositiveIntegerField('PMID', null=True, blank=True)
+
+    # Don't make this unique, since some don't have PMCID
     pmcid = models.CharField('PMCID', max_length=20, blank=True)
 
     title = models.TextField(blank=True)
@@ -111,35 +137,38 @@ class Publication(models.Model):
     # Select to not show this publication on the website
     hidden = models.BooleanField('Hide?', default=False)
 
+    class Meta:
+        # PMIDs are assigned in ascending order, so this is like sorting
+        # by date
+        ordering = ['-pmid']
+
     def __unicode__(self):
         return self.title
 
     def __repr__(self):
         return self.__unicode__()
 
-    def __cmp__(self, other):
-        self_year, self_month, self_day = self.split_pubmed_date()
-        other_year, other_month, other_day = other.split_pubmed_date()
-
-        if self_year != other_year:
-            return cmp(self_year, other_year)
-        elif self_month != other_month:
-            return cmp(self_month, other_month)
-        else:
-            return cmp(self_day, other_day)
-
     def get_pubmed_url(self):
+        """
+        Get the URL of this publication on PubMed.
+        """
         if not self.pmid:
             return None
         return 'http://www.ncbi.nlm.nih.gov/pubmed/{}'.format(self.pmid)
 
     def get_pmc_url(self):
+        """
+        Get the URL of this publication on PMC (free text).
+        """
         if not self.pmcid:
             return None
         return 'http://www.ncbi.nlm.nih.gov/pmc/articles/{}/'.format(
             self.pmcid)
 
     def embolden_PI_names(self):
+        """
+        Make PI names bold in the authors field, with Markdown.
+        """
         def embolden(term, s):
             return s.replace(term, '**{0}**'.format(term))
 
@@ -152,6 +181,9 @@ class Publication(models.Model):
             self.authors = embolden('Gunsalus K', self.authors)
 
     def italicize_species_names(self):
+        """
+        Italicize species names in the abstracts, with Markdown.
+        """
         species_dictionary = {
             'Caenorhabditis': (
                 'elegans',
@@ -182,34 +214,36 @@ class Publication(models.Model):
         self.abstract = re.sub(pattern, '*\g<0>*', self.abstract)
         self.title = re.sub(pattern, '*\g<0>*', self.title)
 
-    def translate_html_br_to_markdown(self):
-        html_line_break_tags = ('<br>', '<br/>')
-        for tag in html_line_break_tags:
-            self.abstract = self.abstract.replace(tag, '  ')
-
-    def split_pubmed_date(self):
+    def get_split_date(self):
+        """
+        Get a tuple of (year, month, date), where each part is an integer,
+        and 0 is used for the parts that do not exist.
+        """
         parts = self.date.split()
         months = ('jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug',
                   'sep', 'oct', 'nov', 'dec')
         try:
             year = int(parts[0])
-        except:
+        except Exception:
             year = 0
 
         try:
             month = months.index(parts[1].lower())
-        except:
+        except Exception:
             month = 0
 
         try:
             day = int(parts[2])
-        except:
+        except Exception:
             day = 0
 
         return (year, month, day)
 
 
 class JoinLabSection(models.Model):
+    """
+    A section on the "Join Lab" page.
+    """
     title = models.CharField(max_length=100, unique=True)
     description = models.TextField('Description',
                                    help_text=settings.MARKDOWN_PROMPT)

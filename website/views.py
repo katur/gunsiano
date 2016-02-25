@@ -88,10 +88,9 @@ def publications(request):
     """
     Publications page
     """
-    pubs = sorted(Publication.objects.filter(hidden=False), reverse=True)
+    pubs = Publication.objects.all()
 
     for pub in pubs:
-        pub.translate_html_br_to_markdown()
         pub.embolden_PI_names()
         pub.italicize_species_names()
 

@@ -106,7 +106,6 @@ class Resource(models.Model):
                                    help_text=settings.MARKDOWN_PROMPT)
     url = models.URLField(blank=True)
     display_order = models.PositiveSmallIntegerField()
-    logo_filename = models.CharField(max_length=50, blank=True)
     logo = models.ImageField(upload_to='resource_logos',
                              null=True, blank=True)
 

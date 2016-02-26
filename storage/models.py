@@ -83,7 +83,6 @@ class ContainerType(models.Model):
     slot_type = models.ForeignKey(ContainerSupertype, models.SET_NULL,
                                   null=True, blank=True,
                                   related_name='container_slot_type')
-    image_filename = models.CharField(max_length=30, blank=True)
     image = models.ImageField(upload_to='storage_vats',
                               null=True, blank=True)
 

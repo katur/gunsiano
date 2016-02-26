@@ -76,7 +76,11 @@
         <a href="{{ lab_tools_url }}"
         {% ifequal request.path lab_tools_url %}class="active"{% endifequal %}
         >Lab Tools</a>
+
+        {% if user.is_staff %}
         <a href="{% url 'admin:index' %}">Admin</a>
+        {% endif %}
+
         <a href="{% url 'logout_url' %}?next={{ request.path }}">Logout</a>
       </div>
       {% endif %}

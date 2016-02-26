@@ -14,7 +14,7 @@ class Vector(models.Model):
     three_prime_utr = models.CharField(max_length=50, blank=True)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['id']
 
     def __unicode__(self):
         s = 'Vector ID {}'.format(self.id)

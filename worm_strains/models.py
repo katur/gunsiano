@@ -181,7 +181,7 @@ class WormStrain(models.Model):
 
 class WormStrainLine(models.Model):
     strain = models.ForeignKey(WormStrain, models.CASCADE)
-    stockable = models.ForeignKey(Stockable, models.CASCADE, unique=True)
+    stockable = models.OneToOneField(Stockable, models.CASCADE)
     created_internally = models.BooleanField(default=False)
     times_outcrossed = models.PositiveSmallIntegerField(null=True, blank=True)
     received_from = models.CharField(max_length=100, blank=True)

@@ -7,7 +7,6 @@ class VectorAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'name',
-        'parent_vector',
         'created_by',
         'genotype_pattern',
         'gene',

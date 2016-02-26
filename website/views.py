@@ -88,7 +88,7 @@ def publications(request):
     """
     Publications page
     """
-    pubs = Publication.objects.all()
+    pubs = Publication.objects.exclude(hidden=True)
 
     for pub in pubs:
         pub.embolden_PI_names()

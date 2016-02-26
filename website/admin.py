@@ -22,7 +22,8 @@ class BothBooleanSelect(forms.NullBooleanSelect):
 class UserProfileAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserProfileAdminForm, self).__init__(*args, **kwargs)
-        self.fields['in_abu_dhabi'].widget = BothBooleanSelect()
+        if 'in_abu_dhabi' in self.fields:
+            self.fields['in_abu_dhabi'].widget = BothBooleanSelect()
 
 
 def has_personnel_admin_privileges(user):

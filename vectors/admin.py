@@ -17,7 +17,6 @@ class VectorAdmin(admin.ModelAdmin):
 
     list_filter = (
         'created_by',
-        'parent_vector',
     )
 
     raw_id_fields = (

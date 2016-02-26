@@ -17,4 +17,9 @@ class Vector(models.Model):
         ordering = ['name']
 
     def __unicode__(self):
-        return self.name
+        s = 'Vector ID {}'.format(self.id)
+
+        if self.name:
+            s += ': {}'.format(self.name)
+
+        return s

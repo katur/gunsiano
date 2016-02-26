@@ -68,7 +68,8 @@ class MyUserAdmin(UserAdmin):
     """
     inlines = (UserProfileInline,)
 
-    list_display = ('first_name', 'last_name', 'username', 'email',)
+    list_display = ('first_name', 'last_name', 'username',
+                    'is_active', 'is_staff', 'is_superuser')
 
     ordering = ('first_name', 'last_name',)
 

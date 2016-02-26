@@ -18,11 +18,13 @@ class ProtocolAdmin(admin.ModelAdmin):
         'pub_date',
     )
 
-    search_fields = ('title',)
+    search_fields = (
+        'title',
+    )
 
-    fields = ('title', 'slug', 'author', 'text',)
-
-    prepopulated_fields = {'slug': ('title',)}
+    prepopulated_fields = {
+        'slug': ('title',)
+    }
 
     form = ProtocolAdminForm
 

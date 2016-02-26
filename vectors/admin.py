@@ -20,5 +20,9 @@ class VectorAdmin(admin.ModelAdmin):
         'parent_vector',
     )
 
+    raw_id_fields = (
+        'parent_vector',
+    )
+
 
 admin.site.register(Vector, VectorAdmin)

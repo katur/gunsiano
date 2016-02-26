@@ -30,6 +30,10 @@ class StockAdmin(admin.ModelAdmin):
         'stockable__type__name',
     )
 
+    raw_id_fields = (
+        'stockable',
+    )
+
 
 class ContainerSupertypeAdmin(admin.ModelAdmin):
     list_display = (

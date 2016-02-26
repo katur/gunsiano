@@ -13,7 +13,16 @@ class WormStrainAdmin(admin.ModelAdmin):
         'on_wormbase',
     )
 
-    search_fields = ('name', 'genotype', 'species__name',)
+    search_fields = (
+        'name',
+        'genotype',
+        'species__name',
+    )
+
+    raw_id_fields = (
+        'parent_strain',
+        'transgene',
+    )
 
 
 class WormStrainLineAdmin(admin.ModelAdmin):
@@ -30,7 +39,16 @@ class WormStrainLineAdmin(admin.ModelAdmin):
         'created_internally',
     )
 
-    search_fields = ('strain__name', 'strain__genotype', 'received_from',)
+    search_fields = (
+        'strain__name',
+        'strain__genotype',
+        'received_from',
+    )
+
+    raw_id_fields = (
+        'strain',
+        'stockable',
+    )
 
 
 class WormLabAdmin(admin.ModelAdmin):
@@ -40,7 +58,9 @@ class WormLabAdmin(admin.ModelAdmin):
         'allele_code',
     )
 
-    search_fields = ('lab',)
+    search_fields = (
+        'lab',
+    )
 
 
 class TransgeneAdmin(admin.ModelAdmin):
@@ -49,7 +69,13 @@ class TransgeneAdmin(admin.ModelAdmin):
         'vector',
     )
 
-    search_fields = ('name',)
+    search_fields = (
+        'name',
+    )
+
+    raw_id_fields = (
+        'vector',
+    )
 
 
 admin.site.register(Mutagen)

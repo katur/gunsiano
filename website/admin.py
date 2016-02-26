@@ -151,7 +151,12 @@ class PublicationAdmin(admin.ModelAdmin):
         'pmcid',
     )
 
-    search_fields = ('title', 'authors', 'abstract', 'journal',)
+    search_fields = (
+        'title',
+        'authors',
+        'abstract',
+        'journal',
+    )
 
 
 class JoinLabSectionAdmin(admin.ModelAdmin):

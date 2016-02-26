@@ -12,8 +12,9 @@
   <a href="{{ resource.url }}">
     <div class="resource">
       <img width="160px"
-        src="{{ STATIC_URL }}images/resource_logos/{{ resource.logo_filename }}"
-        alt="logo for this resource" />
+        src="{{ MEDIA_URL }}{{ resource.logo }}"
+        title="logo for {{ resource.name }}"
+        alt="logo for {{ resource.name }}" />
 
       <span>
         {{ resource.description|enhanced_markdown }}

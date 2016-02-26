@@ -11,7 +11,9 @@
   <div>
     <a href={{ container.get_absolute_url }}>
       <img src="{{ MEDIA_URL }}{{ container.type.image }}"
+           title="photo of a {{ container.type }}"
            alt="photo of a {{ container.type }}"/>
+
       <span
         {% if container.has_hover_detail %}
         data-hover-tag="{{ container.get_hover_detail }}"

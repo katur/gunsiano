@@ -124,7 +124,8 @@ class Container(models.Model):
     thaw_results = models.CharField(max_length=100, blank=True)
 
     def has_children(self):
-        children = Container.objects.all().filter(parent_id=self.id)
+        children = Container.objects.all().filter(parent_id=self.id,
+                                                  is_thawed=False)
         if children:
             return True
         else:

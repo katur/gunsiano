@@ -17,6 +17,7 @@ Contents of {{ container.get_ancestor_title }}
       {% for container in compartment %}
         {% if container.has_children %}
         <a href={{ container.get_absolute_url }}>
+
         {% elif container.worm %}
         <a href={{ container.worm.get_absolute_url }}>
         {% endif %}

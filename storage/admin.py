@@ -35,21 +35,6 @@ class StockAdmin(admin.ModelAdmin):
     )
 
 
-class ContainerSupertypeAdmin(admin.ModelAdmin):
-    list_display = (
-        'name',
-        'has_children',
-    )
-
-    list_filter = (
-        'has_children',
-    )
-
-    search_fields = (
-        'name',
-    )
-
-
 class ContainerTypeAdmin(admin.ModelAdmin):
     list_display = (
         'name',
@@ -110,7 +95,7 @@ class ContainerAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Container, ContainerAdmin)
-admin.site.register(ContainerSupertype, ContainerSupertypeAdmin)
+admin.site.register(ContainerSupertype)
 admin.site.register(ContainerType, ContainerTypeAdmin)
 admin.site.register(Stock, StockAdmin)
 admin.site.register(Stockable, StockableAdmin)

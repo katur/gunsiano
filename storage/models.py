@@ -63,7 +63,6 @@ class ContainerSupertype(models.Model):
     Broad characterization of a container (e.g. "vat", "box", "rack", "tube")
     """
     name = models.CharField(max_length=20)
-    has_children = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['name']
@@ -82,9 +81,6 @@ class ContainerType(models.Model):
     slots_horizontal = models.IntegerField(null=True, blank=True)
     image = models.ImageField(upload_to='storage_vats',
                               null=True, blank=True)
-
-    def has_children(self):
-        return self.supertype.has_children
 
     class Meta:
         ordering = ['supertype', 'name']

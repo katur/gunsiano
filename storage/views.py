@@ -22,7 +22,8 @@ def storage_detail(request, container_id):
     container = get_object_or_404(Container, id=container_id,
                                   type__slots_vertical__isnull=False,
                                   type__slots_horizontal__isnull=False)
-    children = Container.objects.all().filter(parent_id=container, is_thawed=0)
+    children = Container.objects.all().filter(parent_id=container,
+                                              is_thawed=0)
 
     # Create an empty 2D grid
     grid = [[list() for i in range(container.type.slots_horizontal)]

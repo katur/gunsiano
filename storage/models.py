@@ -80,9 +80,6 @@ class ContainerType(models.Model):
     supertype = models.ForeignKey(ContainerSupertype, models.CASCADE)
     slots_vertical = models.IntegerField(null=True, blank=True)
     slots_horizontal = models.IntegerField(null=True, blank=True)
-    slot_type = models.ForeignKey(ContainerSupertype, models.SET_NULL,
-                                  null=True, blank=True,
-                                  related_name='container_slot_type')
     image = models.ImageField(upload_to='storage_vats',
                               null=True, blank=True)
 
@@ -108,18 +105,23 @@ class Container(models.Model):
     type = models.ForeignKey(ContainerType, models.CASCADE)
     parent = models.ForeignKey('self', models.SET_NULL,
                                null=True, blank=True)
-    vertical_position = models.PositiveSmallIntegerField(null=True, blank=True)
-    horizontal_position = models.PositiveSmallIntegerField(null=True,
-                                                           blank=True)
-    stock = models.ForeignKey(Stock, models.SET_NULL, null=True, blank=True)
+    vertical_position = models.PositiveSmallIntegerField(
+        null=True, blank=True)
+    horizontal_position = models.PositiveSmallIntegerField(
+        null=True, blank=True)
     owner = models.ForeignKey(User, models.SET_NULL, null=True, blank=True)
+    notes = models.TextField(blank=True,
+                             help_text=settings.MARKDOWN_PROMPT)
+
+    # Below here are only really relevant for tubes/wells
+    stock = models.ForeignKey(Stock, models.SET_NULL,
+                              null=True, blank=True)
     is_thawed = models.BooleanField(default=False)
     thawed_by = models.ForeignKey(User, models.SET_NULL,
                                   null=True, blank=True,
                                   related_name='container_thawed_by')
     date_thawed = models.DateField(null=True, blank=True)
     thaw_results = models.CharField(max_length=100, blank=True)
-    notes = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
 
     def has_children(self):
         children = Container.objects.all().filter(parent_id=self.id)

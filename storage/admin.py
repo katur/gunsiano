@@ -71,12 +71,10 @@ class ContainerAdmin(admin.ModelAdmin):
         'horizontal_position',
         'owner',
         'is_thawed',
-        'date_thawed',
     )
 
     list_filter = (
         'type__supertype',
-        'type',
         'owner',
         'is_thawed',
     )
@@ -86,6 +84,24 @@ class ContainerAdmin(admin.ModelAdmin):
         'owner__username',
         'owner__first_name',
         'owner__last_name',
+    )
+
+    raw_id_fields = (
+        'parent',
+        'stock',
+    )
+
+    fieldsets = (
+        (None,
+            {'fields': (
+                'name', 'type', 'parent', 'vertical_position',
+                'horizontal_position', 'owner', 'notes',
+            )}),
+        ('Relevant for tubes/wells only',
+            {'fields': (
+                'stock', 'is_thawed', 'thawed_by', 'date_thawed',
+                'thaw_results',
+            )}),
     )
 
 

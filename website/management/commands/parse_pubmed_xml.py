@@ -35,7 +35,8 @@ class Command(BaseCommand):
     (Gunsalus K[Author] OR Gunsalus KC[Author] NOT Gunsalus KT[Author])
 
     Even with these exceptions, some other Pianos and Gunsaluses show
-    up in the results, which should be flagged to not display in the database.
+    up in the results, which must be marked "hidden" to not display on
+    the website. This can be done in the Django admin.
     """
     help = ('Parse a PubMed XML file of publications, adding new ones '
             'to the database. NOTE: since we starting wanting PMCID in '

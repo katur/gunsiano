@@ -71,9 +71,9 @@ class WormStrain(models.Model):
                                   null=True, blank=True)
     mutagen = models.ForeignKey(Mutagen, models.SET_NULL,
                                 null=True, blank=True)
-    date_created = models.DateField(null=True, blank=True)
     created_by = models.ForeignKey(User, models.SET_NULL,
                                    null=True, blank=True)
+    date_created = models.DateField(null=True, blank=True)
     remarks = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
 
     class Meta:

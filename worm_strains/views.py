@@ -2,8 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 from django.db.models import Q
 
-from worm_strains.models import WormLab, WormStrain # , WormStrainLine
-from storage.models import Stock, Container
+from worm_strains.models import WormLab, WormStrain
 
 
 @login_required
@@ -40,34 +39,28 @@ def worm(request, name):
     Page showing information on a particular worm strain.
     """
     worm = get_object_or_404(WormStrain, name=name)
-    # lines = (WormStrainLine.objects.filter(strain=worm)
-    #           .order_by('date_received'))
+
+    lines = worm.wormstrainline_set.order_by('date_received')
 
     lab_code = worm.get_lab_code()
     if lab_code:
         worm.lab = WormLab.objects.filter(strain_code=lab_code).first()
 
-    '''
     for line in lines:
-        line.stocks = (Stock.objects
-                       .filter(stockable=line.stockable)
-                       .order_by('date_prepared'))
+        line.stocks = line.stock_set.order_by('date_prepared')
 
         for stock in line.stocks:
-            # Get the tester thaws
-            stock.thaw_80 = (Container.objects
-                             .filter(stock=stock, parent=7).first())
-            stock.thaw_N = (Container.objects
-                            .filter(stock=stock, parent=8).first())
+            all_tubes = stock.container_set
 
-            # Get other thaws
-            all_tubes = (Container.objects.filter(stock=stock)
-                         .exclude(parent=7).exclude(parent=8))
+            # Get the tester thaws
+            stock.thaw_80 = all_tubes.filter(parent=7).first()
+            stock.thaw_N = all_tubes.filter(parent=8).first()
+            remaining = all_tubes.exclude(parent=7).exclude(parent=8)
 
             thawed_tubes = []
             unthawed_tubes = []
 
-            for tube in all_tubes:
+            for tube in remaining:
                 tube.position = tube.get_overall_position()
                 if tube.is_thawed:
                     thawed_tubes.append(tube)
@@ -79,11 +72,10 @@ def worm(request, name):
                                         key=lambda x: x.position)
             stock.unthawed_tubes = sorted(unthawed_tubes,
                                           key=lambda x: x.position)
-    '''
 
     context = {
         'worm': worm,
-        # 'lines': lines,
+        'lines': lines,
     }
 
     return render(request, 'worm.html', context)

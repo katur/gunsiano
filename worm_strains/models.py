@@ -168,15 +168,13 @@ class WormStrain(models.Model):
             return None
 
     def is_frozen(self):
-        '''
-        lines = WormStrainLine.objects.filter(strain=self.name)
-        for line in lines:
-            stocks = Stock.objects.filter(stockable=line.stockable)
+        for line in self.wormstrainline_set.all():
+            stocks = Stock.objects.filter(
+                stockable=line.stockable_ptr_id)
+
             for stock in stocks:
-                containers = Container.objects.filter(stock=stock)
-                if containers:
+                if stock.container_set.exists():
                     return True
-        '''
 
         return False
 

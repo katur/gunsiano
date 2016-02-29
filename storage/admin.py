@@ -1,18 +1,7 @@
 from django.contrib import admin
 
 from storage.models import (Container, ContainerSupertype, ContainerType,
-                            Stock, Stockable, StockableType)
-
-
-class StockableAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'type',
-    )
-
-    list_filter = (
-        'type',
-    )
+                            Stock, StockableType)
 
 
 class StockAdmin(admin.ModelAdmin):
@@ -26,7 +15,6 @@ class StockAdmin(admin.ModelAdmin):
         'prepared_by',
     )
 
-    '''
     search_fields = (
         'stockable__type__name',
     )
@@ -34,7 +22,6 @@ class StockAdmin(admin.ModelAdmin):
     raw_id_fields = (
         'stockable',
     )
-    '''
 
 
 class ContainerTypeAdmin(admin.ModelAdmin):
@@ -100,5 +87,4 @@ admin.site.register(Container, ContainerAdmin)
 admin.site.register(ContainerSupertype)
 admin.site.register(ContainerType, ContainerTypeAdmin)
 admin.site.register(Stock, StockAdmin)
-admin.site.register(Stockable, StockableAdmin)
 admin.site.register(StockableType)

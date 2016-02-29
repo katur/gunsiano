@@ -11,7 +11,7 @@ Additionally, PubMed's XML output does not include the PMCID, which
 we would like in order to link directly to the free text. And, there
 are sometimes other inconsistencies between the PubMed XML output and
 what shows in the PubMed webpage. For example, PMID 26887572 shows in
-the website as "2016 Feb 17", but in the XML as just "2016".
+the website as issue "2016 Feb 17", but in the XML as just "2016".
 
 So, going forward, we will just enter our new publications through the
 Django Admin, which is very easy. I am keeping this script around just
@@ -53,7 +53,7 @@ class Command(BaseCommand):
         tree = ET.parse(input_file)
         root = tree.getroot()
 
-        # Create set of recorded publications to skip over them
+        # Create set of already-recorded PMIDs, to avoid adding them again
         recorded_publications = Publication.objects.all()
         recorded_pmids = set()
         for publication in recorded_publications:
@@ -85,7 +85,7 @@ class Command(BaseCommand):
             # Sanity check that journal matches that in description
             assert journal == description_journal
 
-            date = journal_line.split('.')[1].split(';')[0].strip()
+            issue = journal_line.split('.')[1].split(';')[0].strip()
             detail = journal_line.split(';')[1].split('</p>')[0].strip()
 
             description_authors = (description.split('Authors:')[1]
@@ -104,6 +104,6 @@ class Command(BaseCommand):
 
             entry = Publication(pmid=pmid, title=title,
                                 authors=authors, abstract=abstract,
-                                journal=journal, date=date,
+                                journal=journal, issue=issue,
                                 detail=detail)
             entry.save()

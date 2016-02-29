@@ -133,7 +133,7 @@ class Publication(models.Model):
     detail = models.CharField(max_length=60, blank=True)
 
     # Don't make this a DateField, since not always specific to date
-    date = models.CharField(max_length=30, blank=True)
+    date_on_pubmed = models.CharField(max_length=30, blank=True)
 
     # Select to not show this publication on the website
     hidden = models.BooleanField('Hide?', default=False)

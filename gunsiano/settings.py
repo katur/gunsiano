@@ -94,7 +94,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'APP_DIRS': True,
 
-        # Needed so overrideen admin templates take precedence
+        # Needed so overridden admin templates take precedence
         'DIRS': [BASE_DIR + '/website/templates/'],
 
         'OPTIONS': {

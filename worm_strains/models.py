@@ -181,11 +181,8 @@ class WormStrain(models.Model):
         return False
 
 
-'''
-class WormStrainLine(models.Model):
+class WormStrainLine(Stockable):
     strain = models.ForeignKey(WormStrain, models.CASCADE)
-    stockable = models.OneToOneField(Stockable, models.CASCADE,
-                                     primary_key=True)
     created_internally = models.BooleanField(default=False)
     times_outcrossed = models.PositiveSmallIntegerField(null=True, blank=True)
     received_from = models.CharField(max_length=100, blank=True)
@@ -212,4 +209,3 @@ class WormStrainLine(models.Model):
         if self.date_received:
             result += (' on ' + formats.date_format(self.date_received))
         return result
-'''

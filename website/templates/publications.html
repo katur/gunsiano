@@ -30,6 +30,7 @@
     </span>
     {% endif %}
 
+    {% if publication.pmid %}
     <span class="cleared pmid">
       <a href="{{ publication.get_pubmed_url }}">
         See on PubMed
@@ -39,6 +40,7 @@
         PMID: {{ publication.pmid }}
       </span>
     </span>
+    {% endif %}
 
     {% if publication.pmcid %}
     <span class="cleared pmcid">

@@ -68,6 +68,7 @@ class Command(BaseCommand):
                     .format(parent_container, horizontal_position,
                             vertical_position))
 
+            # TODO: could use Django's get_or_create method here
             try:
                 # There are a few cases where the lab received an MMP strain
                 # individually from the CGC, so the WormStrain is already

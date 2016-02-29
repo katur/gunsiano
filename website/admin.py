@@ -139,16 +139,12 @@ class ResourceAdmin(admin.ModelAdmin):
 
 class PublicationAdmin(admin.ModelAdmin):
     list_display = (
+        'title',
         'pmid',
         'pmcid',
-        'title',
         'date',
         'journal',
         'hidden',
-    )
-
-    list_editable = (
-        'pmcid',
     )
 
     search_fields = (

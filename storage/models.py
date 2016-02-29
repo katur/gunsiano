@@ -109,7 +109,7 @@ class Container(models.Model):
     notes = models.TextField(blank=True,
                              help_text=settings.MARKDOWN_PROMPT)
 
-    # Below here are only really relevant for tubes/wells
+    # Fields Below here are only really relevant for tubes/wells
     stock = models.ForeignKey(Stock, models.SET_NULL,
                               null=True, blank=True)
     is_thawed = models.BooleanField(default=False)

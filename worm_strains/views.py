@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 from django.db.models import Q
 
-from worm_strains.models import WormLab, WormStrain, WormStrainLine
+from worm_strains.models import WormLab, WormStrain # , WormStrainLine
 from storage.models import Stock, Container
 
 
@@ -40,8 +40,8 @@ def worm(request, name):
     Page showing information on a particular worm strain.
     """
     worm = get_object_or_404(WormStrain, name=name)
-    lines = (WormStrainLine.objects.filter(strain=worm)
-             .order_by('date_received'))
+    # lines = (WormStrainLine.objects.filter(strain=worm)
+    #           .order_by('date_received'))
 
     lab_code = worm.get_lab_code()
     if lab_code:
@@ -83,7 +83,7 @@ def worm(request, name):
 
     context = {
         'worm': worm,
-        'lines': lines,
+        # 'lines': lines,
     }
 
     return render(request, 'worm.html', context)

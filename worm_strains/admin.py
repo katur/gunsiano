@@ -1,7 +1,9 @@
 from django.contrib import admin
 
 from worm_strains.models import (Mutagen, Transgene, WormLab, WormSpecies,
-                                 WormStrain, WormStrainLine)
+                                 WormStrain,
+                                 # WormStrainLine
+                                 )
 
 
 class WormStrainAdmin(admin.ModelAdmin):
@@ -25,6 +27,7 @@ class WormStrainAdmin(admin.ModelAdmin):
     )
 
 
+'''
 class WormStrainLineAdmin(admin.ModelAdmin):
     list_display = (
         'strain',
@@ -49,6 +52,7 @@ class WormStrainLineAdmin(admin.ModelAdmin):
         'strain',
         'stockable',
     )
+'''
 
 
 class WormLabAdmin(admin.ModelAdmin):
@@ -83,4 +87,4 @@ admin.site.register(Transgene, TransgeneAdmin)
 admin.site.register(WormLab, WormLabAdmin)
 admin.site.register(WormSpecies)
 admin.site.register(WormStrain, WormStrainAdmin)
-admin.site.register(WormStrainLine, WormStrainLineAdmin)
+# admin.site.register(WormStrainLine, WormStrainLineAdmin)

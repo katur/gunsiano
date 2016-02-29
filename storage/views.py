@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 
 from storage.models import Container
-from worm_strains.models import WormStrainLine
+# from worm_strains.models import WormStrainLine
 
 
 @login_required

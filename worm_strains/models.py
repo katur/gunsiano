@@ -168,6 +168,7 @@ class WormStrain(models.Model):
             return None
 
     def is_frozen(self):
+        '''
         lines = WormStrainLine.objects.filter(strain=self.name)
         for line in lines:
             stocks = Stock.objects.filter(stockable=line.stockable)
@@ -175,10 +176,12 @@ class WormStrain(models.Model):
                 containers = Container.objects.filter(stock=stock)
                 if containers:
                     return True
+        '''
 
         return False
 
 
+'''
 class WormStrainLine(models.Model):
     strain = models.ForeignKey(WormStrain, models.CASCADE)
     stockable = models.OneToOneField(Stockable, models.CASCADE,
@@ -209,3 +212,4 @@ class WormStrainLine(models.Model):
         if self.date_received:
             result += (' on ' + formats.date_format(self.date_received))
         return result
+'''

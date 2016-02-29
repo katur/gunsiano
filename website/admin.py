@@ -142,8 +142,9 @@ class PublicationAdmin(admin.ModelAdmin):
         'title',
         'pmid',
         'pmcid',
-        'date_on_pubmed',
         'journal',
+        'issue',
+        'detail',
         'hidden',
     )
 

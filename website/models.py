@@ -129,11 +129,12 @@ class Publication(models.Model):
     authors = models.TextField(blank=True)
     abstract = models.TextField(blank=True)
     journal = models.CharField(max_length=100, blank=True)
-    detail = models.CharField(max_length=60, blank=True)
 
-    # Cannot make this a DateField, since sometimes it is a date; sometimes
-    # it is a range of dates; sometimes it is a month
-    date_on_pubmed = models.CharField(max_length=30, blank=True)
+    # Usually a date, but sometimes a date range, or just a month
+    issue = models.CharField(max_length=30, blank=True)
+
+    # Extra details about the journal (e.g. page range)
+    detail = models.CharField(max_length=60, blank=True)
 
     # Select to not show this publication on the website
     hidden = models.BooleanField('Hide?', default=False)

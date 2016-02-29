@@ -38,9 +38,11 @@ def storage_detail(request, container_id):
 
         if child.stock:
             s = child.stock.stockable
+            '''
             if s.type.name == 'worm strain':
                 line = get_object_or_404(WormStrainLine, stockable=s)
                 child.worm = line.strain
+            '''
 
     context = {
         'container': container,

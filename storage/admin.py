@@ -26,6 +26,7 @@ class StockAdmin(admin.ModelAdmin):
         'prepared_by',
     )
 
+    '''
     search_fields = (
         'stockable__type__name',
     )
@@ -33,6 +34,7 @@ class StockAdmin(admin.ModelAdmin):
     raw_id_fields = (
         'stockable',
     )
+    '''
 
 
 class ContainerTypeAdmin(admin.ModelAdmin):

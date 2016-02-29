@@ -47,6 +47,7 @@ def worm(request, name):
     if lab_code:
         worm.lab = WormLab.objects.filter(strain_code=lab_code).first()
 
+    '''
     for line in lines:
         line.stocks = (Stock.objects
                        .filter(stockable=line.stockable)
@@ -78,6 +79,7 @@ def worm(request, name):
                                         key=lambda x: x.position)
             stock.unthawed_tubes = sorted(unthawed_tubes,
                                           key=lambda x: x.position)
+    '''
 
     context = {
         'worm': worm,

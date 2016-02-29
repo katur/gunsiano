@@ -33,7 +33,7 @@ class Stock(models.Model):
     """
     A stock that was prepared of something Stockable.
     """
-    stockable = models.ForeignKey(Stockable, models.CASCADE)
+    stockable = models.IntegerField()
     concentration = models.CharField(max_length=30, blank=True)
     prepared_by = models.ForeignKey(User, models.SET_NULL,
                                     null=True, blank=True)

@@ -120,8 +120,7 @@ class Publication(models.Model):
     """
     A publication in the lab.
     """
-    # Don't make this required, so that we can add pre-Pubmed publications
-    pmid = models.PositiveIntegerField('PMID', null=True, blank=True)
+    pmid = models.PositiveIntegerField('PMID')
 
     # Many publications do not have a PMCID
     pmcid = models.CharField('PMCID', max_length=20, blank=True)

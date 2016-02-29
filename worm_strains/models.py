@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import formats
 
-from storage.models import Stockable, Stock, Container
+from storage.models import Stockable, Stock
 from vectors.models import Vector
 
 
@@ -194,6 +194,9 @@ class WormStrainLine(Stockable):
 
     def __unicode__(self):
         return str(self.strain)
+
+    def get_absolute_url(self):
+        return reverse('worm_url', args=[self.strain.name])
 
     def has_receipt_detail(self):
         return self.received_by or self.received_from or self.date_received

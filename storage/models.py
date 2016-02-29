@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import formats
 
+from utils.models import RealInstanceProvider
+
 
 class StockableType(models.Model):
     """
@@ -18,7 +20,7 @@ class StockableType(models.Model):
         return self.name
 
 
-class Stockable(models.Model):
+class Stockable(models.Model, RealInstanceProvider):
     """
     An entity that can be made into stocks (a particular worm strain line,
     a particular chemical, etc.)

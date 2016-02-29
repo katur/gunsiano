@@ -18,24 +18,25 @@ Contents of {{ container.get_ancestor_title }}
         {% if container.has_children %}
         <a href={{ container.get_absolute_url }}>
 
-        {% elif container.worm %}
-        <a href={{ container.worm.get_absolute_url }}>
+        {% elif container.stockable %}
+        <a href={{ container.stockable.get_absolute_url }}>
         {% endif %}
 
-          <span
-            {% if container.has_hover_detail %}
-            data-hover-tag="{{ container.get_hover_detail }}"
-            {% endif %}
-          >
-            <strong>{{ container.get_supertype }}:</strong>
-            {% if container.worm %}
-              {{ container.worm }}
-            {% else %}
-              {{ container }}
-            {% endif %}
-          </span>
+        <span
+          {% if container.has_hover_detail %}
+          data-hover-tag="{{ container.get_hover_detail }}"
+          {% endif %}>
 
-        {% if container.has_children or container.worm %}
+          <strong>{{ container.get_supertype }}:</strong>
+
+          {% if container.stockable %}
+            {{ container.stockable }}
+          {% else %}
+            {{ container }}
+          {% endif %}
+        </span>
+
+        {% if container.has_children or container.stockable %}
         </a>
         {% endif %}
       <br>

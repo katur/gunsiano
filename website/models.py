@@ -132,7 +132,8 @@ class Publication(models.Model):
     journal = models.CharField(max_length=100, blank=True)
     detail = models.CharField(max_length=60, blank=True)
 
-    # Don't make this a DateField, since not always specific to date
+    # Cannot make this a DateField, since sometimes it is a date; sometimes
+    # it is a range of dates; sometimes it is a month
     date_on_pubmed = models.CharField(max_length=30, blank=True)
 
     # Select to not show this publication on the website

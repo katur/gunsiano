@@ -209,7 +209,7 @@ class WormStrainLine(Stockable):
         ordering = ['strain__name']
 
     def __unicode__(self):
-        return str(self.strain)
+        return str(self.strain) + ' Line'
 
     def get_absolute_url(self):
         return reverse('worm_url', args=[self.strain.name])

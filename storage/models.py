@@ -130,7 +130,8 @@ class Container(models.Model):
         return self.type.supertype
 
     def get_ancestors(self):
-        """Get a list of this tube's ancestors, starting with the oldest.
+        """
+        Get a list of this tube's ancestors, starting with the oldest.
         Returns an empty list if this container has no parent.
         """
         ancestors = []
@@ -145,7 +146,8 @@ class Container(models.Model):
         return '{0}: {1}'.format(str(self.get_supertype()), str(self))
 
     def get_ancestor_title(self):
-        """Get a title for this container that includes both
+        """
+        Get a title for this container that includes both
         supertype and ancestors
         """
         ancestors = self.get_ancestors()
@@ -154,7 +156,8 @@ class Container(models.Model):
         return u' \u2192 '.join(strings)
 
     def get_position_in_parent(self):
-        """Get this container's position within its parent container
+        """
+        Get this container's position within its parent container
         in format 'B6', where 'B' represents the second vertical position
         and '6' represents the sixth horizontal position
         """

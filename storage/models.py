@@ -7,25 +7,11 @@ from django.utils import formats
 from utils.models import RealInstanceProvider
 
 
-class StockableType(models.Model):
-    """
-    A stockable type (e.g. "worm", "bacteria", etc)
-    """
-    name = models.CharField(max_length=20)
-
-    class Meta:
-        ordering = ['name']
-
-    def __unicode__(self):
-        return self.name
-
-
 class Stockable(models.Model, RealInstanceProvider):
     """
     An entity that can be made into stocks (a particular worm strain line,
     a particular chemical, etc.)
     """
-    type = models.ForeignKey(StockableType, models.CASCADE)
 
     def __unicode__(self):
         return str(self.id)

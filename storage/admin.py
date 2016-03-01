@@ -6,6 +6,7 @@ from storage.models import (Container, ContainerType, ContainerSupertype,
 
 class StockAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'stockable',
         'date_prepared',
         'prepared_by',

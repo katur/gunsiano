@@ -1,3 +1,5 @@
+$base-font-size: 18px
+$small-font-size: $base-font-size - 4
 $bigger-font-size: $base-font-size + 2
 $h1-base-font-size: 32px
 $h2-base-font-size: 24px
@@ -43,7 +45,7 @@ h2
     font-size: $h2-base-font-size - 3
 
   &#page-title
-    margin-bottom: $vertical-section-whitespace
+    margin-bottom: $whitespace
 
     &.no-page-title
       display: none
@@ -53,7 +55,7 @@ h2
       float: left
 
 h3
-  margin-bottom: $vertical-subsection-whitespace
+  margin-bottom: $whitespace / 2
   text-transform: uppercase
   letter-spacing: 1px
   font-size: $h3-base-font-size
@@ -68,7 +70,7 @@ h3
     font-size: $h3-base-font-size - 3
 
 h4
-  margin-bottom: $vertical-subsection-whitespace
+  margin-bottom: $whitespace / 2
   font-weight: bold
   color: $gray-medium
   font-size: $h4-base-font-size

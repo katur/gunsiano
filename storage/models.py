@@ -21,6 +21,7 @@ class Stock(models.Model):
     """
     A stock that was prepared of something Stockable.
     """
+
     stockable = models.ForeignKey(Stockable, models.CASCADE)
     concentration = models.CharField(max_length=30, blank=True)
     prepared_by = models.ForeignKey(User, models.SET_NULL,
@@ -50,6 +51,7 @@ class ContainerSupertype(models.Model):
     """
     Broad characterization of a container (e.g. "vat", "box", "rack", "tube")
     """
+
     name = models.CharField(max_length=20)
 
     class Meta:
@@ -63,6 +65,7 @@ class ContainerType(models.Model):
     """
     Specific characterization of a container (e.g. "9x9 box", "1.5mL tube")
     """
+
     name = models.CharField(max_length=50)
     supertype = models.ForeignKey(ContainerSupertype, models.CASCADE)
     slots_vertical = models.IntegerField(null=True, blank=True)
@@ -85,6 +88,7 @@ class Container(models.Model):
     freezer), an innermost/smallest container (a tube or a well), or
     anything in between (a rack, a box, etc).
     """
+
     name = models.CharField(max_length=200, blank=True)
     type = models.ForeignKey(ContainerType, models.CASCADE)
     parent = models.ForeignKey('self', models.SET_NULL,

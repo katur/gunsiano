@@ -3,6 +3,7 @@ from django.db import models
 
 
 class Vector(models.Model):
+
     name = models.CharField(max_length=50, blank=True)
     parent_vector = models.ForeignKey('self', models.SET_NULL,
                                       null=True, blank=True)

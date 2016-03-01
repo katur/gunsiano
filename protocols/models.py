@@ -5,6 +5,10 @@ from django.db import models
 
 
 class Protocol(models.Model):
+    """
+    An experimental protocol.
+    """
+
     title = models.CharField(max_length=200,
                              help_text=settings.MARKDOWN_PROMPT)
     slug = models.SlugField(max_length=120, unique=True)

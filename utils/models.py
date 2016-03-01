@@ -1,4 +1,5 @@
 class RealInstanceProvider(object):
+
     def get_actual_instance(self):
         # Check the cache
         if hasattr(self, '_actual_instance'):

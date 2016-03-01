@@ -9,6 +9,7 @@ class Position(models.Model):
     """
     A lab member position (e.g. Postdoc, Technician).
     """
+
     name = models.CharField(max_length=50)
     display_order = models.PositiveSmallIntegerField()
 
@@ -31,6 +32,7 @@ class UserProfile(models.Model):
     (extending the Django built-in model through inheritance tends
     to be sloppier).
     """
+
     user = models.OneToOneField(User, primary_key=True)
     position = models.ForeignKey(Position, models.CASCADE)
 
@@ -82,6 +84,7 @@ class ResearchArea(models.Model):
 
     These are the topics that display on the home page.
     """
+
     name = models.CharField(max_length=60, unique=True)
     description = models.TextField('Description',
                                    help_text=settings.MARKDOWN_PROMPT)
@@ -99,8 +102,9 @@ class ResearchArea(models.Model):
 
 class Resource(models.Model):
     """
-    A public resource of the lab (e.g. NBrowse, Rhevolution).
+    A public resource of the lab (e.g. NBrowse).
     """
+
     name = models.CharField(max_length=40, unique=True)
     description = models.TextField('Description',
                                    help_text=settings.MARKDOWN_PROMPT)
@@ -118,8 +122,9 @@ class Resource(models.Model):
 
 class Publication(models.Model):
     """
-    A publication in the lab.
+    A publication by the lab.
     """
+
     pmid = models.PositiveIntegerField('PMID')
 
     # Many publications do not have a PMCID
@@ -244,8 +249,9 @@ class Publication(models.Model):
 
 class JoinLabSection(models.Model):
     """
-    A section on the "Join Lab" page.
+    A section on the "Join the Lab" page.
     """
+
     title = models.CharField(max_length=100, unique=True)
     description = models.TextField('Description',
                                    help_text=settings.MARKDOWN_PROMPT)

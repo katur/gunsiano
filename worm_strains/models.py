@@ -10,7 +10,42 @@ from storage.models import Stockable, Stock
 from vectors.models import Vector
 
 
+class Mutagen(models.Model):
+    """
+    A method used to make new worm species.
+
+    Not necessarily a chemical mutagen. Could be a cross.
+    """
+
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        ordering = ['name']
+
+    def __unicode__(self):
+        return self.name
+
+
+class Transgene(models.Model):
+    """
+    A transgene in a worm's genotype.
+    """
+
+    name = models.CharField(max_length=10, blank=True)
+    vector = models.ForeignKey(Vector, models.SET_NULL, null=True, blank=True)
+
+    class Meta:
+        ordering = ['name']
+
+    def __unicode__(self):
+        return self.name
+
+
 class WormSpecies(models.Model):
+    """
+    A worm species (e.g. Caenorhabditis elegans)
+    """
+
     name = models.CharField(max_length=50, unique=True)
 
     class Meta:
@@ -27,40 +62,11 @@ class WormSpecies(models.Model):
         return genus + '. ' + species
 
 
-class Mutagen(models.Model):
-    name = models.CharField(max_length=50)
-
-    class Meta:
-        ordering = ['name']
-
-    def __unicode__(self):
-        return self.name
-
-
-class Transgene(models.Model):
-    name = models.CharField(max_length=10, blank=True)
-    vector = models.ForeignKey(Vector, models.SET_NULL, null=True, blank=True)
-
-    class Meta:
-        ordering = ['name']
-
-    def __unicode__(self):
-        return self.name
-
-
-class WormLab(models.Model):
-    lab = models.CharField(max_length=200)
-    strain_code = models.CharField(max_length=5)
-    allele_code = models.CharField(max_length=5, blank=True)
-
-    class Meta:
-        ordering = ['lab']
-
-    def __unicode__(self):
-        return self.lab
-
-
 class WormStrain(models.Model):
+    """
+    A worm strain (e.g. PF100)
+    """
+
     name = models.CharField(max_length=30, primary_key=True)
     on_wormbase = models.BooleanField(default=False)
     species = models.ForeignKey(WormSpecies, models.CASCADE, default=1)
@@ -180,6 +186,16 @@ class WormStrain(models.Model):
 
 
 class WormStrainLine(Stockable):
+    """
+    A particular line of a worm strain.
+
+    While theoretically all worms of the same strain should be alike,
+    in practice sometimes a line gets silenced or suffers from other
+    issues. So we use WormStrainLine to keep track when we receive
+    the "same" strain from multiple place (e.g. from the CGC, from
+    another lab, etc).
+    """
+
     strain = models.ForeignKey(WormStrain, models.CASCADE)
     created_internally = models.BooleanField(default=False)
     times_outcrossed = models.PositiveSmallIntegerField(null=True, blank=True)
@@ -210,3 +226,22 @@ class WormStrainLine(Stockable):
         if self.date_received:
             result += (' on ' + formats.date_format(self.date_received))
         return result
+
+
+class WormLab(models.Model):
+    """
+    A lab that studies worms.
+
+    This information is available at the CGC:
+        http://cbs.umn.edu/cgc/lab-code
+    """
+
+    lab = models.CharField(max_length=200)
+    strain_code = models.CharField(max_length=5)
+    allele_code = models.CharField(max_length=5, blank=True)
+
+    class Meta:
+        ordering = ['lab']
+
+    def __unicode__(self):
+        return self.lab

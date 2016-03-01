@@ -68,10 +68,10 @@ class MyUserAdmin(UserAdmin):
     """
     inlines = (UserProfileInline,)
 
-    list_display = ('first_name', 'last_name', 'username',
+    list_display = ('username', 'first_name', 'last_name',
                     'is_active', 'is_staff', 'is_superuser')
 
-    ordering = ('first_name', 'last_name',)
+    ordering = ('username',)
 
     def get_queryset(self, request):
         """

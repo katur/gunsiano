@@ -4,6 +4,16 @@ from worm_strains.models import (Mutagen, Transgene, WormLab, WormSpecies,
                                  WormStrain, WormStrainLine)
 
 
+class WormStrainLineInline(admin.StackedInline):
+    model = WormStrainLine
+
+    readonly_fields = ('stockable_ptr_id',)
+
+    fields = ('stockable_ptr_id', 'created_internally', 'received_from',
+              'received_by', 'date_received', 'times_outcrossed',
+              'remarks')
+
+
 class WormStrainAdmin(admin.ModelAdmin):
     list_display = (
         'name',
@@ -24,34 +34,7 @@ class WormStrainAdmin(admin.ModelAdmin):
         'transgene',
     )
 
-
-class WormStrainLineAdmin(admin.ModelAdmin):
-    list_display = (
-        'strain',
-        'stockable_ptr_id',
-        'created_internally',
-        'received_from',
-        'received_by',
-        'date_received',
-    )
-
-    list_filter = (
-        'created_internally',
-    )
-
-    search_fields = (
-        'strain__name',
-        'strain__genotype',
-        'received_from',
-    )
-
-    raw_id_fields = (
-        'strain',
-    )
-
-    readonly_fields = (
-        'stockable_ptr_id',
-    )
+    inlines = [WormStrainLineInline]
 
 
 class WormLabAdmin(admin.ModelAdmin):
@@ -86,4 +69,3 @@ admin.site.register(Transgene, TransgeneAdmin)
 admin.site.register(WormLab, WormLabAdmin)
 admin.site.register(WormSpecies)
 admin.site.register(WormStrain, WormStrainAdmin)
-admin.site.register(WormStrainLine, WormStrainLineAdmin)

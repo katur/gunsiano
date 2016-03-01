@@ -20,6 +20,10 @@ class StockAdmin(admin.ModelAdmin):
         'stockable',
     )
 
+    readonly_fields = (
+        'id',
+    )
+
 
 class ContainerTypeAdmin(admin.ModelAdmin):
     list_display = (
@@ -69,7 +73,7 @@ class ContainerAdmin(admin.ModelAdmin):
     fieldsets = (
         (None,
             {'fields': (
-                'name', 'type', 'parent', 'vertical_position',
+                'type', 'name', 'parent', 'vertical_position',
                 'horizontal_position', 'owner', 'notes',
             )}),
         ('Relevant for tubes/wells only',

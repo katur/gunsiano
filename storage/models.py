@@ -14,7 +14,11 @@ class Stockable(models.Model, RealInstanceProvider):
     """
 
     def __unicode__(self):
-        return str(self.id)
+        '''
+        actual = self.get_actual_instance()
+        return str(actual)
+        '''
+        return unicode(self.id)
 
 
 class Stock(models.Model):

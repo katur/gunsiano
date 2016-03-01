@@ -18,7 +18,7 @@
       {{ publication.authors|enhanced_markdown }}
     </span>
 
-    <span class="cleared journal">
+    <span class="cleared">
       {{ publication.journal }}.
       {{ publication.issue }}{% if publication.detail %};
       {{ publication.detail }}{% endif %}.
@@ -30,8 +30,7 @@
     </span>
     {% endif %}
 
-    {% if publication.pmid %}
-    <span class="cleared pmid">
+    <span class="cleared">
       <a href="{{ publication.get_pubmed_url }}">
         See on PubMed
       </a>
@@ -40,10 +39,9 @@
         PMID: {{ publication.pmid }}
       </span>
     </span>
-    {% endif %}
 
     {% if publication.pmcid %}
-    <span class="cleared pmcid">
+    <span class="cleared">
       <a href="{{ publication.get_pmc_url }}">
         Get free text
       </a>

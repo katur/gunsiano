@@ -168,7 +168,8 @@ class Container(models.Model):
             return None
 
     def get_overall_position(self):
-        """Get a string of this container's overall position,
+        """
+        Get a string of this container's overall position,
         including both ancestors and this container's position.
         This differs from get_ancestor_title() because it includes this
         container's position rather than this container's title.

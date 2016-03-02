@@ -16,7 +16,7 @@ class WormStrainLineInline(admin.StackedInline):
 
 class WormStrainAdmin(admin.ModelAdmin):
     list_display = (
-        'name',
+        'id',
         'species',
         'genotype',
         'created_by',
@@ -24,7 +24,7 @@ class WormStrainAdmin(admin.ModelAdmin):
     )
 
     search_fields = (
-        'name',
+        'id',
         'genotype',
         'species__name',
     )

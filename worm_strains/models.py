@@ -67,14 +67,23 @@ class WormStrain(models.Model):
     A worm strain (e.g. PF100)
     """
 
-    name = models.CharField(max_length=30, primary_key=True)
-    on_wormbase = models.BooleanField(default=False)
+    id = models.CharField(max_length=30, primary_key=True)
     species = models.ForeignKey(WormSpecies, models.CASCADE, default=1)
-    genotype = models.CharField(max_length=500, blank=True)
-    parent_strain = models.ForeignKey('self', models.SET_NULL,
-                                      null=True, blank=True)
+    genotype = models.CharField(
+        max_length=500,
+        help_text=('If a precise genotype is unavailable or not easily '
+                   'written, put something meaningful about what the '
+                   'strain is -- e.g. "suppressor of X". If no '
+                   'information is available, put "n/a"'))
+
+    on_wormbase = models.BooleanField(default=False)
+    parent_strain = models.ForeignKey(
+        'self', models.SET_NULL, null=True, blank=True,
+        help_text='Worm strain that this strain was made from'
+    )
     transgene = models.ForeignKey(Transgene, models.SET_NULL,
                                   null=True, blank=True)
+
     mutagen = models.ForeignKey(Mutagen, models.SET_NULL,
                                 null=True, blank=True)
     created_by = models.ForeignKey(User, models.SET_NULL,
@@ -83,10 +92,10 @@ class WormStrain(models.Model):
     remarks = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['id']
 
     def __unicode__(self):
-        return self.name
+        return self.id
 
     def __cmp__(self, other):
         """
@@ -112,32 +121,32 @@ class WormStrain(models.Model):
 
         # One or both strains not conventionally named
         else:
-            s_lower = self.name.lower()
-            o_lower = other.name.lower()
+            s_lower = self.id.lower()
+            o_lower = other.id.lower()
             if s_lower < o_lower:
                 return -1
             else:
                 return 1
 
     def get_absolute_url(self):
-        return reverse('worm_url', args=[self.name])
+        return reverse('worm_url', args=[self.id])
 
     def get_wormbase_url(self):
         return ('http://www.wormbase.org/species/c_elegans/'
-                'strain/{}'.format(self.name))
+                'strain/{}'.format(self.id))
 
     def is_conventionally_named(self):
-        return re.search('^[A-Z]+\d+$', self.name)
+        return re.search('^[A-Z]+\d+$', self.id)
 
     def get_lab_code(self):
         if self.is_conventionally_named():
-            return re.search('^[A-Z]+', self.name).group(0)
+            return re.search('^[A-Z]+', self.id).group(0)
         else:
             return None
 
     def get_number(self):
         if self.is_conventionally_named():
-            return int(re.search('\d+$', self.name).group(0))
+            return int(re.search('\d+$', self.id).group(0))
         else:
             return None
 
@@ -161,7 +170,7 @@ class WormStrain(models.Model):
                     pattern = pattern.replace('gene', vector.gene)
             genotype = '{0}[{1}]'.format(transgene_name, pattern)
 
-            if self.parent_strain.name == 'DP38':
+            if self.parent_strain.id == 'DP38':
                 background = 'unc-119(ed3) III;'
             else:
                 background = None
@@ -174,6 +183,9 @@ class WormStrain(models.Model):
             return None
 
     def is_frozen(self):
+        """
+        Determine if some line of this strain is frozen.
+        """
         for line in self.wormstrainline_set.all():
             stocks = Stock.objects.filter(
                 stockable=line.stockable_ptr_id)
@@ -197,8 +209,14 @@ class WormStrainLine(Stockable):
     """
 
     strain = models.ForeignKey(WormStrain, models.CASCADE)
-    created_internally = models.BooleanField(default=False)
-    times_outcrossed = models.PositiveSmallIntegerField(null=True, blank=True)
+    created_internally = models.BooleanField(
+        default=False,
+        help_text=(
+            "Check if this line was created in our lab. In this case "
+            "you probably won't fill in the fields below about receipt.")
+        )
+    times_outcrossed = models.PositiveSmallIntegerField(
+        null=True, blank=True)
     received_from = models.CharField(max_length=100, blank=True)
     received_by = models.ForeignKey(User, models.SET_NULL,
                                     null=True, blank=True)
@@ -206,13 +224,13 @@ class WormStrainLine(Stockable):
     remarks = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
 
     class Meta:
-        ordering = ['strain__name']
+        ordering = ['strain__id']
 
     def __unicode__(self):
         return str(self.strain) + ' Line'
 
     def get_absolute_url(self):
-        return reverse('worm_url', args=[self.strain.name])
+        return self.strain.get_absolute_url()
 
     def has_receipt_detail(self):
         return self.received_by or self.received_from or self.date_received

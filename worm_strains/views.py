@@ -20,7 +20,7 @@ def worms(request):
         else:
             for term in terms:
                 worms = worms.filter(
-                    Q(name__icontains=term) |
+                    Q(id__icontains=term) |
                     Q(genotype__icontains=term) |
                     Q(remarks__icontains=term) |
                     Q(created_by__first_name__icontains=term) |
@@ -34,11 +34,11 @@ def worms(request):
 
 
 @login_required
-def worm(request, name):
+def worm(request, id):
     """
     Page showing information on a particular worm strain.
     """
-    worm = get_object_or_404(WormStrain, name=name)
+    worm = get_object_or_404(WormStrain, id=id)
 
     lines = worm.wormstrainline_set.order_by('date_received')
 

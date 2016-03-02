@@ -109,7 +109,7 @@
         {% endif %}
 
         {% for stock in line.stocks %}
-        <li>{{ stock.get_freeze_detail }}
+        <li>{{ stock.get_prep_string }}
           <ul> <!-- per stock of this line -->
             {% if stock.notes %}
             <li>{{ stock.notes }}</li>
@@ -120,7 +120,7 @@
                 <tr><td>-80C tester:
                   {% if stock.thaw_80 %}
                     {% if stock.thaw_80.is_thawed %}
-                      {{ stock.thaw_80.get_thaw_detail }}
+                      {{ stock.thaw_80.get_thaw_string }}
                     {% else %}
                       not thawed yet
                     {% endif %}
@@ -130,7 +130,7 @@
                 <tr><td>Liquid Nitrogen tester:
                   {% if stock.thaw_N %}
                     {% if stock.thaw_N.is_thawed %}
-                      {{ stock.thaw_N.get_thaw_detail }}
+                      {{ stock.thaw_N.get_thaw_string }}
                     {% else %}
                       not thawed yet
                     {% endif %}
@@ -139,7 +139,7 @@
 
                 {% for tube in stock.thawed_tubes %}
                 <tr><td>
-                  {{ tube.position }}: {{ tube.get_thaw_detail }}
+                  {{ tube.position }}: {{ tube.get_thaw_string }}
                 </td></tr>
                 {% endfor %}
               </table>

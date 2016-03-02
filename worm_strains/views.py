@@ -61,7 +61,7 @@ def worm(request, name):
             unthawed_tubes = []
 
             for tube in remaining:
-                tube.position = tube.get_overall_position()
+                tube.position = tube.get_ancestry_string(position=True)
                 if tube.is_thawed:
                     thawed_tubes.append(tube)
                 else:

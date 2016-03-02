@@ -4,7 +4,7 @@
 
 {% block body_id %}storage-detail{% endblock %}
 {% block page_title %}
-Contents of {{ container.get_ancestor_title }}
+{{ container.get_ancestry_string }}
 {% endblock %}
 
 
@@ -23,23 +23,21 @@ Contents of {{ container.get_ancestor_title }}
         {% endif %}
 
         <span
-          {% if container.has_hover_detail %}
-          data-hover-tag="{{ container.get_hover_detail }}"
+          {% if container.get_hover_string %}
+          data-hover-tag="{{ container.get_hover_string }}"
           {% endif %}>
 
-          <strong>{{ container.get_supertype }}:</strong>
-
           {% if container.stockable %}
-            {{ container.stockable }}
+          {{ container.stockable }}
           {% else %}
-            {{ container }}
+          {{ container.get_display_string }}
           {% endif %}
         </span>
 
         {% if container.has_children or container.stockable %}
         </a>
         {% endif %}
-      <br>
+
       {% empty %}
       <span class='no-record'>No record</span>
       {% endfor %}

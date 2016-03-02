@@ -4,41 +4,17 @@ from storage.models import (Container, ContainerType, ContainerSupertype,
                             Stock)
 
 
-class StockAdmin(admin.ModelAdmin):
-    list_display = (
-        'id',
-        'stockable',
-        'date_prepared',
-        'prepared_by',
-    )
-
-    list_filter = (
-        'prepared_by',
-    )
+class ContainerInline(admin.StackedInline):
+    model = Container
 
     raw_id_fields = (
-        'stockable',
+        'parent',
     )
 
-    readonly_fields = (
-        'id',
-    )
-
-
-class ContainerTypeAdmin(admin.ModelAdmin):
-    list_display = (
-        'name',
-        'supertype',
-        'slots_vertical',
-        'slots_horizontal',
-    )
-
-    list_filter = (
-        'supertype',
-    )
-
-    search_fields = (
-        'name',
+    fields = (
+        'type', 'parent', 'vertical_position', 'horizontal_position',
+        'is_thawed', 'thawed_by', 'date_thawed', 'thaw_results',
+        'name', 'owner', 'notes',
     )
 
 
@@ -82,6 +58,55 @@ class ContainerAdmin(admin.ModelAdmin):
                 'thaw_results',
             )}),
     )
+
+
+class ContainerTypeAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'supertype',
+        'slots_vertical',
+        'slots_horizontal',
+    )
+
+    list_filter = (
+        'supertype',
+    )
+
+    search_fields = (
+        'name',
+    )
+
+
+class StockAdmin(admin.ModelAdmin):
+    list_display = (
+        '__unicode__',
+        'stockable',
+        'prepared_by',
+        'date_prepared',
+    )
+
+    list_filter = (
+        'prepared_by',
+    )
+
+    raw_id_fields = (
+        'stockable',
+    )
+
+    readonly_fields = (
+        'id',
+    )
+
+    fields = (
+        'id',
+        'stockable',
+        'prepared_by',
+        'date_prepared',
+        'concentration',
+        'notes',
+    )
+
+    inlines = [ContainerInline]
 
 
 admin.site.register(Container, ContainerAdmin)

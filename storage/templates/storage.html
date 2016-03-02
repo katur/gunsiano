@@ -15,11 +15,11 @@
            alt="photo of a {{ container.type }}"/>
 
       <span
-        {% if container.has_hover_detail %}
-        data-hover-tag="{{ container.get_hover_detail }}"
+        {% if container.get_hover_string %}
+        data-hover-tag="{{ container.get_hover_string }}"
         {% endif %}
       >
-        <strong>{{ container.get_supertype }}:</strong> {{ container }}
+        {{ container.get_display_string }}
       </span>
     </a>
   </div>

@@ -14,11 +14,7 @@ class Stockable(models.Model, RealInstanceProvider):
     """
 
     def __unicode__(self):
-        '''
-        actual = self.get_actual_instance()
-        return str(actual)
-        '''
-        return unicode(self.id)
+        return u'Stockable: {}'.format(self.id)
 
 
 class Stock(models.Model):
@@ -33,10 +29,16 @@ class Stock(models.Model):
     date_prepared = models.DateField(null=True, blank=True)
     notes = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
 
-    def has_freeze_detail(self):
-        return self.prepared_by or self.date_prepared
+    class Meta:
+        ordering = ['stockable']
 
-    def get_freeze_detail(self):
+    def __unicode__(self):
+        return u'Stock: {}'.format(self.id)
+
+    def get_prep_string(self):
+        if not self.prepared_by and not self.date_prepared:
+            return ''
+
         result = 'Frozen'
         if self.prepared_by:
             result += (' by ' + self.prepared_by.get_full_name())
@@ -44,16 +46,12 @@ class Stock(models.Model):
             result += (' on ' + formats.date_format(self.date_prepared))
         return result
 
-    class Meta:
-        ordering = ['stockable']
-
-    def __unicode__(self):
-        return str(self.stockable)
-
 
 class ContainerSupertype(models.Model):
     """
-    Broad characterization of a container (e.g. "vat", "box", "rack", "tube")
+    Broad characterization of a container.
+
+    E.g., "vat", "box", "rack", "tube"
     """
 
     name = models.CharField(max_length=20)
@@ -67,7 +65,9 @@ class ContainerSupertype(models.Model):
 
 class ContainerType(models.Model):
     """
-    Specific characterization of a container (e.g. "9x9 box", "1.5mL tube")
+    Specific characterization of a container.
+
+    E.g., "9x9 box", "1.5mL tube"
     """
 
     name = models.CharField(max_length=50)
@@ -102,7 +102,7 @@ class Container(models.Model):
     horizontal_position = models.PositiveSmallIntegerField(
         null=True, blank=True)
     owner = models.ForeignKey(User, models.SET_NULL, null=True, blank=True)
-    notes = models.TextField(blank=True,
+    notes = models.CharField(max_length=200, blank=True,
                              help_text=settings.MARKDOWN_PROMPT)
 
     # Fields Below here are only really relevant for tubes/wells
@@ -115,23 +115,100 @@ class Container(models.Model):
     date_thawed = models.DateField(null=True, blank=True)
     thaw_results = models.CharField(max_length=100, blank=True)
 
-    def has_children(self):
-        children = Container.objects.all().filter(parent_id=self.id,
-                                                  is_thawed=False)
-        if children:
-            return True
-        else:
-            return False
+    class Meta:
+        ordering = ['type', 'name']
 
     def get_absolute_url(self):
         return reverse('storage_detail_url', args=[self.id])
 
+    def __unicode__(self):
+        return 'Container: {} ({})'.format(
+            self.id, self.get_display_string())
+
+    def get_display_string(self):
+        """
+        Get a nice display string for this container, which includes
+        its supertype.
+        """
+        if self.name:
+            detail = self.name
+        else:
+            detail = 'unnamed'
+        return '{}: {}'.format(self.get_supertype(), detail)
+
+    def get_ancestry_string(self, position=False):
+        """
+        Get the full ancestry of this container as an arrow-connected
+        string.
+
+        By default, includes this container at the end of the ancestry.
+        This is what appears on the title of a storage detail page.
+
+        To instead include the *position* of this container within
+        it's parent (as appears on the worm strain page to locate
+        a tube), pass position=True.
+        """
+        ancestors = self.get_ancestors()
+        s = [a.get_display_string() for a in reversed(ancestors)]
+
+        if position:
+            s.append('Position: ' + self.get_position_within_parent())
+        else:
+            s.append(self.get_display_string())
+        return u' \u2192 '.join(s)
+
+    def get_hover_string(self):
+        """
+        Get information to display when hovering over this container.
+        """
+        if self.stock and self.stock.get_prep_string():
+            return self.stock.get_prep_string()
+
+        result = ''
+        if self.owner:
+            result += self.owner.get_full_name()
+        if self.owner and self.notes:
+            result += ' ('
+        if self.notes:
+            result += self.notes
+        if self.owner and self.notes:
+            result += ')'
+
+        return result
+
+    def get_thaw_string(self):
+        """
+        Get a string about this container's thaw details.
+        """
+        if not (self.is_thawed):
+            return ''
+
+        result = 'Thawed'
+        if self.thawed_by:
+            result += ' by {}'.format(self.thawed_by.get_full_name())
+        if self.date_thawed:
+            result += ' on {}'.format(formats.date_format(self.date_thawed))
+        if self.thaw_results:
+            result += ' ({})'.format(self.thaw_results)
+        return result
+
     def get_supertype(self):
+        """
+        Get this container's supertype.
+        """
         return self.type.supertype
+
+    def has_children(self):
+        """
+        Determine whether this container has nested children containers.
+        """
+        return self.container_set.filter(is_thawed=False).exists()
 
     def get_ancestors(self):
         """
-        Get a list of this tube's ancestors, starting with the oldest.
+        Get a list of this tube's ancestors, starting with its
+        immediate parent.
+
         Returns an empty list if this container has no parent.
         """
         ancestors = []
@@ -139,87 +216,21 @@ class Container(models.Model):
         while current:
             ancestors.append(current)
             current = current.parent
-        return list(reversed(ancestors))
+        return ancestors
 
-    def get_title(self):
-        """Get a simple title for this container including its supertype"""
-        return '{0}: {1}'.format(str(self.get_supertype()), str(self))
-
-    def get_ancestor_title(self):
+    def get_position_within_parent(self):
         """
-        Get a title for this container that includes both
-        supertype and ancestors
+        Get this container's position within its parent container.
+
+        Format is e.g. 'B6', where 'B' represents the second vertical
+        position and '6' represents the sixth horizontal position.
+
+        Returns an empty string if neither vertical nor horizontal
+        position is set.
         """
-        ancestors = self.get_ancestors()
-        ancestors.append(self)
-        strings = [ancestor.get_title() for ancestor in ancestors]
-        return u' \u2192 '.join(strings)
-
-    def get_position_in_parent(self):
-        """
-        Get this container's position within its parent container
-        in format 'B6', where 'B' represents the second vertical position
-        and '6' represents the sixth horizontal position
-        """
-        if self.vertical_position and self.horizontal_position:
-            return '{0}{1}'.format(chr(self.vertical_position + 64),
-                                   self.horizontal_position)
-        else:
-            return None
-
-    def get_overall_position(self):
-        """
-        Get a string of this container's overall position,
-        including both ancestors and this container's position.
-        This differs from get_ancestor_title() because it includes this
-        container's position rather than this container's title.
-        """
-        ancestors = self.get_ancestors()
-        strings = [ancestor.get_title() for ancestor in ancestors]
-        box_position = self.get_position_in_parent()
-        if box_position:
-            strings.append('Position: ' + box_position)
-        return u' \u2192 '.join(strings)
-
-    def has_hover_detail(self):
-        """Determine whether there is hover information for this container"""
-        return self.owner or self.notes or (self.stock and
-                                            self.stock.has_freeze_detail())
-
-    def get_hover_detail(self):
-        """Get information to display when hovering over this container"""
-        result = ''
-        if self.stock and self.stock.has_freeze_detail():
-            result = self.stock.get_freeze_detail()
-        else:
-            if self.owner:
-                result += self.owner.get_full_name()
-            if self.owner and self.notes:
-                result += ' ('
-            if self.notes:
-                result += self.notes
-            if self.owner and self.notes:
-                result += ')'
-        return result
-
-    def get_thaw_detail(self):
-        result = 'Thaw'
-        if self.thawed_by:
-            result += (' by ' + self.thawed_by.get_full_name())
-        if self.date_thawed:
-            result += (' on ' + formats.date_format(self.date_thawed))
-        if self.thaw_results:
-            result += (' was ' + self.thaw_results)
-        return result
-
-    class Meta:
-        ordering = ['type', 'name']
-
-    def __unicode__(self):
-        if self.name:
-            result = self.name
-        elif self.stock:
-            result = str(self.stock)
-        else:
-            result = 'unnamed'
-        return result
+        x = ''
+        if self.vertical_position:
+            x += chr(self.vertical_position + 64)
+        if self.horizontal_position:
+            x += str(self.horizontal_position)
+        return x

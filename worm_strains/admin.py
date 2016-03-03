@@ -7,11 +7,20 @@ from worm_strains.models import (Mutagen, Transgene, WormLab, WormSpecies,
 class WormStrainLineInline(admin.StackedInline):
     model = WormStrainLine
 
-    readonly_fields = ('stockable_ptr_id',)
+    readonly_fields = (
+        'stockable_ptr_id',
+    )
 
-    fields = ('stockable_ptr_id', 'created_internally', 'received_from',
-              'received_by', 'date_received', 'times_outcrossed',
-              'remarks')
+    # Define field order so that readonly stockable_ptr_id is first
+    fields = (
+        'stockable_ptr_id',
+        'created_internally',
+        'received_from',
+        'received_by',
+        'date_received',
+        'times_outcrossed',
+        'remarks',
+    )
 
 
 class WormStrainAdmin(admin.ModelAdmin):

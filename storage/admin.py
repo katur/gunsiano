@@ -4,17 +4,20 @@ from storage.models import (Container, ContainerType, ContainerSupertype,
                             Stock)
 
 
-class ContainerInline(admin.StackedInline):
-    model = Container
-
-    raw_id_fields = (
-        'parent',
+class ContainerTypeAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'supertype',
+        'slots_vertical',
+        'slots_horizontal',
     )
 
-    fields = (
-        'type', 'parent', 'vertical_position', 'horizontal_position',
-        'is_thawed', 'thawed_by', 'date_thawed', 'thaw_results',
-        'name', 'owner', 'notes',
+    list_filter = (
+        'supertype',
+    )
+
+    search_fields = (
+        'name',
     )
 
 
@@ -46,34 +49,28 @@ class ContainerAdmin(admin.ModelAdmin):
         'stock',
     )
 
-    fieldsets = (
-        (None,
-            {'fields': (
-                'type', 'name', 'parent', 'vertical_position',
-                'horizontal_position', 'owner', 'notes',
-            )}),
-        ('Relevant for tubes/wells only',
-            {'fields': (
-                'stock', 'is_thawed', 'thawed_by', 'date_thawed',
-                'thaw_results',
-            )}),
+
+class ContainerInline(admin.TabularInline):
+    model = Container
+
+    raw_id_fields = (
+        'parent',
     )
 
-
-class ContainerTypeAdmin(admin.ModelAdmin):
-    list_display = (
+    # Define field order so that thawing fields precede name & owner
+    # (since thawing fields are more commonly used with StockAdmin)
+    fields = (
+        'type',
+        'parent',
+        'vertical_position',
+        'horizontal_position',
+        'is_thawed',
+        'thawed_by',
+        'date_thawed',
+        'thaw_results',
         'name',
-        'supertype',
-        'slots_vertical',
-        'slots_horizontal',
-    )
-
-    list_filter = (
-        'supertype',
-    )
-
-    search_fields = (
-        'name',
+        'owner',
+        'notes',
     )
 
 
@@ -94,11 +91,12 @@ class StockAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = (
-        'id',
+        '__unicode__',
     )
 
+    # Define field order so that readonly __unicode__ is first
     fields = (
-        'id',
+        '__unicode__',
         'stockable',
         'prepared_by',
         'date_prepared',

@@ -14,7 +14,7 @@ class Stockable(models.Model, RealInstanceProvider):
     """
 
     def __unicode__(self):
-        return u'Stockable: {}'.format(self.id)
+        return u'Stockable #{}'.format(self.id)
 
 
 class Stock(models.Model):
@@ -23,17 +23,17 @@ class Stock(models.Model):
     """
 
     stockable = models.ForeignKey(Stockable, models.CASCADE)
-    concentration = models.CharField(max_length=30, blank=True)
     prepared_by = models.ForeignKey(User, models.SET_NULL,
                                     null=True, blank=True)
     date_prepared = models.DateField(null=True, blank=True)
+    concentration = models.CharField(max_length=30, blank=True)
     notes = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
 
     class Meta:
         ordering = ['stockable']
 
     def __unicode__(self):
-        return u'Stock: {}'.format(self.id)
+        return u'Stock #{}'.format(self.id)
 
     def get_prep_string(self):
         if not (self.prepared_by or self.date_prepared):
@@ -78,7 +78,7 @@ class ContainerType(models.Model):
                               null=True, blank=True)
 
     class Meta:
-        ordering = ['supertype', 'name']
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name
@@ -93,7 +93,6 @@ class Container(models.Model):
     anything in between (a rack, a box, etc).
     """
 
-    name = models.CharField(max_length=200, blank=True)
     type = models.ForeignKey(ContainerType, models.CASCADE)
     parent = models.ForeignKey('self', models.SET_NULL,
                                null=True, blank=True)
@@ -101,25 +100,39 @@ class Container(models.Model):
         null=True, blank=True)
     horizontal_position = models.PositiveSmallIntegerField(
         null=True, blank=True)
-    owner = models.ForeignKey(User, models.SET_NULL, null=True, blank=True)
-    notes = models.CharField(max_length=200, blank=True,
-                             help_text=settings.MARKDOWN_PROMPT)
 
-    # Fields Below here are only really relevant for tubes/wells
-    stock = models.ForeignKey(Stock, models.SET_NULL,
-                              null=True, blank=True)
-    is_thawed = models.BooleanField(default=False)
-    thawed_by = models.ForeignKey(User, models.SET_NULL,
-                                  null=True, blank=True,
-                                  related_name='container_thawed_by')
+    name = models.CharField(max_length=200, blank=True)
+    owner = models.ForeignKey(
+        User, models.SET_NULL, null=True, blank=True,
+        # Need this related name so reverse FK lookup doesn't clash
+        # with the other User pointer (thawed_by)
+        related_name='owner')
+
+    stock = models.ForeignKey(
+        Stock, models.SET_NULL, null=True, blank=True,
+        help_text=('If this container is a tube or well, it might hold '
+                   'a stock'))
+    is_thawed = models.BooleanField(
+        default=False,
+        help_text=('Check this if this is a tube that was thawed, or '
+                   'another type of container that was removed'))
+    thawed_by = models.ForeignKey(
+        User, models.SET_NULL, null=True, blank=True)
     date_thawed = models.DateField(null=True, blank=True)
     thaw_results = models.CharField(max_length=100, blank=True)
 
+    # TODO: perhaps thaw_results can be recorded in notes
+    # TODO: tubes being mislabelled stock-wide should be recorded in stock
+    # TODO: perhaps rename "notes" to "remarks", a la worms app
+    notes = models.CharField(max_length=200, blank=True,
+                             help_text=settings.MARKDOWN_PROMPT)
+
     class Meta:
-        ordering = ['type', 'name']
+        ordering = ['parent__id', 'horizontal_position',
+                    'vertical_position']
 
     def __unicode__(self):
-        return 'Container: {} ({})'.format(
+        return u'Container #{} ({})'.format(
             self.id, self.get_display_string())
 
     def get_absolute_url(self):

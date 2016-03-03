@@ -72,9 +72,14 @@ class WormStrain(models.Model):
         help_text=('If a precise genotype is unavailable or not easily '
                    'written, put something meaningful about what the '
                    'strain is -- e.g. "suppressor of X". If no '
-                   'information is available, put "n/a"'))
+                   'information is available, put "n/a".'))
 
-    on_wormbase = models.BooleanField(default=False)
+    on_wormbase = models.BooleanField(
+        default=False,
+        help_text=('Check this if the strain is on WormBase. In this case, '
+                   'aside from genotype and important remarks such as '
+                   'temperature sensitivitiy, there is no need to fill '
+                   'in the fields which can be found on WormBase.'))
     parent_strain = models.ForeignKey(
         'self', models.SET_NULL, null=True, blank=True,
         help_text='Worm strain that this strain was made from'
@@ -134,15 +139,30 @@ class WormStrain(models.Model):
                 'strain/{}'.format(self.id))
 
     def is_conventionally_named(self):
+        """
+        Determine whether this strain has a proper strain name.
+
+        Some strains in the database have an placeholder name because
+        they haven't received a proper strain name yet.
+        """
         return re.search('^[A-Z]+\d+$', self.id)
 
     def get_lab_code(self):
+        """
+        Extract the lab code from this strain's name.
+
+        The letters at the beginning of a strain name designate the lab.
+        See http://cbs.umn.edu/cgc/lab-code
+        """
         if self.is_conventionally_named():
             return re.search('^[A-Z]+', self.id).group(0)
         else:
             return None
 
     def get_number(self):
+        """
+        Extract the number from this strain's name.
+        """
         if self.is_conventionally_named():
             return int(re.search('\d+$', self.id).group(0))
         else:
@@ -210,9 +230,8 @@ class WormStrainLine(Stockable):
     created_internally = models.BooleanField(
         default=False,
         help_text=(
-            'Whether this line was created in our lab. In this case, the '
-            'fields about receiving the strain will typically be blank.')
-        )
+            'Check this if the line was created in our lab. In this case, '
+            'the fields about receiving the strain will typically be blank.'))
     times_outcrossed = models.PositiveSmallIntegerField(
         null=True, blank=True)
     received_from = models.CharField(max_length=100, blank=True)

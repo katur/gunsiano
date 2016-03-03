@@ -12,9 +12,7 @@ from vectors.models import Vector
 
 class Mutagen(models.Model):
     """
-    A method used to make new worm species.
-
-    Not necessarily a chemical mutagen. Could be a cross.
+    A mutagen or other technique (e.g. crossing) used to make new worm strains.
     """
 
     name = models.CharField(max_length=50)
@@ -212,8 +210,8 @@ class WormStrainLine(Stockable):
     created_internally = models.BooleanField(
         default=False,
         help_text=(
-            "Check if this line was created in our lab. In this case "
-            "you probably won't fill in the fields below about receipt.")
+            'Whether this line was created in our lab. In this case, the '
+            'fields about receiving the strain will typically be blank.')
         )
     times_outcrossed = models.PositiveSmallIntegerField(
         null=True, blank=True)
@@ -227,22 +225,23 @@ class WormStrainLine(Stockable):
         ordering = ['strain__id']
 
     def __unicode__(self):
-        return str(self.strain) + ' Line'
+        return '{} Line'.format(self.strain)
 
     def get_absolute_url(self):
         return self.strain.get_absolute_url()
 
-    def has_receipt_detail(self):
-        return self.received_by or self.received_from or self.date_received
+    def get_receipt_string(self):
+        if not (self.received_by or self.received_from or
+                self.date_received):
+            return ''
 
-    def get_receipt_detail(self):
         result = 'Received'
         if self.received_by:
-            result += (' by ' + self.received_by.get_full_name())
+            result += ' by {}'.format(self.received_by.get_full_name())
         if self.received_from:
-            result += (' from ' + self.received_from)
+            result += ' from {}'.format(self.received_from)
         if self.date_received:
-            result += (' on ' + formats.date_format(self.date_received))
+            result += ' on {}'.format(formats.date_format(self.date_received))
         return result
 
 

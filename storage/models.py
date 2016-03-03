@@ -36,14 +36,14 @@ class Stock(models.Model):
         return u'Stock: {}'.format(self.id)
 
     def get_prep_string(self):
-        if not self.prepared_by and not self.date_prepared:
+        if not (self.prepared_by or self.date_prepared):
             return ''
 
         result = 'Frozen'
         if self.prepared_by:
-            result += (' by ' + self.prepared_by.get_full_name())
+            result += ' by {}'.format(self.prepared_by.get_full_name())
         if self.date_prepared:
-            result += (' on ' + formats.date_format(self.date_prepared))
+            result += ' on {}'.format(formats.date_format(self.date_prepared))
         return result
 
 
@@ -118,12 +118,12 @@ class Container(models.Model):
     class Meta:
         ordering = ['type', 'name']
 
-    def get_absolute_url(self):
-        return reverse('storage_detail_url', args=[self.id])
-
     def __unicode__(self):
         return 'Container: {} ({})'.format(
             self.id, self.get_display_string())
+
+    def get_absolute_url(self):
+        return reverse('storage_detail_url', args=[self.id])
 
     def get_display_string(self):
         """

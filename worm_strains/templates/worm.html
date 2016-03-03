@@ -92,11 +92,13 @@
     {% for line in lines %}
     <li>
       {% if line.created_internally %}
-        Internal line
-      {% elif line.has_receipt_detail %}
-        {{ line.get_receipt_detail }}
+      Internal line
+
+      {% elif line.get_receipt_string %}
+      {{ line.get_receipt_string }}
+
       {% else %}
-        Line with no recorded information about receipt
+      Line with no recorded information about receipt
       {% endif %}
 
       <ul> <!-- per worm line -->

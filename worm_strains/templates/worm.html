@@ -111,7 +111,9 @@
         {% endif %}
 
         {% for stock in line.stocks %}
-        <li>{{ stock.get_prep_string }}
+        <li>
+          {{ stock.get_prep_string }}
+
           <ul> <!-- per stock of this line -->
             {% if stock.notes %}
             <li>{{ stock.notes }}</li>

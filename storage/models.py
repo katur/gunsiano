@@ -36,10 +36,11 @@ class Stock(models.Model):
         return u'Stock #{}'.format(self.id)
 
     def get_prep_string(self):
+        result = 'Stock'
         if not (self.prepared_by or self.date_prepared):
-            return ''
+            return result
 
-        result = 'Frozen'
+        result += ' frozen'
         if self.prepared_by:
             result += ' by {}'.format(self.prepared_by.get_full_name())
         if self.date_prepared:

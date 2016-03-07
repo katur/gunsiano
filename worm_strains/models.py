@@ -254,7 +254,7 @@ class WormStrainLine(Stockable):
                 self.date_received):
             return ''
 
-        result = 'Received'
+        result = 'Line received'
         if self.received_by:
             result += ' by {}'.format(self.received_by.get_full_name())
         if self.received_from:

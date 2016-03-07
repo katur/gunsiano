@@ -92,7 +92,7 @@
     {% for line in lines %}
     <li>
       {% if line.created_internally %}
-      Internal line
+      Line created internally
 
       {% elif line.get_receipt_string %}
       {{ line.get_receipt_string }}

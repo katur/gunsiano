@@ -136,7 +136,7 @@ class Container(models.Model):
         return u'Container #{}'.format(self.id)
 
     def get_absolute_url(self):
-        return reverse('storage_detail_url', args=[self.id])
+        return reverse('container_url', args=[self.id])
 
     def get_display_string(self):
         """

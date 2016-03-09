@@ -17,7 +17,7 @@ def storage(request):
 
 
 @login_required
-def storage_detail(request, container_id):
+def container(request, container_id):
     """
     Page showing the contents of some container
     """
@@ -56,4 +56,4 @@ def storage_detail(request, container_id):
         'unpositioned_children': unpositioned_children,
     }
 
-    return render(request, 'storage_detail.html', context)
+    return render(request, 'container.html', context)

@@ -17,17 +17,17 @@
     </span>
     {% endif %}
 
+    {% if worm.genotype %}
+    <span>
+      <b>Genotype:</b> {{ worm.genotype }}
+    </span>
+    {% endif %}
+
     {% if worm.on_wormbase %}
     <span>
       <a class="external-link" href="{{ worm.get_wormbase_url }}">
         See on wormbase
       </a>
-    </span>
-    {% endif %}
-
-    {% if worm.genotype %}
-    <span>
-      <b>Genotype:</b> {{ worm.genotype }}
     </span>
     {% endif %}
   </div>

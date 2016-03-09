@@ -133,8 +133,7 @@ class Container(models.Model):
                     'vertical_position']
 
     def __unicode__(self):
-        return u'Container #{} ({})'.format(
-            self.id, self.get_display_string())
+        return u'Container #{}'.format(self.id)
 
     def get_absolute_url(self):
         return reverse('storage_detail_url', args=[self.id])

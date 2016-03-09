@@ -65,7 +65,14 @@ class WormStrain(models.Model):
     A worm strain (e.g. PF100)
     """
 
-    id = models.CharField(max_length=30, primary_key=True)
+    id = models.CharField(
+        max_length=30, primary_key=True,
+        help_text=('Since this is the primary key it cannot be edited '
+                   'once saved. If you need to edit it, please do '
+                   'so in the database directly. You will need to edit '
+                   'the worm strain field for any corresponding worm '
+                   'strain lines as well, turning off foreign key '
+                   'constrains while editing.'))
     species = models.ForeignKey(WormSpecies, models.CASCADE, default=1)
     genotype = models.CharField(
         max_length=500,
@@ -80,12 +87,6 @@ class WormStrain(models.Model):
                    'aside from genotype and important remarks such as '
                    'temperature sensitivitiy, there is no need to fill '
                    'in the fields which can be found on WormBase.'))
-    parent_strain = models.ForeignKey(
-        'self', models.SET_NULL, null=True, blank=True,
-        help_text='Worm strain that this strain was made from'
-    )
-    transgene = models.ForeignKey(Transgene, models.SET_NULL,
-                                  null=True, blank=True)
 
     mutagen = models.ForeignKey(Mutagen, models.SET_NULL,
                                 null=True, blank=True)
@@ -93,6 +94,16 @@ class WormStrain(models.Model):
                                    null=True, blank=True)
     date_created = models.DateField(null=True, blank=True)
     remarks = models.TextField(blank=True, help_text=settings.MARKDOWN_PROMPT)
+
+    # These two fields are disabled in the admin. They were used to
+    # generate genotypes automatically for Miyeko's worm strains,
+    # but might not be flexible enough going forward.
+    parent_strain = models.ForeignKey(
+        'self', models.SET_NULL, null=True, blank=True,
+        help_text='Worm strain that this strain was made from'
+    )
+    transgene = models.ForeignKey(Transgene, models.SET_NULL,
+                                  null=True, blank=True)
 
     class Meta:
         ordering = ['id']

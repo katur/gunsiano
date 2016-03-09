@@ -23,30 +23,57 @@ class ContainerTypeAdmin(admin.ModelAdmin):
 
 class ContainerAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         '__unicode__',
-        'parent',
-        'vertical_position',
-        'horizontal_position',
+        'type',
+        'name',
         'owner',
         'is_thawed',
+    )
+
+    ordering = (
+        'id',
     )
 
     list_filter = (
-        'type__supertype',
         'owner',
         'is_thawed',
+        'type__supertype',
     )
 
     search_fields = (
-        'name',
-        'owner__username',
-        'owner__first_name',
-        'owner__last_name',
+        'id',
     )
 
     raw_id_fields = (
         'parent',
         'stock',
+    )
+
+    readonly_fields = (
+        '__unicode__',
+    )
+
+    fieldsets = (
+        (None, {'fields': (
+            '__unicode__',
+            'type',
+            'name',
+            'owner',
+            'notes',
+        )}),
+        ('Position', {'fields': (
+            'parent',
+            'vertical_position',
+            'horizontal_position',
+        )}),
+        ('Stock', {'fields': (
+            'stock',
+            'is_thawed',
+            'thawed_by',
+            'date_thawed',
+            'thaw_results',
+        )}),
     )
 
 

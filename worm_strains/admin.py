@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from worm_strains.models import (Mutagen, Transgene, WormLab, WormSpecies,
+from worm_strains.models import (Mutagen, WormLab, WormSpecies,
                                  WormStrain, WormStrainLine)
 
 
@@ -38,9 +38,15 @@ class WormStrainAdmin(admin.ModelAdmin):
         'species__name',
     )
 
-    raw_id_fields = (
-        'parent_strain',
-        'transgene',
+    fields = (
+        'id',
+        'species',
+        'genotype',
+        'on_wormbase',
+        'mutagen',
+        'created_by',
+        'date_created',
+        'remarks',
     )
 
     inlines = [WormStrainLineInline]
@@ -58,23 +64,7 @@ class WormLabAdmin(admin.ModelAdmin):
     )
 
 
-class TransgeneAdmin(admin.ModelAdmin):
-    list_display = (
-        'name',
-        'vector',
-    )
-
-    search_fields = (
-        'name',
-    )
-
-    raw_id_fields = (
-        'vector',
-    )
-
-
 admin.site.register(Mutagen)
-admin.site.register(Transgene, TransgeneAdmin)
 admin.site.register(WormLab, WormLabAdmin)
 admin.site.register(WormSpecies)
 admin.site.register(WormStrain, WormStrainAdmin)

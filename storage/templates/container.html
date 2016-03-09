@@ -14,7 +14,7 @@
 <span id="page-admin-link">
   <a href="{% url 'admin:storage_container_change' container.id %}">
     Edit container</a>
-
+  <br>
   <a href="{% url 'admin:storage_container_add' %}?parent={{ container.id}}">
     Add child</a>
 </span>

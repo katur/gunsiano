@@ -4,8 +4,9 @@ from worm_strains.models import (Mutagen, WormLab, WormSpecies,
                                  WormStrain, WormStrainLine)
 
 
-class WormStrainLineInline(admin.StackedInline):
+class WormStrainLineInline(admin.TabularInline):
     model = WormStrainLine
+    extra = 1
 
     readonly_fields = (
         'stockable_ptr_id',

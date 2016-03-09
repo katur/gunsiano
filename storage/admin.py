@@ -30,18 +30,18 @@ class ContainerAdmin(admin.ModelAdmin):
         'is_thawed',
     )
 
+    list_filter = (
+        'owner',
+    )
+
     ordering = (
         'id',
     )
 
-    list_filter = (
-        'owner',
-        'is_thawed',
-        'type__supertype',
-    )
-
     search_fields = (
         'id',
+        'name',
+        'type__name',
     )
 
     raw_id_fields = (
@@ -49,13 +49,8 @@ class ContainerAdmin(admin.ModelAdmin):
         'stock',
     )
 
-    readonly_fields = (
-        '__unicode__',
-    )
-
     fieldsets = (
         (None, {'fields': (
-            '__unicode__',
             'type',
             'name',
             'owner',
@@ -78,6 +73,7 @@ class ContainerAdmin(admin.ModelAdmin):
 
 class ContainerInline(admin.TabularInline):
     model = Container
+    extra = 1
 
     raw_id_fields = (
         'parent',
@@ -102,6 +98,7 @@ class ContainerInline(admin.TabularInline):
 
 class StockAdmin(admin.ModelAdmin):
     list_display = (
+        '__unicode__',
         'stockable',
         'prepared_by',
         'date_prepared',

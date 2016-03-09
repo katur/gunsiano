@@ -50,28 +50,21 @@ def worm(request, id):
         line.stocks = line.stock_set.order_by('date_prepared')
 
         for stock in line.stocks:
-            all_tubes = stock.container_set
-
-            # Get the tester thaws
-            stock.thaw_80 = all_tubes.filter(parent=7).first()
-            stock.thaw_N = all_tubes.filter(parent=8).first()
-            remaining = all_tubes.exclude(parent=7).exclude(parent=8)
+            tubes = stock.container_set.all()
 
             thawed_tubes = []
             unthawed_tubes = []
 
-            for tube in remaining:
+            for tube in tubes:
                 tube.position = tube.get_ancestry_string(position=True)
+
                 if tube.is_thawed:
                     thawed_tubes.append(tube)
                 else:
                     unthawed_tubes.append(tube)
 
-            stock.thawed_tubes = sorted(thawed_tubes,
-                                        reverse=True,
-                                        key=lambda x: x.position)
-            stock.unthawed_tubes = sorted(unthawed_tubes,
-                                          key=lambda x: x.position)
+            stock.thawed_tubes = thawed_tubes
+            stock.unthawed_tubes = unthawed_tubes
 
     context = {
         'worm': worm,

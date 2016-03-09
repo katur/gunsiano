@@ -119,28 +119,10 @@
             <li>{{ stock.notes }}</li>
             {% endif %}
 
-            <li>Thawed tubes:
+            {% if stock.thawed_tubes %}
+            <li>
+              Thawed tubes:
               <table>
-                <tr><td>-80C tester:
-                  {% if stock.thaw_80 %}
-                    {% if stock.thaw_80.is_thawed %}
-                      {{ stock.thaw_80.get_thaw_string }}
-                    {% else %}
-                      not thawed yet
-                    {% endif %}
-                  {% else %}not available{% endif %}
-                </td></tr>
-
-                <tr><td>Liquid Nitrogen tester:
-                  {% if stock.thaw_N %}
-                    {% if stock.thaw_N.is_thawed %}
-                      {{ stock.thaw_N.get_thaw_string }}
-                    {% else %}
-                      not thawed yet
-                    {% endif %}
-                  {% else %}not available{% endif %}
-                </td></tr>
-
                 {% for tube in stock.thawed_tubes %}
                 <tr><td>
                   {{ tube.position }}: {{ tube.get_thaw_string }}
@@ -148,6 +130,7 @@
                 {% endfor %}
               </table>
             </li>
+            {% endif %}
 
             <li class="tubes">
               {% if stock.unthawed_tubes %}

@@ -14,29 +14,8 @@
   <tr>
     {% for compartment in row %}
     <td>
-      {% for container in compartment %}
-        {% if container.has_children %}
-        <a href={{ container.get_absolute_url }}>
-
-        {% elif container.stockable %}
-        <a href={{ container.stockable.get_absolute_url }}>
-        {% endif %}
-
-        <span
-          {% if container.get_hover_string %}
-          data-hover-tag="{{ container.get_hover_string }}"
-          {% endif %}>
-
-          {% if container.stockable %}
-          {{ container.stockable }}
-          {% else %}
-          {{ container.get_display_string }}
-          {% endif %}
-        </span>
-
-        {% if container.has_children or container.stockable %}
-        </a>
-        {% endif %}
+      {% for child in compartment %}
+      {% include 'child_detail.html' %}
 
       {% empty %}
       <span class='no-record'>No record</span>
@@ -48,13 +27,12 @@
 </table>
 
 {% if unpositioned_children %}
+<br>
+<br>
 Position unset:
-{% for container in unpositioned_children %}
-  {% if container.stockable%}
-  {{ container.stockable }}
-  {% else %}
-  {{ container.get_display_string }}
-  {% endif %}
+{% for child in unpositioned_children %}
+  <br>
+  {% include 'child_detail.html' %}
 {% endfor %}
 {% endif %}
 

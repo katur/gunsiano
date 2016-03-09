@@ -46,4 +46,16 @@
   </tr>
   {% endfor %}
 </table>
+
+{% if unpositioned_children %}
+Position unset:
+{% for container in unpositioned_children %}
+  {% if container.stockable%}
+  {{ container.stockable }}
+  {% else %}
+  {{ container.get_display_string }}
+  {% endif %}
+{% endfor %}
+{% endif %}
+
 {% endblock %}

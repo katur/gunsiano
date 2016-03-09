@@ -23,7 +23,6 @@ class ContainerTypeAdmin(admin.ModelAdmin):
 
 class ContainerAdmin(admin.ModelAdmin):
     list_display = (
-        'id',
         '__unicode__',
         'type',
         'name',
@@ -103,7 +102,6 @@ class ContainerInline(admin.TabularInline):
 
 class StockAdmin(admin.ModelAdmin):
     list_display = (
-        '__unicode__',
         'stockable',
         'prepared_by',
         'date_prepared',
@@ -113,17 +111,15 @@ class StockAdmin(admin.ModelAdmin):
         'prepared_by',
     )
 
+    search_fields = (
+        'stockable__id',
+    )
+
     raw_id_fields = (
         'stockable',
     )
 
-    readonly_fields = (
-        '__unicode__',
-    )
-
-    # Define field order so that readonly __unicode__ is first
     fields = (
-        '__unicode__',
         'stockable',
         'prepared_by',
         'date_prepared',

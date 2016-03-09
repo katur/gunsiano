@@ -67,12 +67,12 @@ class WormStrain(models.Model):
 
     id = models.CharField(
         max_length=30, primary_key=True,
-        help_text=('Since this is the primary key it cannot be edited '
-                   'once saved. If you need to edit it, please do '
+        help_text=('After saving, this field cannot be changed through the '
+                   'admin interface. If you need to change it, please do '
                    'so in the database directly. You will need to edit '
-                   'the worm strain field for any corresponding worm '
-                   'strain lines as well, turning off foreign key '
-                   'constrains while editing.'))
+                   'the worm strain pointers for all corresponding worm '
+                   'strain lines, too.'))
+
     species = models.ForeignKey(WormSpecies, models.CASCADE, default=1)
     genotype = models.CharField(
         max_length=500,

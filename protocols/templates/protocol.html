@@ -3,17 +3,23 @@
 
 
 {% block body_id %}protocol{% endblock %}
-{% block page_title_style %}class="clear-and-float"{% endblock%}
 {% block page_title %}{{ protocol.title|enhanced_markdown }}{% endblock %}
 
 
 {% block content %}
-<span id="authorship">
+
+<span id="page-admin-link">
   Protocol added by {{ protocol.author.get_full_name }}.
   Last updated on {{ protocol.pub_date }}.
+
+  {% if perms.protocols %}
+  <a href="{% url 'admin:protocols_protocol_change' protocol.id %}">
+    Edit</a>
+  {% endif %}
 </span>
 
 <div id="instructions">
   {{ protocol.text|enhanced_markdown }}
 </div>
+
 {% endblock %}

@@ -6,6 +6,7 @@ $h2-base-font-size: 24px
 $h3-base-font-size: $base-font-size - 2
 $h4-base-font-size: 20px
 
+
 body
   font-family: "Computer Modern Bright", Helvetica, sans-serif
   background: $gray-very-light
@@ -22,6 +23,7 @@ body
   @media (max-width: $tiny-window-width)
     font-size: $base-font-size - 3
 
+
 h1
   line-height: 1.2
   font-size: $h1-base-font-size
@@ -31,6 +33,7 @@ h1
 
   @media (max-width: $tiny-window-width)
     font-size: $h1-base-font-size - 8
+
 
 h2
   font-size: $h2-base-font-size
@@ -50,9 +53,6 @@ h2
     &.no-page-title
       display: none
 
-    &.clear-and-float
-      clear: none
-      float: left
 
 h3
   margin-bottom: $whitespace / 2
@@ -69,6 +69,7 @@ h3
   @media (max-width: $tiny-window-width)
     font-size: $h3-base-font-size - 3
 
+
 h4
   margin-bottom: $whitespace / 2
   font-weight: bold
@@ -83,6 +84,7 @@ h4
 
   @media (max-width: $tiny-window-width)
     font-size: $h4-base-font-size - 3
+
 
 .bigger-text
   font-size: $bigger-font-size
@@ -109,18 +111,23 @@ h4
     @media (max-width: $tiny-window-width)
       font-size: $bigger-font-size - 4
 
+
 i, em
   font-style: italic
+
 
 b, strong
   font-weight: bold
 
+
 h1, h2, h3, h4
   font-weight: normal
+
 
 .subtitle
   font-size: $small-font-size
   color: $gray-medium-dark
+
 
 a
   text-decoration: none

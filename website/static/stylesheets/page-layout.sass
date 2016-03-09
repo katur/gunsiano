@@ -20,19 +20,36 @@ html, body
 #wrap-footer
   padding: 0 0 $window-padding 0
 
+
 #wrap-header
   padding: $window-padding 0 $window-padding 0
+
 
 #header, #footer
   width: 100% - $window-margin * 2
   margin-left: $window-margin
   margin-right: $window-margin
 
+
 #content
+  position: relative
   margin: 0 auto
   width: $content-width-static
   @media (max-width: $content-width-static * $dynamic-break-point)
     width: $content-width-dynamic
+
+  #page-admin-link
+    display: block
+    position: absolute
+    top: 0
+    right: 0
+
+  .admin-link
+    display: inline-block
+    padding-left: $whitespace / 3
+
+  #page-admin-link, .admin-link
+    font-size: $base-font-size - 3
 
 body#home
   #content

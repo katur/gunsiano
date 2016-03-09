@@ -2,14 +2,26 @@
 {% load extra_tags %}
 
 
-{% block body_id %}storage-detail{% endblock %}
+{% block body_id %}container{% endblock %}
 {% block page_title %}
 {{ container.get_ancestry_string }}
 {% endblock %}
 
 
 {% block content %}
-<table>
+
+{% if perms.storage %}
+<span id="page-admin-link">
+  <a href="{% url 'admin:storage_container_change' container.id %}">
+    Edit container</a>
+
+  <a href="{% url 'admin:storage_container_add' %}?parent={{ container.id}}">
+    Add child</a>
+</span>
+{% endif %}
+
+
+<table id="grid">
   {% for row in grid %}
   <tr>
     {% for compartment in row %}

@@ -6,12 +6,21 @@
 
 
 {% block content %}
+
+{% if perms.worm_strains %}
+<a id="page-admin-link"
+   href="{% url 'admin:worm_strains_wormstrain_add' %}">
+  Add new worm</a>
+{% endif %}
+
+
 <form action={% url 'worms_url' %} method="get">
   <input type="text" name="query">
   <input type="submit" value="Search">
 </form>
 
 <span>{{ worms|length }} worm strains</span>
+
 
 <table id="worm-table">
   <thead>

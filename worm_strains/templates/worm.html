@@ -7,6 +7,13 @@
 
 
 {% block content %}
+
+{% if perms.worm_strains %}
+<a id="page-admin-link"
+   href="{% url 'admin:worm_strains_wormstrain_change' worm.id %}">
+  Edit</a>
+{% endif %}
+
 <div id="sections">
   <!-- Identification -->
   {% if worm.species or worm.on_wormbase or worm.genotype %}
@@ -101,6 +108,14 @@
       Line with no recorded information about receipt
       {% endif %}
 
+      {% if perms.storage %}
+      <a class="admin-link"
+         href="
+         {% url 'admin:storage_stock_add'%}?stockable={{ line.stockable_ptr_id }}
+      ">
+        Add new stock</a>
+      {% endif %}
+
       <ul> <!-- per worm line -->
         {% if line.remarks %}
         <li>{{ line.remarks|enhanced_markdown }}</li>
@@ -113,6 +128,12 @@
         {% for stock in line.stocks %}
         <li>
           {{ stock.get_prep_string }}
+
+          {% if perms.storage %}
+          <a class="admin-link"
+            href="{% url 'admin:storage_stock_change' stock.id %}">
+            Edit stock</a>
+          {% endif %}
 
           <ul> <!-- per stock of this line -->
             {% if stock.notes %}

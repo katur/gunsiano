@@ -101,8 +101,8 @@
       {% if line.created_internally %}
       Line created internally
 
-      {% elif line.get_receipt_string %}
-      {{ line.get_receipt_string }}
+      {% elif line|get_receipt_string %}
+      {{ line|get_receipt_string }}
 
       {% else %}
       Line with no recorded information about receipt
@@ -127,7 +127,7 @@
 
         {% for stock in line.stocks %}
         <li>
-          {{ stock.get_prep_string }}
+          {{ stock|get_prep_string }}
 
           {% if perms.storage %}
           <a class="admin-link"
@@ -146,7 +146,9 @@
               <table>
                 {% for tube in stock.thawed_tubes %}
                 <tr><td>
-                  {{ tube.position }}: {{ tube.get_thaw_string }}
+                  {{ tube|get_ancestry_string:"position:True" }}.
+
+                  {{ tube|get_thaw_string }}
                 </td></tr>
                 {% endfor %}
               </table>
@@ -159,7 +161,9 @@
               <table>
                 {% for tube in stock.unthawed_tubes %}
                 <tr><td>
-                  {{ tube.position }}{% if tube.notes %}.
+                  {{ tube|get_ancestry_string:"position:True" }}.
+
+                  {% if tube.notes %}
                   Note: {{ tube.notes }}
                   {% endif %}
                 </td></tr>

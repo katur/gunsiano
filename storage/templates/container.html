@@ -4,7 +4,7 @@
 
 {% block body_id %}container{% endblock %}
 {% block page_title %}
-{{ container.get_ancestry_string }}
+{{ container|get_ancestry_string }}
 {% endblock %}
 
 
@@ -24,7 +24,7 @@
 {% with stock=container.get_stock %}
 {% if stock %}
 <a href="{{ stock.get_absolute_url }}">
-  {{ stock }}</a>
+  Stock: {{ stock }}</a>
 {% endif %}
 {% endwith %}
 

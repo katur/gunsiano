@@ -2,7 +2,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.utils import formats
 
 from utils.models import RealInstanceProvider
 
@@ -34,18 +33,6 @@ class Stock(models.Model):
 
     def __unicode__(self):
         return u'Stock #{}'.format(self.id)
-
-    def get_prep_string(self):
-        result = 'Stock'
-        if not (self.prepared_by or self.date_prepared):
-            return result
-
-        result += ' frozen'
-        if self.prepared_by:
-            result += ' by {}'.format(self.prepared_by.get_full_name())
-        if self.date_prepared:
-            result += ' on {}'.format(formats.date_format(self.date_prepared))
-        return result
 
 
 class ContainerSupertype(models.Model):
@@ -154,62 +141,6 @@ class Container(models.Model):
         else:
             detail = 'unnamed'
         return '{}: {}'.format(self.get_supertype(), detail)
-
-    def get_ancestry_string(self, position=False):
-        """
-        Get the full ancestry of this container as an arrow-connected
-        string.
-
-        By default, includes this container at the end of the ancestry.
-        This is what appears on the title of a storage detail page.
-
-        To instead include the *position* of this container within
-        it's parent (as appears on the worm strain page to locate
-        a tube), pass position=True.
-        """
-        ancestors = self.get_ancestors()
-        s = [a.get_display_string() for a in reversed(ancestors)]
-
-        if position:
-            s.append('Position: ' + self.get_position_within_parent())
-        else:
-            s.append(self.get_display_string())
-        return u' \u2192 '.join(s)
-
-    def get_hover_string(self):
-        """
-        Get information to display when hovering over this container.
-        """
-        if self.stock and self.stock.get_prep_string():
-            return self.stock.get_prep_string()
-
-        result = ''
-        if self.owner:
-            result += self.owner.get_full_name()
-        if self.owner and self.notes:
-            result += ' ('
-        if self.notes:
-            result += self.notes
-        if self.owner and self.notes:
-            result += ')'
-
-        return result
-
-    def get_thaw_string(self):
-        """
-        Get a string about this container's thaw details.
-        """
-        if not (self.is_thawed):
-            return ''
-
-        result = 'Thawed'
-        if self.thawed_by:
-            result += ' by {}'.format(self.thawed_by.get_full_name())
-        if self.date_thawed:
-            result += ' on {}'.format(formats.date_format(self.date_thawed))
-        if self.thaw_results:
-            result += ' ({})'.format(self.thaw_results)
-        return result
 
     def get_supertype(self):
         """

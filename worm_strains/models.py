@@ -255,24 +255,10 @@ class WormStrainLine(Stockable):
         ordering = ['strain__id']
 
     def __unicode__(self):
-        return '{} Line'.format(self.strain)
+        return '{}'.format(self.strain)
 
     def get_absolute_url(self):
         return self.strain.get_absolute_url()
-
-    def get_receipt_string(self):
-        if not (self.received_by or self.received_from or
-                self.date_received):
-            return ''
-
-        result = 'Line received'
-        if self.received_by:
-            result += ' by {}'.format(self.received_by.get_full_name())
-        if self.received_from:
-            result += ' from {}'.format(self.received_from)
-        if self.date_received:
-            result += ' on {}'.format(formats.date_format(self.date_received))
-        return result
 
 
 class WormLab(models.Model):

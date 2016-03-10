@@ -146,9 +146,11 @@
               <table>
                 {% for tube in stock.thawed_tubes %}
                 <tr><td>
-                  {{ tube|get_ancestry_string:"position:True" }}.
+                  {% with container=tube position=True %}
+                  {% include 'container_ancestry.html' %}
+                  {% endwith %}
 
-                  {{ tube|get_thaw_string }}
+                  ; {{ tube|get_thaw_string }}
                 </td></tr>
                 {% endfor %}
               </table>
@@ -161,10 +163,12 @@
               <table>
                 {% for tube in stock.unthawed_tubes %}
                 <tr><td>
-                  {{ tube|get_ancestry_string:"position:True" }}.
+                  {% with container=tube position=True %}
+                  {% include 'container_ancestry.html' %}
+                  {% endwith %}
 
                   {% if tube.notes %}
-                  Note: {{ tube.notes }}
+                  ; Note: {{ tube.notes }}
                   {% endif %}
                 </td></tr>
                 {% endfor %}

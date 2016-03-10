@@ -1,0 +1,19 @@
+{% for ancestor in container.get_ancestors reversed %}
+  {% if links %}
+  <a href={{ ancestor.get_absolute_url }}>
+  {% endif %}
+
+  {{ ancestor.get_display_string }}
+
+  {% if links %}
+  </a>
+  {% endif %}
+
+  &rarr;
+{% endfor %}
+
+{% if position %}
+Position: {{ container.get_position_within_parent }}
+{% else %}
+{{ container.get_display_string }}
+{% endif %}

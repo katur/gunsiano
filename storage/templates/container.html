@@ -4,7 +4,7 @@
 
 {% block body_id %}container{% endblock %}
 {% block page_title %}
-{{ container|get_ancestry_string }}
+{% include 'container_ancestry.html' with links=True %}
 {% endblock %}
 
 

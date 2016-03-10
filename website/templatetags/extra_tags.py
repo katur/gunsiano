@@ -12,6 +12,9 @@ SUBSCRIPT_RE = r'(\~)([^\~]*)\2'  # e.g. ~2~
 SUPERSCRIPT_RE = r'(\^)([^\^]*)\2'  # e.g. ^2^
 
 
+register = template.Library()
+
+
 class SubscriptExtension(markdown.Extension):
     """ Subscript Extension for Python-Markdown. """
 
@@ -32,9 +35,6 @@ class SuperscriptExtension(markdown.Extension):
                               '<not_strong')
 
 
-register = template.Library()
-
-
 @register.filter(is_safe=True)
 @stringfilter
 def enhanced_markdown(text):
@@ -51,28 +51,6 @@ def enhanced_markdown(text):
     return mark_safe(markdown.markdown(force_unicode(text),
                                        extensions,
                                        enable_attributes=False))
-
-
-@register.filter(is_safe=True)
-def get_ancestry_string(container, position=False):
-    """
-    Get ancestry of a storage container as an arrow-connected string.
-
-    By default, includes this container at the end of the ancestry.
-    This is what appears on the title of a storage detail page.
-
-    To instead include the *position* of this container within
-    it's parent (as appears on the worm strain page to locate
-    a tube), pass position=True.
-    """
-    ancestors = container.get_ancestors()
-    s = [a.get_display_string() for a in reversed(ancestors)]
-
-    if position:
-        s.append('Position: ' + container.get_position_within_parent())
-    else:
-        s.append(container.get_display_string())
-    return u' \u2192 '.join(s)
 
 
 @register.filter(is_safe=True)

@@ -25,13 +25,6 @@ def container(request, container_id):
 
     children = container.container_set.filter(is_thawed=0)
 
-    # If the child has a stock, attach the actual instance of the
-    # stockable that makes up that stock (i.e. the specific
-    # WormStrainLine, Primer, Antibody, etc.)
-    for child in children:
-        if child.stock:
-            child.stockable = child.stock.stockable.get_actual_instance()
-
     # Create 3D grid to hold positioned children.
     # 3rd dimension is in case there are multiple objects within a
     # slot (e.g., multiple plates within a freezer rack slot)
@@ -39,21 +32,21 @@ def container(request, container_id):
             for j in range(container.type.slots_vertical)]
 
     # Create list to hold unpositioned children.
-    unpositioned_children = []
+    overflow_children = []
 
     for child in children:
-        if child.horizontal_position and child.vertical_position:
+        try:
             x = child.horizontal_position - 1  # Positions are 1-indexed
             y = child.vertical_position - 1
             (grid[y][x]).append(child)
 
-        else:
-            unpositioned_children.append(child)
+        except IndexError:
+            overflow_children.append(child)
 
     context = {
         'container': container,
         'grid': grid,
-        'unpositioned_children': unpositioned_children,
+        'overflow_children': overflow_children,
     }
 
     return render(request, 'container.html', context)

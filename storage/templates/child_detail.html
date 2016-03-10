@@ -1,18 +1,9 @@
-{% if child.stockable %}
-<a href={{ child.stockable.get_absolute_url }}>
-
-{% else %}
 <a href={{ child.get_absolute_url }}>
-{% endif %}
   <span
     {% if child.get_hover_string %}
     data-hover-tag="{{ child.get_hover_string }}"
     {% endif %}>
 
-    {% if child.stockable %}
-    {{ child.stockable }}
-    {% else %}
     {{ child.get_display_string }}
-    {% endif %}
   </span>
 </a>

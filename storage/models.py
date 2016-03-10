@@ -73,8 +73,8 @@ class ContainerType(models.Model):
 
     name = models.CharField(max_length=50)
     supertype = models.ForeignKey(ContainerSupertype, models.CASCADE)
-    slots_vertical = models.IntegerField(null=True, blank=True)
-    slots_horizontal = models.IntegerField(null=True, blank=True)
+    slots_vertical = models.IntegerField(default=0)
+    slots_horizontal = models.IntegerField(default=0)
     image = models.ImageField(upload_to='storage_vats',
                               null=True, blank=True)
 
@@ -97,10 +97,8 @@ class Container(models.Model):
     type = models.ForeignKey(ContainerType, models.CASCADE)
     parent = models.ForeignKey('self', models.SET_NULL,
                                null=True, blank=True)
-    vertical_position = models.PositiveSmallIntegerField(
-        null=True, blank=True)
-    horizontal_position = models.PositiveSmallIntegerField(
-        null=True, blank=True)
+    vertical_position = models.PositiveSmallIntegerField(default=1)
+    horizontal_position = models.PositiveSmallIntegerField(default=1)
 
     name = models.CharField(max_length=200, blank=True)
     owner = models.ForeignKey(
@@ -138,6 +136,10 @@ class Container(models.Model):
     def get_absolute_url(self):
         return reverse('container_url', args=[self.id])
 
+    def get_stock(self):
+        if self.stock:
+            return self.stock.stockable.get_actual_instance()
+
     def get_display_string(self):
         """
         Get a nice display string for this container, which includes
@@ -145,6 +147,10 @@ class Container(models.Model):
         """
         if self.name:
             detail = self.name
+        elif self.owner:
+            detail = self.owner.get_full_name()
+        elif self.stock:
+            detail = self.get_stock()
         else:
             detail = 'unnamed'
         return '{}: {}'.format(self.get_supertype(), detail)

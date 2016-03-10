@@ -21,6 +21,14 @@
 {% endif %}
 
 
+{% with stock=container.get_stock %}
+{% if stock %}
+<a href="{{ stock.get_absolute_url }}">
+  {{ stock }}</a>
+{% endif %}
+{% endwith %}
+
+
 <table id="grid">
   {% for row in grid %}
   <tr>
@@ -28,6 +36,7 @@
     <td>
       {% for child in compartment %}
       {% include 'child_detail.html' %}
+      <br>
 
       {% empty %}
       <span class='no-record'>No record</span>
@@ -39,13 +48,14 @@
   {% endfor %}
 </table>
 
-{% if unpositioned_children %}
+{% if overflow_children %}
 <br>
 <br>
-Position unset:
-{% for child in unpositioned_children %}
-  <br>
+Position overflow:
+<br>
+{% for child in overflow_children %}
   {% include 'child_detail.html' %}
+  <br>
 {% endfor %}
 {% endif %}
 

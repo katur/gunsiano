@@ -8,40 +8,10 @@ $(document).ready(function() {
 
 $(window).load(function() {
   if ($("body#home").length) {
-    startHomepageScrollEffects();
     activateResearchMenuLinks();
+    startHomepageScrollEffects();
   }
 })
-
-
-function activateResearchMenuLinks() {
-  $("#research-area-menu a").on("click", function() {
-    var target_id = $(this).attr("id").split("-")[0];
-    var target = $("#" + target_id);
-    var scrollTo = target.offset().top
-    var time = scrollTo / 2.0;
-
-    $("body, html").animate({
-      scrollTop: scrollTo
-    }, time);
-  });
-}
-
-
-function setScrollHandler() {
-  var previousScrollTop = 0;
-  $(window).scroll(function(event){
-    var currentScrollTop = $(this).scrollTop();
-    var mouse = $("#mouse #drawing");
-
-    if (currentScrollTop > previousScrollTop) {
-      mouse.addClass("scrollingDown");
-    } else {
-      mouse.removeClass("scrollingDown");
-    }
-    previousScrollTop = currentScrollTop;
-  });
-}
 
 
 function startWormAnimation() {
@@ -154,12 +124,56 @@ function startWormAnimation() {
 }
 
 
+function setScrollHandler() {
+  var previousScrollTop = 0;
+  $(window).scroll(function(event){
+    var currentScrollTop = $(this).scrollTop();
+    var mouse = $("#mouse #drawing");
+
+    if (currentScrollTop > previousScrollTop) {
+      mouse.addClass("scrollingDown");
+    } else {
+      mouse.removeClass("scrollingDown");
+    }
+    previousScrollTop = currentScrollTop;
+  });
+}
+
+
+function activateResearchMenuLinks() {
+  $("#research-area-menu a").on("click", function() {
+    var target_id = $(this).attr("id").split("-")[0];
+    var target = $("#" + target_id);
+    var scrollTo = target.offset().top
+    var time = scrollTo / 2.0;
+
+    $("body, html").animate({
+      scrollTop: scrollTo
+    }, time);
+  });
+}
+
+
 function startHomepageScrollEffects() {
-  initializeWormLayers();
-  initializePhylogenyMask();
-  initializeRotatingRNA();
-  createNetworkLayers();
-  initializeMouse();
+  if ($("#gi").length) {
+    initializeWormLayers();
+  }
+
+  if ($("#rna").length) {
+    initializeRotatingRNA();
+  }
+
+  if ($("#evolution").length) {
+    initializePhylogenyMask();
+  }
+
+  if ($("#network").length) {
+    createNetworkLayers();
+  }
+
+  if ($("#mouse").length) {
+    initializeMouse();
+  }
 
   var width = $(window).width();
   if (width > 500) {
@@ -168,17 +182,66 @@ function startHomepageScrollEffects() {
       forceHeight: false
     });
 
-  // On small windows, deactivate skrollr effects for now
+  // On small windows, deactivate these skrollr effects for now
   } else {
     $("#evolution #mask").hide();
     $("#mouse #drawing").hide();
     $("#network canvas").css("top", "-50%");
   }
 
+  function initializeWormLayers() {
+    var viewportHeight = $(window).height();
+
+    var layer1 = $("#gi .layer-1");
+    var layer2 = $("#gi .layer-2");
+    var layer3 = $("#gi .layer-3");
+
+    var scrollFactor1 = 1.5;
+    var scrollFactor2 = 1.0;
+    var scrollFactor3 = .5;
+
+    layer1.attr("data-bottom-top", "background-position: 0px 0px");
+    layer1.attr("data-top-bottom", "background-position: 0px -" +
+        viewportHeight * scrollFactor1 + "px");
+    layer2.attr("data-bottom-top", "background-position: 0px 0px");
+    layer2.attr("data-top-bottom", "background-position: 0px -" +
+        viewportHeight * scrollFactor2 + "px");
+    layer3.attr("data-bottom-top", "background-position: 0px 0px");
+    layer3.attr("data-top-bottom", "background-position: 0px -" +
+        viewportHeight * scrollFactor3 + "px");
+  }
+
+  function initializeRotatingRNA() {
+    var moleculeFrameHeight = 722;
+    var moleculeFrameWidth = 678;
+    var moleculeFrameCount = 20;
+    var molecule = $("#molecule");
+
+    var step = 100 / moleculeFrameCount;
+    var viewportHeight = $(window).height();
+    var stepsInViewport = viewportHeight / step;
+    var totalSteps = moleculeFrameCount + stepsInViewport;
+
+    molecule.attr("data-bottom-top", "background-position:!0px 0px");
+
+    var spritePosition;
+    for (var i = 1; i < totalSteps; i++) {
+      spritePosition = moleculeFrameWidth * i * -1;
+      molecule.attr("data--" +  (step * i) + "p-bottom-top",
+          "background-position:!" + spritePosition + "px 0px");
+    }
+  }
+
   function initializePhylogenyMask() {
     var mask = $("#evolution #mask");
     mask.attr("data-center-top", "height: 100%");
     mask.attr("data-center-center", "height: 0%");
+  }
+
+  function createNetworkLayers() {
+    new Network($("#network .layer-1"), 2.5, 80000, 8, 2);
+    new Network($("#network .layer-2"), 1.0, 40000, 6, 1);
+    new Network($("#network .layer-3"), .5, 20000, 4, 1);
   }
 
   function initializeMouse() {
@@ -206,55 +269,6 @@ function startHomepageScrollEffects() {
       mouse.attr("data-" + scrollDistance + "-end",
           "background-position:!" + position + "px 0px");
     }
-  }
-
-  function initializeRotatingRNA() {
-    var moleculeFrameHeight = 722;
-    var moleculeFrameWidth = 678;
-    var moleculeFrameCount = 20;
-    var molecule = $("#molecule");
-
-    var step = 100 / moleculeFrameCount;
-    var viewportHeight = $(window).height();
-    var stepsInViewport = viewportHeight / step;
-    var totalSteps = moleculeFrameCount + stepsInViewport;
-
-    molecule.attr("data-bottom-top", "background-position:!0px 0px");
-
-    var spritePosition;
-    for (var i = 1; i < totalSteps; i++) {
-      spritePosition = moleculeFrameWidth * i * -1;
-      molecule.attr("data--" +  (step * i) + "p-bottom-top",
-          "background-position:!" + spritePosition + "px 0px");
-    }
-  }
-
-  function initializeWormLayers() {
-    var viewportHeight = $(window).height();
-
-    var layer1 = $("#gi .layer-1");
-    var layer2 = $("#gi .layer-2");
-    var layer3 = $("#gi .layer-3");
-
-    var scrollFactor1 = 1.5;
-    var scrollFactor2 = 1.0;
-    var scrollFactor3 = .5;
-
-    layer1.attr("data-bottom-top", "background-position: 0px 0px");
-    layer1.attr("data-top-bottom", "background-position: 0px -" +
-        viewportHeight * scrollFactor1 + "px");
-    layer2.attr("data-bottom-top", "background-position: 0px 0px");
-    layer2.attr("data-top-bottom", "background-position: 0px -" +
-        viewportHeight * scrollFactor2 + "px");
-    layer3.attr("data-bottom-top", "background-position: 0px 0px");
-    layer3.attr("data-top-bottom", "background-position: 0px -" +
-        viewportHeight * scrollFactor3 + "px");
-  }
-
-  function createNetworkLayers() {
-    new Network($("#network .layer-1"), 2.5, 80000, 8, 2);
-    new Network($("#network .layer-2"), 1.0, 40000, 6, 1);
-    new Network($("#network .layer-3"), .5, 20000, 4, 1);
   }
 }
 
